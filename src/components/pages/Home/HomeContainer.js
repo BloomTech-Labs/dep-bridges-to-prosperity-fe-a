@@ -1,42 +1,20 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useOktaAuth } from '@okta/okta-react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement } from '../../../state/actions';
 
-import RenderHomePage from './RenderHomePage';
-
-function HomeContainer({ LoadingComponent }) {
-  const { authState, authService } = useOktaAuth();
-  const [userInfo, setUserInfo] = useState(null);
-  // eslint-disable-next-line
-  const [memoAuthService] = useMemo(() => [authService], []);
-
-  useEffect(() => {
-    let isSubscribed = true;
-
-    memoAuthService
-      .getUser()
-      .then(info => {
-        // if user is authenticated we can use the authService to snag some user info.
-        // isSubscribed is a boolean toggle that we're using to clean up our useEffect.
-        if (isSubscribed) {
-          setUserInfo(info);
-        }
-      })
-      .catch(err => {
-        isSubscribed = false;
-        return setUserInfo(null);
-      });
-    return () => (isSubscribed = false);
-  }, [memoAuthService]);
+function HomeContainer() {
+  const dispatch = useDispatch();
+  const { count } = useSelector(state => state.counter);
 
   return (
-    <>
-      {authState.isAuthenticated && !userInfo && (
-        <LoadingComponent message="Fetching user profile..." />
-      )}
-      {authState.isAuthenticated && userInfo && (
-        <RenderHomePage userInfo={userInfo} authService={authService} />
-      )}
-    </>
+    <div>
+      <h1>Home page redux + hooks example</h1>
+      <div className="counter">
+        <button onClick={() => dispatch(decrement())}>Decrement</button>
+        <div className="count">{count}</div>
+        <button onClick={() => dispatch(increment())}>Increment</button>
+      </div>
+    </div>
   );
 }
 
