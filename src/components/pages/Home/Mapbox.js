@@ -59,10 +59,9 @@ function Mapbox() {
               latitude={bridge.latitude}
               longitude={bridge.longitude}
             >
-              <div>
-                {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox. */}
-                <h2>Bridge Maker</h2>
-              </div>
+              <button class="bridge-marker">
+                {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
+              </button>
             </Marker>
           );
         })}
