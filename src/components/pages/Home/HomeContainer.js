@@ -9,8 +9,9 @@ function HomeContainer() {
 
   return (
     <div>
-      <h1>Home page redux + hooks example</h1>
+      <h1>Bridges To Prosperity</h1>
       <Mapbox />
+      {/* not sure if I should remove this or not? */}
       <div className="counter">
         <button onClick={() => dispatch(decrement())}>Decrement</button>
         <div className="count">{count}</div>
