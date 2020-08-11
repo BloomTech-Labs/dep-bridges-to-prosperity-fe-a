@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import ReactMapGl, { Marker } from 'react-map-gl';
+import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
 import { UpCircleFilled } from '@ant-design/icons';
+import { Tooltip } from 'antd';
 
 //DUMMY DATA TO BE DELETED:
 let mapData = [
@@ -37,6 +38,19 @@ function Mapbox() {
     height: '100vh',
     zoom: 10,
   });
+
+  const ZoomIn = bridge => {
+    setViewport({
+      latitude: bridge.latitude,
+      longitude: bridge.longitude,
+      width: '100vw',
+      height: '100vh',
+      zoom: 15,
+      transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+      transitionDuration: 'auto',
+    });
+  };
+
   return (
     <div>
       {/* render map */}
@@ -55,16 +69,18 @@ function Mapbox() {
         {/* currently just showing bridge lats/longs */}
         {mapData.map(bridge => {
           return (
-            <Marker
-              key={bridge.id}
-              latitude={bridge.latitude}
-              longitude={bridge.longitude}
-            >
-              {/* bridge marker placeholder for now, but I like it. */}
-              <UpCircleFilled style={{ fontSize: '20px', color: 'green' }} />
+            <div key={bridge.id} onClick={() => ZoomIn(bridge)}>
+              <Marker latitude={bridge.latitude} longitude={bridge.longitude}>
+                <Tooltip title={bridge.site_name}>
+                  {/* bridge marker placeholder for now, but I like it. */}
+                  <UpCircleFilled
+                    style={{ fontSize: '20px', color: 'green' }}
+                  />
+                </Tooltip>
 
-              {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
-            </Marker>
+                {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
+              </Marker>
+            </div>
           );
         })}
       </ReactMapGl>
