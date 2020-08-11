@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from '../../../state/actions';
 import Mapbox from './Mapbox';
+import MapMenu from './MapMenu';
 
 function HomeContainer() {
   const dispatch = useDispatch();
@@ -10,7 +11,9 @@ function HomeContainer() {
   return (
     <div>
       <h1>Bridges To Prosperity</h1>
-      <Mapbox />
+      {/* <Mapbox /> */}
+      <MapMenu />
+
       {/* not sure if I should remove this or not? */}
       <div className="counter">
         <button onClick={() => dispatch(decrement())}>Decrement</button>

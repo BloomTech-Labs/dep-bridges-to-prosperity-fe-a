@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactMapGl, { Marker } from 'react-map-gl';
 import { UpCircleFilled } from '@ant-design/icons';
+import MapMenu from './MapMenu';
+// import MapSearchBar from './MapSearchBar';
 
 //DUMMY DATA TO BE DELETED:
 let mapData = [
@@ -40,34 +42,40 @@ function Mapbox() {
   return (
     <div>
       {/* render map */}
-      <ReactMapGl
-        {...viewport}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        onViewportChange={viewport => {
-          //allows map to be dynamic and move through useState -> make this work through redux
-          //want to make it so you can set the viewport with buttons/dropdown based on searched villages
-          setViewport(viewport);
-        }}
-        //using minimo right now, should be good to swap out if we want another
-        mapStyle="mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr"
-      >
-        {/* maps the points of the data to the map: bridges, villiages, etc. */}
-        {/* currently just showing bridge lats/longs */}
-        {mapData.map(bridge => {
-          return (
-            <Marker
-              key={bridge.id}
-              latitude={bridge.latitude}
-              longitude={bridge.longitude}
-            >
-              {/* bridge marker placeholder for now, but I like it. */}
-              <UpCircleFilled style={{ fontSize: '20px', color: 'green' }} />
+      {/* <MapSearchBar /> */}
+      {/* <div>
+        <MapMenu />
+      </div> */}
+      <div>
+        <ReactMapGl
+          {...viewport}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+          onViewportChange={viewport => {
+            //allows map to be dynamic and move through useState -> make this work through redux
+            //want to make it so you can set the viewport with buttons/dropdown based on searched villages
+            setViewport(viewport);
+          }}
+          //using minimo right now, should be good to swap out if we want another
+          mapStyle="mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr"
+        >
+          {/* maps the points of the data to the map: bridges, villiages, etc. */}
+          {/* currently just showing bridge lats/longs */}
+          {mapData.map(bridge => {
+            return (
+              <Marker
+                key={bridge.id}
+                latitude={bridge.latitude}
+                longitude={bridge.longitude}
+              >
+                {/* bridge marker placeholder for now, but I like it. */}
+                <UpCircleFilled style={{ fontSize: '20px', color: 'green' }} />
 
-              {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
-            </Marker>
-          );
-        })}
-      </ReactMapGl>
+                {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
+              </Marker>
+            );
+          })}
+        </ReactMapGl>
+      </div>
     </div>
   );
 }
