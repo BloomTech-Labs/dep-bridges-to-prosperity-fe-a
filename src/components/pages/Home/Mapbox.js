@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactMapGl, { Marker } from 'react-map-gl';
+import { UpCircleFilled } from '@ant-design/icons';
 
 //DUMMY DATA TO BE DELETED:
 let mapData = [
@@ -59,9 +60,10 @@ function Mapbox() {
               latitude={bridge.latitude}
               longitude={bridge.longitude}
             >
-              <button class="bridge-marker">
-                {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
-              </button>
+              {/* bridge marker placeholder for now, but I like it. */}
+              <UpCircleFilled style={{ fontSize: '20px', color: 'green' }} />
+
+              {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
             </Marker>
           );
         })}
