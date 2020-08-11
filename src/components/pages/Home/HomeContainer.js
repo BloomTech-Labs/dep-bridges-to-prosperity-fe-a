@@ -11,7 +11,7 @@ function HomeContainer() {
   return (
     <div>
       <h1>Bridges To Prosperity</h1>
-      {/* <Mapbox /> */}
+
       <MapMenu />
 
       {/* not sure if I should remove this or not? */}
