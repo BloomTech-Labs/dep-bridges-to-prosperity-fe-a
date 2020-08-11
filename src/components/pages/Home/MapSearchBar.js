@@ -1,9 +1,16 @@
 import { Input } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
-import React from 'react';
+import React, { useState } from 'react';
 const { Search } = Input;
 
 const MapSearchBar = () => {
+  const [searchVal, setSearchVal] = useState('Search');
+
+  function onSearch(value) {
+    console.log(value);
+    setSearchVal(value);
+  }
+
   const suffix = (
     <AudioOutlined
       style={{
@@ -15,19 +22,9 @@ const MapSearchBar = () => {
 
   return (
     <>
-      <Search
-        placeholder=" search "
-        onSearch={value => console.log(value)}
-        style={{ width: 200 }}
-      />
+      <Search placeholder="search" onSearch={onSearch} />
       <br />
     </>
   );
 };
 export default MapSearchBar;
-
-// import { Input } from 'antd';
-// import React from 'react';
-// import ReactDOM from 'react';
-
-// ReactDOM.render(<Input placeholder="Basic usage" />, mountNode);
