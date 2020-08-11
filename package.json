@@ -18,7 +18,7 @@
     "react-plotly.js": "^2.4.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^3.4.2",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
@@ -27,6 +27,8 @@
     "start": "craco --max_old_space_size=4096 start",
     "build": "craco --max_old_space_size=4096 build",
     "test": "craco test --env=jest-environment-jsdom-sixteen",
+    "pre-branch": "git checkout main && git pull && npm i",
+    "pull-main": "git pull origin main && npm i",
     "eject": "react-scripts eject",
     "prettier": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "coverage": "npm test -- --coverage --watchAll=false",
