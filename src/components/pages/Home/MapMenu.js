@@ -22,7 +22,7 @@ function MapMenu() {
     <div>
       <Layout theme="dark" style={{ minHeight: '100%' }}>
         <Sider collapsible collapsed={slide} onCollapse={setSlide}>
-          <Menu mode="inline">
+          <Menu theme="dark" mode="inline">
             <Menu.Item>
               <MapSearchBar />
             </Menu.Item>
