@@ -5,14 +5,14 @@ import MapSearchBar from './MapSearchBar';
 import Mapbox from './Mapbox';
 
 function MapMenu() {
-  const { Sider, Content } = Layout;
+  const { Sider } = Layout;
   //   const { SubMenu } = Menu;
 
   const [slide, setSlide] = useState({
     collapsed: false,
   });
   //handles the collapse feature of the sidebar
-  const onCollapse = collapsed => {
+  const onCollapse = () => {
     setSlide = {
       collapsed: true,
     };
@@ -20,15 +20,28 @@ function MapMenu() {
 
   return (
     <div>
-      <Layout theme="dark" style={{ minHeight: '100%' }}>
+      <Layout
+        theme="dark"
+        style={{
+          minHeight: '100vh',
+          maxHeight: '100vh',
+          minWidth: '100vw',
+          maxWidth: '100vw',
+        }}
+      >
         <Sider collapsible collapsed={slide} onCollapse={setSlide}>
-          <Menu theme="dark" mode="inline">
+          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item>
               <MapSearchBar />
             </Menu.Item>
-
-            {/* <Menu.Item key="1">Bridge Sites</Menu.Item>
-            <Menu.Item key="2">Village Sites</Menu.Item> */}
+            {/* When these Items are toggled, only display that which is selected*/}
+            {/* Leaving this here for now, as an option -> going to mostlikely delete today for rendering bridge info */}
+            {/* <Menu.Item key="1">All Markers</Menu.Item>
+            <Menu.Item key="2">Village Sites</Menu.Item>
+            <Menu.Item key="3">All Bridge Sites</Menu.Item>
+            <Menu.Item key="4">Bridge Sites Under Construction</Menu.Item>
+            <Menu.Item key="5">Proposed Bridge Sites</Menu.Item>
+            <Menu.Item key="6">Rejected Bridge Sites</Menu.Item> */}
           </Menu>
         </Sider>
         <Mapbox />
