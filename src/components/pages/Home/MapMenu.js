@@ -46,7 +46,7 @@ function MapMenu(props) {
     longitude: null,
   });
 
-  const [clickedBridge, setClickedBridge] = useState([]);
+  const [clickedBridge, setClickedBridge] = useState({});
 
   //handles the collapse feature of the sidebar
   const onCollapse = () => {
@@ -84,7 +84,7 @@ function MapMenu(props) {
             <Menu.Item>
               <MapSearchBar />
             </Menu.Item>
-
+            <InfoDrawer clickedBridge={clickedBridge}></InfoDrawer>
             {/* When these Items are toggled, only display that which is selected*/}
             {/* Leaving this here for now, as an option -> going to mostlikely delete today for rendering bridge info */}
             {/* <Menu.Item key="1">All Markers</Menu.Item>
