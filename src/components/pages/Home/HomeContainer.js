@@ -15,11 +15,11 @@ function HomeContainer() {
       <MapMenu />
 
       {/* not sure if I should remove this or not? */}
-      {/* <div className="counter">
+      <div className="counter">
         <button onClick={() => dispatch(decrement())}>Decrement</button>
         <div className="count">{count}</div>
         <button onClick={() => dispatch(increment())}>Increment</button>
-      </div> */}
+      </div>
     </div>
   );
 }
