@@ -43,8 +43,8 @@ function Mapbox() {
     setViewport({
       latitude: bridge.latitude,
       longitude: bridge.longitude,
-      width: '100vw',
-      height: '100vh',
+      width: '100%',
+      height: '100%',
       zoom: 15,
       transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
       transitionDuration: 'auto',
