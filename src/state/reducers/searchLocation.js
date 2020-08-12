@@ -1,4 +1,8 @@
-import { SEARCH_FOR_LOCATION, SEARCH_SUCCESS, SEARCH_FAIL } from '../actions';
+import {
+  SEARCH_FOR_LOCATION,
+  SEARCH_SUCCESS,
+  SEARCH_FAILURE,
+} from '../actions';
 
 //setting up search by location reducer
 
@@ -24,7 +28,7 @@ export const searchLocation = (state = { initialState }, action) => {
         village_site: action.payload,
         error: action.payload,
       };
-    case SEARCH_FAIL:
+    case SEARCH_FAILURE:
       return {
         ...state,
         error: action.payload,
