@@ -83,7 +83,7 @@ function MapMenu(props) {
           maxWidth: '100vw',
         }}
       >
-        <Sider collapsible collapsed={slide} onCollapse={setSlide}>
+        <Sider>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item>
               <MapSearchBar />
