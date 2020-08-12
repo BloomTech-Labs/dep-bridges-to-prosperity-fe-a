@@ -18,7 +18,7 @@ const InfoDrawer = props => {
         Open
       </Button> */}
       <Drawer
-        title="Basic Drawer"
+        title="Bridge Information"
         placement="left"
         closable={false}
         onClose={props.onClose}
