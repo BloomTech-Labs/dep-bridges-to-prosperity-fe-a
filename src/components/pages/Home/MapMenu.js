@@ -4,7 +4,29 @@ import { Layout, Menu } from 'antd';
 import MapSearchBar from './MapSearchBar';
 import Mapbox from './Mapbox';
 import InfoDrawer from './InfoDrawer';
-
+let mapData = [
+  {
+    id: 1,
+    site_name: 'Buzi',
+    proj_stage: 'rejected',
+    latitude: -2.42056,
+    longitude: 28.9662,
+  },
+  {
+    id: 2,
+    site_name: 'Kamigisha',
+    proj_stage: 'rejected',
+    latitude: -2.42486,
+    longitude: 28.95726,
+  },
+  {
+    id: 3,
+    site_name: 'Nyarubande',
+    proj_stage: 'rejected',
+    latitude: -1.65595,
+    longitude: 30.07884,
+  },
+];
 function MapMenu(props) {
   const { Sider } = Layout;
 
@@ -55,7 +77,7 @@ function MapMenu(props) {
         <Sider>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item>
-              <MapSearchBar />
+              <MapSearchBar mapData={mapData} />
             </Menu.Item>
 
             {/* When these Items are toggled, only display that which is selected*/}
