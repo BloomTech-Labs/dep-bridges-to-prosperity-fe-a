@@ -2,30 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { Drawer, Button } from 'antd';
 
 const InfoDrawer = props => {
-  const [visible, setVisible] = useState(false);
+  //   const [visible, setVisible] = useState(false);
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
+  //     const showDrawer = () => {
+  //       setVisible(true);
+  //     };
 
-  const onClose = () => {
-    setVisible(false);
-  };
   useEffect(() => {
     console.log('infodrawer line 14', props.clickedBridge);
   }, [props.clickedBridge]);
 
   return (
     <>
-      <Button type="primary" onClick={showDrawer}>
+      {/* <Button type="primary" onClick={showDrawer}>
         Open
-      </Button>
+      </Button> */}
       <Drawer
         title="Basic Drawer"
         placement="left"
         closable={false}
-        onClose={onClose}
-        visible={visible}
+        onClose={props.onClose}
+        visible={props.visible}
       >
         <div>
           <p>Site Name:{props.clickedBridge.site_name}</p>

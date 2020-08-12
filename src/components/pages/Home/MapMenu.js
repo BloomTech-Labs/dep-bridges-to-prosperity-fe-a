@@ -47,7 +47,7 @@ function MapMenu(props) {
   });
 
   const [clickedBridge, setClickedBridge] = useState({});
-
+  const [visible, setVisible] = useState(false);
   //handles the collapse feature of the sidebar
   const onCollapse = () => {
     setSlide({
@@ -66,6 +66,10 @@ function MapMenu(props) {
     setClickedBridge(bridge);
     console.log('clickMarker');
     console.log(bridge);
+    setVisible(!visible);
+  };
+  const onClose = () => {
+    setVisible(false);
   };
 
   return (
@@ -84,7 +88,11 @@ function MapMenu(props) {
             <Menu.Item>
               <MapSearchBar />
             </Menu.Item>
-            <InfoDrawer clickedBridge={clickedBridge}></InfoDrawer>
+            <InfoDrawer
+              clickedBridge={clickedBridge}
+              visible={visible}
+              onClose={onClose}
+            ></InfoDrawer>
             {/* When these Items are toggled, only display that which is selected*/}
             {/* Leaving this here for now, as an option -> going to mostlikely delete today for rendering bridge info */}
             {/* <Menu.Item key="1">All Markers</Menu.Item>
