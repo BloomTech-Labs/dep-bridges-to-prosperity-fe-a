@@ -28,7 +28,7 @@ let mapData = [
   },
 ];
 
-function Mapbox() {
+function Mapbox(props) {
   //copy code from previous proj.
   const [viewport, setViewport] = useState({
     //this is bridge site 1 coordinates
@@ -49,6 +49,7 @@ function Mapbox() {
       transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
       transitionDuration: 'auto',
     });
+    props.clickMarker(bridge);
   };
 
   return (
@@ -70,7 +71,11 @@ function Mapbox() {
         {mapData.map(bridge => {
           return (
             <div key={bridge.id} onClick={() => ZoomIn(bridge)}>
-              <Marker latitude={bridge.latitude} longitude={bridge.longitude}>
+              <Marker
+                latitude={bridge.latitude}
+                longitude={bridge.longitude}
+                //onClick={props.clickMarker(bridge)}
+              >
                 <Tooltip title={bridge.site_name}>
                   {/* bridge marker placeholder for now, but I like it. */}
                   <UpCircleFilled
