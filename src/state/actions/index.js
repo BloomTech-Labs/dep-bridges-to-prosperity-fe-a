@@ -5,3 +5,4 @@
 // Declare action TYPES at the top of the file
 
 export * from './counter';
+export * from './searchLocation';
