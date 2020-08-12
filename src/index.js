@@ -15,6 +15,7 @@ import { ExampleDataViz } from './components/pages/ExampleDataViz';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import { RegistrationPage } from './components/pages/Registration';
+import TestPage from './components/pages/Test/index';
 
 // Set up Redux
 import { applyMiddleware, createStore } from 'redux';
@@ -63,6 +64,7 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/registration/:token" component={RegistrationPage} />
         <Route path="/implicit/callback" component={LoginCallback} />
+        <Route path="/bridge-form" component={TestPage} />
         {/* any of the routes you need secured should be registered as SecureRoutes */}
         <Route
           path="/"
