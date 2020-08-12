@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, Input } from 'antd';
 
-function BridgeFormAdd(props) {
+function BridgeFormEdit(props) {
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = data => {
     bridges.push(newBridge);
@@ -29,7 +29,7 @@ function BridgeFormAdd(props) {
 
   return (
     <>
-      <h1>Adding</h1>
+      <h1>Editing</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* BRIDGE SITE NAME */}
         <input
@@ -84,4 +84,4 @@ function BridgeFormAdd(props) {
   );
 }
 
-export default BridgeFormAdd;
+export default BridgeFormEdit;
