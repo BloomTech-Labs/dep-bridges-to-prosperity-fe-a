@@ -29,7 +29,10 @@ let mapData = [
 
 function BridgeFormAdd() {
   const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = data => console.log(newBridge);
+  const onSubmit = data => {
+    bridges.push(newBridge);
+    console.log(bridges);
+  };
   // Setting up the dummy bridge state here
   const [bridges, setBridges] = useState(mapData);
 
@@ -78,6 +81,7 @@ function BridgeFormAdd() {
         <input
           placeholder="Latitude"
           name="latitude"
+          type="number"
           onChange={handleChanges}
           value={newBridge.latitude}
           ref={register({ required: true })}
@@ -89,6 +93,7 @@ function BridgeFormAdd() {
         <input
           placeholder="Longitude"
           name="longitude"
+          type="number"
           onChange={handleChanges}
           value={newBridge.longitude}
           ref={register({ required: true })}
