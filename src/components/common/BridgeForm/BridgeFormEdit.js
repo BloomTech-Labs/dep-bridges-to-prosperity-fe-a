@@ -5,13 +5,11 @@ import { Form, Input } from 'antd';
 function BridgeFormEdit(props) {
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = data => {
-    bridges.push(newBridge);
-    console.log(bridges);
+    // bridges.push(newBridge);
+    console.log(data);
   };
-  // Setting up the dummy bridge state here
-  const [bridges, setBridges] = useState(props.mapData);
 
-  // Setting up the shape of the data to "POST" to the bridge dummy data
+  // Setting up the shape of the data to "PUT" to the bridge dummy data
   const [newBridge, setNewBridge] = useState({
     id: Date.now(),
     site_name: '',
@@ -21,10 +19,10 @@ function BridgeFormEdit(props) {
   });
 
   const handleChanges = e => {
-    setNewBridge({
-      ...newBridge,
-      [e.target.name]: e.target.value,
-    });
+    // setNewBridge({
+    //   ...newBridge,
+    //   [e.target.name]: e.target.value,
+    // });
   };
 
   return (
@@ -36,7 +34,7 @@ function BridgeFormEdit(props) {
           placeholder="Bridge Site Name"
           name="site_name"
           onChange={handleChanges}
-          value={newBridge.site_name}
+          value={props.mapData.site_name}
           ref={register({ required: true })}
         />
         {errors.site_name && (
@@ -47,7 +45,7 @@ function BridgeFormEdit(props) {
           placeholder="Project Stage"
           name="proj_stage"
           onChange={handleChanges}
-          value={newBridge.proj_stage}
+          value={props.mapData.proj_stage}
           ref={register({ required: true })}
         />
         {errors.site_name && (
@@ -59,7 +57,7 @@ function BridgeFormEdit(props) {
           name="latitude"
           type="number"
           onChange={handleChanges}
-          value={newBridge.latitude}
+          value={props.mapData.latitude}
           ref={register({ required: true })}
         />
         {errors.site_name && (
@@ -71,7 +69,7 @@ function BridgeFormEdit(props) {
           name="longitude"
           type="number"
           onChange={handleChanges}
-          value={newBridge.longitude}
+          value={props.mapData.longitude}
           ref={register({ required: true })}
         />
         {errors.site_name && (
