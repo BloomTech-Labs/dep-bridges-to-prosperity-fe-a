@@ -31,13 +31,17 @@ let data = [
 function BridgeFormContainer() {
   const [editing, setEditing] = useState(false);
   console.log(editing);
+  const [toEdit, setToEdit] = useState(null);
   // Setting up the dummy bridge state here
   const [mapData, setMapData] = useState(data);
 
   const toggleEditing = clicked => {
     setEditing(!editing);
     console.log('To edit', clicked);
+    setToEdit(clicked);
   };
+  console.log('out', toEdit);
+
   const addBridge = newBridge => {
     setMapData([...mapData, newBridge]);
   };
@@ -49,7 +53,11 @@ function BridgeFormContainer() {
     <>
       <BridgeSiteList mapData={mapData} toggleEditing={toggleEditing} />
       {editing ? (
-        <BridgeFormEdit mapData={mapData} toggleEditing={toggleEditing} />
+        <BridgeFormEdit
+          mapData={mapData}
+          toggleEditing={toggleEditing}
+          toEdit={toEdit}
+        />
       ) : (
         <BridgeFormAdd mapData={mapData} addBridge={addBridge} />
       )}
