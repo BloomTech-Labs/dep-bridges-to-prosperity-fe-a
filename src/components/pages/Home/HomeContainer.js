@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from '../../../state/actions';
-import Mapbox from './Mapbox';
+// import Mapbox from './Mapbox';
 import MapMenu from './MapMenu';
 
 function HomeContainer() {

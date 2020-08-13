@@ -50,8 +50,9 @@ function MapMenu(props) {
       longitude: bridge.longitude,
     });
     setClickedBridge(bridge);
-    console.log('clickMarker');
-    console.log(bridge);
+
+    console.log('bridge', bridge);
+    console.log('infodisplay:', infoDisplay);
     setVisible(!visible);
   };
   const onClose = () => {
@@ -77,7 +78,7 @@ function MapMenu(props) {
         <Sider>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item>
-              <MapSearchBar mapData={mapData} />
+              <MapSearchBar mapData={mapData}></MapSearchBar>
             </Menu.Item>
 
             {/* When these Items are toggled, only display that which is selected*/}
