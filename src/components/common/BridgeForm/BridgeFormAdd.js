@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Form, Input } from 'antd';
 
 function BridgeFormAdd(props) {
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = () => {
     props.addBridge(newBridge);
   };
-  // console.log('From Props', props.mapData);
 
   // Setting up the shape of the data to "POST" to the bridge dummy data
   const [newBridge, setNewBridge] = useState({

@@ -15,7 +15,7 @@ import { ExampleDataViz } from './components/pages/ExampleDataViz';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import { RegistrationPage } from './components/pages/Registration';
-import TestPage from './components/pages/Test/index';
+import TestPage from './components/pages/Test';
 
 // Set up Redux
 import { applyMiddleware, createStore } from 'redux';

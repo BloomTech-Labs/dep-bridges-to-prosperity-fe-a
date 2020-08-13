@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import BridgeFormAdd from './BridgeFormAdd.js';
 import BridgeFormEdit from './BridgeFormEdit.js';
 import BridgeSiteList from './BridgeSiteList.js';
@@ -30,7 +30,7 @@ let data = [
 
 function BridgeFormContainer() {
   const [editing, setEditing] = useState(false);
-  console.log(editing);
+  // This will hold the value of the bridge to edit
   const [toEdit, setToEdit] = useState(null);
   // Setting up the dummy bridge state here
   const [mapData, setMapData] = useState(data);
@@ -40,14 +40,10 @@ function BridgeFormContainer() {
     console.log('To edit', clicked);
     setToEdit(clicked);
   };
-  console.log('out', toEdit);
 
   const addBridge = newBridge => {
     setMapData([...mapData, newBridge]);
   };
-  //   const editBridge = clicked => {
-  //     console.log('To edit', mapData.filter(clicked));
-  //   };
 
   return (
     <>
