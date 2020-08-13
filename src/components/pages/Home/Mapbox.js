@@ -6,15 +6,7 @@ import InfoDrawer from './InfoDrawer';
 import { mapData } from './dummyData';
 
 function Mapbox(props) {
-  //copy code from previous proj.
-  const [viewport, setViewport] = useState({
-    //this is bridge site 1 coordinates
-    latitude: -2.42056,
-    longitude: 28.9662,
-    width: '100vw',
-    height: '100vh',
-    zoom: 10,
-  });
+  const { viewport, setViewport } = props;
 
   const ZoomIn = bridge => {
     setViewport({
@@ -22,10 +14,11 @@ function Mapbox(props) {
       longitude: bridge.longitude,
       width: '100%',
       height: '100%',
-      zoom: 15,
+      zoom: 14.5,
       transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
       transitionDuration: 'auto',
     });
+    console.log('line 43 mapbox zoom in');
     props.clickMarker(bridge);
   };
 
@@ -43,6 +36,7 @@ function Mapbox(props) {
         //using minimo right now, should be good to swap out if we want another
         mapStyle="mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr"
       >
+        {/* onDoubleClick={()=>ZoomOut(bridge)} */}
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
         {/* currently just showing bridge lats/longs */}
         {mapData.map(bridge => {
