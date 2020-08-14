@@ -1,39 +1,17 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import BridgeFormAdd from './BridgeFormAdd.js';
 import BridgeFormEdit from './BridgeFormEdit.js';
 import BridgeSiteList from './BridgeSiteList.js';
 
-//DUMMY DATA TO BE DELETED:
-let data = [
-  {
-    id: 1,
-    site_name: 'Buzi',
-    proj_stage: 'rejected',
-    latitude: -2.42056,
-    longitude: 28.9662,
-  },
-  {
-    id: 2,
-    site_name: 'Kamigisha',
-    proj_stage: 'rejected',
-    latitude: -2.42486,
-    longitude: 28.95726,
-  },
-  {
-    id: 3,
-    site_name: 'Nyarubande',
-    proj_stage: 'rejected',
-    latitude: -1.65595,
-    longitude: 30.07884,
-  },
-];
-
 function BridgeFormContainer() {
+  const bridges = useSelector(state => state.bridgeSites);
+
+  // Sets editing status
   const [editing, setEditing] = useState(false);
+
   // This will hold the value of the bridge to edit
   const [toEdit, setToEdit] = useState(null);
-  // Setting up the dummy bridge state here
-  const [mapData, setMapData] = useState(data);
 
   const toggleEditing = clicked => {
     setEditing(!editing);
@@ -41,21 +19,17 @@ function BridgeFormContainer() {
     setToEdit(clicked);
   };
 
-  const addBridge = newBridge => {
-    setMapData([...mapData, newBridge]);
-  };
-
   return (
     <>
-      <BridgeSiteList mapData={mapData} toggleEditing={toggleEditing} />
+      <BridgeSiteList bridges={bridges} toggleEditing={toggleEditing} />
       {editing ? (
         <BridgeFormEdit
-          mapData={mapData}
+          bridges={bridges}
           toggleEditing={toggleEditing}
           toEdit={toEdit}
         />
       ) : (
-        <BridgeFormAdd mapData={mapData} addBridge={addBridge} />
+        <BridgeFormAdd bridges={bridges} />
       )}
     </>
   );

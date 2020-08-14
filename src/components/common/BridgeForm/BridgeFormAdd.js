@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { addBridge } from '../../../state/actions';
 
 function BridgeFormAdd(props) {
   const { register, handleSubmit, errors } = useForm();
 
+  const dispatch = useDispatch();
+
   const onSubmit = () => {
-    props.addBridge(newBridge);
+    dispatch(addBridge(newBridge));
   };
+  console.log('Bridges', props.bridges);
 
   // Setting up the shape of the data to "POST" to the bridge dummy data
   const [newBridge, setNewBridge] = useState({

@@ -4,7 +4,7 @@ import BridgeSite from './BridgeSite.js';
 function BridgeSiteList(props) {
   return (
     <>
-      {props.mapData.map(bridge => (
+      {props.bridges.map(bridge => (
         <BridgeSite
           key={bridge.id}
           bridge={bridge}
