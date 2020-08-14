@@ -8,7 +8,7 @@ function BridgeSiteList(props) {
         <BridgeSite
           key={bridge.id}
           bridge={bridge}
-          toggleEditing={props.toggleEditing}
+          bridgeToEdit={props.bridgeToEdit}
         />
       ))}
     </>

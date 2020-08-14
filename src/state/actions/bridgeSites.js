@@ -8,9 +8,9 @@ export const addBridge = newBridge => {
   };
 };
 
-export const editBridge = bridgeToEdit => {
+export const editBridge = newBridge => {
   return {
     type: EDIT,
-    payload: bridgeToEdit,
+    payload: newBridge,
   };
 };

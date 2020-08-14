@@ -13,7 +13,11 @@ function BridgeFormContainer() {
   // This will hold the value of the bridge to edit
   const [toEdit, setToEdit] = useState(null);
 
-  const toggleEditing = clicked => {
+  const toggleEditing = () => {
+    setEditing(!editing);
+  };
+
+  const bridgeToEdit = clicked => {
     setEditing(!editing);
     console.log('To edit', clicked);
     setToEdit(clicked);
@@ -21,7 +25,7 @@ function BridgeFormContainer() {
 
   return (
     <>
-      <BridgeSiteList bridges={bridges} toggleEditing={toggleEditing} />
+      <BridgeSiteList bridges={bridges} bridgeToEdit={bridgeToEdit} />
       {editing ? (
         <BridgeFormEdit
           bridges={bridges}

@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { editBridge } from '../../../state/actions';
 
 function BridgeFormEdit(props) {
   const { register, handleSubmit, errors } = useForm();
 
+  const dispatch = useDispatch();
+
   const onSubmit = () => {
     console.log(newBridge);
+    dispatch(editBridge(newBridge));
+    props.toggleEditing();
   };
 
   // Setting up the shape of the data to "PUT" to the bridge dummy data
