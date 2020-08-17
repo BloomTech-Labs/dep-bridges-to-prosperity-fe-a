@@ -33,9 +33,9 @@ function BridgeFormEdit(props) {
         {/* BRIDGE SITE NAME */}
         <input
           placeholder="Bridge Site Name"
-          name="site_name"
+          name="name"
           onChange={handleChanges}
-          value={newBridge.site_name}
+          value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.site_name && (
@@ -46,12 +46,20 @@ function BridgeFormEdit(props) {
           placeholder="Project Stage"
           name="proj_stage"
           onChange={handleChanges}
-          value={newBridge.proj_stage}
+          value={newBridge.stage}
           ref={register({ required: true })}
         />
         {errors.site_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
+        {/* SUB STAGE */}
+        <input
+          placeholder="Sub Stage"
+          name="subStage"
+          onChange={handleChanges}
+          value={newBridge.subStage}
+          ref={register({ required: false })}
+        />
         {/* LATITUDE */}
         <input
           placeholder="Latitude"
@@ -76,6 +84,32 @@ function BridgeFormEdit(props) {
         {errors.site_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
+        {/* INDIVIDUALS SERVED */}
+        <input
+          placeholder="Individuals Served"
+          name="individualsDirectlyServed"
+          type="number"
+          onChange={handleChanges}
+          value={newBridge.individualsDirectlyServed}
+          ref={register({ required: false })}
+        />
+        {/* SPAN */}
+        <input
+          placeholder="Span"
+          name="Span"
+          type="number"
+          onChange={handleChanges}
+          value={newBridge.span}
+          ref={register({ required: false })}
+        />
+        {/* TYPE */}
+        <input
+          placeholder="Bridge Type"
+          name="Type"
+          onChange={handleChanges}
+          value={newBridge.type}
+          ref={register({ required: false })}
+        />
         {/* SUBMIT */}
         <input type="submit" />
       </form>
