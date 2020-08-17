@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import BridgeFormAdd from './BridgeFormAdd.js';
 import BridgeFormEdit from './BridgeFormEdit.js';
 import BridgeSiteList from './BridgeSiteList.js';
+import { fetchBridges } from '../../../state/actions/index.js';
 
 function BridgeFormContainer() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBridges());
+  }, []);
+
   const bridges = useSelector(state => state.bridgeSites);
 
   // Sets editing status
