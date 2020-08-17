@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //antDesign
+import axios from 'axios';
 import { Layout, Menu } from 'antd';
 import MapSearchBar from './MapSearchBar';
 import Mapbox from './Mapbox';
 import InfoDrawer from './InfoDrawer';
-let mapData = [
-  {
-    id: 1,
-    site_name: 'Buzi',
-    proj_stage: 'rejected',
-    latitude: -2.42056,
-    longitude: 28.9662,
-  },
-  {
-    id: 2,
-    site_name: 'Kamigisha',
-    proj_stage: 'rejected',
-    latitude: -2.42486,
-    longitude: 28.95726,
-  },
-  {
-    id: 3,
-    site_name: 'Nyarubande',
-    proj_stage: 'rejected',
-    latitude: -1.65595,
-    longitude: 30.07884,
-  },
-];
+import { dummyData } from './dummyData';
+import { FlyToInterpolator } from 'react-map-gl';
 function MapMenu(props) {
+  const [mapData, setMapData] = useState([]);
   const { Sider } = Layout;
 
+  useEffect(() => {
+    axios
+      .get('https://bridges-a-api.herokuapp.com/bridges/all')
+      .then(response => {
+        console.log('axios response', response);
+        setMapData(response.data);
+      })
+      .catch(err => {
+        console.log('axios error', err);
+      });
+  }, []);
+  const [viewport, setViewport] = useState({
+    //this is bridge site 1 coordinates
+    latitude: -2.42056,
+    longitude: 28.9662,
+    width: '100vw',
+    height: '100vh',
+    zoom: 15,
+  });
   //state for information to be displayed
   const [infoDisplay, setInfoDisplay] = useState({
     site_name: '',
@@ -39,7 +39,21 @@ function MapMenu(props) {
   });
 
   const [clickedBridge, setClickedBridge] = useState({});
+
   const [visible, setVisible] = useState(false);
+
+  const onClose = () => {
+    setViewport({
+      latitude: clickedBridge.latitude,
+      longitude: clickedBridge.longitude,
+      width: '100%',
+      height: '100%',
+      zoom: 10,
+      transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+      transitionDuration: 'auto',
+    });
+    setVisible(false);
+  };
 
   //handles the click feature of the info
   const clickMarker = bridge => {
@@ -50,13 +64,7 @@ function MapMenu(props) {
       longitude: bridge.longitude,
     });
     setClickedBridge(bridge);
-
-    console.log('bridge', bridge);
-    console.log('infodisplay:', infoDisplay);
     setVisible(!visible);
-  };
-  const onClose = () => {
-    setVisible(false);
   };
 
   return (
@@ -91,7 +99,11 @@ function MapMenu(props) {
             <Menu.Item key="6">Rejected Bridge Sites</Menu.Item> */}
           </Menu>
         </Sider>
-        <Mapbox clickMarker={clickMarker} onClose={onClose} />
+        <Mapbox
+          clickMarker={clickMarker}
+          setViewport={setViewport}
+          viewport={viewport}
+        />
       </Layout>
     </div>
   );

@@ -1,44 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
 import { UpCircleFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-// import InfoDrawer from './InfoDrawer';
-
-//DUMMY DATA TO BE DELETED:
-let mapData = [
-  {
-    id: 1,
-    site_name: 'Buzi',
-    proj_stage: 'rejected',
-    latitude: -2.42056,
-    longitude: 28.9662,
-  },
-  {
-    id: 2,
-    site_name: 'Kamigisha',
-    proj_stage: 'rejected',
-    latitude: -2.42486,
-    longitude: 28.95726,
-  },
-  {
-    id: 3,
-    site_name: 'Nyarubande',
-    proj_stage: 'rejected',
-    latitude: -1.65595,
-    longitude: 30.07884,
-  },
-];
+import InfoDrawer from './InfoDrawer';
+import { dummyData } from './dummyData';
 
 function Mapbox(props) {
-  //copy code from previous proj.
-  const [viewport, setViewport] = useState({
-    //this is bridge site 1 coordinates
-    latitude: -2.42056,
-    longitude: 28.9662,
-    width: '100vw',
-    height: '100vh',
-    zoom: 10,
-  });
+  const { viewport, setViewport } = props;
+  const [mapData, setMapData] = useState([]);
+  const [bridgeData, setBridgeData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('https://bridges-a-api.herokuapp.com/bridges/all')
+      .then(response => {
+        console.log('axios response', response);
+        setMapData(response.data);
+      })
+      .catch(err => {
+        console.log('axios error', err);
+      });
+  }, []);
 
   const ZoomIn = bridge => {
     setViewport({
@@ -46,10 +29,11 @@ function Mapbox(props) {
       longitude: bridge.longitude,
       width: '100%',
       height: '100%',
-      zoom: 15,
+      zoom: 14.5,
       transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
       transitionDuration: 'auto',
     });
+    console.log('line 43 mapbox zoom in');
     props.clickMarker(bridge);
   };
 
@@ -72,6 +56,7 @@ function Mapbox(props) {
         //using minimo right now, should be good to swap out if we want another
         mapStyle="mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr"
       >
+        {/* onDoubleClick={()=>ZoomOut(bridge)} */}
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
         {/* currently just showing bridge lats/longs */}
         {mapData.map(bridge => {

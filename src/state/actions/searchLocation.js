@@ -8,7 +8,7 @@ export const searchLocation = () => dispatch => {
   dispatch({ type: SEARCH_FOR_LOCATION });
   //need to be able to hit that location for the search
   axios
-    .get('village data goes here')
+    .get('https://bridges-a-api.herokuapp.com/bridges/all')
     .then(res => {
       dispatch({ type: SEARCH_SUCCESS, payload: res.data });
       return res.data;

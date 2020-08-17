@@ -3,7 +3,7 @@ import { Drawer } from 'antd';
 
 const InfoDrawer = props => {
   useEffect(() => {
-    console.log('infodrawer line 14', props.clickedBridge);
+    //console.log('infodrawer line 14', props.clickedBridge);
   }, [props.clickedBridge]);
 
   return (
@@ -16,8 +16,8 @@ const InfoDrawer = props => {
         visible={props.visible}
       >
         <div>
-          <p>Site Name:{props.clickedBridge.site_name}</p>
-          <p>Project Stage:{props.clickedBridge.proj_stage}</p>
+          <p>Site Name:{props.clickedBridge.name}</p>
+          {/* <p>Project Stage:{props.clickedBridge.stage}</p> */}
           <p>Latitude:{props.clickedBridge.latitude}</p>
           <p>Longitude:{props.clickedBridge.longitude}</p>
         </div>
