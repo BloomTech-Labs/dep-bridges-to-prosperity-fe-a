@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //antDesign
+import axios from 'axios'
 import { Layout, Menu } from 'antd';
 import MapSearchBar from './MapSearchBar';
 import Mapbox from './Mapbox';
@@ -9,6 +10,18 @@ import { FlyToInterpolator } from 'react-map-gl';
 function MapMenu(props) {
   const [mapData, setMapData] = useState(dummyData);
   const { Sider } = Layout;
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/bridges/all')
+      .then(response => {
+        console.log('axios response', response);
+        setMapData(response.data);
+      })
+      .catch(err => {
+        console.log('axios error', err);
+      });
+  }, []);
   const [viewport, setViewport] = useState({
     //this is bridge site 1 coordinates
     latitude: -2.42056,
