@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addBridge } from '../../../state/actions';
+import { post } from '../../../state/actions';
 
 function BridgeFormAdd(props) {
   const { register, handleSubmit, errors } = useForm();
@@ -9,13 +9,26 @@ function BridgeFormAdd(props) {
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    dispatch(addBridge(newBridge));
+    dispatch(post(newBridge));
   };
-  console.log('Bridges', props.bridges);
+
+  // GENERATING RANDOM NUM FOR BRIDGE ID!
+  function numGenerator() {
+    let num = Math.round(Math.random() * 1000);
+    return num;
+  }
 
   // Setting up the shape of the data to "POST" to the bridge dummy data
   const [newBridge, setNewBridge] = useState({
-    id: Date.now(),
+    id: numGenerator(),
+    individualsDirectlyServed: 1,
+    latitude: 1,
+    longitude: 1,
+    name: '',
+    span: 1,
+    stage: '',
+    subStage: '',
+    type: '',
   });
 
   const handleChanges = e => {
@@ -43,7 +56,7 @@ function BridgeFormAdd(props) {
         {/* PROJECT STAGE */}
         <input
           placeholder="Project Stage"
-          name="proj_stage"
+          name="stage"
           onChange={handleChanges}
           value={newBridge.stage}
           ref={register({ required: true })}
@@ -60,51 +73,63 @@ function BridgeFormAdd(props) {
           ref={register({ required: false })}
         />
         {/* LATITUDE */}
-        <input
-          placeholder="Latitude"
-          name="latitude"
-          type="number"
-          onChange={handleChanges}
-          value={newBridge.latitude}
-          ref={register({ required: true })}
-        />
+        <label style={{ display: 'flex', flexDirection: 'column' }}>
+          Latitude
+          <input
+            placeholder="Latitude"
+            name="latitude"
+            type="number"
+            onChange={handleChanges}
+            value={newBridge.latitude}
+            ref={register({ required: true })}
+          />
+        </label>
         {errors.site_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LONGITUDE */}
-        <input
-          placeholder="Longitude"
-          name="longitude"
-          type="number"
-          onChange={handleChanges}
-          value={newBridge.longitude}
-          ref={register({ required: true })}
-        />
+        <label style={{ display: 'flex', flexDirection: 'column' }}>
+          Longitude
+          <input
+            placeholder="Longitude"
+            name="longitude"
+            type="number"
+            onChange={handleChanges}
+            value={newBridge.longitude}
+            ref={register({ required: true })}
+          />
+        </label>
         {errors.site_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* INDIVIDUALS SERVED */}
-        <input
-          placeholder="Individuals Served"
-          name="individualsDirectlyServed"
-          type="number"
-          onChange={handleChanges}
-          value={newBridge.individualsDirectlyServed}
-          ref={register({ required: false })}
-        />
+        <label style={{ display: 'flex', flexDirection: 'column' }}>
+          Individuals Served
+          <input
+            placeholder="Individuals Served"
+            name="individualsDirectlyServed"
+            type="number"
+            onChange={handleChanges}
+            value={newBridge.individualsDirectlyServed}
+            ref={register({ required: false })}
+          />
+        </label>
         {/* SPAN */}
-        <input
-          placeholder="Span"
-          name="Span"
-          type="number"
-          onChange={handleChanges}
-          value={newBridge.span}
-          ref={register({ required: false })}
-        />
+        <label style={{ display: 'flex', flexDirection: 'column' }}>
+          Span
+          <input
+            placeholder="Span"
+            name="Span"
+            type="number"
+            onChange={handleChanges}
+            value={newBridge.span}
+            ref={register({ required: false })}
+          />
+        </label>
         {/* TYPE */}
         <input
           placeholder="Bridge Type"
-          name="Type"
+          name="type"
           onChange={handleChanges}
           value={newBridge.type}
           ref={register({ required: false })}

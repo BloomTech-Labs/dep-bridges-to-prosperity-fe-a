@@ -34,7 +34,17 @@ export const post = newBridge => dispatch => {
     .post('http://localhost:8000/bridge/add', newBridge)
     .then(res => {
       console.log('New bridge site added: ', newBridge);
-      dispatch({ type: FETCH_BRIDGES, payload: res.data });
+      axios
+        .get('http://localhost:8000/bridges/all')
+        .then(res => {
+          dispatch({ type: FETCH_BRIDGES, payload: res.data });
+        })
+        .catch(err => {
+          console.log(
+            'Error fetching data from fetchBridges action. ERR: ',
+            err
+          );
+        });
     })
     .catch(err => {
       console.log('Error adding bridge: ', err);
