@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 //antDesign
-import axios from 'axios'
+// import axios from 'axios';
 import { Layout, Menu } from 'antd';
 import MapSearchBar from './MapSearchBar';
 import Mapbox from './Mapbox';
 import InfoDrawer from './InfoDrawer';
-import { dummyData } from './dummyData';
+import { useSelector, useDispatch } from 'react-redux';
+// import { dummyData } from './dummyData';
 import { FlyToInterpolator } from 'react-map-gl';
+import { getAllMapData } from '../../../state/actions';
 function MapMenu(props) {
-  const [mapData, setMapData] = useState(dummyData);
+  // const [mapData, setMapData] = u
+  const dispatch = useDispatch();
+  const { mapData, loading, error } = useSelector(
+    state => state.mapDataReducer
+  );
+
   const { Sider } = Layout;
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8000/bridges/all')
-      .then(response => {
-        console.log('axios response', response);
-        setMapData(response.data);
-      })
-      .catch(err => {
-        console.log('axios error', err);
-      });
-  }, []);
+    dispatch(getAllMapData());
+  }, [dispatch]);
   const [viewport, setViewport] = useState({
     //this is bridge site 1 coordinates
     latitude: -2.42056,
@@ -103,6 +102,7 @@ function MapMenu(props) {
           clickMarker={clickMarker}
           setViewport={setViewport}
           viewport={viewport}
+          mapData={mapData}
         />
       </Layout>
     </div>

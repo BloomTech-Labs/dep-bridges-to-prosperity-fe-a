@@ -8,20 +8,6 @@ import { dummyData } from './dummyData';
 
 function Mapbox(props) {
   const { viewport, setViewport } = props;
-  const [mapData, setMapData] = useState(dummyData);
-  const [bridgeData, setBridgeData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:8000/bridges/all')
-      .then(response => {
-        console.log('axios response', response);
-        setMapData(response.data);
-      })
-      .catch(err => {
-        console.log('axios error', err);
-      });
-  }, []);
 
   const ZoomIn = bridge => {
     setViewport({
@@ -33,7 +19,6 @@ function Mapbox(props) {
       transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
       transitionDuration: 'auto',
     });
-    console.log('line 43 mapbox zoom in');
     props.clickMarker(bridge);
   };
 
@@ -54,7 +39,7 @@ function Mapbox(props) {
         {/* onDoubleClick={()=>ZoomOut(bridge)} */}
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
         {/* currently just showing bridge lats/longs */}
-        {mapData.map(bridge => {
+        {props.mapData.map(bridge => {
           return (
             <div key={bridge.id} onClick={() => ZoomIn(bridge)}>
               <Marker
