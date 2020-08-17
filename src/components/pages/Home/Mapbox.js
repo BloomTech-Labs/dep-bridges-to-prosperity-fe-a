@@ -53,6 +53,11 @@ function Mapbox(props) {
     props.clickMarker(bridge);
   };
 
+  const ZoomOut = () => {
+    setViewport({
+      viewport,
+    });
+  };
   return (
     <div>
       {/* render map */}
@@ -71,7 +76,11 @@ function Mapbox(props) {
         {/* currently just showing bridge lats/longs */}
         {mapData.map(bridge => {
           return (
-            <div key={bridge.id} onClick={() => ZoomIn(bridge)}>
+            <div
+              key={bridge.id}
+              onClick={() => ZoomIn(bridge)}
+              onClose={() => ZoomOut()}
+            >
               <Marker
                 latitude={bridge.latitude}
                 longitude={bridge.longitude}
