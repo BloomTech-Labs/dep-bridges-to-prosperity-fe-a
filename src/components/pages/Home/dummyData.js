@@ -1,4 +1,4 @@
-export const mapData = [
+export const dummyData = [
   {
     id: 1,
     site_name: 'Buzi',

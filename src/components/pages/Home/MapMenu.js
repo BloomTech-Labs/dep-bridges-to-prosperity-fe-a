@@ -4,9 +4,10 @@ import { Layout, Menu } from 'antd';
 import MapSearchBar from './MapSearchBar';
 import Mapbox from './Mapbox';
 import InfoDrawer from './InfoDrawer';
-import { mapData } from './dummyData';
+import { dummyData } from './dummyData';
 import { FlyToInterpolator } from 'react-map-gl';
 function MapMenu(props) {
+  const [mapData, setMapData] = useState(dummyData);
   const { Sider } = Layout;
   const [viewport, setViewport] = useState({
     //this is bridge site 1 coordinates

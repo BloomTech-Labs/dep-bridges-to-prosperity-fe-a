@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
 import { UpCircleFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import InfoDrawer from './InfoDrawer';
-import { mapData } from './dummyData';
+import { dummyData } from './dummyData';
 
 function Mapbox(props) {
   const { viewport, setViewport } = props;
+  const [mapData, setMapData] = useState(dummyData);
+  const [bridgeData, setBridgeData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/bridges/all')
+      .then(response => {
+        console.log('axios response', response);
+        setMapData(response.data);
+      })
+      .catch(err => {
+        console.log('axios error', err);
+      });
+  }, []);
 
   const ZoomIn = bridge => {
     setViewport({
