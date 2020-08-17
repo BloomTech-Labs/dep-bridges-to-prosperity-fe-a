@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { editBridge } from '../../../state/actions';
+import { patch, fetchBridges } from '../../../state/actions';
 
 function BridgeFormEdit(props) {
   const { register, handleSubmit, errors } = useForm();
@@ -10,7 +10,7 @@ function BridgeFormEdit(props) {
 
   const onSubmit = () => {
     console.log(newBridge);
-    dispatch(editBridge(newBridge));
+    dispatch(patch(newBridge));
     props.toggleEditing();
   };
 
@@ -29,7 +29,7 @@ function BridgeFormEdit(props) {
       <h1>Editing</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* ID */}
-        <input placeholder="ID" name="id" value={newBridge.id} readOnly />
+        {/* <input placeholder="ID" name="id" value={newBridge.id} readOnly /> */}
         {/* BRIDGE SITE NAME */}
         <input
           placeholder="Bridge Site Name"
@@ -44,7 +44,7 @@ function BridgeFormEdit(props) {
         {/* PROJECT STAGE */}
         <input
           placeholder="Project Stage"
-          name="proj_stage"
+          name="stage"
           onChange={handleChanges}
           value={newBridge.stage}
           ref={register({ required: true })}
