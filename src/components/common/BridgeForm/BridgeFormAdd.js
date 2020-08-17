@@ -54,24 +54,34 @@ function BridgeFormAdd(props) {
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* PROJECT STAGE */}
-        <input
-          placeholder="Project Stage"
+        <label htmlFor="stage">Project Stage</label>
+        <select
           name="stage"
+          id="stage"
           onChange={handleChanges}
-          value={newBridge.stage}
           ref={register({ required: true })}
-        />
+        >
+          <option value="Accepted">Accepted</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Identified">Identified</option>
+        </select>
         {errors.site_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUB STAGE */}
-        <input
-          placeholder="Sub Stage"
+        <label htmlFor="subStage">Sub Stage</label>
+        <select
           name="subStage"
+          id="subStage"
           onChange={handleChanges}
-          value={newBridge.subStage}
-          ref={register({ required: false })}
-        />
+          ref={register({ required: true })}
+        >
+          <option value="Technical">Technical</option>
+          <option value="Requested">Requested</option>
+        </select>
+        {errors.site_name && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
         {/* LATITUDE */}
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Latitude
@@ -127,13 +137,20 @@ function BridgeFormAdd(props) {
           />
         </label>
         {/* TYPE */}
-        <input
-          placeholder="Bridge Type"
+        <label htmlFor="type">Bridge Type</label>
+        <select
           name="type"
+          id="type"
           onChange={handleChanges}
-          value={newBridge.type}
-          ref={register({ required: false })}
-        />
+          ref={register({ required: true })}
+        >
+          <option value="Suspended">Suspended</option>
+          <option value="Suspension">Suspension</option>
+          <option value="Other">Other</option>
+        </select>
+        {errors.site_name && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
         {/* SUBMIT */}
         <input type="submit" />
       </form>

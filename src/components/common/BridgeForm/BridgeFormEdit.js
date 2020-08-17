@@ -28,8 +28,6 @@ function BridgeFormEdit(props) {
     <>
       <h1>Editing</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* ID */}
-        {/* <input placeholder="ID" name="id" value={newBridge.id} readOnly /> */}
         {/* BRIDGE SITE NAME */}
         <input
           placeholder="Bridge Site Name"
@@ -42,74 +40,106 @@ function BridgeFormEdit(props) {
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* PROJECT STAGE */}
-        <input
-          placeholder="Project Stage"
+        <label htmlFor="stage">Project Stage</label>
+        <select
           name="stage"
+          id="stage"
           onChange={handleChanges}
           value={newBridge.stage}
           ref={register({ required: true })}
-        />
+        >
+          <option value="Accepted">Accepted</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Identified">Identified</option>
+        </select>
         {errors.site_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUB STAGE */}
-        <input
-          placeholder="Sub Stage"
+        <label htmlFor="subStage">Sub Stage</label>
+        <select
           name="subStage"
+          id="subStage"
           onChange={handleChanges}
           value={newBridge.subStage}
-          ref={register({ required: false })}
-        />
-        {/* LATITUDE */}
-        <input
-          placeholder="Latitude"
-          name="latitude"
-          type="number"
-          onChange={handleChanges}
-          value={newBridge.latitude}
           ref={register({ required: true })}
-        />
+        >
+          <option value="Technical">Technical</option>
+          <option value="Requested">Requested</option>
+        </select>
+        {errors.site_name && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* LATITUDE */}
+        <label style={{ display: 'flex', flexDirection: 'column' }}>
+          Latitude
+          <input
+            placeholder="Latitude"
+            name="latitude"
+            type="number"
+            onChange={handleChanges}
+            value={newBridge.latitude}
+            ref={register({ required: true })}
+          />
+        </label>
         {errors.site_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LONGITUDE */}
-        <input
-          placeholder="Longitude"
-          name="longitude"
-          type="number"
-          onChange={handleChanges}
-          value={newBridge.longitude}
-          ref={register({ required: true })}
-        />
+        <label style={{ display: 'flex', flexDirection: 'column' }}>
+          Longitude
+          <input
+            placeholder="Longitude"
+            name="longitude"
+            type="number"
+            onChange={handleChanges}
+            value={newBridge.longitude}
+            ref={register({ required: true })}
+          />
+        </label>
         {errors.site_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* INDIVIDUALS SERVED */}
-        <input
-          placeholder="Individuals Served"
-          name="individualsDirectlyServed"
-          type="number"
-          onChange={handleChanges}
-          value={newBridge.individualsDirectlyServed}
-          ref={register({ required: false })}
-        />
+        <label style={{ display: 'flex', flexDirection: 'column' }}>
+          Individuals Served
+          <input
+            placeholder="Individuals Served"
+            name="individualsDirectlyServed"
+            type="number"
+            onChange={handleChanges}
+            value={newBridge.individualsDirectlyServed}
+            ref={register({ required: false })}
+          />
+        </label>
         {/* SPAN */}
-        <input
-          placeholder="Span"
-          name="Span"
-          type="number"
-          onChange={handleChanges}
-          value={newBridge.span}
-          ref={register({ required: false })}
-        />
+        <label style={{ display: 'flex', flexDirection: 'column' }}>
+          Span
+          <input
+            placeholder="Span"
+            name="Span"
+            type="number"
+            onChange={handleChanges}
+            value={newBridge.span}
+            ref={register({ required: false })}
+          />
+        </label>
         {/* TYPE */}
-        <input
-          placeholder="Bridge Type"
-          name="Type"
+        <label htmlFor="type">Bridge Type</label>
+        <select
+          name="type"
+          id="type"
           onChange={handleChanges}
           value={newBridge.type}
-          ref={register({ required: false })}
-        />
+          ref={register({ required: true })}
+        >
+          <option value="Suspended">Suspended</option>
+          <option value="Suspension">Suspension</option>
+          <option value="Other">Other</option>
+        </select>
+        {errors.site_name && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
         {/* SUBMIT */}
         <input type="submit" />
       </form>
