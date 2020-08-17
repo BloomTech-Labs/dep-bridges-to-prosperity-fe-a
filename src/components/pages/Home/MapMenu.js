@@ -91,7 +91,7 @@ function MapMenu(props) {
             <Menu.Item key="6">Rejected Bridge Sites</Menu.Item> */}
           </Menu>
         </Sider>
-        <Mapbox clickMarker={clickMarker} />
+        <Mapbox clickMarker={clickMarker} onClose={onClose} />
       </Layout>
     </div>
   );
