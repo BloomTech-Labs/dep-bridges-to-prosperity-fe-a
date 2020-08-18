@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { patch, fetchBridges } from '../../../state/actions';
+import { editBridge } from '../../../state/actions';
 
 function BridgeFormEdit(props) {
   const { register, handleSubmit, errors } = useForm();
@@ -10,7 +10,7 @@ function BridgeFormEdit(props) {
 
   const onSubmit = () => {
     console.log(newBridge);
-    dispatch(patch(newBridge));
+    dispatch(editBridge(newBridge));
     props.toggleEditing();
   };
 

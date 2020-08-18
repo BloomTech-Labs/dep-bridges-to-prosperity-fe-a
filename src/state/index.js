@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
-import { counter } from './reducers/counter';
-import { searchLocation } from './reducers/searchLocation';
-import { bridgeSites } from './reducers/bridgeSites';
+import { searchLocationReducer } from './reducers/searchLocationReducer';
+import { bridgeSitesReducer } from './reducers/bridgeSitesReducer';
 
 // Using combine reducers to break up reducers into different files
 export default combineReducers({
-  counter,
-  searchLocation,
-  bridgeSites,
+  searchLocationReducer,
+  bridgeSitesReducer,
 });

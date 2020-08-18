@@ -13,7 +13,7 @@ const initialState = {
   error: null,
 };
 
-export const searchLocation = (state = { initialState }, action) => {
+export const searchLocationReducer = (state = { initialState }, action) => {
   switch (action.type) {
     case SEARCH_FOR_LOCATION:
       return {
