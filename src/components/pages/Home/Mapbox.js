@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+//import axios from 'axios';
 import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
 import { UpCircleFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-import InfoDrawer from './InfoDrawer';
-import { dummyData } from './dummyData';
+// import InfoDrawer from './InfoDrawer';
+// import { dummyData } from './dummyData';
 
 function Mapbox(props) {
   const { viewport, setViewport } = props;
-  console.log(viewport);
+
   const ZoomIn = bridge => {
     setViewport({
       latitude: bridge.latitude,

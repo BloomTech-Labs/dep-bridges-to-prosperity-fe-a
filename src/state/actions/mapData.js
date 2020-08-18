@@ -8,7 +8,7 @@ export const getAllMapData = () => dispatch => {
     type: GET_MAP_DATA_START,
   });
   axios
-    .get('http://localhost:8000/bridges/all')
+    .get('https://bridges-a-api.herokuapp.com/bridges/all')
     .then(response => {
       dispatch({
         type: GET_MAP_DATA_SUCCESS,
