@@ -1,42 +1,60 @@
-import { Input } from 'antd';
+import { Input, Card } from 'antd';
 // import { AudioOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import { searchLocation } from '../../../state/actions';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+
 const { Search } = Input;
 
 const MapSearchBar = props => {
-  const [searchResults, setSearchResults] = useState([]);
-  //this will work to seet the terms for the search ::below::
-  const [searchTerm, setSearchTerm] = useState('');
+  const { register } = useForm();
 
-  function onSearch(event) {
-    console.log(event.target.value);
-    setSearchTerm(event.target.value);
-    // search(event.target.value, props.mapData);
+  const [searchResults, setSearchResults] = useState([]);
+
+  function onSearch(data) {
+    console.log(data.target.value);
+
+    //setSearchTerm(event.target.value);
+    const results = props.mapData.filter(info =>
+      info.name.toLowerCase().includes(data.target.value.toLowerCase())
+    );
+
+    setSearchResults(results);
+    console.log('search rsults:', searchResults);
   }
 
-  useEffect(() => {
-    const results = props.mapData.filter(info =>
-      info.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(results);
-  }, [props.mapData, searchTerm]);
+  // useEffect(() => {
 
-  useEffect(() => {
-    searchLocation();
-  }, []);
+  // }, [props.mapData, searchTerm]);
+
+  // useEffect(() => {
+  //   dispatch(searchLocation());
+  // }, [dispatch]);
 
   return (
     <>
-      <Search value={searchTerm} placeholder="search" onChange={onSearch} />
+      <Search
+        placeholder="search"
+        onChange={onSearch}
+        ref={register}
+        name="search"
+      />
 
       <div>
+        <Card visible={props.visible}>
+          <h2>
+            Active:
+            <br /> {props.clickedBridge.name}
+          </h2>
+        </Card>
         {searchResults.map(item => {
           console.log('search,', item);
           return (
-            <div style={{ backgroundColor: 'black', color: 'white' }}>
-              <h2>Site: {item.name}</h2>
-            </div>
+            <Card size="small">
+              <h2>{item.name}</h2>
+              <p></p>
+            </Card>
           );
         })}
       </div>
