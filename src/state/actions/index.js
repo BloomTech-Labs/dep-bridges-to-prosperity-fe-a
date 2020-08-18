@@ -4,6 +4,5 @@
 // You can have multiple actioncreators per file if it makes sense to the purpose those action creators are serving.
 // Declare action TYPES at the top of the file
 
-export * from './counter';
 export * from './searchLocation';
 export * from './bridgeSites';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
 import { UpCircleFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-import InfoDrawer from './InfoDrawer';
+// import InfoDrawer from './InfoDrawer';
 
 //DUMMY DATA TO BE DELETED:
 let mapData = [

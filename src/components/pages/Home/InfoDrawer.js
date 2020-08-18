@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Drawer, Button } from 'antd';
+import React, { useEffect } from 'react';
+import { Drawer } from 'antd';
 
 const InfoDrawer = props => {
   //   const [visible, setVisible] = useState(false);

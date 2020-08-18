@@ -3,16 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import BridgeFormAdd from './BridgeFormAdd.js';
 import BridgeFormEdit from './BridgeFormEdit.js';
 import BridgeSiteList from './BridgeSiteList.js';
-import { fetchBridges } from '../../../state/actions/index.js';
+import { getAllBridges } from '../../../state/actions/index.js';
 
 function BridgeFormContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchBridges());
-  }, []);
+    dispatch(getAllBridges());
+  }, [dispatch]);
 
-  const bridges = useSelector(state => state.bridgeSites);
+  const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   // Sets editing status
   const [editing, setEditing] = useState(false);
@@ -32,15 +32,15 @@ function BridgeFormContainer() {
 
   return (
     <>
-      <BridgeSiteList bridges={bridges} bridgeToEdit={bridgeToEdit} />
+      <BridgeSiteList bridges={bridgeData} bridgeToEdit={bridgeToEdit} />
       {editing ? (
         <BridgeFormEdit
-          bridges={bridges}
+          bridges={bridgeData}
           toggleEditing={toggleEditing}
           toEdit={toEdit}
         />
       ) : (
-        <BridgeFormAdd bridges={bridges} />
+        <BridgeFormAdd bridges={bridgeData} />
       )}
     </>
   );

@@ -1,74 +1,71 @@
 import axios from 'axios';
 
-export const ADD = 'ADD';
-export const EDIT = 'EDIT';
-export const FETCH_BRIDGES = 'FETCH_BRIDGES';
+export const GET_BRIDGE_DATA_START = 'GET_BRIDGE_DATA_START';
+export const GET_BRIDGE_DATA_SUCCESS = 'GET_BRIDGE_DATA_SUCCESS';
+export const GET_BRIDGE_DATA_FAILURE = 'GET_BRIDGE_DATA_FAILURE';
 
-export const addBridge = newBridge => {
-  return {
-    type: ADD,
-    payload: newBridge,
-  };
-};
+export const ADD_BRIDGE_DATA_START = 'ADD_BRIDGE_DATA_START';
+export const ADD_BRIDGE_DATA_SUCCESS = 'ADD_BRIDGE_DATA_SUCCESS';
+export const ADD_BRIDGE_DATA_FAILURE = 'ADD_BRIDGE_DATA_FAILURE';
 
-export const editBridge = newBridge => {
-  return {
-    type: EDIT,
-    payload: newBridge,
-  };
-};
+export const EDIT_BRIDGE_DATA_START = 'EDIT_BRIDGE_START';
+export const EDIT_BRIDGE_DATA_SUCCESS = 'EDIT_BRIDGE_SUCCESS';
+export const EDIT_BRIDGE_DATA_FAILURE = 'EDIT_BRIDGE_FAILURE';
 
-export const fetchBridges = () => dispatch => {
+export const getAllBridges = () => dispatch => {
+  dispatch({
+    type: GET_BRIDGE_DATA_START,
+  });
   axios
     .get('http://localhost:8000/bridges/all')
     .then(res => {
-      dispatch({ type: FETCH_BRIDGES, payload: res.data });
+      dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      console.log('Error fetching data from fetchBridges action. ERR: ', err);
+      dispatch({
+        type: GET_BRIDGE_DATA_START,
+        payload: err.message,
+      });
     });
 };
 
-export const post = newBridge => dispatch => {
+export const addNewBridge = newBridge => dispatch => {
+  dispatch({
+    type: ADD_BRIDGE_DATA_START,
+  });
   axios
-    .post('http://localhost:8000/bridge/add', newBridge)
+    .post('http://localhost:8000/bridges/add', newBridge)
     .then(res => {
-      console.log('New bridge site added: ', newBridge);
-      axios
-        .get('http://localhost:8000/bridges/all')
-        .then(res => {
-          dispatch({ type: FETCH_BRIDGES, payload: res.data });
-        })
-        .catch(err => {
-          console.log(
-            'Error fetching data from fetchBridges action. ERR: ',
-            err
-          );
-        });
+      console.log('add bridge res:', res);
+      dispatch({
+        type: ADD_BRIDGE_DATA_SUCCESS,
+        payload: res.data,
+      });
     })
     .catch(err => {
-      console.log('Error adding bridge: ', err);
+      dispatch({
+        type: ADD_BRIDGE_DATA_FAILURE,
+        payload: err.message,
+      });
     });
 };
 
-export const patch = newBridge => dispatch => {
+export const editBridge = bridge => dispatch => {
+  dispatch({
+    type: EDIT_BRIDGE_DATA_START,
+  });
   axios
-    .patch(`http://localhost:8000/bridges/${newBridge.id}`, newBridge)
+    .patch(`http://localhost:8000/bridges/${bridge.id}`, bridge)
     .then(res => {
-      console.log('Bridge site edited: ', newBridge);
-      axios
-        .get('http://localhost:8000/bridges/all')
-        .then(res => {
-          dispatch({ type: FETCH_BRIDGES, payload: res.data });
-        })
-        .catch(err => {
-          console.log(
-            'Error fetching data from fetchBridges action. ERR: ',
-            err
-          );
-        });
+      dispatch({
+        type: EDIT_BRIDGE_DATA_SUCCESS,
+        payload: res.data,
+      });
     })
     .catch(err => {
-      console.log('Error adding bridge: ', err);
+      dispatch({
+        type: EDIT_BRIDGE_DATA_FAILURE,
+        payload: err.message,
+      });
     });
 };

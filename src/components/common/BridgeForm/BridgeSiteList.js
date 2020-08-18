@@ -5,11 +5,10 @@ function BridgeSiteList(props) {
   return (
     <>
       {props.bridges.map(bridge => (
-        <BridgeSite
-          key={bridge.id}
-          bridge={bridge}
-          bridgeToEdit={props.bridgeToEdit}
-        />
+        <div key={bridge.id}>
+          {console.log('bridge', bridge)}
+          <BridgeSite bridge={bridge} bridgeToEdit={props.bridgeToEdit} />
+        </div>
       ))}
     </>
   );

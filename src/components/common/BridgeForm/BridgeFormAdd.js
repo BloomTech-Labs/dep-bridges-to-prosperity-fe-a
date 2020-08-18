@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { post } from '../../../state/actions';
+import { addNewBridge } from '../../../state/actions';
 
-function BridgeFormAdd(props) {
+function BridgeFormAdd() {
   const { register, handleSubmit, errors } = useForm();
 
   const dispatch = useDispatch();
 
-  const onSubmit = () => {
-    dispatch(post(newBridge));
+  const onSubmit = data => {
+    console.log('new bridge data:', data);
+    const newBridgeData = {
+      ...data,
+      id: numGenerator(),
+    };
+    dispatch(addNewBridge(newBridgeData));
   };
 
   // GENERATING RANDOM NUM FOR BRIDGE ID!
@@ -19,35 +24,35 @@ function BridgeFormAdd(props) {
   }
 
   // Setting up the shape of the data to "POST" to the bridge dummy data
-  const [newBridge, setNewBridge] = useState({
-    id: numGenerator(),
-    individualsDirectlyServed: 1,
-    latitude: 1,
-    longitude: 1,
-    name: '',
-    span: 1,
-    stage: '',
-    subStage: '',
-    type: '',
-  });
+  // const [newBridge, setNewBridge] = useState({
+  //   individualsDirectlyServed: 0,
+  //   latitude: 1,
+  //   longitude: 1,
+  //   name: '',
+  //   span: 0,
+  //   stage: 'Accepted',
+  //   subStage: 'Technical',
+  //   type: 'Suspended',
+  // });
 
-  const handleChanges = e => {
-    setNewBridge({
-      ...newBridge,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChanges = e => {
+  //   setNewBridge({
+  //     ...newBridge,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   return (
     <>
       <h1>Adding</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* BRIDGE SITE NAME */}
+        <label htmlFor="name">Bridge Site Name</label>
         <input
-          placeholder="Bridge Site Name"
+          placeholder="Ex: Buzi"
           name="name"
-          onChange={handleChanges}
-          value={newBridge.name}
+          // onChange={handleChanges}
+          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.site_name && (
@@ -58,7 +63,7 @@ function BridgeFormAdd(props) {
         <select
           name="stage"
           id="stage"
-          onChange={handleChanges}
+          // onChange={handleChanges}
           ref={register({ required: true })}
         >
           <option value="Accepted">Accepted</option>
@@ -73,7 +78,7 @@ function BridgeFormAdd(props) {
         <select
           name="subStage"
           id="subStage"
-          onChange={handleChanges}
+          // onChange={handleChanges}
           ref={register({ required: true })}
         >
           <option value="Technical">Technical</option>
@@ -86,11 +91,11 @@ function BridgeFormAdd(props) {
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Latitude
           <input
-            placeholder="Latitude"
+            placeholder="Ex: -1234"
             name="latitude"
             type="number"
-            onChange={handleChanges}
-            value={newBridge.latitude}
+            // onChange={handleChanges}
+            // value={newBridge.latitude}
             ref={register({ required: true })}
           />
         </label>
@@ -101,11 +106,11 @@ function BridgeFormAdd(props) {
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Longitude
           <input
-            placeholder="Longitude"
+            placeholder="Ex: 1234"
             name="longitude"
             type="number"
-            onChange={handleChanges}
-            value={newBridge.longitude}
+            // onChange={handleChanges}
+            // value={newBridge.longitude}
             ref={register({ required: true })}
           />
         </label>
@@ -116,11 +121,11 @@ function BridgeFormAdd(props) {
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Individuals Served
           <input
-            placeholder="Individuals Served"
+            placeholder="How many individuals does/would this bridge serve?"
             name="individualsDirectlyServed"
             type="number"
-            onChange={handleChanges}
-            value={newBridge.individualsDirectlyServed}
+            // onChange={handleChanges}
+            // value={newBridge.individualsDirectlyServed}
             ref={register({ required: false })}
           />
         </label>
@@ -128,11 +133,11 @@ function BridgeFormAdd(props) {
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Span
           <input
-            placeholder="Span"
-            name="Span"
+            placeholder="How long does/would this bridge span?"
+            name="span"
             type="number"
-            onChange={handleChanges}
-            value={newBridge.span}
+            // onChange={handleChanges}
+            // value={newBridge.span}
             ref={register({ required: false })}
           />
         </label>
@@ -141,7 +146,7 @@ function BridgeFormAdd(props) {
         <select
           name="type"
           id="type"
-          onChange={handleChanges}
+          // onChange={handleChanges}
           ref={register({ required: true })}
         >
           <option value="Suspended">Suspended</option>
