@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 //antDesign
-import { Layout } from 'antd';
+
+import { Layout, Menu } from 'antd';
 import MapSearchBar from './MapSearchBar';
 import Mapbox from './Mapbox';
 
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FlyToInterpolator } from 'react-map-gl';
-import { getAllMapData } from '../../../state/actions';
+import { getAllBridges } from '../../../state/actions';
 function MapMenu(props) {
   const dispatch = useDispatch();
   const { mapData, loading, error } = useSelector(
-    state => state.mapDataReducer
+    state => state.bridgeSitesReducer
   );
 
   const { Sider } = Layout;
 
   useEffect(() => {
-    dispatch(getAllMapData());
+    dispatch(getAllBridges());
   }, [dispatch]);
   const [viewport, setViewport] = useState({
     //starting viewport: set to show all of rowanda.

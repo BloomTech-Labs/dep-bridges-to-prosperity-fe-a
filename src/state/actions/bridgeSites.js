@@ -1,24 +1,70 @@
 import axios from 'axios';
-export const GET_MAP_DATA_START = 'GET_MAP_START';
-export const GET_MAP_DATA_SUCCESS = 'GET_MAP_SUCCESS';
-export const GET_MAP_DATA_FAILURE = 'GET_MAP_FAILURE';
 
-export const getAllMapData = () => dispatch => {
+export const GET_BRIDGE_DATA_START = 'GET_BRIDGE_DATA_START';
+export const GET_BRIDGE_DATA_SUCCESS = 'GET_BRIDGE_DATA_SUCCESS';
+export const GET_BRIDGE_DATA_FAILURE = 'GET_BRIDGE_DATA_FAILURE';
+
+export const ADD_BRIDGE_DATA_START = 'ADD_BRIDGE_DATA_START';
+export const ADD_BRIDGE_DATA_SUCCESS = 'ADD_BRIDGE_DATA_SUCCESS';
+export const ADD_BRIDGE_DATA_FAILURE = 'ADD_BRIDGE_DATA_FAILURE';
+
+export const EDIT_BRIDGE_DATA_START = 'EDIT_BRIDGE_START';
+export const EDIT_BRIDGE_DATA_SUCCESS = 'EDIT_BRIDGE_SUCCESS';
+export const EDIT_BRIDGE_DATA_FAILURE = 'EDIT_BRIDGE_FAILURE';
+
+export const getAllBridges = () => dispatch => {
   dispatch({
-    type: GET_MAP_DATA_START,
+    type: GET_BRIDGE_DATA_START,
   });
   axios
     .get('https://bridges-a-api.herokuapp.com/bridges/all')
-    .then(response => {
+    .then(res => {
+      dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
       dispatch({
-        type: GET_MAP_DATA_SUCCESS,
-        payload: response.data,
+        type: GET_BRIDGE_DATA_START,
+        payload: err.message,
+      });
+    });
+};
+
+export const addNewBridge = newBridge => dispatch => {
+  dispatch({
+    type: ADD_BRIDGE_DATA_START,
+  });
+  axios
+    .post('http://localhost:8000/bridges/add', newBridge)
+    .then(res => {
+      console.log('add bridge res:', res);
+      dispatch({
+        type: ADD_BRIDGE_DATA_SUCCESS,
+        payload: res.data,
       });
     })
     .catch(err => {
-      console.log('axios error', err);
       dispatch({
-        type: GET_MAP_DATA_FAILURE,
+        type: ADD_BRIDGE_DATA_FAILURE,
+        payload: err.message,
+      });
+    });
+};
+
+export const editBridge = bridge => dispatch => {
+  dispatch({
+    type: EDIT_BRIDGE_DATA_START,
+  });
+  axios
+    .patch(`http://localhost:8000/bridges/${bridge.id}`, bridge)
+    .then(res => {
+      dispatch({
+        type: EDIT_BRIDGE_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: EDIT_BRIDGE_DATA_FAILURE,
         payload: err.message,
       });
     });

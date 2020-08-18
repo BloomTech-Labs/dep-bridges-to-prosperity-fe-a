@@ -1,5 +1,4 @@
 import { Input, Card } from 'antd';
-// import { AudioOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import { searchLocation } from '../../../state/actions';
 import { useForm } from 'react-hook-form';

@@ -3,8 +3,6 @@ import React from 'react';
 import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
 import { UpCircleFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-// import InfoDrawer from './InfoDrawer';
-// import { dummyData } from './dummyData';
 
 function Mapbox(props) {
   const { viewport, setViewport } = props;
@@ -41,9 +39,7 @@ function Mapbox(props) {
         //using minimo right now, should be good to swap out if we want another
         mapStyle="mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr"
       >
-        {/* onDoubleClick={()=>ZoomOut(bridge)} */}
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
-        {/* currently just showing bridge lats/longs */}
         {props.mapData.map(bridge => {
           return (
             <div
@@ -56,14 +52,12 @@ function Mapbox(props) {
                 longitude={bridge.longitude}
                 //onClick={props.clickMarker(bridge)}
               >
-                <Tooltip title={bridge.site_name}>
+                <Tooltip title={bridge.name}>
                   {/* bridge marker placeholder for now, but I like it. */}
                   <UpCircleFilled
                     style={{ fontSize: '20px', color: 'green' }}
                   />
                 </Tooltip>
-
-                {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
               </Marker>
             </div>
           );
