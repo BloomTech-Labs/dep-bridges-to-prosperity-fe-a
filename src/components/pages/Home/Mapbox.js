@@ -8,7 +8,7 @@ import { dummyData } from './dummyData';
 
 function Mapbox(props) {
   const { viewport, setViewport } = props;
-
+  console.log(viewport);
   const ZoomIn = bridge => {
     setViewport({
       latitude: bridge.latitude,

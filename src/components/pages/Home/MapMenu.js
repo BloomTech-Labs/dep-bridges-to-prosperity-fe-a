@@ -22,12 +22,12 @@ function MapMenu(props) {
     dispatch(getAllMapData());
   }, [dispatch]);
   const [viewport, setViewport] = useState({
-    //this is bridge site 1 coordinates
-    latitude: -2.42056,
-    longitude: 28.9662,
+    //starting viewport: set to show all of rowanda.
+    latitude: -2.1729420778611965,
+    longitude: 30.40027324303975,
     width: '100vw',
     height: '100vh',
-    zoom: 15,
+    zoom: 7.261150491603372,
   });
   //state for information to be displayed
   const [infoDisplay, setInfoDisplay] = useState({
