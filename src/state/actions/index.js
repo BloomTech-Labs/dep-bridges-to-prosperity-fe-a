@@ -6,3 +6,4 @@
 
 export * from './counter';
 export * from './searchLocation';
+export * from './bridgeSites';
