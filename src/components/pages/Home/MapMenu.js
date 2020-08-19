@@ -54,14 +54,20 @@ function MapMenu(props) {
 
   return (
     <div>
-      <Layout
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={broken => {}}
-        onCollapse={(collapsed, type) => {}}
-      >
-        <Sider>
+      <Layout>
+        <Sider
+          className="sider-class"
+          breakpoint="lg"
+          collapsedWidth="0"
+          onBreakpoint={broken => {}}
+          onCollapse={(collapsed, type) => {}}
+        >
           <MapSearchBar
+            className="sider-class"
+            breakpoint="lg"
+            collapsedWidth="0"
+            onBreakpoint={broken => {}}
+            onCollapse={(collapsed, type) => {}}
             bridgeData={bridgeData}
             clickedBridge={clickedBridge}
             visible={visible}
