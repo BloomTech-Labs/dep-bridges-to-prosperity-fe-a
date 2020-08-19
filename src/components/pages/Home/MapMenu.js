@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //antDesign
 
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import MapSearchBar from './MapSearchBar';
 import Mapbox from './Mapbox';
 
@@ -39,7 +39,7 @@ function MapMenu(props) {
       longitude: clickedBridge.longitude,
       width: '100%',
       height: '100%',
-      zoom: 10,
+      zoom: 7.261150491603372,
       transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
       transitionDuration: 'auto',
     });
@@ -57,14 +57,15 @@ function MapMenu(props) {
       <Layout>
         <Sider
           className="sider-class"
-          breakpoint="lg"
+          breakpoint="xl"
           collapsedWidth="0"
           onBreakpoint={broken => {}}
           onCollapse={(collapsed, type) => {}}
+          width={275}
         >
           <MapSearchBar
             className="sider-class"
-            breakpoint="lg"
+            breakpoint="xl"
             collapsedWidth="0"
             onBreakpoint={broken => {}}
             onCollapse={(collapsed, type) => {}}
