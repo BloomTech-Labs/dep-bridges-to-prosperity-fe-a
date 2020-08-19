@@ -1,20 +1,21 @@
 import { Input, Card } from 'antd';
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { searchLocation } from '../../../state/actions';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 
 const { Search } = Input;
 
 const MapSearchBar = props => {
+  const dispatch = useDispatch();
+  const { onClose, visible, clickedBridge } = props;
   const { register } = useForm();
 
   const [searchResults, setSearchResults] = useState([]);
 
   function onSearch(data) {
+    data.preventDefault();
     console.log(data.target.value);
-
-    //setSearchTerm(event.target.value);
     const results = props.bridgeData.filter(info =>
       info.name.toLowerCase().includes(data.target.value.toLowerCase())
     );
@@ -23,13 +24,9 @@ const MapSearchBar = props => {
     console.log('search rsults:', searchResults);
   }
 
-  // useEffect(() => {
-
-  // }, [props.mapData, searchTerm]);
-
-  // useEffect(() => {
-  //   dispatch(searchLocation());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(searchLocation());
+  }, [dispatch]);
 
   return (
     <>
@@ -41,10 +38,11 @@ const MapSearchBar = props => {
       />
 
       <div>
-        <Card visible={props.visible}>
+        <Card visible={visible}>
           <h2>
             Active:
-            <br /> {props.clickedBridge.name}
+            <br /> {clickedBridge.name}
+            <button onClick={onClose}>Close</button>
           </h2>
         </Card>
         {searchResults.map(item => {
