@@ -11,7 +11,7 @@ import { FlyToInterpolator } from 'react-map-gl';
 import { getAllBridges } from '../../../state/actions';
 function MapMenu(props) {
   const dispatch = useDispatch();
-  const { mapData, loading, error } = useSelector(
+  const { bridgeData, loading, error } = useSelector(
     state => state.bridgeSitesReducer
   );
 
@@ -62,7 +62,7 @@ function MapMenu(props) {
       >
         <Sider>
           <MapSearchBar
-            mapData={mapData}
+            bridgeData={bridgeData}
             clickedBridge={clickedBridge}
             visible={visible}
             onClose={onClose}
@@ -72,7 +72,7 @@ function MapMenu(props) {
           clickMarker={clickMarker}
           setViewport={setViewport}
           viewport={viewport}
-          mapData={mapData}
+          bridgeData={bridgeData}
         />
       </Layout>
     </div>

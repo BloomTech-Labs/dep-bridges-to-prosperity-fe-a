@@ -15,7 +15,7 @@ const MapSearchBar = props => {
     console.log(data.target.value);
 
     //setSearchTerm(event.target.value);
-    const results = props.mapData.filter(info =>
+    const results = props.bridgeData.filter(info =>
       info.name.toLowerCase().includes(data.target.value.toLowerCase())
     );
 
