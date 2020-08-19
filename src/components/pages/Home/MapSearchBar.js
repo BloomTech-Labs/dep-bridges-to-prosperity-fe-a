@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 const { Search } = Input;
 
 const MapSearchBar = props => {
-  const { onClose, visible, clickedBridge } = props;
+  const { onClose, clickedBridge } = props;
   const { register } = useForm();
 
   const [searchResults, setSearchResults] = useState([]);
@@ -34,7 +34,7 @@ const MapSearchBar = props => {
       />
 
       <div>
-        <Card visible={visible}>
+        <Card>
           <h2>
             Active:
             <br /> {clickedBridge.name}
@@ -46,6 +46,7 @@ const MapSearchBar = props => {
           return (
             <Card size="small">
               <h2>{item.name}</h2>
+
               <ul>
                 <li>Site ID: {item.id}</li>
                 <li>Bridge Type: {item.type}</li>
