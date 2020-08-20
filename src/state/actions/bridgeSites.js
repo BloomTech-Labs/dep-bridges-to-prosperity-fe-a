@@ -18,6 +18,10 @@ export const EDIT_BRIDGE_DATA_FAILURE = 'EDIT_BRIDGE_FAILURE';
 
 export const GET_SINGLE_BRIDGE = 'GET_SINGLE_BRIDGE';
 
+export const SEARCH_BRIDGE_START = 'SEARCH_BRIDGE_START';
+export const SEARCH_BRIDGE_SUCCESS = 'SEARCH_BRIDGE_START';
+export const SEARCH_BRIDGE_FAILURE = 'SEARCH_BRIDGE_START';
+
 export const getSingleBridge = bridge => dispatch => {
   dispatch({ type: GET_SINGLE_BRIDGE, payload: bridge });
 };
@@ -27,7 +31,7 @@ export const getAllBridges = () => dispatch => {
     type: GET_BRIDGE_DATA_START,
   });
   axios
-    .get('http://localhost:8000/bridges/all')
+    .get('https://bridges-a-api.herokuapp.com/bridgesall')
     .then(res => {
       dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
@@ -44,7 +48,7 @@ export const getOneBridge = () => dispatch => {
     type: GET_ONE_BRIDGE_DATA_START,
   });
   axios
-    .get('http://localhost:8000/bridges/all')
+    .get('https://bridges-a-api.herokuapp.com/bridgesall')
     .then(res => {
       dispatch({ type: GET_ONE_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
@@ -82,7 +86,7 @@ export const editBridge = bridge => dispatch => {
     type: EDIT_BRIDGE_DATA_START,
   });
   axios
-    .patch(`http://localhost:8000/bridges/${bridge.id}`, bridge)
+    .patch(`https://bridges-a-api.herokuapp.com/bridges/${bridge.id}`, bridge)
     .then(res => {
       dispatch({
         type: EDIT_BRIDGE_DATA_SUCCESS,
@@ -94,5 +98,20 @@ export const editBridge = bridge => dispatch => {
         type: EDIT_BRIDGE_DATA_FAILURE,
         payload: err.message,
       });
+    });
+};
+
+export const searchBridge = bridge => dispatch => {
+  dispatch({
+    type: SEARCH_BRIDGE_START,
+  });
+  //need to be able to hit that location for the search
+  axios
+    .get('https://bridges-a-api.herokuapp.com/bridges', bridge)
+    .then(res => {
+      dispatch({ type: SEARCH_BRIDGE_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: SEARCH_BRIDGE_FAILURE, payload: err.response });
     });
 };

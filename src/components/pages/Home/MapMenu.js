@@ -9,11 +9,6 @@ import { FlyToInterpolator } from 'react-map-gl';
 function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
   const dispatch = useDispatch();
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
-  // const { Sider } = Layout;
-
-  // const onClose = () => {
-  //   setVisible(false);
-  // };
 
   function onClear() {
     dispatch(getAllBridges());

@@ -9,6 +9,9 @@ import {
   EDIT_BRIDGE_DATA_SUCCESS,
   EDIT_BRIDGE_DATA_FAILURE,
   GET_SINGLE_BRIDGE,
+  SEARCH_BRIDGE_START,
+  SEARCH_BRIDGE_SUCCESS,
+  SEARCH_BRIDGE_FAILURE,
 } from '../actions';
 
 const initialState = {
@@ -86,6 +89,24 @@ export const bridgeSitesReducer = (state = initialState, action) => {
       return {
         ...state,
         bridgeData: [action.payload],
+      };
+
+    case SEARCH_BRIDGE_START:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case SEARCH_BRIDGE_SUCCESS:
+      return {
+        ...state,
+        bridgeData: action.payload,
+      };
+    case SEARCH_BRIDGE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
 
     default:
