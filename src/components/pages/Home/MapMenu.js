@@ -81,14 +81,17 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
-                    <BridgeList bridge={bridge} />
+                    <BridgeList bridge={bridge} loggedIn={authState.idToken} />
                   </div>
                 ))}
               </div>
             ) : (
               //the clickedBridge
               <div className="bridges-wrapper">
-                <BridgeList bridge={bridgeData[0]} />
+                <BridgeList
+                  bridge={bridgeData[0]}
+                  loggedIn={authState.idToken}
+                />
               </div>
             )}
           </>
