@@ -12,13 +12,11 @@ const redirectUri = `${window.location.origin}/`;
 
 function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
   const dispatch = useDispatch();
+  // Pulling in bridge data from reducer
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
-  // const { Sider } = Layout;
 
-  // const onClose = () => {
-  //   setVisible(false);
-  // };
-
+  /* Refetches bridge data, toggles all bridges
+  view and  */
   function onClear() {
     dispatch(getAllBridges());
     setViewport({
@@ -44,6 +42,7 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
     <div className="menu-wrapper">
       <section className="search-menu">
         <div className="menu-header">
+          {/* DIY Hamburger Icon */}
           <div className="hamburger-wrapper">
             <div className="hamburger-layer" />
             <div className="hamburger-layer" />
@@ -70,6 +69,7 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
       </section>
 
       <section className="bridge-info">
+        {/* toggles bridges view on and off */}
         {!bridgesToggle ? (
           <div className="card">
             <strong>Welcome to the Bridge Explorer!</strong>Here you can can
@@ -77,6 +77,7 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
           </div>
         ) : (
           <>
+            {/* Maps through all bridges in redux store */}
             {bridgeData.length >= 1 ? (
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
@@ -96,13 +97,13 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
             )}
           </>
         )}
-        {/* <button onClick={toggleBridges} className="view-bridges-btn"> */}
         {!bridgesToggle ? (
           <button onClick={toggleBridges} className="view-bridges-btn">
             View All Bridges
           </button>
         ) : (
           <button onClick={onClear} className="view-bridges-btn">
+            {/* Special clear command onClick here */}
             Clear
           </button>
         )}
