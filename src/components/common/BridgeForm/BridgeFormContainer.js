@@ -14,6 +14,10 @@ function BridgeFormContainer() {
 
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
+  const theBridge = JSON.parse(window.localStorage.getItem('bridge'));
+  const edit = JSON.parse(window.localStorage.getItem('editing'));
+  console.log('THE BRIDGE', theBridge);
+
   // Sets editing status
   const [editing, setEditing] = useState(false);
 
@@ -33,8 +37,9 @@ function BridgeFormContainer() {
   return (
     <>
       <BridgeSiteList bridges={bridgeData} bridgeToEdit={bridgeToEdit} />
-      {editing ? (
+      {edit === true ? (
         <BridgeFormEdit
+          theBridge={theBridge}
           bridges={bridgeData}
           toggleEditing={toggleEditing}
           toEdit={toEdit}

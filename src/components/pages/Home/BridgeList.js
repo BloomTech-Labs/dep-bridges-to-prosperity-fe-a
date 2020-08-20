@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getSingleBridge } from '../../../state/actions';
 
 export function BridgeList({ bridge, loggedIn }) {
   const [bridgeInfoToggle, setBridgeInfoToggle] = useState(false);
@@ -10,7 +12,18 @@ export function BridgeList({ bridge, loggedIn }) {
   return (
     <div className="bridge-card">
       <h4>{bridge.name}</h4>
-      {loggedIn ? <span>Edit Bridge</span> : null}
+      {loggedIn ? (
+        <a href="/bridge-form">
+          <button
+            onClick={() => {
+              window.localStorage.setItem('bridge', JSON.stringify(bridge));
+              window.localStorage.setItem('editing', true);
+            }}
+          >
+            Edit Bridge
+          </button>
+        </a>
+      ) : null}
       <button onClick={toggleBridgeInfo}>
         {!bridgeInfoToggle ? 'Show Info' : 'Hide Info'}
       </button>

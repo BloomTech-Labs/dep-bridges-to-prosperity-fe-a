@@ -11,11 +11,11 @@ function BridgeFormEdit(props) {
   const onSubmit = () => {
     console.log(newBridge);
     dispatch(editBridge(newBridge));
-    props.toggleEditing();
+    localStorage['editing'] = false;
   };
 
   // Setting up the shape of the data to "PUT" to the bridge dummy data
-  const [newBridge, setNewBridge] = useState(props.toEdit);
+  const [newBridge, setNewBridge] = useState(props.theBridge);
 
   const handleChanges = e => {
     setNewBridge({
