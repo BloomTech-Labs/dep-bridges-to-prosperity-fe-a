@@ -1,5 +1,4 @@
 import { Input } from 'antd';
-// import { AudioOutlined } from '@ant-design/icons';
 import React from 'react';
 // import { searchLocation } from '../../../state/actions';
 const { Search } = Input;
@@ -11,23 +10,12 @@ const MapSearchBar = () => {
 
   function onSearch(value) {
     console.log(value);
-    // setSearchVal(value);
   }
 
-  // const suffix = (
-  //   <AudioOutlined
-  //     style={{
-  //       fontSize: 16,
-  //       color: '#1890ff',
-  //     }}
-  //   />
-  // );
-
   return (
-    <>
+    <div className="search-bar">
       <Search placeholder="search" onSearch={onSearch} />
-      <br />
-    </>
+    </div>
   );
 };
 export default MapSearchBar;
