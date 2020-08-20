@@ -5,6 +5,7 @@ import { Layout, Menu } from 'antd';
 import MapSearchBar from './MapSearchBar';
 import Mapbox from './Mapbox';
 import InfoDrawer from './InfoDrawer';
+import InfoModal from './InfoModal';
 import { useSelector, useDispatch } from 'react-redux';
 // import { dummyData } from './dummyData';
 import { FlyToInterpolator } from 'react-map-gl';
@@ -68,11 +69,11 @@ function MapMenu(props) {
 
   return (
     <div>
-      <InfoDrawer
+      <InfoModal
         clickedBridge={clickedBridge}
         visible={visible}
         onClose={onClose}
-      ></InfoDrawer>
+      ></InfoModal>
       <Layout
         theme="dark"
         style={{
