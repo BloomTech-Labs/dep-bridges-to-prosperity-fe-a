@@ -103,6 +103,11 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
             Clear
           </button>
         )}
+        {authState.idToken ? (
+          <button onClick={toggleBridges} className="view-bridges-btn">
+            Add New Bridge
+          </button>
+        ) : null}
         {/* </button> */}
       </section>
     </div>
