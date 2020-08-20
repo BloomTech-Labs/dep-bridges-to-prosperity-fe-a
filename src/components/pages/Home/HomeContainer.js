@@ -11,11 +11,11 @@ function HomeContainer() {
 
   const originalView = {
     //this is bridge site 1 coordinates
-    latitude: -2.42056,
-    longitude: 28.9662,
+    latitude: -1.94995,
+    longitude: 29.9,
     width: '100vw',
     height: '100vh',
-    zoom: 10,
+    zoom: 8.4,
   };
 
   const [viewport, setViewport] = useState(originalView);
