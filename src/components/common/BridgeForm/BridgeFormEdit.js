@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { editBridge } from '../../../state/actions';
 
-function BridgeFormEdit(props) {
+function BridgeFormEdit({ bridge }) {
   const { register, handleSubmit, errors } = useForm();
 
   const dispatch = useDispatch();
@@ -11,11 +11,12 @@ function BridgeFormEdit(props) {
   const onSubmit = () => {
     console.log(newBridge);
     dispatch(editBridge(newBridge));
+    window.localStorage.removeItem('bridge');
     localStorage['editing'] = false;
   };
 
   // Setting up the shape of the data to "PUT" to the bridge dummy data
-  const [newBridge, setNewBridge] = useState(props.theBridge);
+  const [newBridge, setNewBridge] = useState(bridge);
 
   const handleChanges = e => {
     setNewBridge({
@@ -26,7 +27,7 @@ function BridgeFormEdit(props) {
 
   return (
     <>
-      <h1>Editing</h1>
+      <h1>Editing {bridge.name}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* BRIDGE SITE NAME */}
         <input

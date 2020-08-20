@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getSingleBridge } from '../../../state/actions';
 
 export function BridgeList({ bridge, loggedIn }) {
   const [bridgeInfoToggle, setBridgeInfoToggle] = useState(false);

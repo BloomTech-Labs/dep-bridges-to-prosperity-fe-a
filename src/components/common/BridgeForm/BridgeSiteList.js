@@ -6,7 +6,7 @@ function BridgeSiteList(props) {
     <>
       {props.bridges.map(bridge => (
         <div key={bridge.id}>
-          <BridgeSite bridge={bridge} bridgeToEdit={props.bridgeToEdit} />
+          <BridgeSite bridge={bridge} />
         </div>
       ))}
     </>

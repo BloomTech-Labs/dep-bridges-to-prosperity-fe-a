@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import BridgeFormAdd from './BridgeFormAdd.js';
 import BridgeFormEdit from './BridgeFormEdit.js';
-import BridgeSiteList from './BridgeSiteList.js';
 import { getAllBridges } from '../../../state/actions/index.js';
 
 function BridgeFormContainer() {
@@ -14,36 +13,13 @@ function BridgeFormContainer() {
 
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
-  const theBridge = JSON.parse(window.localStorage.getItem('bridge'));
+  const bridge = JSON.parse(window.localStorage.getItem('bridge'));
   const edit = JSON.parse(window.localStorage.getItem('editing'));
-  console.log('THE BRIDGE', theBridge);
-
-  // Sets editing status
-  const [editing, setEditing] = useState(false);
-
-  // This will hold the value of the bridge to edit
-  const [toEdit, setToEdit] = useState(null);
-
-  const toggleEditing = () => {
-    setEditing(!editing);
-  };
-
-  const bridgeToEdit = clicked => {
-    setEditing(!editing);
-    console.log('To edit', clicked);
-    setToEdit(clicked);
-  };
 
   return (
     <>
-      <BridgeSiteList bridges={bridgeData} bridgeToEdit={bridgeToEdit} />
       {edit === true ? (
-        <BridgeFormEdit
-          theBridge={theBridge}
-          bridges={bridgeData}
-          toggleEditing={toggleEditing}
-          toEdit={toEdit}
-        />
+        <BridgeFormEdit bridge={bridge} />
       ) : (
         <BridgeFormAdd bridges={bridgeData} />
       )}

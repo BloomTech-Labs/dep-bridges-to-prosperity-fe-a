@@ -23,28 +23,9 @@ function BridgeFormAdd() {
     return num;
   }
 
-  // Setting up the shape of the data to "POST" to the bridge dummy data
-  // const [newBridge, setNewBridge] = useState({
-  //   individualsDirectlyServed: 0,
-  //   latitude: 1,
-  //   longitude: 1,
-  //   name: '',
-  //   span: 0,
-  //   stage: 'Accepted',
-  //   subStage: 'Technical',
-  //   type: 'Suspended',
-  // });
-
-  // const handleChanges = e => {
-  //   setNewBridge({
-  //     ...newBridge,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
   return (
     <>
-      <h1>Adding</h1>
+      <h1>Add New Bridge</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* BRIDGE SITE NAME */}
         <label htmlFor="name">Bridge Site Name</label>
