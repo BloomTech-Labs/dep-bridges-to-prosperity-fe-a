@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BridgeList } from './BridgeList';
 import { getAllBridges } from '../../../state/actions';
 import { FlyToInterpolator } from 'react-map-gl';
+import { useOktaAuth } from '@okta/okta-react';
 
 function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
   const dispatch = useDispatch();
@@ -25,6 +26,8 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
     toggleBridges();
   }
 
+  const { authState } = useOktaAuth();
+
   return (
     <div className="menu-wrapper">
       <section className="search-menu">
@@ -37,7 +40,11 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
           <h2>Bridge Explorer</h2>
         </div>
         <div className="sign-in">
-          <a href="/login">sign in</a>
+          {authState.idToken ? (
+            <a href="/login">sign out</a>
+          ) : (
+            <a href="/">sign in</a>
+          )}
         </div>
         <MapSearchBar />
         <div className="filters">
