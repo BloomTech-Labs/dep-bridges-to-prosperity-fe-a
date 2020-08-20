@@ -1,44 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
 import { UpCircleFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
+import { useSelector } from 'react-redux';
 // import InfoDrawer from './InfoDrawer';
 
-//DUMMY DATA TO BE DELETED:
-let mapData = [
-  {
-    id: 1,
-    site_name: 'Buzi',
-    proj_stage: 'rejected',
-    latitude: -2.42056,
-    longitude: 28.9662,
-  },
-  {
-    id: 2,
-    site_name: 'Kamigisha',
-    proj_stage: 'rejected',
-    latitude: -2.42486,
-    longitude: 28.95726,
-  },
-  {
-    id: 3,
-    site_name: 'Nyarubande',
-    proj_stage: 'rejected',
-    latitude: -1.65595,
-    longitude: 30.07884,
-  },
-];
-
-function Mapbox(props) {
+function Mapbox({ clickMarker, viewport, setViewport }) {
+  const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   //copy code from previous proj.
-  const [viewport, setViewport] = useState({
-    //this is bridge site 1 coordinates
-    latitude: -2.42056,
-    longitude: 28.9662,
-    width: '100vw',
-    height: '100vh',
-    zoom: 10,
-  });
 
   const ZoomIn = bridge => {
     setViewport({
@@ -50,7 +19,7 @@ function Mapbox(props) {
       transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
       transitionDuration: 'auto',
     });
-    props.clickMarker(bridge);
+    clickMarker(bridge);
   };
 
   return (
@@ -69,15 +38,15 @@ function Mapbox(props) {
       >
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
         {/* currently just showing bridge lats/longs */}
-        {mapData.map(bridge => {
+        {bridgeData.map(bridge => {
           return (
             <div key={bridge.id} onClick={() => ZoomIn(bridge)}>
               <Marker
                 latitude={bridge.latitude}
                 longitude={bridge.longitude}
-                //onClick={props.clickMarker(bridge)}
+                //onClick={clickMarker(bridge)}
               >
-                <Tooltip title={bridge.site_name}>
+                <Tooltip title={bridge.name}>
                   {/* bridge marker placeholder for now, but I like it. */}
                   <UpCircleFilled
                     style={{ fontSize: '20px', color: 'green' }}

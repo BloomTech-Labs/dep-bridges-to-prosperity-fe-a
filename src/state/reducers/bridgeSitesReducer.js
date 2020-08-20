@@ -8,6 +8,7 @@ import {
   EDIT_BRIDGE_DATA_START,
   EDIT_BRIDGE_DATA_SUCCESS,
   EDIT_BRIDGE_DATA_FAILURE,
+  GET_SINGLE_BRIDGE,
 } from '../actions';
 
 const initialState = {
@@ -79,6 +80,12 @@ export const bridgeSitesReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+
+    case GET_SINGLE_BRIDGE:
+      return {
+        ...state,
+        bridgeData: [action.payload],
       };
 
     default:
