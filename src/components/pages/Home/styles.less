@@ -1,4 +1,7 @@
+/* Wraps all the styles in the home page */
 .home-wrapper {
+
+  /* sign in link styles */
   .sign-in {
     position: absolute;
     top: 29px;
@@ -13,6 +16,8 @@
     }
   }
 
+  /* sets border for the map and adds menu
+  on top of the map */
   .menu-wrapper {
     max-width: 100vw;
     max-height: 100vh;
@@ -25,6 +30,7 @@
     align-items: center;
     border-radius: 0px 0px 10px 0px;
 
+    /* styles for filter buttons */
     .filters {
       width: 330px;
       margin-top: 15px;
@@ -45,6 +51,7 @@
       }
     }
 
+    /* wraps search-bar/menu section */
     .search-menu {
       display: flex;
       flex-direction: column;
@@ -97,6 +104,7 @@
       }
     }
 
+    /* wraps all styles dealing with bridge info section */
     .bridge-info {
       // max-height: 40vh;
       display: flex;
@@ -125,6 +133,7 @@
           flex-direction: column;
         }
 
+        /* styles to make scroll-bar look slick */
         &::-webkit-scrollbar {
           width: 4px;
         }
@@ -140,6 +149,7 @@
         }
       }
 
+      /* Default empty card */
       .card {
         padding: 0px 20px;
         background: #fffefe;
@@ -163,16 +173,6 @@
         font-size: 15px;
       }
     }
-  }
-
-  .counter {
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-  }
-
-  .count {
-    margin: 0 10px;
   }
 
   .bridge-marker {

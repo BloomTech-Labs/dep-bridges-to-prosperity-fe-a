@@ -9,6 +9,7 @@ function HomeContainer() {
   const [visible, setVisible] = useState(false);
   const [bridgesToggle, setBridgesToggle] = useState(false);
 
+  // One spot for default view values, so this object can be shared across components
   const originalView = {
     //this is bridge site 1 coordinates
     latitude: -1.94995,
@@ -21,6 +22,8 @@ function HomeContainer() {
   const [viewport, setViewport] = useState(originalView);
 
   const dispatch = useDispatch();
+  // Components should be set up to handle errors and loadings status
+  // eslint-disable-next-line
   const { bridgeData, loading, error } = useSelector(
     state => state.bridgeSitesReducer
   );
@@ -36,11 +39,15 @@ function HomeContainer() {
   };
 
   useEffect(() => {
+    // When home page is refreshed all bridges
+    // are retrieved
     dispatch(getAllBridges());
   }, [dispatch]);
 
   return (
     <div className="home-wrapper">
+      {/* Passing down functions and bridge data to 
+      assist sorting through the bridge data */}
       <MapMenu
         toggleBridges={toggleBridges}
         bridgeData={bridgeData}
