@@ -1,15 +1,29 @@
 import React from 'react';
 import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { BridgeList } from './BridgeList';
+import { getAllBridges } from '../../../state/actions';
+import { FlyToInterpolator } from 'react-map-gl';
 
-function MapMenu({ bridgesToggle, list, toggleBridges }) {
+function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
+  const dispatch = useDispatch();
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   // const { Sider } = Layout;
 
   // const onClose = () => {
   //   setVisible(false);
   // };
+
+  function onClear() {
+    dispatch(getAllBridges());
+    setViewport({
+      ...originalView,
+      transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+      transitionDuration: 'auto',
+    });
+    toggleBridges();
+  }
 
   return (
     <div className="menu-wrapper">
@@ -37,27 +51,40 @@ function MapMenu({ bridgesToggle, list, toggleBridges }) {
       </section>
 
       <section className="bridge-info">
-        {list.length === 0 ? (
+        {!bridgesToggle ? (
           <div className="card">
             <strong>Welcome to the Bridge Explorer!</strong>Here you can can
             learn more about the 1.5k existing and prospective bridges.
           </div>
         ) : (
-          <div>
-            {bridgeData.map(bridges => {
-              return (
-                <div className="card">
-                  <ul>
-                    <li>{bridges.name}</li>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
+          <>
+            {bridgeData.length >= 1 ? (
+              <div className="bridges-wrapper">
+                {bridgeData.map(bridge => (
+                  <div key={bridge.id}>
+                    <BridgeList bridge={bridge} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              //the clickedBridge
+              <div className="bridges-wrapper">
+                <BridgeList bridge={bridgeData[0]} />
+              </div>
+            )}
+          </>
         )}
-        <button onClick={toggleBridges} className="view-bridges-btn">
-          {!bridgesToggle ? 'View All Bridges' : 'Clear'}
-        </button>
+        {/* <button onClick={toggleBridges} className="view-bridges-btn"> */}
+        {!bridgesToggle ? (
+          <button onClick={toggleBridges} className="view-bridges-btn">
+            View All Bridges
+          </button>
+        ) : (
+          <button onClick={onClear} className="view-bridges-btn">
+            Clear
+          </button>
+        )}
+        {/* </button> */}
       </section>
     </div>
   );

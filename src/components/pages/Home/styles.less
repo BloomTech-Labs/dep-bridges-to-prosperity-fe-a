@@ -25,6 +25,26 @@
     align-items: center;
     border-radius: 0px 0px 10px 0px;
 
+    .filters {
+      width: 330px;
+      margin-top: 15px;
+
+      .filter-btn {
+        margin-right: 10px;
+        border: 1px solid #959595;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 16px;
+        color: #959595;
+        padding: 3px 9px;
+
+        &:hover {
+          color: #666;
+          border: 1px solid #666;
+        }
+      }
+    }
+
     .search-menu {
       display: flex;
       flex-direction: column;
@@ -66,10 +86,6 @@
           background: #000000;
           border-radius: 25%;
         }
-
-        .filters {
-          width: 100%;
-        }
       }
 
       .search-bar {
@@ -82,10 +98,52 @@
     }
 
     .bridge-info {
+      // max-height: 40vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      .bridges-wrapper {
+        max-height: 70vh;
+        overflow: scroll;
+        width: 100%;
+        display: flex;
+        // justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        .bridge-card {
+          padding: 0px 20px;
+          background: #fffefe;
+          width: 349px;
+          height: 103px;
+          margin: 24px 0;
+          border-radius: 10px;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+        }
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #f4f1f1;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #999;
+          border-radius: 20px;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+        }
+      }
+
       .card {
         padding: 0px 20px;
         background: #fffefe;
-        width: 359px;
+        width: 349px;
         height: 103px;
         margin: 24px 0;
         border-radius: 10px;

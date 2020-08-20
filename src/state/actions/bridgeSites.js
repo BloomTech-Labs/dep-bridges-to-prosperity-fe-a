@@ -4,6 +4,10 @@ export const GET_BRIDGE_DATA_START = 'GET_BRIDGE_DATA_START';
 export const GET_BRIDGE_DATA_SUCCESS = 'GET_BRIDGE_DATA_SUCCESS';
 export const GET_BRIDGE_DATA_FAILURE = 'GET_BRIDGE_DATA_FAILURE';
 
+export const GET_ONE_BRIDGE_DATA_START = 'GET_ONE_BRIDGE_DATA_START';
+export const GET_ONE_BRIDGE_DATA_SUCCESS = 'GET_ONE_BRIDGE_DATA_SUCCESS';
+export const GET_ONE_BRIDGE_DATA_FAILURE = 'GET_ONE_BRIDGE_DATA_FAILURE';
+
 export const ADD_BRIDGE_DATA_START = 'ADD_BRIDGE_DATA_START';
 export const ADD_BRIDGE_DATA_SUCCESS = 'ADD_BRIDGE_DATA_SUCCESS';
 export const ADD_BRIDGE_DATA_FAILURE = 'ADD_BRIDGE_DATA_FAILURE';
@@ -11,6 +15,12 @@ export const ADD_BRIDGE_DATA_FAILURE = 'ADD_BRIDGE_DATA_FAILURE';
 export const EDIT_BRIDGE_DATA_START = 'EDIT_BRIDGE_START';
 export const EDIT_BRIDGE_DATA_SUCCESS = 'EDIT_BRIDGE_SUCCESS';
 export const EDIT_BRIDGE_DATA_FAILURE = 'EDIT_BRIDGE_FAILURE';
+
+export const GET_SINGLE_BRIDGE = 'GET_SINGLE_BRIDGE';
+
+export const getSingleBridge = bridge => dispatch => {
+  dispatch({ type: GET_SINGLE_BRIDGE, payload: bridge });
+};
 
 export const getAllBridges = () => dispatch => {
   dispatch({
@@ -23,7 +33,24 @@ export const getAllBridges = () => dispatch => {
     })
     .catch(err => {
       dispatch({
-        type: GET_BRIDGE_DATA_START,
+        type: GET_BRIDGE_DATA_FAILURE,
+        payload: err.message,
+      });
+    });
+};
+
+export const getOneBridge = () => dispatch => {
+  dispatch({
+    type: GET_ONE_BRIDGE_DATA_START,
+  });
+  axios
+    .get('http://localhost:8000/bridges/all')
+    .then(res => {
+      dispatch({ type: GET_ONE_BRIDGE_DATA_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ONE_BRIDGE_DATA_FAILURE,
         payload: err.message,
       });
     });

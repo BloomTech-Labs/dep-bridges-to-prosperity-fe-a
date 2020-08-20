@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllBridges } from '../../../state/actions';
+import { getAllBridges, getSingleBridge } from '../../../state/actions';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
 
 function HomeContainer() {
-  const [clickedBridge, setClickedBridge] = useState({});
+  // const [clickedBridge, setClickedBridge] = useState(null);
   const [visible, setVisible] = useState(false);
-  const [list, setList] = useState([]);
   const [bridgesToggle, setBridgesToggle] = useState(false);
+
+  const originalView = {
+    //this is bridge site 1 coordinates
+    latitude: -2.42056,
+    longitude: 28.9662,
+    width: '100vw',
+    height: '100vh',
+    zoom: 10,
+  };
+
+  const [viewport, setViewport] = useState(originalView);
 
   const dispatch = useDispatch();
   const { bridgeData, loading, error } = useSelector(
@@ -16,15 +26,12 @@ function HomeContainer() {
   );
   //handles the click feature of the info
   const clickMarker = bridge => {
-    setClickedBridge(bridge);
-    console.log('clickMarker');
-    console.log(bridge);
     setVisible(!visible);
+    setBridgesToggle(true);
+    dispatch(getSingleBridge(bridge));
   };
 
   const toggleBridges = () => {
-    // setList(bridgeData);
-    // console.log('viewAllBridges', bridgeData);
     setBridgesToggle(!bridgesToggle);
   };
 
@@ -35,17 +42,19 @@ function HomeContainer() {
   return (
     <div className="home-wrapper">
       <MapMenu
-        clickedBridge={clickedBridge}
         toggleBridges={toggleBridges}
-        list={list}
         bridgeData={bridgeData}
         bridgesToggle={bridgesToggle}
+        visible={visible}
+        setViewport={setViewport}
+        originalView={originalView}
       />
       <Mapbox
         clickMarker={clickMarker}
         visible={visible}
         setVisible={setVisible}
-        clickedBridge={clickedBridge}
+        viewport={viewport}
+        setViewport={setViewport}
       />
     </div>
   );
