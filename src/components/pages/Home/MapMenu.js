@@ -34,7 +34,7 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
         <div className="sign-in">
           <a href="/login">sign in</a>
         </div>
-        <MapSearchBar />
+        <MapSearchBar bridgeData={bridgeData} />
         <div className="filters">
           <button className="filter-btn">Province</button>
           <button className="filter-btn">District</button>

@@ -31,7 +31,7 @@ export const getAllBridges = () => dispatch => {
     type: GET_BRIDGE_DATA_START,
   });
   axios
-    .get('https://bridges-a-api.herokuapp.com/bridgesall')
+    .get('http://localhost:8000/bridges/all')
     .then(res => {
       dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
@@ -48,7 +48,7 @@ export const getOneBridge = () => dispatch => {
     type: GET_ONE_BRIDGE_DATA_START,
   });
   axios
-    .get('https://bridges-a-api.herokuapp.com/bridgesall')
+    .get('http://localhost:8000/bridges/all')
     .then(res => {
       dispatch({ type: GET_ONE_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
@@ -86,7 +86,7 @@ export const editBridge = bridge => dispatch => {
     type: EDIT_BRIDGE_DATA_START,
   });
   axios
-    .patch(`https://bridges-a-api.herokuapp.com/bridges/${bridge.id}`, bridge)
+    .patch(`http://localhost:8000/bridges/${bridge.id}`, bridge)
     .then(res => {
       dispatch({
         type: EDIT_BRIDGE_DATA_SUCCESS,
@@ -107,7 +107,7 @@ export const searchBridge = bridge => dispatch => {
   });
   //need to be able to hit that location for the search
   axios
-    .get('https://bridges-a-api.herokuapp.com/bridges', bridge)
+    .post(`http://localhost:8000/search`, bridge)
     .then(res => {
       dispatch({ type: SEARCH_BRIDGE_SUCCESS, payload: res.data });
     })
