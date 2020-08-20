@@ -7,6 +7,9 @@ import { getAllBridges } from '../../../state/actions';
 import { FlyToInterpolator } from 'react-map-gl';
 import { useOktaAuth } from '@okta/okta-react';
 
+const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
+const redirectUri = `${window.location.origin}/`;
+
 function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
   const dispatch = useDispatch();
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
@@ -26,7 +29,16 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
     toggleBridges();
   }
 
-  const { authState } = useOktaAuth();
+  const { authState, authService } = useOktaAuth();
+
+  const logout = async () => {
+    // Reads the idToken before local session is cleared
+    const idToken = authState.idToken;
+    await authService.logout('/');
+
+    // Clears the remote session
+    window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
+  };
 
   return (
     <div className="menu-wrapper">
@@ -41,9 +53,9 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
         </div>
         <div className="sign-in">
           {authState.idToken ? (
-            <a href="/login">sign out</a>
+            <a onClick={logout}>sign out</a>
           ) : (
-            <a href="/">sign in</a>
+            <a href="/login">sign in</a>
           )}
         </div>
         <MapSearchBar />
