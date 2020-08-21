@@ -58,14 +58,17 @@ function MapMenu({
       </section>
 
       <section className="bridge-info">
+        {/* Begin toggle for information */}
+        {/* first if : when bridges toggle is set off it displays the welcome */}
         {!bridgesToggle ? (
           <div className="card">
             <strong>Welcome to the Bridge Explorer!</strong>Here you can can
             learn more about the 1.5k existing and prospective bridges.
           </div>
         ) : (
+          // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
-            {!searching ? (
+            {bridgeData.length >= 1 ? (
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
