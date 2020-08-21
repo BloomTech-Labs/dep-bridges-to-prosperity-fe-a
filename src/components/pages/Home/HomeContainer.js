@@ -26,7 +26,7 @@ function HomeContainer() {
   );
   //handles the click feature of the info
   const clickMarker = bridge => {
-    setVisible(!visible);
+    // setVisible(!visible);
     setBridgesToggle(true);
     dispatch(getSingleBridge(bridge));
   };
@@ -48,6 +48,7 @@ function HomeContainer() {
         visible={visible}
         setViewport={setViewport}
         originalView={originalView}
+        setBridgesToggle={setBridgesToggle}
       />
       <Mapbox
         clickMarker={clickMarker}

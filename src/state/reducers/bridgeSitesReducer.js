@@ -9,15 +9,15 @@ import {
   EDIT_BRIDGE_DATA_SUCCESS,
   EDIT_BRIDGE_DATA_FAILURE,
   GET_SINGLE_BRIDGE,
-  SEARCH_BRIDGE_START,
-  SEARCH_BRIDGE_SUCCESS,
-  SEARCH_BRIDGE_FAILURE,
+  SEARCH_BRIDGE,
 } from '../actions';
 
 const initialState = {
   bridgeData: [],
+  searchData: [],
   loading: false,
   error: '',
+  searching: false,
 };
 
 export const bridgeSitesReducer = (state = initialState, action) => {
@@ -91,22 +91,25 @@ export const bridgeSitesReducer = (state = initialState, action) => {
         bridgeData: [action.payload],
       };
 
-    case SEARCH_BRIDGE_START:
+    case SEARCH_BRIDGE:
       return {
         ...state,
-        loading: true,
-      };
-
-    case SEARCH_BRIDGE_SUCCESS:
-      return {
-        ...state,
-        bridgeData: action.payload,
-      };
-    case SEARCH_BRIDGE_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
+        searchData: state.bridgeData.filter(
+          info =>
+            info.name
+              .toLowerCase()
+              .trim()
+              .includes(action.payload.toLowerCase().trim()) ||
+            info.type
+              .toLowerCase()
+              .trim()
+              .includes(action.payload.toLowerCase().trim()) ||
+            info.stage
+              .toLowerCase()
+              .trim()
+              .includes(action.payload.toLowerCase().trim())
+        ),
+        searching: true,
       };
 
     default:

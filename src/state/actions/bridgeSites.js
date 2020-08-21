@@ -18,9 +18,7 @@ export const EDIT_BRIDGE_DATA_FAILURE = 'EDIT_BRIDGE_FAILURE';
 
 export const GET_SINGLE_BRIDGE = 'GET_SINGLE_BRIDGE';
 
-export const SEARCH_BRIDGE_START = 'SEARCH_BRIDGE_START';
-export const SEARCH_BRIDGE_SUCCESS = 'SEARCH_BRIDGE_START';
-export const SEARCH_BRIDGE_FAILURE = 'SEARCH_BRIDGE_START';
+export const SEARCH_BRIDGE = 'SEARCH_BRIDGE';
 
 export const getSingleBridge = bridge => dispatch => {
   dispatch({ type: GET_SINGLE_BRIDGE, payload: bridge });
@@ -36,6 +34,7 @@ export const getAllBridges = () => dispatch => {
       dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
     .catch(err => {
+      console.log('DISPATCH GET ALL', err.response.data.message);
       dispatch({
         type: GET_BRIDGE_DATA_FAILURE,
         payload: err.message,
@@ -101,17 +100,9 @@ export const editBridge = bridge => dispatch => {
     });
 };
 
-export const searchBridge = bridge => dispatch => {
-  dispatch({
-    type: SEARCH_BRIDGE_START,
-  });
+export const searchBridge = search => dispatch => {
+  //
   //need to be able to hit that location for the search
-  axios
-    .post(`http://localhost:8000/search`, bridge)
-    .then(res => {
-      dispatch({ type: SEARCH_BRIDGE_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      dispatch({ type: SEARCH_BRIDGE_FAILURE, payload: err.response });
-    });
+
+  dispatch({ type: SEARCH_BRIDGE, payload: search });
 };

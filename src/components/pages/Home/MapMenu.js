@@ -6,9 +6,17 @@ import { BridgeList } from './BridgeList';
 import { getAllBridges } from '../../../state/actions';
 import { FlyToInterpolator } from 'react-map-gl';
 
-function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
+function MapMenu({
+  setBridgesToggle,
+  bridgesToggle,
+  toggleBridges,
+  originalView,
+  setViewport,
+}) {
   const dispatch = useDispatch();
-  const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
+  const { bridgeData, searchData, searching } = useSelector(
+    state => state.bridgeSitesReducer
+  );
 
   function onClear() {
     dispatch(getAllBridges());
@@ -34,7 +42,11 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
         <div className="sign-in">
           <a href="/login">sign in</a>
         </div>
-        <MapSearchBar bridgeData={bridgeData} />
+        <MapSearchBar
+          bridgeData={bridgeData}
+          searchData={searchData}
+          setBridgesToggle={setBridgesToggle}
+        />
         <div className="filters">
           <button className="filter-btn">Province</button>
           <button className="filter-btn">District</button>
@@ -53,7 +65,7 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
           </div>
         ) : (
           <>
-            {bridgeData.length >= 1 ? (
+            {!searching ? (
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
