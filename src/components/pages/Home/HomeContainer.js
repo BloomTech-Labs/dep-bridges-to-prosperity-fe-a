@@ -21,9 +21,8 @@ function HomeContainer() {
   const [viewport, setViewport] = useState(originalView);
 
   const dispatch = useDispatch();
-  const { bridgeData, loading, error } = useSelector(
-    state => state.bridgeSitesReducer
-  );
+  //took out loading/erorr to clean it up
+  const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   //handles the click feature of the info
   const clickMarker = bridge => {
     // setVisible(!visible);

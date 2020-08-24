@@ -14,9 +14,7 @@ function MapMenu({
   setViewport,
 }) {
   const dispatch = useDispatch();
-  const { bridgeData, searchData, searching } = useSelector(
-    state => state.bridgeSitesReducer
-  );
+  const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   function onClear() {
     dispatch(getAllBridges());
@@ -44,8 +42,8 @@ function MapMenu({
         </div>
         <MapSearchBar
           bridgeData={bridgeData}
-          searchData={searchData}
           setBridgesToggle={setBridgesToggle}
+          onClear={onClear}
         />
         <div className="filters">
           <button className="filter-btn">Province</button>

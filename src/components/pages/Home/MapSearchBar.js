@@ -1,11 +1,12 @@
 import { Input } from 'antd';
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { searchBridge, getAllBridges } from '../../../state/actions';
+import { FlyToInterpolator } from 'react-map-gl';
 // import { searchLocation } from '../../../state/actions';
 const { Search } = Input;
 
-const MapSearchBar = ({ setBridgesToggle }) => {
+const MapSearchBar = ({ setBridgesToggle, setViewport, originalView }) => {
   const dispatch = useDispatch();
 
   function onSearch(bridge) {
@@ -17,6 +18,11 @@ const MapSearchBar = ({ setBridgesToggle }) => {
     } else {
       dispatch(getAllBridges());
       setBridgesToggle(false);
+      setViewport({
+        ...originalView,
+        transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+        transitionDuration: 'auto',
+      });
     }
     // dispatch(searchBridge(bridge.target.value));
     // bridge.target.value ? setBridgesToggle(true) : setBridgesToggle(false);
@@ -27,6 +33,7 @@ const MapSearchBar = ({ setBridgesToggle }) => {
       <Search
         placeholder="search"
         onChange={onSearch}
+
         // onKeyDown={e => {
         //   if (e.keyCode === 8) return onSearch();
         // }}
