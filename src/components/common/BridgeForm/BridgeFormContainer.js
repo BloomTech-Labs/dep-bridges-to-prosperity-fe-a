@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import BridgeFormAdd from './BridgeFormAdd.js';
 import BridgeFormEdit from './BridgeFormEdit.js';
 import { getAllBridges } from '../../../state/actions/index.js';
+import './styles.less';
 
 function BridgeFormContainer() {
   const dispatch = useDispatch();
