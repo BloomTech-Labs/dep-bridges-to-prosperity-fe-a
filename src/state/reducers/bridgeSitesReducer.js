@@ -94,7 +94,8 @@ export const bridgeSitesReducer = (state = initialState, action) => {
     case SEARCH_BRIDGE:
       return {
         ...state,
-        searchData: state.bridgeData.filter(
+
+        bridgeData: state.bridgeData.filter(
           info =>
             info.name
               .toLowerCase()

@@ -84,7 +84,7 @@ function MapMenu({
             )}
           </>
         )}
-        {/* <button onClick={toggleBridges} className="view-bridges-btn"> */}
+
         {!bridgesToggle ? (
           <button onClick={toggleBridges} className="view-bridges-btn">
             View All Bridges

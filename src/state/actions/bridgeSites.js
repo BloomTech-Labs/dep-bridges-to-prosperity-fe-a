@@ -103,6 +103,16 @@ export const editBridge = bridge => dispatch => {
 export const searchBridge = search => dispatch => {
   //
   //need to be able to hit that location for the search
-
-  dispatch({ type: SEARCH_BRIDGE, payload: search });
+  axios
+    .get('http://localhost:8000/bridges/all')
+    .then(res => {
+      dispatch({ type: SEARCH_BRIDGE, payload: res.data });
+    })
+    .catch(err => {
+      console.log('DISPATCH GET ALL', err.response.data.message);
+      dispatch({
+        type: GET_BRIDGE_DATA_FAILURE,
+        payload: err.message,
+      });
+    });
 };

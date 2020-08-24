@@ -5,25 +5,19 @@ import { searchBridge, getAllBridges } from '../../../state/actions';
 // import { searchLocation } from '../../../state/actions';
 const { Search } = Input;
 
-const MapSearchBar = ({ searchData, setBridgesToggle }) => {
-  // const [searchVal, setSearchVal] = useState([]);
-  //this will work to seet the terms for the search ::below::
-  // const [searchTerms, setSearchTerms] = useState('');
-  // const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
+const MapSearchBar = ({ setBridgesToggle }) => {
   const dispatch = useDispatch();
 
   function onSearch(bridge) {
     console.log('ONSEARCH,', bridge.target.value);
-    console.log('searchData:', searchData);
+    // console.log('searchData:', searchData);
     if (bridge.target.value !== '') {
       dispatch(searchBridge(bridge.target.value));
       bridge.target.value ? setBridgesToggle(true) : setBridgesToggle(false);
     } else {
       dispatch(getAllBridges());
+      setBridgesToggle(false);
     }
-
-    dispatch(searchBridge(bridge.target.value));
-    bridge.target.value ? setBridgesToggle(true) : setBridgesToggle(false);
   }
 
   return (
