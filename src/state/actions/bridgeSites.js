@@ -100,19 +100,9 @@ export const editBridge = bridge => dispatch => {
     });
 };
 
-export const searchBridge = () => dispatch => {
+export const searchBridge = search => dispatch => {
   //
   //need to be able to hit that location for the search
-  axios
-    .post('http://localhost:8000/bridges/search')
-    .then(res => {
-      dispatch({ type: SEARCH_BRIDGE, payload: res.data });
-    })
-    .catch(err => {
-      // console.log('DISPATCH GET ALL', err.response.data.message);
-      dispatch({
-        type: GET_BRIDGE_DATA_FAILURE,
-        payload: err.message,
-      });
-    });
+
+  dispatch({ type: SEARCH_BRIDGE, payload: search });
 };

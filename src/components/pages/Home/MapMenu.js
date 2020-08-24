@@ -68,7 +68,7 @@ function MapMenu({
         ) : (
           // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
-            {bridgeData.length >= 1 ? (
+            {bridgeData.length >= 0 ? (
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
