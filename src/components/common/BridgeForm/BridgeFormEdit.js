@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { editBridge } from '../../../state/actions';
+import axios from 'axios';
 
 function BridgeFormEdit({ bridge }) {
   const { register, handleSubmit, errors } = useForm();
@@ -24,10 +25,23 @@ function BridgeFormEdit({ bridge }) {
       [e.target.name]: e.target.value,
     });
   };
+  console.log('THIS IS THE BRIDGE: ', bridge);
+
+  // TO DELETE BRIDGE
+  const deleteBridge = () => {
+    axios
+      .delete(`http://localhost:8000/bridges/${bridge.id}`)
+      .then(res => console.log(`${bridge} successfully deleted!`));
+  };
 
   return (
     <>
-      <h1>Editing {bridge.name}</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <h1>Editing {bridge.name}</h1>
+        <a onClick={() => deleteBridge()} href="/">
+          <button>Delete Bridge</button>
+        </a>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* BRIDGE SITE NAME */}
         <input
