@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { editBridge } from '../../../state/actions';
@@ -28,19 +29,26 @@ function BridgeFormEdit({ bridge }) {
   console.log('THIS IS THE BRIDGE: ', bridge);
 
   // TO DELETE BRIDGE
+  const history = useHistory();
+
   const deleteBridge = () => {
-    axios
-      .delete(`http://localhost:8000/bridges/${bridge.id}`)
-      .then(res => console.log(`${bridge} successfully deleted!`));
+    if (window.confirm('Are you sure you want to DELETE this bridge?')) {
+      axios.delete(`http://localhost:8000/bridges/${bridge.id}`).then(res => {
+        history.push('/');
+        console.log(`${bridge} successfully deleted!`);
+      });
+    } else {
+      console.log('You canceled the delete action');
+    }
   };
 
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h1>Editing {bridge.name}</h1>
-        <a onClick={() => deleteBridge()} href="/">
-          <button>Delete Bridge</button>
-        </a>
+        <button className="delete-button" onClick={() => deleteBridge()}>
+          Delete Bridge
+        </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* BRIDGE SITE NAME */}
