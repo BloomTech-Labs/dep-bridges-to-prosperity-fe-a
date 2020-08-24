@@ -5,6 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BridgeList } from './BridgeList';
 import { getAllBridges } from '../../../state/actions';
 import { FlyToInterpolator } from 'react-map-gl';
+import { useOktaAuth } from '@okta/okta-react';
+
+const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
+const redirectUri = `${window.location.origin}/`;
 
 function MapMenu({
   setBridgesToggle,
@@ -14,8 +18,11 @@ function MapMenu({
   setViewport,
 }) {
   const dispatch = useDispatch();
+  // Pulling in bridge data from reducer
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
+  /* Refetches bridge data, toggles all bridges
+  view and  */
   function onClear() {
     dispatch(getAllBridges());
     setViewport({
@@ -26,10 +33,22 @@ function MapMenu({
     toggleBridges();
   }
 
+  const { authState, authService } = useOktaAuth();
+
+  const logout = async () => {
+    // Reads the idToken before local session is cleared
+    const idToken = authState.idToken;
+    await authService.logout('/');
+
+    // Clears the remote session
+    window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
+  };
+
   return (
     <div className="menu-wrapper">
       <section className="search-menu">
         <div className="menu-header">
+          {/* DIY Hamburger Icon */}
           <div className="hamburger-wrapper">
             <div className="hamburger-layer" />
             <div className="hamburger-layer" />
@@ -38,7 +57,11 @@ function MapMenu({
           <h2>Bridge Explorer</h2>
         </div>
         <div className="sign-in">
-          <a href="/login">sign in</a>
+          {authState.idToken ? (
+            <a onClick={logout}>sign out</a>
+          ) : (
+            <a href="/login">sign in</a>
+          )}
         </div>
         <MapSearchBar
           bridgeData={bridgeData}
@@ -71,14 +94,17 @@ function MapMenu({
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
-                    <BridgeList bridge={bridge} />
+                    <BridgeList bridge={bridge} loggedIn={authState.idToken} />
                   </div>
                 ))}
               </div>
             ) : (
               //the clickedBridge
               <div className="bridges-wrapper">
-                <BridgeList bridge={bridgeData[0]} />
+                <BridgeList
+                  bridge={bridgeData[0]}
+                  loggedIn={authState.idToken}
+                />
               </div>
             )}
           </>
@@ -90,9 +116,15 @@ function MapMenu({
           </button>
         ) : (
           <button onClick={onClear} className="view-bridges-btn">
+            {/* Special clear command onClick here */}
             Clear
           </button>
         )}
+        {authState.idToken ? (
+          <a href="/bridge-form">
+            <button className="view-bridges-btn">Add New Bridge</button>
+          </a>
+        ) : null}
         {/* </button> */}
       </section>
     </div>

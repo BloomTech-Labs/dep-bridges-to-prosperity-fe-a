@@ -23,6 +23,15 @@ const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 afterEach(cleanup);
 
+jest.mock('@okta/okta-react', () => ({
+  useOktaAuth: () => {
+    return {
+      authState: {},
+      authService: {},
+    };
+  },
+}));
+
 describe('<HomeContainer /> testing suite', () => {
   test('mounts a page', async () => {
     const { getByText } = render(
@@ -36,10 +45,15 @@ describe('<HomeContainer /> testing suite', () => {
         </Router>
       </Provider>
     );
-    let inc = getByText(/Increment/i);
-    expect(inc).toBeInTheDocument();
+    let welcome = getByText(/Welcome to the Bridge Explorer!/i);
+    expect(welcome).toBeInTheDocument();
 
-    let dev = getByText(/Decrement/i);
-    expect(dev).toBeInTheDocument();
+    let into = getByText(
+      /Here you can can learn more about the 1.5k existing and prospective bridges./i
+    );
+    expect(into).toBeInTheDocument();
+
+    let bridges = getByText(/View All Bridges/i);
+    expect(bridges).toBeInTheDocument();
   });
 });
