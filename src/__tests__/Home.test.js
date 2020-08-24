@@ -23,6 +23,15 @@ const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 afterEach(cleanup);
 
+jest.mock('@okta/okta-react', () => ({
+  useOktaAuth: () => {
+    return {
+      authState: {},
+      authService: {},
+    };
+  },
+}));
+
 describe('<HomeContainer /> testing suite', () => {
   test('mounts a page', async () => {
     const { getByText } = render(

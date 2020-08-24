@@ -23,28 +23,9 @@ function BridgeFormAdd() {
     return num;
   }
 
-  // Setting up the shape of the data to "POST" to the bridge dummy data
-  // const [newBridge, setNewBridge] = useState({
-  //   individualsDirectlyServed: 0,
-  //   latitude: 1,
-  //   longitude: 1,
-  //   name: '',
-  //   span: 0,
-  //   stage: 'Accepted',
-  //   subStage: 'Technical',
-  //   type: 'Suspended',
-  // });
-
-  // const handleChanges = e => {
-  //   setNewBridge({
-  //     ...newBridge,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
   return (
     <>
-      <h1>Adding</h1>
+      <h1>Add New Bridge</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* BRIDGE SITE NAME */}
         <label htmlFor="name">Bridge Site Name</label>
@@ -55,7 +36,7 @@ function BridgeFormAdd() {
           // value={newBridge.name}
           ref={register({ required: true })}
         />
-        {errors.site_name && (
+        {errors.name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* PROJECT STAGE */}
@@ -70,7 +51,7 @@ function BridgeFormAdd() {
           <option value="Rejected">Rejected</option>
           <option value="Identified">Identified</option>
         </select>
-        {errors.site_name && (
+        {errors.stage && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUB STAGE */}
@@ -84,7 +65,7 @@ function BridgeFormAdd() {
           <option value="Technical">Technical</option>
           <option value="Requested">Requested</option>
         </select>
-        {errors.site_name && (
+        {errors.subStage && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LATITUDE */}
@@ -99,7 +80,7 @@ function BridgeFormAdd() {
             ref={register({ required: true })}
           />
         </label>
-        {errors.site_name && (
+        {errors.latitude && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LONGITUDE */}
@@ -114,7 +95,7 @@ function BridgeFormAdd() {
             ref={register({ required: true })}
           />
         </label>
-        {errors.site_name && (
+        {errors.longitude && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* INDIVIDUALS SERVED */}
@@ -153,7 +134,7 @@ function BridgeFormAdd() {
           <option value="Suspension">Suspension</option>
           <option value="Other">Other</option>
         </select>
-        {errors.site_name && (
+        {errors.type && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUBMIT */}

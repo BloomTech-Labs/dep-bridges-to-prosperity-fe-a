@@ -5,6 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BridgeList } from './BridgeList';
 import { getAllBridges } from '../../../state/actions';
 import { FlyToInterpolator } from 'react-map-gl';
+import { useOktaAuth } from '@okta/okta-react';
+
+const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
+const redirectUri = `${window.location.origin}/`;
 
 function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
   const dispatch = useDispatch();
@@ -23,6 +27,17 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
     toggleBridges();
   }
 
+  const { authState, authService } = useOktaAuth();
+
+  const logout = async () => {
+    // Reads the idToken before local session is cleared
+    const idToken = authState.idToken;
+    await authService.logout('/');
+
+    // Clears the remote session
+    window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
+  };
+
   return (
     <div className="menu-wrapper">
       <section className="search-menu">
@@ -36,7 +51,11 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
           <h2>Bridge Explorer</h2>
         </div>
         <div className="sign-in">
-          <a href="/login">sign in</a>
+          {authState.idToken ? (
+            <a onClick={logout}>sign out</a>
+          ) : (
+            <a href="/login">sign in</a>
+          )}
         </div>
         <MapSearchBar />
         <div className="filters">
@@ -63,14 +82,17 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
-                    <BridgeList bridge={bridge} />
+                    <BridgeList bridge={bridge} loggedIn={authState.idToken} />
                   </div>
                 ))}
               </div>
             ) : (
               //the clickedBridge
               <div className="bridges-wrapper">
-                <BridgeList bridge={bridgeData[0]} />
+                <BridgeList
+                  bridge={bridgeData[0]}
+                  loggedIn={authState.idToken}
+                />
               </div>
             )}
           </>
@@ -85,6 +107,12 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
             Clear
           </button>
         )}
+        {authState.idToken ? (
+          <a href="/bridge-form">
+            <button className="view-bridges-btn">Add New Bridge</button>
+          </a>
+        ) : null}
+        {/* </button> */}
       </section>
     </div>
   );
