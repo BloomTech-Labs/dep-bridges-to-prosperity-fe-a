@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllBridges, getSingleBridge } from '../../../state/actions';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
+import BridgeForms from '../BridgeForms.js';
 
 function HomeContainer() {
   // const [clickedBridge, setClickedBridge] = useState(null);
@@ -63,6 +64,7 @@ function HomeContainer() {
         viewport={viewport}
         setViewport={setViewport}
       />
+      <BridgeForms />
     </div>
   );
 }

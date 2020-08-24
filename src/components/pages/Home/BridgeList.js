@@ -19,17 +19,15 @@ export function BridgeList({ bridge, loggedIn }) {
         </ul>
       )}
       {loggedIn ? (
-        <a href="/bridge-form">
-          <button
-            style={{ width: '100%', color: '#666666' }}
-            onClick={() => {
-              window.localStorage.setItem('bridge', JSON.stringify(bridge));
-              window.localStorage.setItem('editing', true);
-            }}
-          >
-            Edit Bridge
-          </button>
-        </a>
+        <button
+          style={{ width: '100%', color: '#666666' }}
+          onClick={() => {
+            window.localStorage.setItem('bridge', JSON.stringify(bridge));
+            window.localStorage.setItem('editing', true);
+          }}
+        >
+          Edit Bridge
+        </button>
       ) : null}
     </div>
   );

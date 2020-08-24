@@ -34,6 +34,7 @@ function BridgeFormEdit({ bridge }) {
   const deleteBridge = () => {
     if (window.confirm('Are you sure you want to DELETE this bridge?')) {
       axios.delete(`http://localhost:8000/bridges/${bridge.id}`).then(res => {
+        localStorage['editing'] = false;
         history.push('/');
         console.log(`${bridge} successfully deleted!`);
       });
