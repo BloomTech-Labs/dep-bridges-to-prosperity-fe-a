@@ -44,6 +44,7 @@ function MapMenu({
           bridgeData={bridgeData}
           setBridgesToggle={setBridgesToggle}
           onClear={onClear}
+          setViewport={setViewport}
         />
         <div className="filters">
           <button className="filter-btn">Province</button>
