@@ -23,11 +23,12 @@ export const getSingleBridge = bridge => dispatch => {
 };
 
 export const getAllBridges = () => dispatch => {
+  let apiURL = 'https://bridges-a-api.herokuapp.com/bridges';
   dispatch({
     type: GET_BRIDGE_DATA_START,
   });
   axios
-    .get('http://localhost:8000/bridges/all')
+    .get(apiURL)
     .then(res => {
       dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
