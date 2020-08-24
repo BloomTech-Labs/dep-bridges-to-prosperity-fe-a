@@ -10,11 +10,11 @@ function BridgeFormAdd() {
 
   const onSubmit = data => {
     console.log('new bridge data:', data);
-    const newBridgeData = {
-      ...data,
-      id: numGenerator(),
-    };
-    dispatch(addNewBridge(newBridgeData));
+    // const newBridgeData = {
+    //   ...data,
+    //   id: numGenerator(),
+    // };
+    dispatch(addNewBridge(data));
   };
 
   // GENERATING RANDOM NUM FOR BRIDGE ID!
@@ -37,6 +37,18 @@ function BridgeFormAdd() {
           ref={register({ required: true })}
         />
         {errors.name && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* PROJECT CODE */}
+        <label htmlFor="projectCode">Project Code</label>
+        <input
+          placeholder="Ex: 1024"
+          name="projectCode"
+          // onChange={handleChanges}
+          // value={newBridge.name}
+          ref={register({ required: true })}
+        />
+        {errors.projectCode && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* PROJECT STAGE */}
@@ -135,6 +147,90 @@ function BridgeFormAdd() {
           <option value="Other">Other</option>
         </select>
         {errors.type && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* COUNTRY */}
+        <label htmlFor="country">Country</label>
+        <input
+          placeholder="Ex: Rwanda"
+          name="country"
+          // onChange={handleChanges}
+          // value={newBridge.name}
+          ref={register({ required: true })}
+        />
+        {errors.country && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* PROVINCE */}
+        <label htmlFor="province">Province</label>
+        <input
+          placeholder="Ex: Western Province"
+          name="province"
+          // onChange={handleChanges}
+          // value={newBridge.name}
+          ref={register({ required: true })}
+        />
+        {errors.province && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* SECTOR */}
+        <label htmlFor="sector">Sector</label>
+        <input
+          placeholder="Ex: Giheke"
+          name="sector"
+          // onChange={handleChanges}
+          // value={newBridge.name}
+          ref={register({ required: true })}
+        />
+        {errors.sector && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* CELL */}
+        <label htmlFor="cell">Cell</label>
+        <input
+          placeholder="Ex: Gakomeye"
+          name="cell"
+          // onChange={handleChanges}
+          // value={newBridge.name}
+          ref={register({ required: true })}
+        />
+        {errors.cell && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* FORM NAME */}
+        <label htmlFor="formName">Form Name</label>
+        <input
+          placeholder="Ex: Project Assessment - 2018.10.29"
+          name="formName"
+          // onChange={handleChanges}
+          // value={newBridge.name}
+          ref={register({ required: true })}
+        />
+        {errors.formName && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* CASE SAFE ID FORM */}
+        <label htmlFor="caseSafeIdForm">Case Safe ID Form</label>
+        <input
+          placeholder="Ex: a1if1002ejd77"
+          name="caseSafeIdForm"
+          // onChange={handleChanges}
+          // value={newBridge.name}
+          ref={register({ required: true })}
+        />
+        {errors.caseSafeIdForm && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* BRIDGE OPPORTUNITY ID */}
+        <label htmlFor="bridgeOpportunityId">Bridge Opportunity Name</label>
+        <input
+          placeholder="Ex: 0067kaf894a"
+          name="bridgeOpportunityId"
+          // onChange={handleChanges}
+          // value={newBridge.name}
+          ref={register({ required: true })}
+        />
+        {errors.bridgeOpportunityId && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUBMIT */}

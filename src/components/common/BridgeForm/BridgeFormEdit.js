@@ -53,14 +53,27 @@ function BridgeFormEdit({ bridge }) {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* BRIDGE SITE NAME */}
+        <label htmlFor="name">Bridge Site Name</label>
         <input
-          placeholder="Bridge Site Name"
+          placeholder="Ex: Buzi"
           name="name"
           onChange={handleChanges}
           value={newBridge.name}
           ref={register({ required: true })}
         />
-        {errors.site_name && (
+        {errors.name && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* PROJECT CODE */}
+        <label htmlFor="projectCode">Project Code</label>
+        <input
+          placeholder="Ex: 1024"
+          name="projectCode"
+          onChange={handleChanges}
+          value={newBridge.projectCode}
+          ref={register({ required: true })}
+        />
+        {errors.projectCode && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* PROJECT STAGE */}
@@ -76,7 +89,7 @@ function BridgeFormEdit({ bridge }) {
           <option value="Rejected">Rejected</option>
           <option value="Identified">Identified</option>
         </select>
-        {errors.site_name && (
+        {errors.stage && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUB STAGE */}
@@ -91,14 +104,14 @@ function BridgeFormEdit({ bridge }) {
           <option value="Technical">Technical</option>
           <option value="Requested">Requested</option>
         </select>
-        {errors.site_name && (
+        {errors.subStage && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LATITUDE */}
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Latitude
           <input
-            placeholder="Latitude"
+            placeholder="Ex: -1234"
             name="latitude"
             type="number"
             onChange={handleChanges}
@@ -106,14 +119,14 @@ function BridgeFormEdit({ bridge }) {
             ref={register({ required: true })}
           />
         </label>
-        {errors.site_name && (
+        {errors.latitude && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LONGITUDE */}
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Longitude
           <input
-            placeholder="Longitude"
+            placeholder="Ex: 1234"
             name="longitude"
             type="number"
             onChange={handleChanges}
@@ -121,14 +134,14 @@ function BridgeFormEdit({ bridge }) {
             ref={register({ required: true })}
           />
         </label>
-        {errors.site_name && (
+        {errors.longitude && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* INDIVIDUALS SERVED */}
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Individuals Served
           <input
-            placeholder="Individuals Served"
+            placeholder="How many individuals does/would this bridge serve?"
             name="individualsDirectlyServed"
             type="number"
             onChange={handleChanges}
@@ -140,8 +153,8 @@ function BridgeFormEdit({ bridge }) {
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Span
           <input
-            placeholder="Span"
-            name="Span"
+            placeholder="How long does/would this bridge span?"
+            name="span"
             type="number"
             onChange={handleChanges}
             value={newBridge.span}
@@ -161,7 +174,91 @@ function BridgeFormEdit({ bridge }) {
           <option value="Suspension">Suspension</option>
           <option value="Other">Other</option>
         </select>
-        {errors.site_name && (
+        {errors.type && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* COUNTRY */}
+        <label htmlFor="country">Country</label>
+        <input
+          placeholder="Ex: Rwanda"
+          name="country"
+          onChange={handleChanges}
+          value={newBridge.country}
+          ref={register({ required: true })}
+        />
+        {errors.country && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* PROVINCE */}
+        <label htmlFor="province">Province</label>
+        <input
+          placeholder="Ex: Western Province"
+          name="province"
+          onChange={handleChanges}
+          value={newBridge.province}
+          ref={register({ required: true })}
+        />
+        {errors.province && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* SECTOR */}
+        <label htmlFor="sector">Sector</label>
+        <input
+          placeholder="Ex: Giheke"
+          name="sector"
+          onChange={handleChanges}
+          value={newBridge.sector}
+          ref={register({ required: true })}
+        />
+        {errors.sector && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* CELL */}
+        <label htmlFor="cell">Cell</label>
+        <input
+          placeholder="Ex: Gakomeye"
+          name="cell"
+          onChange={handleChanges}
+          value={newBridge.cell}
+          ref={register({ required: true })}
+        />
+        {errors.cell && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* FORM NAME */}
+        <label htmlFor="formName">Form Name</label>
+        <input
+          placeholder="Ex: Project Assessment - 2018.10.29"
+          name="formName"
+          onChange={handleChanges}
+          value={newBridge.formName}
+          ref={register({ required: true })}
+        />
+        {errors.formName && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* CASE SAFE ID FORM */}
+        <label htmlFor="caseSafeIdForm">Case Safe ID Form</label>
+        <input
+          placeholder="Ex: a1if1002ejd77"
+          name="caseSafeIdForm"
+          onChange={handleChanges}
+          value={newBridge.caseSafeIdForm}
+          ref={register({ required: true })}
+        />
+        {errors.caseSafeIdForm && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* BRIDGE OPPORTUNITY ID */}
+        <label htmlFor="bridgeOpportunityId">Bridge Opportunity Name</label>
+        <input
+          placeholder="Ex: 0067kaf894a"
+          name="bridgeOpportunityId"
+          onChange={handleChanges}
+          value={newBridge.bridgeOpportunityId}
+          ref={register({ required: true })}
+        />
+        {errors.bridgeOpportunityId && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUBMIT */}
