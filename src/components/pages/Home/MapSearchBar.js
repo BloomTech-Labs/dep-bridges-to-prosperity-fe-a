@@ -18,11 +18,11 @@ const MapSearchBar = ({ setBridgesToggle, setViewport, originalView }) => {
     } else {
       dispatch(getAllBridges());
       setBridgesToggle(false);
-      setViewport({
-        ...originalView,
-        transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
-        transitionDuration: 'auto',
-      });
+      // setViewport({
+      //   ...originalView,
+      //   transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+      //   transitionDuration: 'auto',
+      // });
     }
     // dispatch(searchBridge(bridge.target.value));
     // bridge.target.value ? setBridgesToggle(true) : setBridgesToggle(false);
