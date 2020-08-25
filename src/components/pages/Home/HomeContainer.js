@@ -37,7 +37,7 @@ function HomeContainer() {
     //sets the theme
     console.log(style.target.id);
     setTheme({
-      theme: `mapbox://styles/mapbox/${changeStyle}`,
+      mapStyle: `mapbox://styles/jameslcarpino/${changeStyle}`,
     });
     console.log(theme);
   };

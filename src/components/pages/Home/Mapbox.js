@@ -5,7 +5,14 @@ import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 // import InfoDrawer from './InfoDrawer';
 
-function Mapbox({ clickMarker, viewport, setViewport, setTheme, ZoomIn }) {
+function Mapbox({
+  clickMarker,
+  viewport,
+  setViewport,
+  theme,
+  setTheme,
+  ZoomIn,
+}) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   //copy code from previous proj.
 
