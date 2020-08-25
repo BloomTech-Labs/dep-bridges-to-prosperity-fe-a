@@ -1,0 +1,28 @@
+@keyframes slideup {
+  0% {
+    top: 0px;
+  }
+  25% {
+    top: 200px;
+  }
+  50% {
+    top: 100px;
+  }
+  75% {
+    top: 200px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+.landing-page-wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #999;
+  z-index: 2000;
+  &:hover {
+    animation: slideup 5s infinite;
+  }
+}
