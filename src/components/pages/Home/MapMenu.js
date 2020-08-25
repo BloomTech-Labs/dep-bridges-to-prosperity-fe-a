@@ -16,6 +16,8 @@ function MapMenu({
   toggleBridges,
   originalView,
   setViewport,
+  setTheme,
+  ZoomIn,
 }) {
   const dispatch = useDispatch();
   // Pulling in bridge data from reducer
@@ -44,6 +46,16 @@ function MapMenu({
     window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
   };
 
+  //function for setting theme of the map
+  const changeTheme = style => {
+    //grabs the id target
+    const changeStyle = style.target.id;
+    //sets the theme
+    setTheme({
+      theme: `mapbox://styles/mapbox/${changeStyle}`,
+    });
+  };
+
   return (
     <div className="menu-wrapper">
       <section className="search-menu">
@@ -58,7 +70,9 @@ function MapMenu({
         </div>
         <div className="sign-in">
           {authState.idToken ? (
-            <a onClick={logout}>sign out</a>
+            <button className="signin-button" onClick={logout}>
+              sign out
+            </button>
           ) : (
             <a href="/login">sign in</a>
           )}
@@ -69,6 +83,7 @@ function MapMenu({
           onClear={onClear}
           setViewport={setViewport}
         />
+
         <div className="filters">
           <button className="filter-btn">Province</button>
           <button className="filter-btn">District</button>
@@ -94,7 +109,11 @@ function MapMenu({
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
-                    <BridgeList bridge={bridge} loggedIn={authState.idToken} />
+                    <BridgeList
+                      bridge={bridge}
+                      loggedIn={authState.idToken}
+                      ZoomIn={ZoomIn}
+                    />
                   </div>
                 ))}
               </div>
