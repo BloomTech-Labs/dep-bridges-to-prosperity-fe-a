@@ -45,6 +45,13 @@ function HomeContainer() {
     dispatch(getAllBridges());
   }, [dispatch]);
 
+  // FOR ADDING/EDITING FORM
+  const [showForm, setShowForm] = useState(false);
+
+  const changeShowForm = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <div className="home-wrapper">
       {/* Passing down functions and bridge data to 
@@ -64,7 +71,9 @@ function HomeContainer() {
         viewport={viewport}
         setViewport={setViewport}
       />
-      <BridgeForms />
+      {showForm === true ? (
+        <BridgeForms changeShowForm={changeShowForm} />
+      ) : null}
     </div>
   );
 }

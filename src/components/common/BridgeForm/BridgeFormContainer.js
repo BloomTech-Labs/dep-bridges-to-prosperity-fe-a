@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import BridgeFormAdd from './BridgeFormAdd.js';
 import BridgeFormEdit from './BridgeFormEdit.js';
 import { getAllBridges } from '../../../state/actions/index.js';
+import { Modal } from 'antd';
 import './styles.less';
 
 function BridgeFormContainer() {
@@ -15,15 +16,17 @@ function BridgeFormContainer() {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   const bridge = JSON.parse(window.localStorage.getItem('bridge'));
-  const edit = JSON.parse(window.localStorage.getItem('editing'));
+  const isEditing = JSON.parse(window.localStorage.getItem('editing'));
 
   return (
     <>
-      {edit === true ? (
-        <BridgeFormEdit bridge={bridge} />
-      ) : (
-        <BridgeFormAdd bridges={bridgeData} />
-      )}
+      <Modal visible={true} onOk={() => {}} onCancel={() => {}}>
+        {isEditing === true ? (
+          <BridgeFormEdit bridge={bridge} />
+        ) : (
+          <BridgeFormAdd bridges={bridgeData} />
+        )}
+      </Modal>
     </>
   );
 }

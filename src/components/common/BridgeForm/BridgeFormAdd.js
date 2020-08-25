@@ -25,7 +25,7 @@ function BridgeFormAdd() {
 
   return (
     <>
-      <h1>Add New Bridge</h1>
+      <h2>Add New Bridge</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* BRIDGE SITE NAME */}
         <label htmlFor="name">Bridge Site Name</label>

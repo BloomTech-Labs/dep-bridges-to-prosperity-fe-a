@@ -31,6 +31,9 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
 
   const logout = async () => {
     // Reads the idToken before local session is cleared
+    window.localStorage.removeItem('bridge');
+    window.localStorage.removeItem('editing');
+    window.localStorage.removeItem('showForm');
     const idToken = authState.idToken;
     await authService.logout('/');
 
@@ -108,7 +111,12 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
           </button>
         )}
         {authState.idToken ? (
-          <button className="view-bridges-btn">Add New Bridge</button>
+          <button
+            className="view-bridges-btn"
+            onClick={() => window.localStorage.setItem('showForm', true)}
+          >
+            Add New Bridge
+          </button>
         ) : null}
         {/* </button> */}
       </section>
