@@ -1,26 +1,26 @@
 import React from 'react';
-import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
-import { UpCircleFilled } from '@ant-design/icons';
+import ReactMapGl, { Marker } from 'react-map-gl';
+import { EnvironmentOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 // import InfoDrawer from './InfoDrawer';
 
-function Mapbox({ clickMarker, viewport, setViewport }) {
+function Mapbox({ clickMarker, viewport, setViewport, setTheme, ZoomIn }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   //copy code from previous proj.
 
-  const ZoomIn = bridge => {
-    setViewport({
-      latitude: bridge.latitude,
-      longitude: bridge.longitude,
-      width: '100%',
-      height: '100%',
-      zoom: 15,
-      transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
-      transitionDuration: 'auto',
-    });
-    clickMarker(bridge);
-  };
+  // const ZoomIn = bridge => {
+  //   setViewport({
+  //     latitude: bridge.latitude,
+  //     longitude: bridge.longitude,
+  //     width: '100%',
+  //     height: '100%',
+  //     zoom: 15,
+  //     transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+  //     transitionDuration: 'auto',
+  //   });
+  //   clickMarker(bridge);
+  // };
 
   return (
     <div>
@@ -34,7 +34,7 @@ function Mapbox({ clickMarker, viewport, setViewport }) {
           setViewport(viewport);
         }}
         //using minimo right now, should be good to swap out if we want another
-        mapStyle="mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr"
+        setStyle={setTheme}
       >
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
         {/* currently just showing bridge lats/longs */}
@@ -48,8 +48,8 @@ function Mapbox({ clickMarker, viewport, setViewport }) {
               >
                 <Tooltip title={bridge.name}>
                   {/* bridge marker placeholder for now, but I like it. */}
-                  <UpCircleFilled
-                    style={{ fontSize: '20px', color: 'green' }}
+                  <EnvironmentOutlined
+                    style={{ fontSize: '20px', color: '#009149' }}
                   />
                 </Tooltip>
 
