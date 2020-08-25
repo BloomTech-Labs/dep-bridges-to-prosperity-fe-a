@@ -49,8 +49,14 @@ function HomeContainer() {
 
   // FOR ADDING/EDITING FORM
   const [show, setShow] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
   const changeShow = () => {
     setShow(!show);
+  };
+
+  const changeIsEditing = () => {
+    setIsEditing(!isEditing);
   };
 
   return (
@@ -66,6 +72,7 @@ function HomeContainer() {
         originalView={originalView}
         setBridgesToggle={setBridgesToggle}
         changeShow={changeShow}
+        changeIsEditing={changeIsEditing}
       />
       <Mapbox
         clickMarker={clickMarker}
@@ -75,7 +82,11 @@ function HomeContainer() {
         setViewport={setViewport}
       />
       <Modal visible={show} footer={null} onCancel={changeShow}>
-        <BridgeForms changeShow={changeShow} />
+        <BridgeForms
+          changeShow={changeShow}
+          changeIsEditing={changeIsEditing}
+          isEditing={isEditing}
+        />
       </Modal>
     </div>
   );

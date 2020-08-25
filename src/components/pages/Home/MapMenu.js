@@ -17,6 +17,7 @@ function MapMenu({
   originalView,
   setViewport,
   changeShow,
+  changeIsEditing,
 }) {
   const dispatch = useDispatch();
   // Pulling in bridge data from reducer
@@ -39,8 +40,6 @@ function MapMenu({
   const logout = async () => {
     // Reads the idToken before local session is cleared
     window.localStorage.removeItem('bridge');
-    window.localStorage.removeItem('editing');
-    window.localStorage.removeItem('showForm');
     const idToken = authState.idToken;
     await authService.logout('/');
 
@@ -102,6 +101,7 @@ function MapMenu({
                       bridge={bridge}
                       loggedIn={authState.idToken}
                       changeShow={changeShow}
+                      changeIsEditing={changeIsEditing}
                     />
                   </div>
                 ))}
@@ -113,6 +113,7 @@ function MapMenu({
                   bridge={bridgeData[0]}
                   loggedIn={authState.idToken}
                   changeShow={changeShow}
+                  changeIsEditing={changeIsEditing}
                 />
               </div>
             )}

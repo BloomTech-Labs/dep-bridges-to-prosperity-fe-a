@@ -1,43 +1,46 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { editBridge } from '../../../state/actions';
+import { editBridge, getAllBridges } from '../../../state/actions';
 import { axiosWithAuth } from '../../../utils/axiosWithAuth';
 
-function BridgeFormEdit({ bridge, authState }) {
+function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
   const { register, handleSubmit, errors } = useForm();
 
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    console.log(newBridge);
-    dispatch(editBridge(newBridge, authState.id));
+    delete newBridge['communitiesServed'];
+    dispatch(editBridge(newBridge, authState.idToken));
     window.localStorage.removeItem('bridge');
-    localStorage['editing'] = false;
+    changeIsEditing();
+    // changeShow();
+    // dispatch(getAllBridges());
   };
 
   // Setting up the shape of the data to "PUT" to the bridge dummy data
   const [newBridge, setNewBridge] = useState(bridge);
 
   const handleChanges = e => {
+    newBridge.span = parseInt(newBridge.span);
+    newBridge.individualsDirectlyServed = parseInt(
+      newBridge.individualsDirectlyServed
+    );
     setNewBridge({
       ...newBridge,
       [e.target.name]: e.target.value,
     });
   };
-  console.log('THIS IS THE BRIDGE: ', bridge);
+  console.log('THIS IS THE BRIDGE: ', newBridge);
 
   // TO DELETE BRIDGE
-  const history = useHistory();
-
   const deleteBridge = idToken => {
     if (window.confirm('Are you sure you want to DELETE this bridge?')) {
       axiosWithAuth(idToken)
-        .delete(`http://localhost:8000/bridges/${bridge.id}`)
+        .delete(`/bridges/${bridge.id}`)
         .then(res => {
-          localStorage['editing'] = false;
-          history.push('/');
+          changeIsEditing();
+          changeShow();
           console.log(`${bridge} successfully deleted!`);
         });
     } else {
@@ -51,12 +54,12 @@ function BridgeFormEdit({ bridge, authState }) {
         <h1>Editing {bridge.name}</h1>
         <button
           className="delete-button"
-          onClick={() => deleteBridge(authState.id)}
+          onClick={() => deleteBridge(authState.idToken)}
         >
           Delete Bridge
         </button>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="form-cont-inner">
         {/* BRIDGE SITE NAME */}
         <label htmlFor="name">Bridge Site Name</label>
         <input

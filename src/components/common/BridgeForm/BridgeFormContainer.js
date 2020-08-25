@@ -6,7 +6,7 @@ import { getAllBridges } from '../../../state/actions/index.js';
 import { useOktaAuth } from '@okta/okta-react';
 import './styles.less';
 
-function BridgeFormContainer({ changeShowForm }) {
+function BridgeFormContainer({ changeShow, changeIsEditing, isEditing }) {
   const dispatch = useDispatch();
 
   const { authState } = useOktaAuth();
@@ -18,16 +18,24 @@ function BridgeFormContainer({ changeShowForm }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   const bridge = JSON.parse(window.localStorage.getItem('bridge'));
-  const isEditing = JSON.parse(window.localStorage.getItem('editing'));
 
   return (
-    <>
+    <section className="form-cont-outer">
       {isEditing === true ? (
-        <BridgeFormEdit bridge={bridge} authState={authState} />
+        <BridgeFormEdit
+          bridge={bridge}
+          authState={authState}
+          changeIsEditing={changeIsEditing}
+          changeShow={changeShow}
+        />
       ) : (
-        <BridgeFormAdd bridges={bridgeData} authState={authState} />
+        <BridgeFormAdd
+          bridges={bridgeData}
+          authState={authState}
+          changeShow={changeShow}
+        />
       )}
-    </>
+    </section>
   );
 }
 

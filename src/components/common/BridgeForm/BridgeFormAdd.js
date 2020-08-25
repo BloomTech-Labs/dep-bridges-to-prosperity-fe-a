@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addNewBridge } from '../../../state/actions';
+import { addNewBridge, getAllBridges } from '../../../state/actions';
 
-function BridgeFormAdd({ authState }) {
+function BridgeFormAdd({ authState, changeShow }) {
   const { register, handleSubmit, errors } = useForm();
 
   const dispatch = useDispatch();
@@ -11,12 +11,14 @@ function BridgeFormAdd({ authState }) {
   const onSubmit = data => {
     console.log('new bridge data:', data);
     dispatch(addNewBridge(data, authState.idToken));
+    changeShow();
+    dispatch(getAllBridges());
   };
 
   return (
     <>
       <h2>Add New Bridge</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="form-cont-inner">
         {/* BRIDGE SITE NAME */}
         <label htmlFor="name">Bridge Site Name</label>
         <input
