@@ -28,7 +28,7 @@ function Mapbox({
           setViewport(viewport);
         }}
         //using minimo right now, should be good to swap out if we want another
-        setStyle={setTheme}
+        mapStyle={theme.mapStyle}
       >
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
         {/* currently just showing bridge lats/longs */}
