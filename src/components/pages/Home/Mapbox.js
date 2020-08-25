@@ -5,10 +5,10 @@ import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 // import InfoDrawer from './InfoDrawer';
 
-function Mapbox({ clickMarker, viewport, setViewport, setTheme, ZoomIn }) {
+function Mapbox({ clickMarker, viewport, setViewport, theme, ZoomIn }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   //copy code from previous proj.
-
+  console.log('mapStyle', localStorage.getItem('mapStyle'));
   return (
     <div>
       {/* render map */}
@@ -21,7 +21,11 @@ function Mapbox({ clickMarker, viewport, setViewport, setTheme, ZoomIn }) {
           setViewport(viewport);
         }}
         //using minimo right now, should be good to swap out if we want another
-        setStyle={setTheme}
+        mapStyle={
+          localStorage.getItem('mapStyle')
+            ? localStorage.getItem('mapStyle')
+            : 'mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr'
+        }
       >
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
         {/* currently just showing bridge lats/longs */}

@@ -83,6 +83,13 @@ function MapMenu({
             All Filters <img src={filterIcon} alt="filter icon" />
           </button>
           <button
+            id="ckdp065po06j11ip6ga2xsphr"
+            className="filter-btn"
+            onClick={changeTheme}
+          >
+            Minimo Map
+          </button>
+          <button
             id="ckeaavyf603w319p8sqrfxm7n"
             className="filter-btn"
             onClick={changeTheme}

@@ -24,8 +24,8 @@ function HomeContainer() {
 
   //starting theme of minimo
   const startingTheme = {
-    // mapStyle: 'mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr',
-    mapStyle: 'mapbox://styles/jameslcarpino/ckea7854a009m19p7w7jupmj8',
+    mapStyle: 'mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr',
+    // mapStyle: 'mapbox://styles/jameslcarpino/ckeaavyf603w319p8sqrfxm7n',
   };
   //theme to be set with an onclick
   const [theme, setTheme] = useState(startingTheme);
@@ -36,10 +36,12 @@ function HomeContainer() {
     const changeStyle = style.target.id;
     //sets the theme
     console.log(style.target.id);
-    setTheme({
-      theme: `mapbox://styles/mapbox/${changeStyle}`,
-    });
-    console.log(theme);
+    localStorage.setItem(
+      'mapStyle',
+      `mapbox://styles/jameslcarpino/${changeStyle}`
+    );
+    window.location.reload();
+    // console.log(localStorage.getItem('mapStyle'));
   };
 
   const dispatch = useDispatch();
