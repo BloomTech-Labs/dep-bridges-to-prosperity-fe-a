@@ -15,7 +15,6 @@ function Mapbox({
 }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   //copy code from previous proj.
-  console.log('mapStyle', localStorage.getItem('mapStyle'));
   return (
     <div>
       {/* render map */}

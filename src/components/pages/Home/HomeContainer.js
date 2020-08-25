@@ -23,10 +23,6 @@ function HomeContainer() {
   const [viewport, setViewport] = useState(originalView);
 
   //starting theme of minimo
-  // const startingTheme = {
-  //   // mapStyle: 'mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr',
-  //   mapStyle: 'mapbox://styles/jameslcarpino/ckea7854a009m19p7w7jupmj8',
-  // };
   //theme to be set with an onclick
   const [theme, setTheme] = useState(
     localStorage.getItem('mapStyle')
@@ -44,7 +40,6 @@ function HomeContainer() {
       `mapbox://styles/jameslcarpino/${changeStyle}`
     );
     setTheme(`mapbox://styles/jameslcarpino/${changeStyle}`);
-    console.log(theme);
   };
 
   const dispatch = useDispatch();

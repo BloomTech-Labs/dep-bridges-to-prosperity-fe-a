@@ -6,6 +6,8 @@ import { BridgeList } from './BridgeList';
 import { getAllBridges } from '../../../state/actions';
 import { FlyToInterpolator } from 'react-map-gl';
 import { useOktaAuth } from '@okta/okta-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette } from '@fortawesome/free-solid-svg-icons';
 
 const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
 const redirectUri = `${window.location.origin}/`;
@@ -52,11 +54,12 @@ function MapMenu({
       <section className="search-menu">
         <div className="menu-header">
           {/* DIY Hamburger Icon */}
-          <div className="hamburger-wrapper">
+          {/* <div className="hamburger-wrapper">
             <div className="hamburger-layer" />
             <div className="hamburger-layer" />
-            <div className="hamburger-layer" />
-          </div>
+            <div className="hamburger-layer" /> */}
+          <FontAwesomeIcon alt="Change Theme" icon={faPalette} />
+          {/* </div> */}
           <h2>Bridge Explorer</h2>
         </div>
         <div className="sign-in">
@@ -95,6 +98,9 @@ function MapMenu({
             onClick={changeTheme}
           >
             Terrain Map
+          </button>
+          <button id="cke9et76u0o361aqngn9owqnu" onClick={changeTheme}>
+            Elevation Map
           </button>
         </div>
       </section>
