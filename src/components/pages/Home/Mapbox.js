@@ -28,7 +28,7 @@ function Mapbox({
           setViewport(viewport);
         }}
         //using minimo right now, should be good to swap out if we want another
-        mapStyle={theme.mapStyle}
+        mapStyle={theme}
       >
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
         {/* currently just showing bridge lats/longs */}
@@ -42,6 +42,7 @@ function Mapbox({
               >
                 <Tooltip title={bridge.name}>
                   {/* bridge marker placeholder for now, but I like it. */}
+
                   <EnvironmentOutlined
                     style={{ fontSize: '20px', color: '#009149' }}
                   />

@@ -23,22 +23,27 @@ function HomeContainer() {
   const [viewport, setViewport] = useState(originalView);
 
   //starting theme of minimo
-  const startingTheme = {
-    // mapStyle: 'mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr',
-    mapStyle: 'mapbox://styles/jameslcarpino/ckea7854a009m19p7w7jupmj8',
-  };
+  // const startingTheme = {
+  //   // mapStyle: 'mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr',
+  //   mapStyle: 'mapbox://styles/jameslcarpino/ckea7854a009m19p7w7jupmj8',
+  // };
   //theme to be set with an onclick
-  const [theme, setTheme] = useState(startingTheme);
+  const [theme, setTheme] = useState(
+    localStorage.getItem('mapStyle')
+      ? localStorage.getItem('mapStyle')
+      : 'mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr'
+  );
 
   //function for setting theme of the map
   const changeTheme = style => {
     //grabs the id target
     const changeStyle = style.target.id;
     //sets the theme
-    console.log(style.target.id);
-    setTheme({
-      mapStyle: `mapbox://styles/jameslcarpino/${changeStyle}`,
-    });
+    localStorage.setItem(
+      'mapStyle',
+      `mapbox://styles/jameslcarpino/${changeStyle}`
+    );
+    setTheme(`mapbox://styles/jameslcarpino/${changeStyle}`);
     console.log(theme);
   };
 
