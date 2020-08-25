@@ -23,6 +23,7 @@ function HomeContainer() {
   const [viewport, setViewport] = useState(originalView);
 
   const dispatch = useDispatch();
+
   // Components should be set up to handle errors and loadings status
   // eslint-disable-next-line
   const { bridgeData, loading, error } = useSelector(
@@ -30,7 +31,7 @@ function HomeContainer() {
   );
   //handles the click feature of the info
   const clickMarker = bridge => {
-    setVisible(!visible);
+    // setVisible(!visible);
     setBridgesToggle(true);
     dispatch(getSingleBridge(bridge));
   };
@@ -63,6 +64,7 @@ function HomeContainer() {
         visible={visible}
         setViewport={setViewport}
         originalView={originalView}
+        setBridgesToggle={setBridgesToggle}
       />
       <Mapbox
         clickMarker={clickMarker}

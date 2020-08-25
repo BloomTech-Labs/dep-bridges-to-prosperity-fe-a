@@ -18,6 +18,8 @@ export const EDIT_BRIDGE_DATA_FAILURE = 'EDIT_BRIDGE_FAILURE';
 
 export const GET_SINGLE_BRIDGE = 'GET_SINGLE_BRIDGE';
 
+export const SEARCH_BRIDGE = 'SEARCH_BRIDGE';
+
 export const getSingleBridge = bridge => dispatch => {
   dispatch({ type: GET_SINGLE_BRIDGE, payload: bridge });
 };
@@ -32,6 +34,7 @@ export const getAllBridges = () => dispatch => {
       dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
     .catch(err => {
+      console.log('DISPATCH GET ALL', err.response.data.message);
       dispatch({
         type: GET_BRIDGE_DATA_FAILURE,
         payload: err.message,
@@ -95,4 +98,11 @@ export const editBridge = bridge => dispatch => {
         payload: err.message,
       });
     });
+};
+
+export const searchBridge = search => dispatch => {
+  //
+  //need to be able to hit that location for the search
+
+  dispatch({ type: SEARCH_BRIDGE, payload: search });
 };

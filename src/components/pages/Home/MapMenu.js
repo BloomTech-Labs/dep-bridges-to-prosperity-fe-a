@@ -10,7 +10,13 @@ import { useOktaAuth } from '@okta/okta-react';
 const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
 const redirectUri = `${window.location.origin}/`;
 
-function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
+function MapMenu({
+  setBridgesToggle,
+  bridgesToggle,
+  toggleBridges,
+  originalView,
+  setViewport,
+}) {
   const dispatch = useDispatch();
   // Pulling in bridge data from reducer
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
@@ -60,7 +66,12 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
             <a href="/login">sign in</a>
           )}
         </div>
-        <MapSearchBar />
+        <MapSearchBar
+          bridgeData={bridgeData}
+          setBridgesToggle={setBridgesToggle}
+          onClear={onClear}
+          setViewport={setViewport}
+        />
         <div className="filters">
           <button className="filter-btn">Province</button>
           <button className="filter-btn">District</button>
@@ -72,16 +83,17 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
       </section>
 
       <section className="bridge-info">
-        {/* toggles bridges view on and off */}
+        {/* Begin toggle for information */}
+        {/* first if : when bridges toggle is set off it displays the welcome */}
         {!bridgesToggle ? (
           <div className="card">
             <strong>Welcome to the Bridge Explorer!</strong>Here you can can
             learn more about the 1.5k existing and prospective bridges.
           </div>
         ) : (
+          // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
-            {/* Maps through all bridges in redux store */}
-            {bridgeData.length >= 1 ? (
+            {bridgeData.length >= 0 ? (
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
@@ -100,6 +112,7 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
             )}
           </>
         )}
+
         {!bridgesToggle ? (
           <button onClick={toggleBridges} className="view-bridges-btn">
             View All Bridges
