@@ -3,16 +3,16 @@ import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { editBridge } from '../../../state/actions';
-import axios from 'axios';
+import { axiosWithAuth } from '../../../utils/axiosWithAuth';
 
-function BridgeFormEdit({ bridge }) {
+function BridgeFormEdit({ bridge, authState }) {
   const { register, handleSubmit, errors } = useForm();
 
   const dispatch = useDispatch();
 
   const onSubmit = () => {
     console.log(newBridge);
-    dispatch(editBridge(newBridge));
+    dispatch(editBridge(newBridge, authState.id));
     window.localStorage.removeItem('bridge');
     localStorage['editing'] = false;
   };
@@ -31,13 +31,15 @@ function BridgeFormEdit({ bridge }) {
   // TO DELETE BRIDGE
   const history = useHistory();
 
-  const deleteBridge = () => {
+  const deleteBridge = idToken => {
     if (window.confirm('Are you sure you want to DELETE this bridge?')) {
-      axios.delete(`http://localhost:8000/bridges/${bridge.id}`).then(res => {
-        localStorage['editing'] = false;
-        history.push('/');
-        console.log(`${bridge} successfully deleted!`);
-      });
+      axiosWithAuth(idToken)
+        .delete(`http://localhost:8000/bridges/${bridge.id}`)
+        .then(res => {
+          localStorage['editing'] = false;
+          history.push('/');
+          console.log(`${bridge} successfully deleted!`);
+        });
     } else {
       console.log('You canceled the delete action');
     }
@@ -47,7 +49,10 @@ function BridgeFormEdit({ bridge }) {
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h1>Editing {bridge.name}</h1>
-        <button className="delete-button" onClick={() => deleteBridge()}>
+        <button
+          className="delete-button"
+          onClick={() => deleteBridge(authState.id)}
+        >
           Delete Bridge
         </button>
       </div>

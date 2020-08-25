@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import BridgeFormAdd from './BridgeFormAdd.js';
 import BridgeFormEdit from './BridgeFormEdit.js';
 import { getAllBridges } from '../../../state/actions/index.js';
-import { Modal } from 'antd';
+import { useOktaAuth } from '@okta/okta-react';
 import './styles.less';
 
-function BridgeFormContainer() {
+function BridgeFormContainer({ changeShowForm }) {
   const dispatch = useDispatch();
+
+  const { authState } = useOktaAuth();
 
   useEffect(() => {
     dispatch(getAllBridges());
@@ -20,13 +22,11 @@ function BridgeFormContainer() {
 
   return (
     <>
-      <Modal visible={true} onOk={() => {}} onCancel={() => {}}>
-        {isEditing === true ? (
-          <BridgeFormEdit bridge={bridge} />
-        ) : (
-          <BridgeFormAdd bridges={bridgeData} />
-        )}
-      </Modal>
+      {isEditing === true ? (
+        <BridgeFormEdit bridge={bridge} authState={authState} />
+      ) : (
+        <BridgeFormAdd bridges={bridgeData} authState={authState} />
+      )}
     </>
   );
 }

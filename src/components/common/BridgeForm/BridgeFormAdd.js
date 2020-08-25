@@ -3,25 +3,15 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addNewBridge } from '../../../state/actions';
 
-function BridgeFormAdd() {
+function BridgeFormAdd({ authState }) {
   const { register, handleSubmit, errors } = useForm();
 
   const dispatch = useDispatch();
 
   const onSubmit = data => {
     console.log('new bridge data:', data);
-    // const newBridgeData = {
-    //   ...data,
-    //   id: numGenerator(),
-    // };
-    dispatch(addNewBridge(data));
+    dispatch(addNewBridge(data, authState.idToken));
   };
-
-  // GENERATING RANDOM NUM FOR BRIDGE ID!
-  function numGenerator() {
-    let num = Math.round(Math.random() * 1000);
-    return num;
-  }
 
   return (
     <>
@@ -32,8 +22,6 @@ function BridgeFormAdd() {
         <input
           placeholder="Ex: Buzi"
           name="name"
-          // onChange={handleChanges}
-          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.name && (
@@ -44,8 +32,6 @@ function BridgeFormAdd() {
         <input
           placeholder="Ex: 1024"
           name="projectCode"
-          // onChange={handleChanges}
-          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.projectCode && (
@@ -53,12 +39,7 @@ function BridgeFormAdd() {
         )}
         {/* PROJECT STAGE */}
         <label htmlFor="stage">Project Stage</label>
-        <select
-          name="stage"
-          id="stage"
-          // onChange={handleChanges}
-          ref={register({ required: true })}
-        >
+        <select name="stage" id="stage" ref={register({ required: true })}>
           <option value="Accepted">Accepted</option>
           <option value="Rejected">Rejected</option>
           <option value="Identified">Identified</option>
@@ -71,7 +52,6 @@ function BridgeFormAdd() {
         <select
           name="subStage"
           id="subStage"
-          // onChange={handleChanges}
           ref={register({ required: true })}
         >
           <option value="Technical">Technical</option>
@@ -87,8 +67,6 @@ function BridgeFormAdd() {
             placeholder="Ex: -1234"
             name="latitude"
             type="number"
-            // onChange={handleChanges}
-            // value={newBridge.latitude}
             ref={register({ required: true })}
           />
         </label>
@@ -102,8 +80,6 @@ function BridgeFormAdd() {
             placeholder="Ex: 1234"
             name="longitude"
             type="number"
-            // onChange={handleChanges}
-            // value={newBridge.longitude}
             ref={register({ required: true })}
           />
         </label>
@@ -117,8 +93,6 @@ function BridgeFormAdd() {
             placeholder="How many individuals does/would this bridge serve?"
             name="individualsDirectlyServed"
             type="number"
-            // onChange={handleChanges}
-            // value={newBridge.individualsDirectlyServed}
             ref={register({ required: false })}
           />
         </label>
@@ -129,19 +103,12 @@ function BridgeFormAdd() {
             placeholder="How long does/would this bridge span?"
             name="span"
             type="number"
-            // onChange={handleChanges}
-            // value={newBridge.span}
             ref={register({ required: false })}
           />
         </label>
         {/* TYPE */}
         <label htmlFor="type">Bridge Type</label>
-        <select
-          name="type"
-          id="type"
-          // onChange={handleChanges}
-          ref={register({ required: true })}
-        >
+        <select name="type" id="type" ref={register({ required: true })}>
           <option value="Suspended">Suspended</option>
           <option value="Suspension">Suspension</option>
           <option value="Other">Other</option>
@@ -154,8 +121,6 @@ function BridgeFormAdd() {
         <input
           placeholder="Ex: Rwanda"
           name="country"
-          // onChange={handleChanges}
-          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.country && (
@@ -166,8 +131,6 @@ function BridgeFormAdd() {
         <input
           placeholder="Ex: Western Province"
           name="province"
-          // onChange={handleChanges}
-          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.province && (
@@ -178,8 +141,6 @@ function BridgeFormAdd() {
         <input
           placeholder="Ex: Giheke"
           name="sector"
-          // onChange={handleChanges}
-          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.sector && (
@@ -190,8 +151,6 @@ function BridgeFormAdd() {
         <input
           placeholder="Ex: Gakomeye"
           name="cell"
-          // onChange={handleChanges}
-          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.cell && (
@@ -202,8 +161,6 @@ function BridgeFormAdd() {
         <input
           placeholder="Ex: Project Assessment - 2018.10.29"
           name="formName"
-          // onChange={handleChanges}
-          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.formName && (
@@ -214,8 +171,6 @@ function BridgeFormAdd() {
         <input
           placeholder="Ex: a1if1002ejd77"
           name="caseSafeIdForm"
-          // onChange={handleChanges}
-          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.caseSafeIdForm && (
@@ -226,8 +181,6 @@ function BridgeFormAdd() {
         <input
           placeholder="Ex: 0067kaf894a"
           name="bridgeOpportunityId"
-          // onChange={handleChanges}
-          // value={newBridge.name}
           ref={register({ required: true })}
         />
         {errors.bridgeOpportunityId && (

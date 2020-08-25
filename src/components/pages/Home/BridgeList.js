@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export function BridgeList({ bridge, loggedIn }) {
+export function BridgeList({ bridge, loggedIn, changeShow }) {
   const [bridgeInfoToggle, setBridgeInfoToggle] = useState(false);
 
   const toggleBridgeInfo = () => {
@@ -24,6 +24,7 @@ export function BridgeList({ bridge, loggedIn }) {
           onClick={() => {
             window.localStorage.setItem('bridge', JSON.stringify(bridge));
             window.localStorage.setItem('editing', true);
+            changeShow();
           }}
         >
           Edit Bridge

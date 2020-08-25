@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllBridges, getSingleBridge } from '../../../state/actions';
+import { Modal } from 'antd';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
 import BridgeForms from '../BridgeForms.js';
@@ -47,10 +48,9 @@ function HomeContainer() {
   }, [dispatch]);
 
   // FOR ADDING/EDITING FORM
-  const [showForm, setShowForm] = useState(false);
-
-  const changeShowForm = () => {
-    setShowForm(!showForm);
+  const [show, setShow] = useState(false);
+  const changeShow = () => {
+    setShow(!show);
   };
 
   return (
@@ -65,6 +65,7 @@ function HomeContainer() {
         setViewport={setViewport}
         originalView={originalView}
         setBridgesToggle={setBridgesToggle}
+        changeShow={changeShow}
       />
       <Mapbox
         clickMarker={clickMarker}
@@ -73,9 +74,9 @@ function HomeContainer() {
         viewport={viewport}
         setViewport={setViewport}
       />
-      {showForm === true ? (
-        <BridgeForms changeShowForm={changeShowForm} />
-      ) : null}
+      <Modal visible={show} footer={null} onCancel={changeShow}>
+        <BridgeForms changeShow={changeShow} />
+      </Modal>
     </div>
   );
 }

@@ -16,6 +16,7 @@ function MapMenu({
   toggleBridges,
   originalView,
   setViewport,
+  changeShow,
 }) {
   const dispatch = useDispatch();
   // Pulling in bridge data from reducer
@@ -97,7 +98,11 @@ function MapMenu({
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
-                    <BridgeList bridge={bridge} loggedIn={authState.idToken} />
+                    <BridgeList
+                      bridge={bridge}
+                      loggedIn={authState.idToken}
+                      changeShow={changeShow}
+                    />
                   </div>
                 ))}
               </div>
@@ -107,6 +112,7 @@ function MapMenu({
                 <BridgeList
                   bridge={bridgeData[0]}
                   loggedIn={authState.idToken}
+                  changeShow={changeShow}
                 />
               </div>
             )}
@@ -124,10 +130,7 @@ function MapMenu({
           </button>
         )}
         {authState.idToken ? (
-          <button
-            className="view-bridges-btn"
-            onClick={() => window.localStorage.setItem('showForm', true)}
-          >
+          <button className="view-bridges-btn" onClick={changeShow}>
             Add New Bridge
           </button>
         ) : null}
