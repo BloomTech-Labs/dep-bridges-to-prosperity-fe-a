@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllBridges, getSingleBridge } from '../../../state/actions';
+import { LandingPage } from '../../pages/LandingPage';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
 
@@ -48,6 +49,7 @@ function HomeContainer() {
     <div className="home-wrapper">
       {/* Passing down functions and bridge data to 
       assist sorting through the bridge data */}
+      <LandingPage></LandingPage>
       <MapMenu
         toggleBridges={toggleBridges}
         bridgeData={bridgeData}
