@@ -18,6 +18,7 @@ function MapMenu({
   setViewport,
   setTheme,
   ZoomIn,
+  changeTheme,
 }) {
   const dispatch = useDispatch();
   // Pulling in bridge data from reducer
@@ -44,16 +45,6 @@ function MapMenu({
 
     // Clears the remote session
     window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
-  };
-
-  //function for setting theme of the map
-  const changeTheme = style => {
-    //grabs the id target
-    const changeStyle = style.target.id;
-    //sets the theme
-    setTheme({
-      theme: `mapbox://styles/mapbox/${changeStyle}`,
-    });
   };
 
   return (
@@ -90,6 +81,13 @@ function MapMenu({
           <button className="filter-btn">Cell</button>
           <button className="filter-btn">
             All Filters <img src={filterIcon} alt="filter icon" />
+          </button>
+          <button
+            id="ckeaavyf603w319p8sqrfxm7n"
+            className="filter-btn"
+            onClick={changeTheme}
+          >
+            Terrain Map
           </button>
         </div>
       </section>

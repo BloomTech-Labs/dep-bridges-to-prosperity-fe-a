@@ -30,6 +30,18 @@ function HomeContainer() {
   //theme to be set with an onclick
   const [theme, setTheme] = useState(startingTheme);
 
+  //function for setting theme of the map
+  const changeTheme = style => {
+    //grabs the id target
+    const changeStyle = style.target.id;
+    //sets the theme
+    console.log(style.target.id);
+    setTheme({
+      theme: `mapbox://styles/mapbox/${changeStyle}`,
+    });
+    console.log(theme);
+  };
+
   const dispatch = useDispatch();
 
   // Components should be set up to handle errors and loadings status
@@ -82,6 +94,7 @@ function HomeContainer() {
         setBridgesToggle={setBridgesToggle}
         setTheme={setTheme}
         ZoomIn={ZoomIn}
+        changeTheme={changeTheme}
       />
       <Mapbox
         clickMarker={clickMarker}

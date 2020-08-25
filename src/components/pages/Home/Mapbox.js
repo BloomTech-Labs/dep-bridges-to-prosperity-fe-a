@@ -9,19 +9,6 @@ function Mapbox({ clickMarker, viewport, setViewport, setTheme, ZoomIn }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   //copy code from previous proj.
 
-  // const ZoomIn = bridge => {
-  //   setViewport({
-  //     latitude: bridge.latitude,
-  //     longitude: bridge.longitude,
-  //     width: '100%',
-  //     height: '100%',
-  //     zoom: 15,
-  //     transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
-  //     transitionDuration: 'auto',
-  //   });
-  //   clickMarker(bridge);
-  // };
-
   return (
     <div>
       {/* render map */}
