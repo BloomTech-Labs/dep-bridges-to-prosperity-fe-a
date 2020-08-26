@@ -47,14 +47,21 @@ function HomeContainer() {
     dispatch(getAllBridges());
   }, [dispatch]);
 
-  // FOR ADDING/EDITING FORM
+  /******* FOR ADDING/EDITING FORM *******/
   const [show, setShow] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
+  // TO SHOW OR HIDE MODAL
   const changeShow = () => {
     setShow(!show);
   };
 
+  const cancelModal = () => {
+    setShow(!show);
+    setIsEditing(false);
+  };
+
+  // CHANGE EDITING STATE
   const changeIsEditing = () => {
     setIsEditing(!isEditing);
   };
@@ -81,7 +88,7 @@ function HomeContainer() {
         viewport={viewport}
         setViewport={setViewport}
       />
-      <Modal visible={show} footer={null} onCancel={changeShow}>
+      <Modal visible={show} footer={null} onCancel={cancelModal}>
         <BridgeForms
           changeShow={changeShow}
           changeIsEditing={changeIsEditing}

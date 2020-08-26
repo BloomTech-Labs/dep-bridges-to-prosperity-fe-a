@@ -22,7 +22,7 @@ export function BridgeList({ bridge, loggedIn, changeShow, changeIsEditing }) {
         <button
           style={{ width: '100%', color: '#666666' }}
           onClick={() => {
-            window.localStorage.setItem('bridge', JSON.stringify(bridge));
+            window.localStorage.setItem('bridge', JSON.stringify(bridge)); //<-- SETTING BRIDGE OBJECT IN LOCAL STORAGE TO GET IN EDIT FORM
             changeIsEditing();
             changeShow();
           }}

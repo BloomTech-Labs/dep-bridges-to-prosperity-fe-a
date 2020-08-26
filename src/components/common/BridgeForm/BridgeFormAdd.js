@@ -8,7 +8,13 @@ function BridgeFormAdd({ authState, changeShow }) {
 
   const dispatch = useDispatch();
 
+  /******** TO ADD BRIDGE *******/
   const onSubmit = data => {
+    // parsing some inputs into integers
+    data.span = parseInt(data.span);
+    data.latitude = parseInt(data.latitude);
+    data.longitude = parseInt(data.longitude);
+    data.individualsDirectlyServed = parseInt(data.individualsDirectlyServed);
     console.log('new bridge data:', data);
     dispatch(addNewBridge(data, authState.idToken));
     changeShow();

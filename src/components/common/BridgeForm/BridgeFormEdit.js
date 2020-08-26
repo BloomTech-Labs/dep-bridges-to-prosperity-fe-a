@@ -28,6 +28,9 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
     newBridge.span = parseInt(newBridge.span);
     newBridge.latitude = parseInt(newBridge.latitude);
     newBridge.longitude = parseInt(newBridge.longitude);
+    newBridge.individualsDirectlyServed = parseInt(
+      newBridge.individualsDirectlyServed
+    );
 
     // deleting communities served array from sent data
     delete newBridge['communitiesServed'];

@@ -35,6 +35,7 @@ function MapMenu({
     toggleBridges();
   }
 
+  /******* TO SIGN OUT *******/
   const { authState, authService } = useOktaAuth();
 
   const logout = async () => {
