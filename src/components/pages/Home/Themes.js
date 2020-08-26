@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Themes({ changeTheme }) {
   return (
-    <div>
+    <div className="filter">
       <button
         id="ckdp065po06j11ip6ga2xsphr"
         className="filter-btn"
@@ -18,11 +18,11 @@ export default function Themes({ changeTheme }) {
         Terrain Map
       </button>
       <button
-        id="cke9et76u0o361aqngn9owqnu"
+        id="ckebpt7fe1hfn19p7roqubcev"
         className="filter-btn"
         onClick={changeTheme}
       >
-        Elevation Map
+        Satellite Map
       </button>
     </div>
   );

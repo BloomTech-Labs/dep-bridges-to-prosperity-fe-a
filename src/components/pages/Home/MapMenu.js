@@ -20,7 +20,6 @@ function MapMenu({
   toggleBridges,
   originalView,
   setViewport,
-  setTheme,
   ZoomIn,
   changeTheme,
 }) {
@@ -81,7 +80,6 @@ function MapMenu({
                 icon={faSearch}
                 onClick={() => {
                   themeClick(false);
-                  console.log(themeClick);
                 }}
               />
             </Tooltip>
@@ -107,7 +105,7 @@ function MapMenu({
             setViewport={setViewport}
           />
         ) : (
-          <Themes />
+          <Themes changeTheme={changeTheme} />
         )}
 
         <div className="filters">
