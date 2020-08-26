@@ -5,7 +5,7 @@ import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 // import InfoDrawer from './InfoDrawer';
 
-function Mapbox({ viewport, setViewport, theme, ZoomIn }) {
+function Mapbox({ viewport, setViewport, theme, ZoomIn, toggleMarkerColor }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   return (
@@ -25,6 +25,7 @@ function Mapbox({ viewport, setViewport, theme, ZoomIn }) {
         {bridgeData.map(bridge => {
           return (
             <div key={bridge.id} onClick={() => ZoomIn(bridge)}>
+              (
               <Marker
                 latitude={bridge.latitude}
                 longitude={bridge.longitude}
@@ -40,6 +41,7 @@ function Mapbox({ viewport, setViewport, theme, ZoomIn }) {
 
                 {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
               </Marker>
+              )
             </div>
           );
         })}

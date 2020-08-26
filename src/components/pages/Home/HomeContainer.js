@@ -29,6 +29,7 @@ function HomeContainer() {
       ? localStorage.getItem('mapStyle')
       : 'mapbox://styles/jameslcarpino/ckdp065po06j11ip6ga2xsphr'
   );
+  const [toggleMarkerColor, setToggleMarkerColor] = useState(false);
 
   //function for setting theme of the map
   const changeTheme = style => {
@@ -40,6 +41,7 @@ function HomeContainer() {
       `mapbox://styles/jameslcarpino/${changeStyle}`
     );
     setTheme(`mapbox://styles/jameslcarpino/${changeStyle}`);
+    setToggleMarkerColor(!toggleMarkerColor);
   };
 
   const dispatch = useDispatch();
@@ -105,6 +107,7 @@ function HomeContainer() {
         theme={theme}
         setTheme={setTheme}
         ZoomIn={ZoomIn}
+        toggleMarkerColor={toggleMarkerColor}
       />
     </div>
   );
