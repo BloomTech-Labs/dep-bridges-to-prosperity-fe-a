@@ -66,27 +66,52 @@ function HomeContainer() {
     setIsEditing(!isEditing);
   };
 
+  const [checked, setChecked] = useState(false);
+
+  const changeChecked = () => {
+    setTimeout(() => {
+      setChecked(true);
+    }, 1200);
+  };
+
   return (
     <div className="home-wrapper">
-      {/* Passing down functions and bridge data to 
+      {/* HAMBURGER MENU START */}
+      <div className="menu-cont">
+        <input
+          type="checkbox"
+          className="toggle"
+          checked={checked}
+          onClick={() => setChecked(!checked)}
+        />
+        <div className="hamburger">
+          <div></div>
+        </div>
+        <div className="menu">
+          {/* Passing down functions and bridge data to 
       assist sorting through the bridge data */}
-      <MapMenu
-        toggleBridges={toggleBridges}
-        bridgeData={bridgeData}
-        bridgesToggle={bridgesToggle}
-        visible={visible}
-        setViewport={setViewport}
-        originalView={originalView}
-        setBridgesToggle={setBridgesToggle}
-        changeShow={changeShow}
-        changeIsEditing={changeIsEditing}
-      />
+          <MapMenu
+            className="map-men"
+            toggleBridges={toggleBridges}
+            bridgeData={bridgeData}
+            bridgesToggle={bridgesToggle}
+            visible={visible}
+            setViewport={setViewport}
+            originalView={originalView}
+            setBridgesToggle={setBridgesToggle}
+            changeShow={changeShow}
+            changeIsEditing={changeIsEditing}
+          />
+        </div>
+      </div>
+      {/* HAMBURGER MENU END */}
       <Mapbox
         clickMarker={clickMarker}
         visible={visible}
         setVisible={setVisible}
         viewport={viewport}
         setViewport={setViewport}
+        changeChecked={changeChecked}
       />
       <Modal visible={show} footer={null} onCancel={cancelModal}>
         <BridgeForms

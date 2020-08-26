@@ -5,7 +5,7 @@ import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 // import InfoDrawer from './InfoDrawer';
 
-function Mapbox({ clickMarker, viewport, setViewport }) {
+function Mapbox({ clickMarker, viewport, setViewport, changeChecked }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   //copy code from previous proj.
 
@@ -19,6 +19,7 @@ function Mapbox({ clickMarker, viewport, setViewport }) {
       transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
       transitionDuration: 'auto',
     });
+    changeChecked();
     clickMarker(bridge);
   };
 
