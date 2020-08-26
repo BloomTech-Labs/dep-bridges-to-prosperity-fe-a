@@ -1,12 +1,28 @@
 import React from 'react';
 import ReactMapGl, { Marker } from 'react-map-gl';
-import { EnvironmentOutlined } from '@ant-design/icons';
+import { EnvironmentOutlined, EnvironmentFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
+import pinMarker from './assets/pinMarker.png';
 // import InfoDrawer from './InfoDrawer';
 
-function Mapbox({ viewport, setViewport, theme, ZoomIn, toggleMarkerColor }) {
+function Mapbox({ viewport, setViewport, theme, ZoomIn }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
+
+  const themeChanger = () => {
+    if (
+      localStorage.getItem('mapStyle') ===
+      'mapbox://styles/jameslcarpino/ckebr24rw1fs91an1h6e52vij'
+    ) {
+      return (
+        // <EnvironmentFilled style={{ fontSize: '20px', color: '#05004F' }} />
+
+        <img src={pinMarker} alt="marker"></img>
+      );
+    } else {
+      return <EnvironmentFilled style={{ fontSize: '20px', color: 'brown' }} />;
+    }
+  };
 
   return (
     <div>
@@ -21,27 +37,16 @@ function Mapbox({ viewport, setViewport, theme, ZoomIn, toggleMarkerColor }) {
         mapStyle={theme}
       >
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
-        {/* currently just showing bridge lats/longs */}
         {bridgeData.map(bridge => {
           return (
             <div key={bridge.id} onClick={() => ZoomIn(bridge)}>
-              (
               <Marker
                 latitude={bridge.latitude}
                 longitude={bridge.longitude}
                 //onClick={clickMarker(bridge)}
               >
-                <Tooltip title={bridge.name}>
-                  {/* bridge marker placeholder for now, but I like it. */}
-
-                  <EnvironmentOutlined
-                    style={{ fontSize: '20px', color: '#009149' }}
-                  />
-                </Tooltip>
-
-                {/* this will be the bridge marker, need to upload svg for bridge icon to stylemaker on mapbox./or do it locally here */}
+                <Tooltip title={bridge.name}>{themeChanger()}</Tooltip>
               </Marker>
-              )
             </div>
           );
         })}
