@@ -52,12 +52,6 @@ function MapMenu({
     <div className="menu-wrapper">
       <section className="search-menu">
         <div className="menu-header">
-          {/* DIY Hamburger Icon */}
-          <div className="hamburger-wrapper">
-            <div className="hamburger-layer" />
-            <div className="hamburger-layer" />
-            <div className="hamburger-layer" />
-          </div>
           <h2>Bridge Explorer</h2>
         </div>
         <div className="sign-in">

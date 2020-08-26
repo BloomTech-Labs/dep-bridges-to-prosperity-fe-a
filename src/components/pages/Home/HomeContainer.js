@@ -68,19 +68,29 @@ function HomeContainer() {
 
   return (
     <div className="home-wrapper">
-      {/* Passing down functions and bridge data to 
+      {/* HAMBURGER MENU (FOR MOBILE) */}
+      <div className="menu-cont">
+        <input type="checkbox" className="toggle" />
+        <div className="hamburger">
+          <div></div>
+        </div>
+        <div className="menu">
+          {/* Passing down functions and bridge data to 
       assist sorting through the bridge data */}
-      <MapMenu
-        toggleBridges={toggleBridges}
-        bridgeData={bridgeData}
-        bridgesToggle={bridgesToggle}
-        visible={visible}
-        setViewport={setViewport}
-        originalView={originalView}
-        setBridgesToggle={setBridgesToggle}
-        changeShow={changeShow}
-        changeIsEditing={changeIsEditing}
-      />
+          <MapMenu
+            className="map-men"
+            toggleBridges={toggleBridges}
+            bridgeData={bridgeData}
+            bridgesToggle={bridgesToggle}
+            visible={visible}
+            setViewport={setViewport}
+            originalView={originalView}
+            setBridgesToggle={setBridgesToggle}
+            changeShow={changeShow}
+            changeIsEditing={changeIsEditing}
+          />
+        </div>
+      </div>
       <Mapbox
         clickMarker={clickMarker}
         visible={visible}
