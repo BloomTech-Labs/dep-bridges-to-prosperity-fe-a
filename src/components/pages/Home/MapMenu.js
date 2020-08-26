@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,7 +7,9 @@ import { getAllBridges } from '../../../state/actions';
 import { FlyToInterpolator } from 'react-map-gl';
 import { useOktaAuth } from '@okta/okta-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Tooltip } from 'antd';
+import Themes from './Themes';
 
 const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
 const redirectUri = `${window.location.origin}/`;
@@ -49,6 +51,12 @@ function MapMenu({
     window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
   };
 
+  const [toggleThemes, setToggleThemes] = useState(false);
+
+  const themeClick = () => {
+    setToggleThemes(!toggleThemes);
+  };
+
   return (
     <div className="menu-wrapper">
       <section className="search-menu">
@@ -58,7 +66,27 @@ function MapMenu({
             <div className="hamburger-layer" />
             <div className="hamburger-layer" />
             <div className="hamburger-layer" /> */}
-          <FontAwesomeIcon alt="Change Theme" icon={faPalette} />
+          {!toggleThemes ? (
+            <Tooltip title="Change theme" size="s">
+              <FontAwesomeIcon
+                icon={faPalette}
+                onClick={() => {
+                  themeClick();
+                }}
+              />
+            </Tooltip>
+          ) : (
+            <Tooltip title="Search Location" size="s">
+              <FontAwesomeIcon
+                icon={faSearch}
+                onClick={() => {
+                  themeClick(false);
+                  console.log(themeClick);
+                }}
+              />
+            </Tooltip>
+          )}
+
           {/* </div> */}
           <h2>Bridge Explorer</h2>
         </div>
@@ -71,12 +99,16 @@ function MapMenu({
             <a href="/login">sign in</a>
           )}
         </div>
-        <MapSearchBar
-          bridgeData={bridgeData}
-          setBridgesToggle={setBridgesToggle}
-          onClear={onClear}
-          setViewport={setViewport}
-        />
+        {!toggleThemes ? (
+          <MapSearchBar
+            bridgeData={bridgeData}
+            setBridgesToggle={setBridgesToggle}
+            onClear={onClear}
+            setViewport={setViewport}
+          />
+        ) : (
+          <Themes />
+        )}
 
         <div className="filters">
           <button className="filter-btn">Province</button>
@@ -84,23 +116,6 @@ function MapMenu({
           <button className="filter-btn">Cell</button>
           <button className="filter-btn">
             All Filters <img src={filterIcon} alt="filter icon" />
-          </button>
-          <button
-            id="ckdp065po06j11ip6ga2xsphr"
-            className="filter-btn"
-            onClick={changeTheme}
-          >
-            Minimo Map
-          </button>
-          <button
-            id="ckeaavyf603w319p8sqrfxm7n"
-            className="filter-btn"
-            onClick={changeTheme}
-          >
-            Terrain Map
-          </button>
-          <button id="cke9et76u0o361aqngn9owqnu" onClick={changeTheme}>
-            Elevation Map
           </button>
         </div>
       </section>
