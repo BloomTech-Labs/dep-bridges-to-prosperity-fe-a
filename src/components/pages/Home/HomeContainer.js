@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllBridges, getSingleBridge } from '../../../state/actions';
+import { Modal } from 'antd';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
+import BridgeForms from '../BridgeForms.js';
 
 function HomeContainer() {
   // const [clickedBridge, setClickedBridge] = useState(null);
@@ -45,6 +47,25 @@ function HomeContainer() {
     dispatch(getAllBridges());
   }, [dispatch]);
 
+  /******* FOR ADDING/EDITING FORM *******/
+  const [show, setShow] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  // TO SHOW OR HIDE MODAL
+  const changeShow = () => {
+    setShow(!show);
+  };
+
+  const cancelModal = () => {
+    setShow(!show);
+    setIsEditing(false);
+  };
+
+  // CHANGE EDITING STATE
+  const changeIsEditing = () => {
+    setIsEditing(!isEditing);
+  };
+
   return (
     <div className="home-wrapper">
       {/* Passing down functions and bridge data to 
@@ -57,6 +78,8 @@ function HomeContainer() {
         setViewport={setViewport}
         originalView={originalView}
         setBridgesToggle={setBridgesToggle}
+        changeShow={changeShow}
+        changeIsEditing={changeIsEditing}
       />
       <Mapbox
         clickMarker={clickMarker}
@@ -65,6 +88,13 @@ function HomeContainer() {
         viewport={viewport}
         setViewport={setViewport}
       />
+      <Modal visible={show} footer={null} onCancel={cancelModal}>
+        <BridgeForms
+          changeShow={changeShow}
+          changeIsEditing={changeIsEditing}
+          isEditing={isEditing}
+        />
+      </Modal>
     </div>
   );
 }

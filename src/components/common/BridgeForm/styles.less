@@ -1,6 +1,131 @@
-.delete-button {
-  height: 30px;
-  width: 100px;
-  color: @error-color;
-  margin: 2px 2px 0 0;
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.form-cont-outer {
+  hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin-bottom: 2px;
+  }
+
+  // ADD FORM GRID LAYOUT
+  .add-form-cont-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(
+        0,
+        1fr
+      );
+    grid-gap: 5px;
+    grid-template-areas:
+      'name name f-name f-name'
+      'served served type span'
+      'p-code p-code p-stage sub-stage'
+      'lat lat lon lon'
+      'country country province province'
+      'sector sector cell cell'
+      'CSIF CSIF BOI BOI'
+      '. . . submit';
+  }
+
+  // EDIT FORM GRID LAYOUT
+  .edit-form-cont-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(
+        0,
+        1fr
+      );
+    grid-gap: 5px;
+    grid-template-areas:
+      'name name f-name f-name'
+      'served served type span'
+      'p-code p-code p-stage sub-stage'
+      'lat lat lon lon'
+      'country country province province'
+      'sector sector cell cell'
+      'CSIF CSIF BOI BOI'
+      'delete . . submit';
+  }
+
+  // DEFINING GRID
+  .name {
+    grid-area: name;
+  }
+  .p-code {
+    grid-area: p-code;
+  }
+  .p-stage {
+    grid-area: p-stage;
+  }
+  .sub-stage {
+    grid-area: sub-stage;
+  }
+  .lat {
+    grid-area: lat;
+  }
+  .lon {
+    grid-area: lon;
+  }
+  .span {
+    grid-area: span;
+  }
+  .b-type {
+    grid-area: type;
+  }
+  .country {
+    grid-area: country;
+  }
+  .province {
+    grid-area: province;
+  }
+  .sector {
+    grid-area: sector;
+  }
+  .cell {
+    grid-area: cell;
+  }
+  .f-name {
+    grid-area: f-name;
+  }
+  .CSIF {
+    grid-area: CSIF;
+  }
+  .served {
+    grid-area: served;
+  }
+  .BOI {
+    grid-area: BOI;
+  }
+  .submit {
+    grid-area: submit;
+  }
+  .delete-button {
+    grid-area: delete;
+    height: 30px;
+    width: 100px;
+    color: @error-color;
+    margin: 2px 2px 0 0;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      border: 0.5px solid black;
+      border-radius: 2px;
+      height: 35px;
+      padding: 5px;
+      font-size: 12px;
+    }
+    select {
+      height: 35px;
+      border-radius: 2px;
+      font-size: 12px;
+    }
+  }
 }

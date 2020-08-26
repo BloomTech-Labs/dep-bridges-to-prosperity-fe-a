@@ -16,6 +16,8 @@ function MapMenu({
   toggleBridges,
   originalView,
   setViewport,
+  changeShow,
+  changeIsEditing,
 }) {
   const dispatch = useDispatch();
   // Pulling in bridge data from reducer
@@ -33,10 +35,12 @@ function MapMenu({
     toggleBridges();
   }
 
+  /******* TO SIGN OUT *******/
   const { authState, authService } = useOktaAuth();
 
   const logout = async () => {
     // Reads the idToken before local session is cleared
+    window.localStorage.removeItem('bridge');
     const idToken = authState.idToken;
     await authService.logout('/');
 
@@ -94,7 +98,12 @@ function MapMenu({
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
-                    <BridgeList bridge={bridge} loggedIn={authState.idToken} />
+                    <BridgeList
+                      bridge={bridge}
+                      loggedIn={authState.idToken}
+                      changeShow={changeShow}
+                      changeIsEditing={changeIsEditing}
+                    />
                   </div>
                 ))}
               </div>
@@ -104,6 +113,8 @@ function MapMenu({
                 <BridgeList
                   bridge={bridgeData[0]}
                   loggedIn={authState.idToken}
+                  changeShow={changeShow}
+                  changeIsEditing={changeIsEditing}
                 />
               </div>
             )}
@@ -121,9 +132,9 @@ function MapMenu({
           </button>
         )}
         {authState.idToken ? (
-          <a href="/bridge-form">
-            <button className="view-bridges-btn">Add New Bridge</button>
-          </a>
+          <button className="view-bridges-btn" onClick={changeShow}>
+            Add New Bridge
+          </button>
         ) : null}
         {/* </button> */}
       </section>

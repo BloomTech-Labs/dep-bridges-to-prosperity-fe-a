@@ -1,82 +1,88 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addNewBridge } from '../../../state/actions';
+import { addNewBridge, getAllBridges } from '../../../state/actions';
 
-function BridgeFormAdd() {
+function BridgeFormAdd({ authState, changeShow }) {
   const { register, handleSubmit, errors } = useForm();
 
   const dispatch = useDispatch();
 
+  /******** TO ADD BRIDGE *******/
   const onSubmit = data => {
+    // parsing some inputs into integers
+    data.span = parseInt(data.span);
+    data.latitude = parseInt(data.latitude);
+    data.longitude = parseInt(data.longitude);
+    data.individualsDirectlyServed = parseInt(data.individualsDirectlyServed);
     console.log('new bridge data:', data);
-    const newBridgeData = {
-      ...data,
-      id: numGenerator(),
-    };
-    dispatch(addNewBridge(newBridgeData));
+    dispatch(addNewBridge(data, authState.idToken));
+    changeShow();
+    dispatch(getAllBridges());
   };
-
-  // GENERATING RANDOM NUM FOR BRIDGE ID!
-  function numGenerator() {
-    let num = Math.round(Math.random() * 1000);
-    return num;
-  }
 
   return (
     <>
-      <h1>Add New Bridge</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <h2>Adding New Bridge</h2> <hr></hr>
+      <form onSubmit={handleSubmit(onSubmit)} className="add-form-cont-inner">
         {/* BRIDGE SITE NAME */}
-        <label htmlFor="name">Bridge Site Name</label>
-        <input
-          placeholder="Ex: Buzi"
-          name="name"
-          // onChange={handleChanges}
-          // value={newBridge.name}
-          ref={register({ required: true })}
-        />
+        <label className="name">
+          Bridge Site Name
+          <input
+            placeholder="Ex: Buzi"
+            name="name"
+            ref={register({ required: true })}
+          />
+        </label>
         {errors.name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
+        {/* PROJECT CODE */}
+        <label className="p-code">
+          Project Code
+          <input
+            placeholder="Ex: 1024"
+            name="projectCode"
+            ref={register({ required: true })}
+          />
+        </label>
+        {errors.projectCode && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
         {/* PROJECT STAGE */}
-        <label htmlFor="stage">Project Stage</label>
-        <select
-          name="stage"
-          id="stage"
-          // onChange={handleChanges}
-          ref={register({ required: true })}
-        >
-          <option value="Accepted">Accepted</option>
-          <option value="Rejected">Rejected</option>
-          <option value="Identified">Identified</option>
-        </select>
+        <label className="p-stage">
+          Project Stage
+          <select name="stage" id="stage" ref={register({ required: true })}>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Identified">Identified</option>
+          </select>
+        </label>
         {errors.stage && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUB STAGE */}
-        <label htmlFor="subStage">Sub Stage</label>
-        <select
-          name="subStage"
-          id="subStage"
-          // onChange={handleChanges}
-          ref={register({ required: true })}
-        >
-          <option value="Technical">Technical</option>
-          <option value="Requested">Requested</option>
-        </select>
+        <label className="sub-stage">
+          Sub Stage
+          <select
+            name="subStage"
+            id="subStage"
+            ref={register({ required: true })}
+          >
+            <option value="Technical">Technical</option>
+            <option value="Requested">Requested</option>
+          </select>
+        </label>
         {errors.subStage && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LATITUDE */}
-        <label style={{ display: 'flex', flexDirection: 'column' }}>
+        <label className="lat">
           Latitude
           <input
             placeholder="Ex: -1234"
             name="latitude"
             type="number"
-            // onChange={handleChanges}
-            // value={newBridge.latitude}
             ref={register({ required: true })}
           />
         </label>
@@ -84,14 +90,12 @@ function BridgeFormAdd() {
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LONGITUDE */}
-        <label style={{ display: 'flex', flexDirection: 'column' }}>
+        <label className="lon">
           Longitude
           <input
             placeholder="Ex: 1234"
             name="longitude"
             type="number"
-            // onChange={handleChanges}
-            // value={newBridge.longitude}
             ref={register({ required: true })}
           />
         </label>
@@ -99,46 +103,123 @@ function BridgeFormAdd() {
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* INDIVIDUALS SERVED */}
-        <label style={{ display: 'flex', flexDirection: 'column' }}>
+        <label className="served">
           Individuals Served
           <input
-            placeholder="How many individuals does/would this bridge serve?"
+            placeholder="Ex: 240"
             name="individualsDirectlyServed"
             type="number"
-            // onChange={handleChanges}
-            // value={newBridge.individualsDirectlyServed}
             ref={register({ required: false })}
           />
         </label>
         {/* SPAN */}
-        <label style={{ display: 'flex', flexDirection: 'column' }}>
+        <label className="span">
           Span
           <input
-            placeholder="How long does/would this bridge span?"
+            placeholder="Length in meters"
             name="span"
             type="number"
-            // onChange={handleChanges}
-            // value={newBridge.span}
             ref={register({ required: false })}
           />
         </label>
         {/* TYPE */}
-        <label htmlFor="type">Bridge Type</label>
-        <select
-          name="type"
-          id="type"
-          // onChange={handleChanges}
-          ref={register({ required: true })}
-        >
-          <option value="Suspended">Suspended</option>
-          <option value="Suspension">Suspension</option>
-          <option value="Other">Other</option>
-        </select>
+        <label className="b-type">
+          Bridge Type
+          <select name="type" id="type" ref={register({ required: true })}>
+            <option value="Suspended">Suspended</option>
+            <option value="Suspension">Suspension</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
         {errors.type && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
+        {/* COUNTRY */}
+        <label className="country">
+          Country
+          <input
+            placeholder="Ex: Rwanda"
+            name="country"
+            ref={register({ required: true })}
+          />
+        </label>
+        {errors.country && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* PROVINCE */}
+        <label className="province">
+          Province
+          <input
+            placeholder="Ex: Western Province"
+            name="province"
+            ref={register({ required: true })}
+          />
+        </label>
+        {errors.province && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* SECTOR */}
+        <label className="sector">
+          Sector
+          <input
+            placeholder="Ex: Giheke"
+            name="sector"
+            ref={register({ required: true })}
+          />
+        </label>
+        {errors.sector && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* CELL */}
+        <label className="cell">
+          Cell
+          <input
+            placeholder="Ex: Gakomeye"
+            name="cell"
+            ref={register({ required: true })}
+          />
+        </label>
+        {errors.cell && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* FORM NAME */}
+        <label className="f-name">
+          Form Name
+          <input
+            placeholder="Ex: Project Assessment - 2018.10.29"
+            name="formName"
+            ref={register({ required: true })}
+          />
+        </label>
+        {errors.formName && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* CASE SAFE ID FORM */}
+        <label className="CSIF">
+          Case Safe ID Form
+          <input
+            placeholder="Ex: a1if1002ejd77"
+            name="caseSafeIdForm"
+            ref={register({ required: true })}
+          />
+        </label>
+        {errors.caseSafeIdForm && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
+        {/* BRIDGE OPPORTUNITY ID */}
+        <label className="BOI">
+          Bridge Opportunity Name
+          <input
+            placeholder="Ex: 0067kaf894a"
+            name="bridgeOpportunityId"
+            ref={register({ required: true })}
+          />
+        </label>
+        {errors.bridgeOpportunityId && (
+          <h3 style={{ color: 'red' }}>This is a required field</h3>
+        )}
         {/* SUBMIT */}
-        <input type="submit" />
+        <input className="submit" type="submit" />
       </form>
     </>
   );
