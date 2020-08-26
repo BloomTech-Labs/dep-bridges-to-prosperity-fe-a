@@ -3,15 +3,16 @@ import React from 'react';
 export default function Themes({ changeTheme }) {
   return (
     <div className="filter">
+      <h3>Map Theme Options</h3>
       <button
-        id="ckdp065po06j11ip6ga2xsphr"
-        className="filter-btn"
+        className="filter-icon"
+        id="ckebr24rw1fs91an1h6e52vij"
         onClick={changeTheme}
       >
         Minimo Map
       </button>
       <button
-        id="ckeaavyf603w319p8sqrfxm7n"
+        id="ckebqwnel1ifg19lg8lkmn29s"
         className="filter-btn"
         onClick={changeTheme}
       >
@@ -19,10 +20,10 @@ export default function Themes({ changeTheme }) {
       </button>
       <button
         id="ckebpt7fe1hfn19p7roqubcev"
-        className="filter-btn"
+        className="filter-icon"
         onClick={changeTheme}
       >
-        Satellite Map
+        Satellite
       </button>
     </div>
   );

@@ -66,7 +66,7 @@ function MapMenu({
             <div className="hamburger-layer" />
             <div className="hamburger-layer" /> */}
           {!toggleThemes ? (
-            <Tooltip title="Change theme" size="s">
+            <Tooltip title="Change theme">
               <FontAwesomeIcon
                 icon={faPalette}
                 onClick={() => {
@@ -75,7 +75,7 @@ function MapMenu({
               />
             </Tooltip>
           ) : (
-            <Tooltip title="Search Location" size="s">
+            <Tooltip title="Search Location">
               <FontAwesomeIcon
                 icon={faSearch}
                 onClick={() => {
