@@ -66,11 +66,24 @@ function HomeContainer() {
     setIsEditing(!isEditing);
   };
 
+  const [checked, setChecked] = useState(false);
+
+  const changeChecked = () => {
+    setTimeout(() => {
+      setChecked(true);
+    }, 1200);
+  };
+
   return (
     <div className="home-wrapper">
-      {/* HAMBURGER MENU (FOR MOBILE) */}
+      {/* HAMBURGER MENU START */}
       <div className="menu-cont">
-        <input type="checkbox" className="toggle" />
+        <input
+          type="checkbox"
+          className="toggle"
+          checked={checked}
+          onClick={() => setChecked(!checked)}
+        />
         <div className="hamburger">
           <div></div>
         </div>
@@ -91,12 +104,14 @@ function HomeContainer() {
           />
         </div>
       </div>
+      {/* HAMBURGER MENU END */}
       <Mapbox
         clickMarker={clickMarker}
         visible={visible}
         setVisible={setVisible}
         viewport={viewport}
         setViewport={setViewport}
+        changeChecked={changeChecked}
       />
       <Modal visible={show} footer={null} onCancel={cancelModal}>
         <BridgeForms

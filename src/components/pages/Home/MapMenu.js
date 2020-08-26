@@ -53,13 +53,13 @@ function MapMenu({
       <section className="search-menu">
         <div className="menu-header">
           <h2>Bridge Explorer</h2>
-        </div>
-        <div className="sign-in">
-          {authState.idToken ? (
-            <a onClick={logout}>sign out</a>
-          ) : (
-            <a href="/login">sign in</a>
-          )}
+          <div className="sign-in">
+            {authState.idToken ? (
+              <a onClick={logout}>sign out</a>
+            ) : (
+              <a href="/login">sign in</a>
+            )}
+          </div>
         </div>
         <MapSearchBar
           bridgeData={bridgeData}

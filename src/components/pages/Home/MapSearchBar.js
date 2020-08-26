@@ -1,4 +1,5 @@
 import { Input } from 'antd';
+import filterIcon from './assets/filter-icon.svg';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { searchBridge, getAllBridges } from '../../../state/actions';
@@ -29,8 +30,9 @@ const MapSearchBar = ({ setBridgesToggle, setViewport, originalView }) => {
   }
 
   return (
-    <div className="search-bar">
+    <div className="search-cont">
       <Search
+        className="search-bar"
         placeholder="search"
         onChange={onSearch}
 
@@ -38,6 +40,9 @@ const MapSearchBar = ({ setBridgesToggle, setViewport, originalView }) => {
         //   if (e.keyCode === 8) return onSearch();
         // }}
       />
+      <button className="filter-btn-mobile">
+        All Filters <img src={filterIcon} alt="filter icon" />
+      </button>
     </div>
   );
 };
