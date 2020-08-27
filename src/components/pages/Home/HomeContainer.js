@@ -81,8 +81,8 @@ function HomeContainer() {
         <input
           type="checkbox"
           className="toggle"
+          onChange={() => setChecked(!checked)}
           checked={checked}
-          onClick={() => setChecked(!checked)}
         />
         <div className="hamburger">
           <div></div>
