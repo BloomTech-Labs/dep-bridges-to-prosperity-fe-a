@@ -59,18 +59,45 @@ function HomeContainer() {
     dispatch(getSingleBridge(bridge));
   };
 
-  //bridge zoom in function
-  const ZoomIn = bridge => {
+  /* Refetches bridge data, toggles all bridges
+  view and  */
+  function onClear() {
+    dispatch(getAllBridges());
     setViewport({
-      latitude: bridge.latitude,
-      longitude: bridge.longitude,
-      width: '100%',
-      height: '100%',
-      zoom: 15,
-      transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+      ...originalView,
+      transitionInterpolator: new FlyToInterpolator({
+        speed: 3,
+      }),
       transitionDuration: 'auto',
     });
-    clickMarker(bridge);
+    toggleBridges();
+  }
+
+  const [markerClicked, setMarkerClicked] = useState(false);
+
+  const changeMarkerClicked = () => {
+    setMarkerClicked(!markerClicked);
+  };
+
+  //bridge zoom in function
+  const ZoomIn = bridge => {
+    setMarkerClicked(!markerClicked);
+    if (markerClicked === true) {
+      onClear();
+    } else {
+      clickMarker(bridge);
+      setViewport({
+        latitude: bridge.latitude,
+        longitude: bridge.longitude,
+        width: '100%',
+        height: '100%',
+        zoom: 15,
+        transitionInterpolator: new FlyToInterpolator({
+          speed: 3,
+        }),
+        transitionDuration: 'auto',
+      });
+    }
   };
 
   const toggleBridges = () => {
@@ -139,6 +166,7 @@ function HomeContainer() {
             changeTheme={changeTheme}
             changeShow={changeShow}
             changeIsEditing={changeIsEditing}
+            onClear={onClear}
           />
         </div>
       </div>
@@ -153,6 +181,7 @@ function HomeContainer() {
         ZoomIn={ZoomIn}
         toggleMarkerColor={toggleMarkerColor}
         changeChecked={changeChecked}
+        changeMarkerClicked={changeMarkerClicked}
       />
       <Modal visible={show} footer={null} onCancel={cancelModal}>
         <BridgeForms

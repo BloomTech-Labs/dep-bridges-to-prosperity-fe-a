@@ -24,22 +24,11 @@ function MapMenu({
   changeTheme,
   changeShow,
   changeIsEditing,
+  onClear,
 }) {
   const dispatch = useDispatch();
   // Pulling in bridge data from reducer
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
-
-  /* Refetches bridge data, toggles all bridges
-  view and  */
-  function onClear() {
-    dispatch(getAllBridges());
-    setViewport({
-      ...originalView,
-      transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
-      transitionDuration: 'auto',
-    });
-    toggleBridges();
-  }
 
   /******* TO SIGN OUT *******/
   const { authState, authService } = useOktaAuth();
