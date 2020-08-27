@@ -140,27 +140,27 @@ function HomeContainer() {
             changeShow={changeShow}
             changeIsEditing={changeIsEditing}
           />
-          <Mapbox
-            clickMarker={clickMarker}
-            visible={visible}
-            setVisible={setVisible}
-            viewport={viewport}
-            setViewport={setViewport}
-            theme={theme}
-            setTheme={setTheme}
-            ZoomIn={ZoomIn}
-            toggleMarkerColor={toggleMarkerColor}
-            changeChecked={changeChecked}
-          />
-          <Modal visible={show} footer={null} onCancel={cancelModal}>
-            <BridgeForms
-              changeShow={changeShow}
-              changeIsEditing={changeIsEditing}
-              isEditing={isEditing}
-            />
-          </Modal>
         </div>
       </div>
+      <Mapbox
+        clickMarker={clickMarker}
+        visible={visible}
+        setVisible={setVisible}
+        viewport={viewport}
+        setViewport={setViewport}
+        theme={theme}
+        setTheme={setTheme}
+        ZoomIn={ZoomIn}
+        toggleMarkerColor={toggleMarkerColor}
+        changeChecked={changeChecked}
+      />
+      <Modal visible={show} footer={null} onCancel={cancelModal}>
+        <BridgeForms
+          changeShow={changeShow}
+          changeIsEditing={changeIsEditing}
+          isEditing={isEditing}
+        />
+      </Modal>
     </div>
   );
 }
