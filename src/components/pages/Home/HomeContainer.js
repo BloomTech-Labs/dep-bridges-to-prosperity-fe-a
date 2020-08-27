@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FlyToInterpolator } from 'react-map-gl';
 import { getAllBridges, getSingleBridge } from '../../../state/actions';
 import { Modal } from 'antd';
 import MapMenu from './MapMenu';
@@ -7,7 +8,6 @@ import Mapbox from './Mapbox';
 import BridgeForms from '../BridgeForms.js';
 
 function HomeContainer() {
-  // const [clickedBridge, setClickedBridge] = useState(null);
   const [visible, setVisible] = useState(false);
   const [bridgesToggle, setBridgesToggle] = useState(false);
 
@@ -23,6 +23,28 @@ function HomeContainer() {
 
   const [viewport, setViewport] = useState(originalView);
 
+  //starting theme of minimo
+  //theme to be set with an onclick
+  const [theme, setTheme] = useState(
+    localStorage.getItem('mapStyle')
+      ? localStorage.getItem('mapStyle')
+      : 'mapbox://styles/jameslcarpino/ckebr24rw1fs91an1h6e52vij'
+  );
+  const [toggleMarkerColor, setToggleMarkerColor] = useState(false);
+
+  //function for setting theme of the map
+  const changeTheme = style => {
+    //grabs the id target
+    const changeStyle = style.target.id;
+    //sets the theme
+    localStorage.setItem(
+      'mapStyle',
+      `mapbox://styles/jameslcarpino/${changeStyle}`
+    );
+    setTheme(`mapbox://styles/jameslcarpino/${changeStyle}`);
+    setToggleMarkerColor(!toggleMarkerColor);
+  };
+
   const dispatch = useDispatch();
 
   // Components should be set up to handle errors and loadings status
@@ -35,6 +57,20 @@ function HomeContainer() {
     // setVisible(!visible);
     setBridgesToggle(true);
     dispatch(getSingleBridge(bridge));
+  };
+
+  //bridge zoom in function
+  const ZoomIn = bridge => {
+    setViewport({
+      latitude: bridge.latitude,
+      longitude: bridge.longitude,
+      width: '100%',
+      height: '100%',
+      zoom: 15,
+      transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+      transitionDuration: 'auto',
+    });
+    clickMarker(bridge);
   };
 
   const toggleBridges = () => {
@@ -82,7 +118,7 @@ function HomeContainer() {
           type="checkbox"
           className="toggle"
           checked={checked}
-          onClick={() => setChecked(!checked)}
+          onChange={() => setChecked(!checked)}
         />
         <div className="hamburger">
           <div></div>
@@ -91,7 +127,6 @@ function HomeContainer() {
           {/* Passing down functions and bridge data to 
       assist sorting through the bridge data */}
           <MapMenu
-            className="map-men"
             toggleBridges={toggleBridges}
             bridgeData={bridgeData}
             bridgesToggle={bridgesToggle}
@@ -99,27 +134,33 @@ function HomeContainer() {
             setViewport={setViewport}
             originalView={originalView}
             setBridgesToggle={setBridgesToggle}
+            setTheme={setTheme}
+            ZoomIn={ZoomIn}
+            changeTheme={changeTheme}
             changeShow={changeShow}
             changeIsEditing={changeIsEditing}
           />
+          <Mapbox
+            clickMarker={clickMarker}
+            visible={visible}
+            setVisible={setVisible}
+            viewport={viewport}
+            setViewport={setViewport}
+            theme={theme}
+            setTheme={setTheme}
+            ZoomIn={ZoomIn}
+            toggleMarkerColor={toggleMarkerColor}
+            changeChecked={changeChecked}
+          />
+          <Modal visible={show} footer={null} onCancel={cancelModal}>
+            <BridgeForms
+              changeShow={changeShow}
+              changeIsEditing={changeIsEditing}
+              isEditing={isEditing}
+            />
+          </Modal>
         </div>
       </div>
-      {/* HAMBURGER MENU END */}
-      <Mapbox
-        clickMarker={clickMarker}
-        visible={visible}
-        setVisible={setVisible}
-        viewport={viewport}
-        setViewport={setViewport}
-        changeChecked={changeChecked}
-      />
-      <Modal visible={show} footer={null} onCancel={cancelModal}>
-        <BridgeForms
-          changeShow={changeShow}
-          changeIsEditing={changeIsEditing}
-          isEditing={isEditing}
-        />
-      </Modal>
     </div>
   );
 }

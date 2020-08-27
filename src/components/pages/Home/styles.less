@@ -111,7 +111,7 @@
         /* styles for filter buttons */
         .filters {
           width: 330px;
-          margin-top: 15px;
+          margin-top: 13px;
 
           @media (max-width: 500px) {
             display: none;
@@ -148,6 +148,28 @@
           @media (max-width: 500px) {
             height: 110px;
           }
+          .theme-wrap {
+            border-bottom: 1px #959595 solid;
+          }
+
+          h3 {
+            text-align: center;
+          }
+          .theme-btn {
+            margin-right: 10px;
+            border: 1px solid #959595;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 16px;
+            color: #959595;
+            padding: 3px 9px;
+            margin-bottom: 10px;
+
+            &:hover {
+              color: #666;
+              border: 1px solid #666;
+            }
+          }
 
           .menu-header {
             display: flex;
@@ -156,7 +178,7 @@
             height: 24px;
             margin-left: 4px;
             margin-top: 29px;
-            margin-bottom: 16px;
+            margin-bottom: 10px;
 
             @media (max-width: 500px) {
               margin-top: 20px;
@@ -167,10 +189,14 @@
             align-items: center;
 
             h2 {
-              margin: 0 0 0 18px;
+              margin-bottom: 0em;
               font-weight: bold;
               font-size: 24px;
               line-height: 28px;
+            }
+            .theme-search-icons {
+              margin-left: 25px;
+              font-size: 16px;
             }
           }
 
@@ -213,7 +239,6 @@
 
         /* wraps all styles dealing with bridge info section */
         .bridge-info {
-          // max-height: 40vh;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -224,7 +249,6 @@
             overflow: scroll;
             width: 100%;
             display: flex;
-            // justify-content: center;
             flex-direction: column;
             align-items: center;
 
@@ -297,7 +321,6 @@
 
       .village-marker {
         background-color: green;
-        //needs a shape maker css for a rhombus
         width: 20px;
         height: 20px;
       }

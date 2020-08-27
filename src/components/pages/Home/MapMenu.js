@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,6 +6,10 @@ import { BridgeList } from './BridgeList';
 import { getAllBridges } from '../../../state/actions';
 import { FlyToInterpolator } from 'react-map-gl';
 import { useOktaAuth } from '@okta/okta-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Tooltip } from 'antd';
+import Themes from './Themes';
 
 const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
 const redirectUri = `${window.location.origin}/`;
@@ -16,6 +20,8 @@ function MapMenu({
   toggleBridges,
   originalView,
   setViewport,
+  ZoomIn,
+  changeTheme,
   changeShow,
   changeIsEditing,
 }) {
@@ -48,25 +54,60 @@ function MapMenu({
     window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
   };
 
+  const [toggleThemes, setToggleThemes] = useState(false);
+
+  const themeClick = () => {
+    setToggleThemes(!toggleThemes);
+  };
+
   return (
     <div className="menu-wrapper">
       <section className="search-menu">
         <div className="menu-header">
+          {!toggleThemes ? (
+            <Tooltip title="Change theme">
+              <FontAwesomeIcon
+                className="theme-search-icons"
+                icon={faPalette}
+                onClick={() => {
+                  themeClick();
+                }}
+              />
+            </Tooltip>
+          ) : (
+            <Tooltip title="Search Location">
+              <FontAwesomeIcon
+                className="theme-search-icons"
+                icon={faSearch}
+                onClick={() => {
+                  themeClick(false);
+                }}
+              />
+            </Tooltip>
+          )}
           <h2>Bridge Explorer</h2>
           <div className="sign-in">
             {authState.idToken ? (
-              <a onClick={logout}>sign out</a>
+              <button className="signin-button" onClick={logout}>
+                sign out
+              </button>
             ) : (
               <a href="/login">sign in</a>
             )}
           </div>
         </div>
-        <MapSearchBar
-          bridgeData={bridgeData}
-          setBridgesToggle={setBridgesToggle}
-          onClear={onClear}
-          setViewport={setViewport}
-        />
+
+        {!toggleThemes ? (
+          <MapSearchBar
+            bridgeData={bridgeData}
+            setBridgesToggle={setBridgesToggle}
+            onClear={onClear}
+            setViewport={setViewport}
+          />
+        ) : (
+          <Themes changeTheme={changeTheme} />
+        )}
+
         <div className="filters">
           <button className="filter-btn">Province</button>
           <button className="filter-btn">District</button>
@@ -95,6 +136,7 @@ function MapMenu({
                     <BridgeList
                       bridge={bridge}
                       loggedIn={authState.idToken}
+                      ZoomIn={ZoomIn}
                       changeShow={changeShow}
                       changeIsEditing={changeIsEditing}
                     />
@@ -130,7 +172,6 @@ function MapMenu({
             Add New Bridge
           </button>
         ) : null}
-        {/* </button> */}
       </section>
     </div>
   );

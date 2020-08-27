@@ -14,9 +14,11 @@ export function BridgeList({ bridge, loggedIn, changeShow, changeIsEditing }) {
         {!bridgeInfoToggle ? 'Show Info' : 'Hide Info'}
       </button>
       {!bridgeInfoToggle ? null : (
-        <ul>
-          <li>Bridge Stage: {bridge.stage}</li>
-        </ul>
+        <>
+          <ul>
+            <li>Bridge Stage: {bridge.stage}</li>
+          </ul>
+        </>
       )}
       {loggedIn ? (
         <button
