@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import pinMarker from './assets/pinMarker.png';
 // import InfoDrawer from './InfoDrawer';
 
-function Mapbox({ viewport, setViewport, theme, ZoomIn }) {
+function Mapbox({ viewport, setViewport, theme, ZoomIn, changeChecked }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   const themeChanger = () => {

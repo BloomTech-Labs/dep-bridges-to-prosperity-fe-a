@@ -22,6 +22,8 @@ function MapMenu({
   setViewport,
   ZoomIn,
   changeTheme,
+  changeShow,
+  changeIsEditing,
 }) {
   const dispatch = useDispatch();
   // Pulling in bridge data from reducer
@@ -39,10 +41,12 @@ function MapMenu({
     toggleBridges();
   }
 
+  /******* TO SIGN OUT *******/
   const { authState, authService } = useOktaAuth();
 
   const logout = async () => {
     // Reads the idToken before local session is cleared
+    window.localStorage.removeItem('bridge');
     const idToken = authState.idToken;
     await authService.logout('/');
 
@@ -68,6 +72,7 @@ function MapMenu({
           {!toggleThemes ? (
             <Tooltip title="Change theme">
               <FontAwesomeIcon
+                className="theme-search-icons"
                 icon={faPalette}
                 onClick={() => {
                   themeClick();
@@ -77,6 +82,7 @@ function MapMenu({
           ) : (
             <Tooltip title="Search Location">
               <FontAwesomeIcon
+                className="theme-search-icons"
                 icon={faSearch}
                 onClick={() => {
                   themeClick(false);
@@ -87,16 +93,17 @@ function MapMenu({
 
           {/* </div> */}
           <h2>Bridge Explorer</h2>
+          <div className="sign-in">
+            {authState.idToken ? (
+              <button className="signin-button" onClick={logout}>
+                sign out
+              </button>
+            ) : (
+              <a href="/login">sign in</a>
+            )}
+          </div>
         </div>
-        <div className="sign-in">
-          {authState.idToken ? (
-            <button className="signin-button" onClick={logout}>
-              sign out
-            </button>
-          ) : (
-            <a href="/login">sign in</a>
-          )}
-        </div>
+
         {!toggleThemes ? (
           <MapSearchBar
             bridgeData={bridgeData}
@@ -137,6 +144,8 @@ function MapMenu({
                       bridge={bridge}
                       loggedIn={authState.idToken}
                       ZoomIn={ZoomIn}
+                      changeShow={changeShow}
+                      changeIsEditing={changeIsEditing}
                     />
                   </div>
                 ))}
@@ -147,6 +156,8 @@ function MapMenu({
                 <BridgeList
                   bridge={bridgeData[0]}
                   loggedIn={authState.idToken}
+                  changeShow={changeShow}
+                  changeIsEditing={changeIsEditing}
                 />
               </div>
             )}
@@ -164,9 +175,9 @@ function MapMenu({
           </button>
         )}
         {authState.idToken ? (
-          <a href="/bridge-form">
-            <button className="view-bridges-btn">Add New Bridge</button>
-          </a>
+          <button className="view-bridges-btn" onClick={changeShow}>
+            Add New Bridge
+          </button>
         ) : null}
         {/* </button> */}
       </section>

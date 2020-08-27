@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 export const GET_BRIDGE_DATA_START = 'GET_BRIDGE_DATA_START';
 export const GET_BRIDGE_DATA_SUCCESS = 'GET_BRIDGE_DATA_SUCCESS';
@@ -59,12 +60,12 @@ export const getOneBridge = () => dispatch => {
     });
 };
 
-export const addNewBridge = newBridge => dispatch => {
+export const addNewBridge = (newBridge, idToken) => dispatch => {
   dispatch({
     type: ADD_BRIDGE_DATA_START,
   });
-  axios
-    .post('http://localhost:8000/bridges/add', newBridge)
+  axiosWithAuth(idToken)
+    .post('/bridges/add', newBridge)
     .then(res => {
       console.log('add bridge res:', res);
       dispatch({
@@ -80,12 +81,12 @@ export const addNewBridge = newBridge => dispatch => {
     });
 };
 
-export const editBridge = bridge => dispatch => {
+export const editBridge = (bridge, idToken) => dispatch => {
   dispatch({
     type: EDIT_BRIDGE_DATA_START,
   });
-  axios
-    .patch(`http://localhost:8000/bridges/${bridge.id}`, bridge)
+  axiosWithAuth(idToken)
+    .patch(`/bridges/${bridge.id}`, bridge)
     .then(res => {
       dispatch({
         type: EDIT_BRIDGE_DATA_SUCCESS,

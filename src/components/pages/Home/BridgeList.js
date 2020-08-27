@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export function BridgeList({ bridge, loggedIn }) {
+export function BridgeList({ bridge, loggedIn, changeShow, changeIsEditing }) {
   const [bridgeInfoToggle, setBridgeInfoToggle] = useState(false);
 
   const toggleBridgeInfo = () => {
@@ -21,17 +21,16 @@ export function BridgeList({ bridge, loggedIn }) {
         </>
       )}
       {loggedIn ? (
-        <a href="/bridge-form">
-          <button
-            style={{ width: '100%', color: '#666666' }}
-            onClick={() => {
-              window.localStorage.setItem('bridge', JSON.stringify(bridge));
-              window.localStorage.setItem('editing', true);
-            }}
-          >
-            Edit Bridge
-          </button>
-        </a>
+        <button
+          style={{ width: '100%', color: '#666666' }}
+          onClick={() => {
+            window.localStorage.setItem('bridge', JSON.stringify(bridge)); //<-- SETTING BRIDGE OBJECT IN LOCAL STORAGE TO GET IN EDIT FORM
+            changeIsEditing();
+            changeShow();
+          }}
+        >
+          Edit Bridge
+        </button>
       ) : null}
     </div>
   );
