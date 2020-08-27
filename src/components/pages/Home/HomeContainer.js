@@ -54,7 +54,6 @@ function HomeContainer() {
   );
   //handles the click feature of the info
   const clickMarker = bridge => {
-    // setVisible(!visible);
     setBridgesToggle(true);
     dispatch(getSingleBridge(bridge));
   };
