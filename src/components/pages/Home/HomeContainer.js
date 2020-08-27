@@ -8,7 +8,6 @@ import Mapbox from './Mapbox';
 import BridgeForms from '../BridgeForms.js';
 
 function HomeContainer() {
-  // const [clickedBridge, setClickedBridge] = useState(null);
   const [visible, setVisible] = useState(false);
   const [bridgesToggle, setBridgesToggle] = useState(false);
 

@@ -22,15 +22,7 @@ const MapSearchBar = ({ setBridgesToggle }) => {
 
   return (
     <div className="search-cont">
-      <Search
-        className="search-bar"
-        placeholder="search"
-        onChange={onSearch}
-
-        // onKeyDown={e => {
-        //   if (e.keyCode === 8) return onSearch();
-        // }}
-      />
+      <Search className="search-bar" placeholder="search" onChange={onSearch} />
       <button className="filter-btn-mobile">
         All Filters <img src={filterIcon} alt="filter icon" />
       </button>

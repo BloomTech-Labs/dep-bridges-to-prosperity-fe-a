@@ -1,25 +1,25 @@
 import React from 'react';
 import ReactMapGl, { Marker } from 'react-map-gl';
-import { EnvironmentOutlined, EnvironmentFilled } from '@ant-design/icons';
+import { EnvironmentFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 import pinMarker from './assets/pinMarker.png';
-// import InfoDrawer from './InfoDrawer';
 
-function Mapbox({ viewport, setViewport, theme, ZoomIn, changeChecked }) {
+function Mapbox({ viewport, setViewport, theme, ZoomIn }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   const themeChanger = () => {
+    //checks local storage for mapStyle, sets proper pin color per mapstyle, waiting on brians updated pins.
     if (
       localStorage.getItem('mapStyle') ===
       'mapbox://styles/jameslcarpino/ckebr24rw1fs91an1h6e52vij'
     ) {
       return (
-        // <EnvironmentFilled style={{ fontSize: '20px', color: '#05004F' }} />
-
+        //brians marker - test
         <img src={pinMarker} alt="marker"></img>
       );
     } else {
+      //placeholder pin until brian drops me the correct ones
       return <EnvironmentFilled style={{ fontSize: '20px', color: 'brown' }} />;
     }
   };
@@ -40,11 +40,7 @@ function Mapbox({ viewport, setViewport, theme, ZoomIn, changeChecked }) {
         {bridgeData.map(bridge => {
           return (
             <div key={bridge.id} onClick={() => ZoomIn(bridge)}>
-              <Marker
-                latitude={bridge.latitude}
-                longitude={bridge.longitude}
-                //onClick={clickMarker(bridge)}
-              >
+              <Marker latitude={bridge.latitude} longitude={bridge.longitude}>
                 <Tooltip title={bridge.name}>{themeChanger()}</Tooltip>
               </Marker>
             </div>
