@@ -119,7 +119,7 @@ function HomeContainer() {
           type="checkbox"
           className="toggle"
           checked={checked}
-          onClick={() => setChecked(!checked)}
+          onChange={() => setChecked(!checked)}
         />
         <div className="hamburger">
           <div></div>
