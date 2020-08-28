@@ -128,12 +128,11 @@ function HomeContainer() {
     setIsEditing(!isEditing);
   };
 
+  // Passing down to MapBox, when Marker is pressed menu toggle will be set to checked
   const [checked, setChecked] = useState(false);
 
   const changeChecked = () => {
-    setTimeout(() => {
-      setChecked(true);
-    }, 1200);
+    setChecked(true);
   };
 
   return (
