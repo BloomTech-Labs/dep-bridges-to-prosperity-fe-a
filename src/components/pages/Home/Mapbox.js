@@ -5,7 +5,15 @@ import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 import pinMarker from './assets/pinMarker.png';
 
-function Mapbox({ viewport, setViewport, theme, ZoomIn }) {
+function Mapbox({
+  viewport,
+  setViewport,
+  theme,
+  ZoomIn,
+  zoomOut,
+  zoomed,
+  onClear,
+}) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   const themeChanger = () => {

@@ -13,6 +13,7 @@ const MapSearchBar = ({ setBridgesToggle }) => {
     console.log('ONSEARCH,', bridge.target.value);
     if (bridge.target.value !== '') {
       dispatch(searchBridge(bridge.target.value));
+      //logic to show data in menu
       bridge.target.value ? setBridgesToggle(true) : setBridgesToggle(false);
     } else {
       dispatch(getAllBridges());
