@@ -54,7 +54,6 @@ function HomeContainer() {
   );
   //handles the click feature of the info
   const clickMarker = bridge => {
-    // setVisible(!visible);
     setBridgesToggle(true);
     dispatch(getSingleBridge(bridge));
   };
@@ -65,29 +64,38 @@ function HomeContainer() {
     dispatch(getAllBridges());
     setViewport({
       ...originalView,
-      transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+      transitionInterpolator: new FlyToInterpolator({
+        speed: 3,
+      }),
       transitionDuration: 'auto',
     });
     toggleBridges();
   }
 
+  const [markerClicked, setMarkerClicked] = useState(false);
+
+  const changeMarkerClicked = () => {
+    setMarkerClicked(!markerClicked);
+  };
+
   //bridge zoom in function
-  const [zoomed, setZoomed] = useState(false);
   const ZoomIn = bridge => {
-    setZoomed(!zoomed);
-    if (zoomed === true) {
+    setMarkerClicked(!markerClicked);
+    if (markerClicked === true) {
       onClear();
     } else {
+      clickMarker(bridge);
       setViewport({
         latitude: bridge.latitude,
         longitude: bridge.longitude,
         width: '100%',
         height: '100%',
         zoom: 15,
-        transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
+        transitionInterpolator: new FlyToInterpolator({
+          speed: 3,
+        }),
         transitionDuration: 'auto',
       });
-      clickMarker(bridge);
     }
   };
 
@@ -159,28 +167,28 @@ function HomeContainer() {
             changeIsEditing={changeIsEditing}
             onClear={onClear}
           />
-          <Mapbox
-            clickMarker={clickMarker}
-            visible={visible}
-            setVisible={setVisible}
-            viewport={viewport}
-            setViewport={setViewport}
-            theme={theme}
-            setTheme={setTheme}
-            ZoomIn={ZoomIn}
-            toggleMarkerColor={toggleMarkerColor}
-            changeChecked={changeChecked}
-            zoomed={zoomed}
-          />
-          <Modal visible={show} footer={null} onCancel={cancelModal}>
-            <BridgeForms
-              changeShow={changeShow}
-              changeIsEditing={changeIsEditing}
-              isEditing={isEditing}
-            />
-          </Modal>
         </div>
       </div>
+      <Mapbox
+        clickMarker={clickMarker}
+        visible={visible}
+        setVisible={setVisible}
+        viewport={viewport}
+        setViewport={setViewport}
+        theme={theme}
+        setTheme={setTheme}
+        ZoomIn={ZoomIn}
+        toggleMarkerColor={toggleMarkerColor}
+        changeChecked={changeChecked}
+        changeMarkerClicked={changeMarkerClicked}
+      />
+      <Modal visible={show} footer={null} onCancel={cancelModal}>
+        <BridgeForms
+          changeShow={changeShow}
+          changeIsEditing={changeIsEditing}
+          isEditing={isEditing}
+        />
+      </Modal>
     </div>
   );
 }
