@@ -1,28 +1,36 @@
-@keyframes slideup {
-  0% {
-    top: 0px;
-  }
-  25% {
-    top: 200px;
-  }
-  50% {
-    top: 100px;
-  }
-  75% {
-    top: 200px;
-  }
-  100% {
-    top: 0px;
-  }
-}
+// @keyframes appear {
 
-.landing-page-wrapper {
+//   100% {
+//     top: 100vh;
+//   }
+// }
+
+.landing-page-wrapper-visible {
   position: absolute;
+  // margin:auto;
   width: 100vw;
   height: 100vh;
   background-color: #999;
   z-index: 2000;
-  &:hover {
-    animation: slideup 5s infinite;
+  // &:hover {
+  //   animation: appear 1s infinite;
+  // }
+
+  button{
+    background-color :rgb(207, 80, 80);
   }
+}
+
+.landing-page-wrapper-hidden {
+  position: absolute;
+  // margin:auto;
+  width: 100vw;
+  height: 100vh;
+  background-color: #999;
+  z-index: -1;
+  // &:hover {
+  //   animation: appear 1s infinite;
+  // }
+
+
 }
