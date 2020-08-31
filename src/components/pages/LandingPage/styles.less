@@ -1,13 +1,5 @@
-// @keyframes appear {
-
-//   100% {
-//     top: 100vh;
-//   }
-// }
-
 .landing-page-wrapper-visible {
   position: absolute;
-  // margin:auto;
   width: 100vw;
   height: 100vh;
   background-color: #999;
@@ -15,8 +7,7 @@
     z-index: 2000;
     position: absolute;
     width: 100vw;
-    height: 50vh;
-    // margin:auto;
+    height: 100vh;
 
     background-image: url('./assets/Rwanda_Suspended_Children Crossing.png');
     background-position: center;
@@ -28,7 +19,7 @@
       z-index: 2001;
       position: absolute;
       width: 100vw;
-      height: 50vh;
+      height: 100vh;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -36,22 +27,11 @@
       justify-content: center;
       align-items: center;
     }
-    // .central-search-content{
-    //   h2, h4{
-    //     color:white;
-    //   }
-    //   display:flex;
-    //   text-align:center;
-    //   vertical-align: center;
-    //   font-weight:bold;
-    //   // font-size: 3rem;
-    //   margin: auto;
-    // }
   }
   .landing-page-wrapper-bottom {
-    z-index: 2002;
+    z-index: 1999;
     background-color: white;
-    margin-top: 50vh;
+    margin-top: 100vh;
     position: absolute;
     color: red;
     width: 100vw;
@@ -60,14 +40,6 @@
     justify-content: center;
     align-items: center;
   }
-
-  // &:hover {
-  //   animation: appear 1s infinite;
-  // }
-  // input{ // TODO use if use search direct on landing page
-  //   background: url("./assets/the-magnifying-glass-icon.png") no-repeat left
-  // }
-
   button {
     background-color: rgb(207, 80, 80);
   }
@@ -77,15 +49,10 @@ img {
 }
 .landing-page-wrapper-hidden {
   position: absolute;
-  // margin:auto;
   width: 100vw;
   height: 100vh;
   background-color: #999;
   z-index: -1;
-  // &:hover {
-  //   animation: appear 1s infinite;
-  // }
-
   button {
     background-color: rgb(207, 80, 80);
     z-index: 2000;

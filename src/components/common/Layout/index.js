@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './styles.less';
 import logo from './logo.png';
-import { useLanding } from '../../hooks';
 import { ShowExplorerContext } from '../../../state/context/showExplorer';
 
 export default function Layout({ children }) {
   const [state, setState] = React.useContext(ShowExplorerContext);
-  // const [bridgeExplorer, setBridgeExplorer] = React.useState("Bridge Explorer")
-  const { setLandingTrue, setLandingFalse, hideLanding } = useLanding();
 
   const toggle = e => {
     if (state.show === 'landing-page-wrapper-visible') {
