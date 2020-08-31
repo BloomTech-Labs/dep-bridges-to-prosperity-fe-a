@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 export const GET_BRIDGE_DATA_START = 'GET_BRIDGE_DATA_START';
 export const GET_BRIDGE_DATA_SUCCESS = 'GET_BRIDGE_DATA_SUCCESS';
@@ -18,6 +19,8 @@ export const EDIT_BRIDGE_DATA_FAILURE = 'EDIT_BRIDGE_FAILURE';
 
 export const GET_SINGLE_BRIDGE = 'GET_SINGLE_BRIDGE';
 
+export const SEARCH_BRIDGE = 'SEARCH_BRIDGE';
+
 export const getSingleBridge = bridge => dispatch => {
   dispatch({ type: GET_SINGLE_BRIDGE, payload: bridge });
 };
@@ -33,6 +36,7 @@ export const getAllBridges = () => dispatch => {
       dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
     .catch(err => {
+      console.log('DISPATCH GET ALL', err.response.data.message);
       dispatch({
         type: GET_BRIDGE_DATA_FAILURE,
         payload: err.message,
@@ -57,12 +61,12 @@ export const getOneBridge = () => dispatch => {
     });
 };
 
-export const addNewBridge = newBridge => dispatch => {
+export const addNewBridge = (newBridge, idToken) => dispatch => {
   dispatch({
     type: ADD_BRIDGE_DATA_START,
   });
-  axios
-    .post('http://localhost:8000/bridges/add', newBridge)
+  axiosWithAuth(idToken)
+    .post('/bridges/add', newBridge)
     .then(res => {
       console.log('add bridge res:', res);
       dispatch({
@@ -78,12 +82,12 @@ export const addNewBridge = newBridge => dispatch => {
     });
 };
 
-export const editBridge = bridge => dispatch => {
+export const editBridge = (bridge, idToken) => dispatch => {
   dispatch({
     type: EDIT_BRIDGE_DATA_START,
   });
-  axios
-    .patch(`http://localhost:8000/bridges/${bridge.id}`, bridge)
+  axiosWithAuth(idToken)
+    .patch(`/bridges/${bridge.id}`, bridge)
     .then(res => {
       dispatch({
         type: EDIT_BRIDGE_DATA_SUCCESS,
@@ -96,4 +100,11 @@ export const editBridge = bridge => dispatch => {
         payload: err.message,
       });
     });
+};
+
+export const searchBridge = search => dispatch => {
+  //
+  //need to be able to hit that location for the search
+
+  dispatch({ type: SEARCH_BRIDGE, payload: search });
 };

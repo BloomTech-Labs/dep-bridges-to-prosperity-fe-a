@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FlyToInterpolator } from 'react-map-gl';
 import { getAllBridges, getSingleBridge } from '../../../state/actions';
-import { LandingPage } from '../../pages/LandingPage';
+import { Modal } from 'antd';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
+import BridgeForms from '../BridgeForms.js';
+import { LandingPage } from '../../pages/LandingPage';
 import Layout from '../../common/Layout';
 
 function HomeContainer() {
-  // const [clickedBridge, setClickedBridge] = useState(null);
   const [visible, setVisible] = useState(false);
   const [bridgesToggle, setBridgesToggle] = useState(false);
 
@@ -23,7 +25,30 @@ function HomeContainer() {
 
   const [viewport, setViewport] = useState(originalView);
 
+  //starting theme of minimo
+  //theme to be set with an onclick
+  const [theme, setTheme] = useState(
+    localStorage.getItem('mapStyle')
+      ? localStorage.getItem('mapStyle')
+      : 'mapbox://styles/jameslcarpino/ckebr24rw1fs91an1h6e52vij'
+  );
+  const [toggleMarkerColor, setToggleMarkerColor] = useState(false);
+
+  //function for setting theme of the map
+  const changeTheme = style => {
+    //grabs the id target
+    const changeStyle = style.target.id;
+    //sets the theme
+    localStorage.setItem(
+      'mapStyle',
+      `mapbox://styles/jameslcarpino/${changeStyle}`
+    );
+    setTheme(`mapbox://styles/jameslcarpino/${changeStyle}`);
+    setToggleMarkerColor(!toggleMarkerColor);
+  };
+
   const dispatch = useDispatch();
+
   // Components should be set up to handle errors and loadings status
   // eslint-disable-next-line
   const { bridgeData, loading, error } = useSelector(
@@ -31,9 +56,49 @@ function HomeContainer() {
   );
   //handles the click feature of the info
   const clickMarker = bridge => {
-    setVisible(!visible);
     setBridgesToggle(true);
     dispatch(getSingleBridge(bridge));
+  };
+
+  /* Refetches bridge data, toggles all bridges
+  view and  */
+  function onClear() {
+    dispatch(getAllBridges());
+    setViewport({
+      ...originalView,
+      transitionInterpolator: new FlyToInterpolator({
+        speed: 3,
+      }),
+      transitionDuration: 'auto',
+    });
+    toggleBridges();
+  }
+
+  const [markerClicked, setMarkerClicked] = useState(false);
+
+  const changeMarkerClicked = () => {
+    setMarkerClicked(!markerClicked);
+  };
+
+  //bridge zoom in function
+  const ZoomIn = bridge => {
+    setMarkerClicked(!markerClicked);
+    if (markerClicked === true) {
+      onClear();
+    } else {
+      clickMarker(bridge);
+      setViewport({
+        latitude: bridge.latitude,
+        longitude: bridge.longitude,
+        width: '100%',
+        height: '100%',
+        zoom: 15,
+        transitionInterpolator: new FlyToInterpolator({
+          speed: 3,
+        }),
+        transitionDuration: 'auto',
+      });
+    }
   };
 
   const toggleBridges = () => {
@@ -46,28 +111,87 @@ function HomeContainer() {
     dispatch(getAllBridges());
   }, [dispatch]);
 
+  /******* FOR ADDING/EDITING FORM *******/
+  const [show, setShow] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  // TO SHOW OR HIDE MODAL
+  const changeShow = () => {
+    setShow(!show);
+  };
+
+  const cancelModal = () => {
+    setShow(!show);
+    setIsEditing(false);
+  };
+
+  // CHANGE EDITING STATE
+  const changeIsEditing = () => {
+    setIsEditing(!isEditing);
+  };
+
+  // Passing down to MapBox, when Marker is pressed menu toggle will be set to checked
+  const [checked, setChecked] = useState(false);
+
+  const changeChecked = () => {
+    setChecked(true);
+  };
+
   return (
     <Layout>
       <div className="home-wrapper">
-        {/* Passing down functions and bridge data to 
+        <LandingPage />
+        {/* HAMBURGER MENU START */}
+        <div className="menu-cont">
+          <input
+            type="checkbox"
+            className="toggle"
+            checked={checked}
+            onChange={() => setChecked(!checked)}
+          />
+          <div className="hamburger">
+            <div></div>
+          </div>
+          <div className="menu">
+            {/* Passing down functions and bridge data to 
       assist sorting through the bridge data */}
-
-        <LandingPage></LandingPage>
-        <MapMenu
-          toggleBridges={toggleBridges}
-          bridgeData={bridgeData}
-          bridgesToggle={bridgesToggle}
-          visible={visible}
-          setViewport={setViewport}
-          originalView={originalView}
-        />
+            <MapMenu
+              toggleBridges={toggleBridges}
+              bridgeData={bridgeData}
+              bridgesToggle={bridgesToggle}
+              visible={visible}
+              setViewport={setViewport}
+              originalView={originalView}
+              setBridgesToggle={setBridgesToggle}
+              setTheme={setTheme}
+              ZoomIn={ZoomIn}
+              changeTheme={changeTheme}
+              changeShow={changeShow}
+              changeIsEditing={changeIsEditing}
+              onClear={onClear}
+            />
+          </div>
+        </div>
         <Mapbox
           clickMarker={clickMarker}
           visible={visible}
           setVisible={setVisible}
           viewport={viewport}
           setViewport={setViewport}
+          theme={theme}
+          setTheme={setTheme}
+          ZoomIn={ZoomIn}
+          toggleMarkerColor={toggleMarkerColor}
+          changeChecked={changeChecked}
+          changeMarkerClicked={changeMarkerClicked}
         />
+        <Modal visible={show} footer={null} onCancel={cancelModal}>
+          <BridgeForms
+            changeShow={changeShow}
+            changeIsEditing={changeIsEditing}
+            isEditing={isEditing}
+          />
+        </Modal>
       </div>
     </Layout>
   );

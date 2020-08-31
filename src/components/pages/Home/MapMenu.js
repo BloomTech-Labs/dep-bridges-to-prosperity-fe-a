@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,31 +6,36 @@ import { BridgeList } from './BridgeList';
 import { getAllBridges } from '../../../state/actions';
 import { FlyToInterpolator } from 'react-map-gl';
 import { useOktaAuth } from '@okta/okta-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Tooltip } from 'antd';
+import Themes from './Themes';
 
 const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
 const redirectUri = `${window.location.origin}/`;
 
-function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
+function MapMenu({
+  setBridgesToggle,
+  bridgesToggle,
+  toggleBridges,
+  originalView,
+  setViewport,
+  ZoomIn,
+  changeTheme,
+  changeShow,
+  changeIsEditing,
+  onClear,
+}) {
   const dispatch = useDispatch();
   // Pulling in bridge data from reducer
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
-  /* Refetches bridge data, toggles all bridges
-  view and  */
-  function onClear() {
-    dispatch(getAllBridges());
-    setViewport({
-      ...originalView,
-      transitionInterpolator: new FlyToInterpolator({ speed: 3 }),
-      transitionDuration: 'auto',
-    });
-    toggleBridges();
-  }
-
+  /******* TO SIGN OUT *******/
   const { authState, authService } = useOktaAuth();
 
   const logout = async () => {
     // Reads the idToken before local session is cleared
+    window.localStorage.removeItem('bridge');
     const idToken = authState.idToken;
     await authService.logout('/');
 
@@ -38,26 +43,60 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
     window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
   };
 
+  const [toggleThemes, setToggleThemes] = useState(false);
+
+  const themeClick = () => {
+    setToggleThemes(!toggleThemes);
+  };
+
   return (
     <div className="menu-wrapper">
       <section className="search-menu">
         <div className="menu-header">
-          {/* DIY Hamburger Icon */}
-          <div className="hamburger-wrapper">
-            <div className="hamburger-layer" />
-            <div className="hamburger-layer" />
-            <div className="hamburger-layer" />
-          </div>
-          <h2>Bridge Explorer</h2>
-        </div>
-        <div className="sign-in">
-          {authState.idToken ? (
-            <a onClick={logout}>sign out</a>
+          {!toggleThemes ? (
+            <Tooltip title="Change theme">
+              <FontAwesomeIcon
+                className="theme-search-icons"
+                icon={faPalette}
+                onClick={() => {
+                  themeClick();
+                }}
+              />
+            </Tooltip>
           ) : (
-            <a href="/login">sign in</a>
+            <Tooltip title="Search Location">
+              <FontAwesomeIcon
+                className="theme-search-icons"
+                icon={faSearch}
+                onClick={() => {
+                  themeClick(false);
+                }}
+              />
+            </Tooltip>
           )}
+          <h2>Bridge Explorer</h2>
+          <div className="sign-in">
+            {authState.idToken ? (
+              <button className="signin-button" onClick={logout}>
+                sign out
+              </button>
+            ) : (
+              <a href="/login">sign in</a>
+            )}
+          </div>
         </div>
-        <MapSearchBar />
+
+        {!toggleThemes ? (
+          <MapSearchBar
+            bridgeData={bridgeData}
+            setBridgesToggle={setBridgesToggle}
+            onClear={onClear}
+            setViewport={setViewport}
+          />
+        ) : (
+          <Themes changeTheme={changeTheme} />
+        )}
+
         <div className="filters">
           <button className="filter-btn">Province</button>
           <button className="filter-btn">District</button>
@@ -69,20 +108,27 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
       </section>
 
       <section className="bridge-info">
-        {/* toggles bridges view on and off */}
+        {/* Begin toggle for information */}
+        {/* first if : when bridges toggle is set off it displays the welcome */}
         {!bridgesToggle ? (
           <div className="card">
             <strong>Welcome to the Bridge Explorer!</strong>Here you can can
             learn more about the 1.5k existing and prospective bridges.
           </div>
         ) : (
+          // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
-            {/* Maps through all bridges in redux store */}
-            {bridgeData.length >= 1 ? (
+            {bridgeData.length >= 0 ? (
               <div className="bridges-wrapper">
                 {bridgeData.map(bridge => (
                   <div key={bridge.id}>
-                    <BridgeList bridge={bridge} loggedIn={authState.idToken} />
+                    <BridgeList
+                      bridge={bridge}
+                      loggedIn={authState.idToken}
+                      ZoomIn={ZoomIn}
+                      changeShow={changeShow}
+                      changeIsEditing={changeIsEditing}
+                    />
                   </div>
                 ))}
               </div>
@@ -92,11 +138,14 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
                 <BridgeList
                   bridge={bridgeData[0]}
                   loggedIn={authState.idToken}
+                  changeShow={changeShow}
+                  changeIsEditing={changeIsEditing}
                 />
               </div>
             )}
           </>
         )}
+
         {!bridgesToggle ? (
           <button onClick={toggleBridges} className="view-bridges-btn">
             View All Bridges
@@ -108,11 +157,10 @@ function MapMenu({ bridgesToggle, toggleBridges, originalView, setViewport }) {
           </button>
         )}
         {authState.idToken ? (
-          <a href="/bridge-form">
-            <button className="view-bridges-btn">Add New Bridge</button>
-          </a>
+          <button className="view-bridges-btn" onClick={changeShow}>
+            Add New Bridge
+          </button>
         ) : null}
-        {/* </button> */}
       </section>
     </div>
   );

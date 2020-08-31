@@ -3,9 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import BridgeFormAdd from './BridgeFormAdd.js';
 import BridgeFormEdit from './BridgeFormEdit.js';
 import { getAllBridges } from '../../../state/actions/index.js';
+import { useOktaAuth } from '@okta/okta-react';
+import './styles.less';
 
-function BridgeFormContainer() {
+function BridgeFormContainer({ changeShow, changeIsEditing, isEditing }) {
   const dispatch = useDispatch();
+
+  const { authState } = useOktaAuth();
 
   useEffect(() => {
     dispatch(getAllBridges());
@@ -14,16 +18,24 @@ function BridgeFormContainer() {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   const bridge = JSON.parse(window.localStorage.getItem('bridge'));
-  const edit = JSON.parse(window.localStorage.getItem('editing'));
 
   return (
-    <>
-      {edit === true ? (
-        <BridgeFormEdit bridge={bridge} />
+    <section className="form-cont-outer">
+      {isEditing === true ? (
+        <BridgeFormEdit
+          bridge={bridge}
+          authState={authState}
+          changeIsEditing={changeIsEditing}
+          changeShow={changeShow}
+        />
       ) : (
-        <BridgeFormAdd bridges={bridgeData} />
+        <BridgeFormAdd
+          bridges={bridgeData}
+          authState={authState}
+          changeShow={changeShow}
+        />
       )}
-    </>
+    </section>
   );
 }
 
