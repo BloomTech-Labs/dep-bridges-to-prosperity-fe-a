@@ -1,6 +1,7 @@
 // VARS
 @renewal-green: #009149;
 @clickables: #05004f;
+@clickables-hover: #08007a;
 
 /* Wraps all the styles in the home page */
 .home-wrapper {
@@ -88,12 +89,21 @@
 
       /* sign in link styles */
       .sign-in {
-        a {
-          color: #000;
+        .sign-in-btn {
+          background-color: @clickables;
+          padding: 2px 5px;
+          border-style: none;
+          border-radius: 3px;
+          color: #f4f1f1;
+          align-items: center;
 
           &:hover {
-            color: #888;
+            background-color: @clickables-hover;
           }
+        }
+
+        a {
+          color: #f4f1f1;
         }
       }
 
@@ -198,8 +208,13 @@
               line-height: 28px;
             }
             .theme-search-icons {
+              color: @clickables;
               margin-left: 25px;
               font-size: 16px;
+
+              &:hover {
+                color: @clickables-hover;
+              }
             }
           }
 
@@ -298,7 +313,7 @@
 
           .view-bridges-btn {
             color: #ffffff;
-            background: #525252;
+            background: @clickables;
             border-radius: 5px;
             margin-bottom: 24px;
             border: none;
@@ -308,7 +323,7 @@
             transition: 0.25s;
 
             &:hover {
-              background: #666666;
+              background: @clickables-hover;
               transition: 0.25s;
             }
           }
