@@ -9,17 +9,21 @@ export function BridgeList({ bridge, loggedIn, changeShow, changeIsEditing }) {
 
   return (
     <div className="bridge-card">
-      <h4>{bridge.name}</h4>
+      <h2>{bridge.name}</h2>
+      {!bridgeInfoToggle ? null : (
+        <div className="bridge-card">
+          <p>Bridge Type: {bridge.type}</p>
+          <p>Bridge Stage: {bridge.stage}</p>
+          Communities Served:
+          {bridge.communitiesServed.map(community => {
+            return <li>{community.name}</li>;
+          })}
+        </div>
+      )}
+
       <button style={{ color: '#666666' }} onClick={toggleBridgeInfo}>
         {!bridgeInfoToggle ? 'Show Info' : 'Hide Info'}
       </button>
-      {!bridgeInfoToggle ? null : (
-        <>
-          <ul>
-            <li>Bridge Stage: {bridge.stage}</li>
-          </ul>
-        </>
-      )}
       {loggedIn ? (
         <button
           style={{ width: '100%', color: '#666666' }}

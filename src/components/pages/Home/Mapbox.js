@@ -5,15 +5,7 @@ import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 import pinMarker from './assets/pinMarker.png';
 
-function Mapbox({
-  viewport,
-  setViewport,
-  theme,
-  ZoomIn,
-  zoomOut,
-  zoomed,
-  onClear,
-}) {
+function Mapbox({ viewport, setViewport, theme, ZoomIn, changeChecked }) {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   const themeChanger = () => {
@@ -47,7 +39,13 @@ function Mapbox({
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
         {bridgeData.map(bridge => {
           return (
-            <div key={bridge.id} onClick={() => ZoomIn(bridge)}>
+            <div
+              key={bridge.id}
+              onClick={() => {
+                ZoomIn(bridge);
+                changeChecked();
+              }}
+            >
               <Marker latitude={bridge.latitude} longitude={bridge.longitude}>
                 <Tooltip title={bridge.name}>{themeChanger()}</Tooltip>
               </Marker>

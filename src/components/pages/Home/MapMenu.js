@@ -18,7 +18,6 @@ function MapMenu({
   setBridgesToggle,
   bridgesToggle,
   toggleBridges,
-  originalView,
   setViewport,
   ZoomIn,
   changeTheme,
@@ -26,7 +25,6 @@ function MapMenu({
   changeIsEditing,
   onClear,
 }) {
-  // const dispatch = useDispatch();
   // Pulling in bridge data from reducer
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
