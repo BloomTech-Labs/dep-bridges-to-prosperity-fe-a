@@ -30,7 +30,7 @@ export const getAllBridges = () => dispatch => {
     type: GET_BRIDGE_DATA_START,
   });
   axios
-    .get('http://localhost:8000/bridges/all')
+    .get(process.env.REACT_APP_API_URI + '/bridges/all')
     .then(res => {
       dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
@@ -48,7 +48,7 @@ export const getOneBridge = () => dispatch => {
     type: GET_ONE_BRIDGE_DATA_START,
   });
   axios
-    .get('http://localhost:8000/bridges/all')
+    .get(process.env.REACT_APP_API_URI + '/bridges/all')
     .then(res => {
       dispatch({ type: GET_ONE_BRIDGE_DATA_SUCCESS, payload: res.data });
     })
