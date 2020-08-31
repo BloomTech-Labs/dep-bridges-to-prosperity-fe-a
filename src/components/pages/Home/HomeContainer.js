@@ -58,6 +58,23 @@ function HomeContainer() {
     dispatch(getSingleBridge(bridge));
   };
 
+  //handles click on the card
+  const cardClickZoom = bridge => {
+    dispatch(getSingleBridge(bridge));
+    clickMarker(bridge);
+    setViewport({
+      latitude: bridge.latitude,
+      longitude: bridge.longitude,
+      width: '100%',
+      height: '100%',
+      zoom: 15,
+      transitionInterpolator: new FlyToInterpolator({
+        speed: 3,
+      }),
+      transitionDuration: 'auto',
+    });
+  };
+
   /* Refetches bridge data, toggles all bridges
   view and  */
   function onClear() {
@@ -165,6 +182,7 @@ function HomeContainer() {
             changeShow={changeShow}
             changeIsEditing={changeIsEditing}
             onClear={onClear}
+            cardClickZoom={cardClickZoom}
           />
         </div>
       </div>

@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
-export function BridgeList({ bridge, loggedIn, changeShow, changeIsEditing }) {
+export function BridgeList({
+  bridge,
+  loggedIn,
+  changeShow,
+  changeIsEditing,
+  cardClickZoom,
+}) {
   const [bridgeInfoToggle, setBridgeInfoToggle] = useState(false);
 
   const toggleBridgeInfo = () => {
@@ -8,7 +14,7 @@ export function BridgeList({ bridge, loggedIn, changeShow, changeIsEditing }) {
   };
 
   return (
-    <div className="bridge-card">
+    <div onClick={() => cardClickZoom(bridge)} className="bridge-card">
       <div className="bridge-card-info">
         <h2>{bridge.name}</h2>
         <p className="bridge-type">
