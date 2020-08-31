@@ -4,6 +4,7 @@ import { getAllBridges, getSingleBridge } from '../../../state/actions';
 import { LandingPage } from '../../pages/LandingPage';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
+import Layout from '../../common/Layout';
 
 function HomeContainer() {
   // const [clickedBridge, setClickedBridge] = useState(null);
@@ -46,26 +47,29 @@ function HomeContainer() {
   }, [dispatch]);
 
   return (
-    <div className="home-wrapper">
-      {/* Passing down functions and bridge data to 
+    <Layout>
+      <div className="home-wrapper">
+        {/* Passing down functions and bridge data to 
       assist sorting through the bridge data */}
-      <LandingPage></LandingPage>
-      <MapMenu
-        toggleBridges={toggleBridges}
-        bridgeData={bridgeData}
-        bridgesToggle={bridgesToggle}
-        visible={visible}
-        setViewport={setViewport}
-        originalView={originalView}
-      />
-      <Mapbox
-        clickMarker={clickMarker}
-        visible={visible}
-        setVisible={setVisible}
-        viewport={viewport}
-        setViewport={setViewport}
-      />
-    </div>
+
+        <LandingPage></LandingPage>
+        <MapMenu
+          toggleBridges={toggleBridges}
+          bridgeData={bridgeData}
+          bridgesToggle={bridgesToggle}
+          visible={visible}
+          setViewport={setViewport}
+          originalView={originalView}
+        />
+        <Mapbox
+          clickMarker={clickMarker}
+          visible={visible}
+          setVisible={setVisible}
+          viewport={viewport}
+          setViewport={setViewport}
+        />
+      </div>
+    </Layout>
   );
 }
 
