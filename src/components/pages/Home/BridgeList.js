@@ -8,9 +8,17 @@ export function BridgeList({
   ZoomIn,
 }) {
   return (
-    <div onClick={() => ZoomIn(bridge)} className="bridge-card">
+    <div className="bridge-card">
       <div className="bridge-card-info">
-        <h2>{bridge.name}</h2>
+        <div className="bridge-card-title-wrapper">
+          <h2
+            onClick={() => {
+              ZoomIn(bridge);
+            }}
+          >
+            {bridge.name}
+          </h2>
+        </div>
         <p className="bridge-type">
           Type: <b>{bridge.type}</b>
         </p>
