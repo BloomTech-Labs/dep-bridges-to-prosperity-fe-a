@@ -3,7 +3,7 @@ import filterIcon from './assets/filter-icon.svg';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { searchBridge, getAllBridges } from '../../../state/actions';
-
+import { SearchOutlined } from '@ant-design/icons';
 const { Search } = Input;
 
 const MapSearchBar = ({ setBridgesToggle }) => {
@@ -23,7 +23,12 @@ const MapSearchBar = ({ setBridgesToggle }) => {
 
   return (
     <div className="search-cont">
-      <Search className="search-bar" placeholder="search" onChange={onSearch} />
+      <Input.Search
+        className="search-bar"
+        placeholder="What bridge are you looking for?"
+        onChange={onSearch}
+        allowClear
+      />
       <button className="filter-btn-mobile">
         All Filters <img src={filterIcon} alt="filter icon" />
       </button>
