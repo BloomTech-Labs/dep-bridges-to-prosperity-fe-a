@@ -8,6 +8,6 @@ export const axiosWithAuth = idToken => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    baseURL: 'http://localhost:8000',
+    baseURL: `${process.env.REACT_APP_API_URI}`,
   });
 };

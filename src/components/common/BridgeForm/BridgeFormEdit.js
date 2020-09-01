@@ -14,8 +14,8 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
   const [newBridge, setNewBridge] = useState(bridge);
 
   const handleChanges = e => {
-    newBridge.individualsDirectlyServed = parseInt(
-      newBridge.individualsDirectlyServed
+    newBridge.individuals_directly_served = parseFloat(
+      newBridge.individuals_directly_served
     );
     setNewBridge({
       ...newBridge,
@@ -25,11 +25,11 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
 
   const onSubmit = () => {
     // parsing some inputs into integers
-    newBridge.span = parseInt(newBridge.span);
-    newBridge.latitude = parseInt(newBridge.latitude);
-    newBridge.longitude = parseInt(newBridge.longitude);
-    newBridge.individualsDirectlyServed = parseInt(
-      newBridge.individualsDirectlyServed
+    newBridge.span = parseFloat(newBridge.span);
+    newBridge.latitude = parseFloat(newBridge.latitude);
+    newBridge.longitude = parseFloat(newBridge.longitude);
+    newBridge.individuals_directly_served = parseFloat(
+      newBridge.individuals_directly_served
     );
 
     // deleting communities served array from sent data
@@ -79,13 +79,13 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
           Project Code
           <input
             placeholder="Ex: 1024"
-            name="projectCode"
+            name="project_code"
             onChange={handleChanges}
-            value={newBridge.projectCode}
+            value={newBridge.project_code}
             ref={register({ required: true })}
           />
         </label>
-        {errors.projectCode && (
+        {errors.project_code && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* PROJECT STAGE */}
@@ -110,17 +110,17 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
         <label className="sub-stage">
           Sub Stage
           <select
-            name="subStage"
-            id="subStage"
+            name="sub_stage"
+            id="sub_stage"
             onChange={handleChanges}
-            value={newBridge.subStage}
+            value={newBridge.sub_stage}
             ref={register({ required: true })}
           >
             <option value="Technical">Technical</option>
             <option value="Requested">Requested</option>
           </select>
         </label>
-        {errors.subStage && (
+        {errors.sub_stage && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LATITUDE */}
@@ -158,10 +158,10 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
           Individuals Served
           <input
             placeholder="Ex: 240"
-            name="individualsDirectlyServed"
+            name="individuals_directly_served"
             type="number"
             onChange={handleChanges}
-            value={newBridge.individualsDirectlyServed}
+            value={newBridge.individuals_directly_served}
             ref={register({ required: false })}
           />
         </label>
@@ -256,13 +256,13 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
           Form Name
           <input
             placeholder="Ex: Project Assessment - 2018.10.29"
-            name="formName"
+            name="form_name"
             onChange={handleChanges}
-            value={newBridge.formName}
+            value={newBridge.form_name}
             ref={register({ required: true })}
           />
         </label>
-        {errors.formName && (
+        {errors.form_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* CASE SAFE ID FORM */}
@@ -270,13 +270,13 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
           Case Safe ID Form
           <input
             placeholder="Ex: a1if1002ejd77"
-            name="caseSafeIdForm"
+            name="case_safe_id_form"
             onChange={handleChanges}
-            value={newBridge.caseSafeIdForm}
+            value={newBridge.case_safe_id_form}
             ref={register({ required: true })}
           />
         </label>
-        {errors.caseSafeIdForm && (
+        {errors.case_safe_id_form && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* BRIDGE OPPORTUNITY ID */}
@@ -284,13 +284,13 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
           Bridge Opportunity Name
           <input
             placeholder="Ex: 0067kaf894a"
-            name="bridgeOpportunityId"
+            name="bridge_opportunity_id"
             onChange={handleChanges}
-            value={newBridge.bridgeOpportunityId}
+            value={newBridge.bridge_opportunity_id}
             ref={register({ required: true })}
           />
         </label>
-        {errors.bridgeOpportunityId && (
+        {errors.bridge_opportunity_id && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUBMIT */}
