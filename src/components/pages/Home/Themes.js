@@ -6,10 +6,10 @@ export default function Themes({ changeTheme }) {
       <h3>Map Theme Options</h3>
       <button
         className="theme-btn"
-        id="ckebr24rw1fs91an1h6e52vij"
+        id="ckej1e5b546o019mmuazc08ko"
         onClick={changeTheme}
       >
-        Minimo Map
+        Standard Map
       </button>
       <button
         id="ckebqwnel1ifg19lg8lkmn29s"
@@ -23,7 +23,7 @@ export default function Themes({ changeTheme }) {
         className="theme-btn"
         onClick={changeTheme}
       >
-        Satellite
+        Satellite Map
       </button>
     </div>
   );
