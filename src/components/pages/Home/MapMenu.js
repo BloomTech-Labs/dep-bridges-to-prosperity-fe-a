@@ -74,11 +74,13 @@ function MapMenu({
           <h2>Bridge Explorer</h2>
           <div className="sign-in">
             {authState.idToken ? (
-              <button className="signin-button" onClick={logout}>
+              <button className="sign-in-btn" onClick={logout}>
                 sign out
               </button>
             ) : (
-              <a href="/login">sign in</a>
+              <button className="sign-in-btn">
+                <a href="/login">sign in</a>
+              </button>
             )}
           </div>
         </div>
