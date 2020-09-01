@@ -32,10 +32,13 @@ export const getAllBridges = () => dispatch => {
   axios
     .get(process.env.REACT_APP_API_URI + '/bridges/all')
     .then(res => {
-      dispatch({ type: GET_BRIDGE_DATA_SUCCESS, payload: res.data });
+      dispatch({
+        type: GET_BRIDGE_DATA_SUCCESS,
+        payload: res.data.filter(site => site.latitude && site.longitude),
+      });
     })
     .catch(err => {
-      console.log('DISPATCH GET ALL', err.response.data.message);
+      console.log('DISPATCH GET ALL', err.message);
       dispatch({
         type: GET_BRIDGE_DATA_FAILURE,
         payload: err.message,
