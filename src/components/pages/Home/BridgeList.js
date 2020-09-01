@@ -34,7 +34,7 @@ export function BridgeList({
             Serving:{' '}
             <b>
               {
-                bridge.communitiesServed.map(community => {
+                bridge.communities_served.map(community => {
                   return <>{community}</>;
                 }).length
               }
