@@ -4,20 +4,38 @@ import logo from './logo.png';
 import { ShowExplorerContext } from '../../../state/context/showExplorer';
 
 export default function Layout({ children }) {
-  const [state, setState] = React.useContext(ShowExplorerContext);
+  const [contextState, setContextState] = React.useContext(ShowExplorerContext);
 
-  const toggle = e => {
-    if (state.show === 'landing-page-wrapper-visible') {
-      setState(state => ({
-        ...state,
-        show: 'landing-page-wrapper-hidden',
-        buttonName: 'Bridge Explorer',
-      }));
-    } else if (state.show === 'landing-page-wrapper-hidden') {
-      setState(state => ({
-        ...state,
+  // const toggle = e => {   // SUPERCEDED BY SEPARATE BUTTONS
+  //   if (state.show === 'landing-page-wrapper-visible') {
+  //     setState(state => ({
+  //       ...state,
+  //       show: 'landing-page-wrapper-hidden',
+  //       buttonName: 'Bridge Explorer',
+  //     }));
+  //   } else if (state.show === 'landing-page-wrapper-hidden') {
+  //     setState(state => ({
+  //       ...state,
+  //       show: 'landing-page-wrapper-visible',
+  //       buttonName: 'Show Map',
+  //     }));
+  //   }
+  // };
+
+  const showBE = e => {
+    if (contextState.show === 'landing-page-wrapper-hidden') {
+      setContextState(contextState => ({
+        ...contextState,
         show: 'landing-page-wrapper-visible',
-        buttonName: 'Show Map',
+      }));
+    }
+  };
+
+  const showMap = e => {
+    if (contextState.show === 'landing-page-wrapper-visible') {
+      setContextState(contextState => ({
+        ...contextState,
+        show: 'landing-page-wrapper-hidden',
       }));
     }
   };
@@ -27,21 +45,25 @@ export default function Layout({ children }) {
         <img src={logo} alt="logo" />
         {/* <button onClick={() => setLandingFalse()}>Bridge Explorer</button>
         <button onClick={() => setLandingTrue()}>Map</button> */}
-        <button className="b-e" onClick={toggle}>
-          {state.buttonName}
-        </button>
-        <button
-          className="about"
-          onClick={() =>
-            // TODO Need to refactor this to do what is wanted per UX
-            setState(state => ({
-              ...state,
-              show: 'landing-page-wrapper-hidden',
-            }))
-          }
-        >
-          About
-        </button>
+        <div className="right-nav">
+          <button onClick={showBE}>Bridge Explorer</button>
+          <button className="b-e" onClick={showMap}>
+            {/* {state.buttonName} */}
+            Map
+          </button>
+          <button
+            className="about"
+            onClick={() =>
+              // TODO Need to refactor this to do what is wanted per UX
+              setContextState(contextState => ({
+                ...contextState,
+                show: 'landing-page-wrapper-hidden',
+              }))
+            }
+          >
+            Sign In
+          </button>
+        </div>
       </nav>
       <div className="spacer" />
       {children}
