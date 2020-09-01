@@ -11,10 +11,12 @@ function BridgeFormAdd({ authState, changeShow }) {
   /******** TO ADD BRIDGE *******/
   const onSubmit = data => {
     // parsing some inputs into integers
-    data.span = parseInt(data.span);
-    data.latitude = parseInt(data.latitude);
-    data.longitude = parseInt(data.longitude);
-    data.individualsDirectlyServed = parseInt(data.individualsDirectlyServed);
+    data.span = parseFloat(data.span);
+    data.latitude = parseFloat(data.latitude);
+    data.longitude = parseFloat(data.longitude);
+    data.individuals_directly_served = parseFloat(
+      data.individuals_directly_served
+    );
     console.log('new bridge data:', data);
     dispatch(addNewBridge(data, authState.idToken));
     changeShow();
@@ -42,11 +44,11 @@ function BridgeFormAdd({ authState, changeShow }) {
           Project Code
           <input
             placeholder="Ex: 1024"
-            name="projectCode"
+            name="project_code"
             ref={register({ required: true })}
           />
         </label>
-        {errors.projectCode && (
+        {errors.project_code && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* PROJECT STAGE */}
@@ -65,15 +67,15 @@ function BridgeFormAdd({ authState, changeShow }) {
         <label className="sub-stage">
           Sub Stage
           <select
-            name="subStage"
-            id="subStage"
+            name="sub_stage"
+            id="sub_stage"
             ref={register({ required: true })}
           >
             <option value="Technical">Technical</option>
             <option value="Requested">Requested</option>
           </select>
         </label>
-        {errors.subStage && (
+        {errors.sub_stage && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* LATITUDE */}
@@ -107,7 +109,7 @@ function BridgeFormAdd({ authState, changeShow }) {
           Individuals Served
           <input
             placeholder="Ex: 240"
-            name="individualsDirectlyServed"
+            name="individuals_directly_served"
             type="number"
             ref={register({ required: false })}
           />
@@ -187,11 +189,11 @@ function BridgeFormAdd({ authState, changeShow }) {
           Form Name
           <input
             placeholder="Ex: Project Assessment - 2018.10.29"
-            name="formName"
+            name="form_name"
             ref={register({ required: true })}
           />
         </label>
-        {errors.formName && (
+        {errors.form_name && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* CASE SAFE ID FORM */}
@@ -199,11 +201,11 @@ function BridgeFormAdd({ authState, changeShow }) {
           Case Safe ID Form
           <input
             placeholder="Ex: a1if1002ejd77"
-            name="caseSafeIdForm"
+            name="case_safe_id_form"
             ref={register({ required: true })}
           />
         </label>
-        {errors.caseSafeIdForm && (
+        {errors.case_safe_id_form && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* BRIDGE OPPORTUNITY ID */}
@@ -211,11 +213,11 @@ function BridgeFormAdd({ authState, changeShow }) {
           Bridge Opportunity Name
           <input
             placeholder="Ex: 0067kaf894a"
-            name="bridgeOpportunityId"
+            name="bridge_opportunity_id"
             ref={register({ required: true })}
           />
         </label>
-        {errors.bridgeOpportunityId && (
+        {errors.bridge_opportunity_id && (
           <h3 style={{ color: 'red' }}>This is a required field</h3>
         )}
         {/* SUBMIT */}
