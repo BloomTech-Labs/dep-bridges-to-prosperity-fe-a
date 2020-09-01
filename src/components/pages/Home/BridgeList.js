@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export function BridgeList({
   bridge,
   loggedIn,
   changeShow,
   changeIsEditing,
-  cardClickZoom,
+  ZoomIn,
 }) {
-  const [bridgeInfoToggle, setBridgeInfoToggle] = useState(false);
-
-  const toggleBridgeInfo = () => {
-    setBridgeInfoToggle(!bridgeInfoToggle);
-  };
-
   return (
-    <div onClick={() => cardClickZoom(bridge)} className="bridge-card">
+    <div onClick={() => ZoomIn(bridge)} className="bridge-card">
       <div className="bridge-card-info">
         <h2>{bridge.name}</h2>
         <p className="bridge-type">

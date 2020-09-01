@@ -24,7 +24,6 @@ function MapMenu({
   changeShow,
   changeIsEditing,
   onClear,
-  cardClickZoom,
 }) {
   // Pulling in bridge data from reducer
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
@@ -124,7 +123,7 @@ function MapMenu({
                     <BridgeList
                       bridge={bridge}
                       loggedIn={authState.idToken}
-                      cardClickZoom={cardClickZoom}
+                      ZoomIn={ZoomIn}
                       changeShow={changeShow}
                       changeIsEditing={changeIsEditing}
                     />
