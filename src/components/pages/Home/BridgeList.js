@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Drawer } from 'antd';
 
 export function BridgeList({
   bridge,
@@ -7,6 +8,14 @@ export function BridgeList({
   changeIsEditing,
   ZoomIn,
 }) {
+  const [visible, setVisible] = useState(false);
+  const showDrawer = () => {
+    setVisible(true);
+  };
+  const onClose = () => {
+    setVisible(false);
+  };
+
   return (
     <div className="bridge-card">
       <div className="bridge-card-info">
@@ -42,8 +51,60 @@ export function BridgeList({
           </p>
         </div>
         <div className="info-button-wrapper">
-          <button className="info-button">More Infomation</button>
-          <button className="info-button">Close</button>
+          <button onClick={showDrawer} className="info-button">
+            More Infomation
+          </button>
+          <Drawer
+            placement="left"
+            closable={false}
+            onClose={onClose}
+            visible={visible}
+            width={'45%'}
+          >
+            <div>
+              <h2>{bridge.name}</h2>
+              <p>
+                Serving:{' '}
+                <b>
+                  {
+                    bridge.communities_served.map(community => {
+                      return <>{community}</>;
+                    }).length
+                  }
+                </b>
+              </p>
+              <p>Stage: {bridge.stage}</p>
+            </div>
+            <h3>Regional Information</h3>
+
+            <h4>Country</h4>
+            <p>{bridge.country}</p>
+            <h4>Province</h4>
+            <p>{bridge.province}</p>
+            <h4>Cell</h4>
+            <p>{bridge.cell}</p>
+            <h4>District</h4>
+            <p>{bridge.district}</p>
+            <h4>Latitude</h4>
+            <p>{bridge.latitude}</p>
+            <h4>Longitude</h4>
+            <p>{bridge.longitude}</p>
+            <h4>Communities Served:</h4>
+            <p>
+              {bridge.communities_served.map(community => {
+                return (
+                  <>
+                    <ol>
+                      <li>{community.name}</li>
+                    </ol>
+                  </>
+                );
+              })}
+            </p>
+            <h3>Identification Codes</h3>
+            <h4>Project Code</h4>
+            <p>{bridge.project_code}</p>
+          </Drawer>
         </div>
       </div>
       {loggedIn ? (

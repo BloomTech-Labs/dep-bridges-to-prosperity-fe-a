@@ -127,6 +127,8 @@ function MapMenu({
                       ZoomIn={ZoomIn}
                       changeShow={changeShow}
                       changeIsEditing={changeIsEditing}
+                      toggleBridges={toggleBridges}
+                      onClear={onClear}
                     />
                   </div>
                 ))}
@@ -140,6 +142,7 @@ function MapMenu({
                   loggedIn={authState.idToken}
                   changeShow={changeShow}
                   changeIsEditing={changeIsEditing}
+                  onClear={onClear}
                 />
               </div>
             )}

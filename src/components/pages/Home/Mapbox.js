@@ -20,7 +20,8 @@ function Mapbox({ viewport, setViewport, theme, ZoomIn, changeChecked }) {
       );
     } else {
       //placeholder pin until brian drops me the correct ones
-      return <EnvironmentFilled style={{ fontSize: '20px', color: 'brown' }} />;
+      // return <EnvironmentFilled style={{ fontSize: '20px', color: 'brown' }} />;
+      return <img src={pinMarker} alt="marker"></img>;
     }
   };
 
