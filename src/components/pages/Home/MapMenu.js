@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { BridgeList } from './BridgeList';
-import { getAllBridges } from '../../../state/actions';
-import { FlyToInterpolator } from 'react-map-gl';
+
 import { useOktaAuth } from '@okta/okta-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +17,6 @@ function MapMenu({
   setBridgesToggle,
   bridgesToggle,
   toggleBridges,
-  originalView,
   setViewport,
   ZoomIn,
   changeTheme,
@@ -26,7 +24,6 @@ function MapMenu({
   changeIsEditing,
   onClear,
 }) {
-  const dispatch = useDispatch();
   // Pulling in bridge data from reducer
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
@@ -138,6 +135,7 @@ function MapMenu({
               //the clickedBridge
               <div className="bridges-wrapper">
                 <BridgeList
+                  ZoomIn={ZoomIn}
                   bridge={bridgeData[0]}
                   loggedIn={authState.idToken}
                   changeShow={changeShow}

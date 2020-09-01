@@ -4,6 +4,7 @@
 @clickables-hover: #08007a;
 
 /* Wraps all the styles in the home page */
+
 .home-wrapper {
   .menu-cont {
     top: 0;
@@ -215,6 +216,7 @@
               &:hover {
                 color: @clickables-hover;
               }
+              cursor: pointer;
             }
           }
 
@@ -227,6 +229,8 @@
 
               .search-bar {
                 width: 225px;
+                // font-family: 'FontAwesome' !important;
+                // font-weight: 900;
               }
             }
 
@@ -270,16 +274,51 @@
             flex-direction: column;
             align-items: center;
 
+            // bridge card styles
             .bridge-card {
               padding: 0px 20px;
               background: #fffefe;
               width: 349px;
-              height: 103px;
+              min-height: 103px;
               margin: 24px 0;
               border-radius: 10px;
               display: flex;
               justify-content: center;
               flex-direction: column;
+
+              .bridge-card-info {
+                font-size: 14px;
+
+                h2 {
+                  margin-top: 10px;
+                  margin-bottom: 0px;
+                  cursor: pointer;
+                }
+
+                .bridge-card-info-secondary {
+                  display: flex;
+                  flex-direction: row-reverse;
+                  justify-content: space-between;
+                  align-content: space-between;
+                  margin-top: -11px;
+
+                  .image-placeholder {
+                    left: 22.99%;
+                    right: 71.46%;
+                    top: 69.44%;
+                    bottom: 22.22%;
+                    background: #e6e6e6;
+                    margin-top: -63px;
+                    margin-bottom: 5px;
+
+                    h6 {
+                      display: flex;
+                      align-items: center;
+                      height: 85px;
+                    }
+                  }
+                }
+              }
             }
 
             /* styles to make scroll-bar look slick */
@@ -313,7 +352,7 @@
 
           .view-bridges-btn {
             color: #ffffff;
-            background: @clickables;
+            background: #05004f;
             border-radius: 5px;
             margin-bottom: 24px;
             border: none;
