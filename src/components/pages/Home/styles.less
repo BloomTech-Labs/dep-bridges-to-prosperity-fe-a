@@ -293,6 +293,27 @@
                   margin-top: 10px;
                   margin-bottom: 0px;
                   cursor: pointer;
+
+                  &:hover {
+                    color: @clickables-hover;
+                  }
+                }
+                .info-button-wrapper {
+                  display: flex;
+                  justify-content: space-between;
+                  width: 82%;
+
+                  .info-button {
+                    text-decoration: none;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    color: @clickables;
+
+                    &:hover {
+                      color: @clickables-hover;
+                    }
+                  }
                 }
 
                 .bridge-card-info-secondary {

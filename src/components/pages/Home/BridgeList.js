@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export function BridgeList({
   bridge,
@@ -34,12 +34,16 @@ export function BridgeList({
             Serving:{' '}
             <b>
               {
-                bridge.communitiesServed.map(community => {
+                bridge.communities_served.map(community => {
                   return <>{community}</>;
                 }).length
               }
             </b>
           </p>
+        </div>
+        <div className="info-button-wrapper">
+          <button className="info-button">More Infomation</button>
+          <button className="info-button">Close</button>
         </div>
       </div>
       {loggedIn ? (
