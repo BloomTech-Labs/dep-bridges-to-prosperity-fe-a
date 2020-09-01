@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 const ShowExplorerContext = React.createContext([{}, () => {}]);
 
 const ShowExplorerProvider = props => {
-  const [state, setState] = useState({
+  const [contextState, setContextState] = useState({
     show: 'landing-page-wrapper-visible',
     buttonName: 'Show Map',
   });
   return (
-    <ShowExplorerContext.Provider value={[state, setState]}>
+    <ShowExplorerContext.Provider value={[contextState, setContextState]}>
       {props.children}
     </ShowExplorerContext.Provider>
   );
