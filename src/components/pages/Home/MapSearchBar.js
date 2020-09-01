@@ -3,8 +3,6 @@ import filterIcon from './assets/filter-icon.svg';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { searchBridge, getAllBridges } from '../../../state/actions';
-import { SearchOutlined } from '@ant-design/icons';
-const { Search } = Input;
 
 const MapSearchBar = ({ setBridgesToggle }) => {
   const dispatch = useDispatch();
