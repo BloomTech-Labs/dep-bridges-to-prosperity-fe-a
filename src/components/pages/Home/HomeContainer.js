@@ -30,7 +30,7 @@ function HomeContainer() {
   const [theme, setTheme] = useState(
     localStorage.getItem('mapStyle')
       ? localStorage.getItem('mapStyle')
-      : 'mapbox://styles/jameslcarpino/ckebr24rw1fs91an1h6e52vij'
+      : 'mapbox://styles/jameslcarpino/ckej1e5b546o019mmuazc08ko'
   );
   const [toggleMarkerColor, setToggleMarkerColor] = useState(false);
 
