@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import usePagination from './hooks/paginationHook';
 import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
 import { useSelector } from 'react-redux';
@@ -7,7 +8,7 @@ import { BridgeList } from './BridgeList';
 import { useOktaAuth } from '@okta/okta-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Tooltip } from 'antd';
+import { Tooltip, Pagination } from 'antd';
 import Themes from './Themes';
 
 const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
@@ -26,6 +27,12 @@ function MapMenu({
 }) {
   // Pulling in bridge data from reducer
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
+
+  //Getting pagination from custom hook
+  const { next, prev, jump, currentPage, currentData, maxPage } = usePagination(
+    bridgeData, // data taken in to paginate
+    3 //itemsPerPage
+  );
 
   /******* TO SIGN OUT *******/
   const { authState, authService } = useOktaAuth();
@@ -132,6 +139,7 @@ function MapMenu({
                     />
                   </div>
                 ))}
+                <Pagination simple total={maxPage}></Pagination>
               </div>
             ) : (
               //the clickedBridge
