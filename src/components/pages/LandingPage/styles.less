@@ -34,12 +34,13 @@
     background-color: white;
     margin-top: 100vh;
     position: absolute;
-    color: red;
+    color: black;
     width: 100vw;
     height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display:grid;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
   }
   button {
     background-color: rgb(207, 80, 80);
@@ -59,3 +60,24 @@ img {
     z-index: 2000;
   }
 }
+
+.region-class{
+  color:black;
+  display:grid;
+  grid-template-columns: auto auto auto;
+}
+
+.footer{
+  z-index:99999999;
+  color:black;
+}
+
+.region-wrapper{
+  width:90%;
+  display:grid;
+  grid-template-columns: auto auto auto;
+  margin-top: 1rem;
+}
+// *{
+//   border: 1px solid red;
+// }
