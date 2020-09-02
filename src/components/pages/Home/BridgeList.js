@@ -17,7 +17,7 @@ export function BridgeList({
   };
 
   const getThoseCommunities = bridge.communities_served.map(community => {
-    return <li>{community.name}</li>;
+    return <li key={community.id}>{community.name}</li>;
   });
 
   return (
@@ -78,6 +78,8 @@ export function BridgeList({
             <p>{bridge.country}</p>
             <h4>Province</h4>
             <p>{bridge.province}</p>
+            <h4>Sector</h4>
+            <p>{bridge.sector}</p>
             <h4>Cell</h4>
             <p>{bridge.cell}</p>
             <h4>District</h4>
