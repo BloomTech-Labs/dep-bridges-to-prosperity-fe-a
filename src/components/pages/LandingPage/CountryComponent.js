@@ -39,10 +39,7 @@ export function RegionComponent(props) {
       {props.provinces[props.province].map((village, index) => {
         return (
           <div className="region-class">
-            <div className="bridge-unit">
-              <div>{village.name}</div>
-              <div>{village.sector}</div>
-            </div>
+            <BridgeUnitComponent village={village}></BridgeUnitComponent>
             <br />
             <br />
             <br />
@@ -53,10 +50,12 @@ export function RegionComponent(props) {
     </div>
   );
 }
-{
-  /* 
-export function BridgeUnitComponent(props){
 
-}
-// array.slice(0,15(Variable)) */
+export function BridgeUnitComponent(props) {
+  return (
+    <div className="bridge-unit">
+      <div style={{ fontWeight: 'bold' }}>{props.village.name}</div>
+      <div>{props.village.sector}</div>
+    </div>
+  );
 }
