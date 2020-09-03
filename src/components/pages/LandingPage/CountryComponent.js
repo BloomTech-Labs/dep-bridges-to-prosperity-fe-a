@@ -34,9 +34,18 @@ export default function CountryComponent(props) {
 
 export function RegionComponent(props) {
   console.log('province, 32', props.provinces[props.province]);
+  const [len, setLen] = React.useState(11);
+  // React.useEffect(() => {
+
+  // }, [len]);
+  const showMore = () => {
+    console.log('len', len);
+    setLen(len + 16);
+    console.log('len', len);
+  };
   return (
     <div className="region-wrapper">
-      {props.provinces[props.province].map((village, index) => {
+      {props.provinces[props.province].slice(0, len).map((village, index) => {
         return (
           <div className="region-class">
             <BridgeUnitComponent village={village}></BridgeUnitComponent>
@@ -46,6 +55,7 @@ export function RegionComponent(props) {
           </div>
         );
       })}
+      <div onClick={showMore}>+ more</div>
       <div />
     </div>
   );
@@ -54,7 +64,9 @@ export function RegionComponent(props) {
 export function BridgeUnitComponent(props) {
   return (
     <div className="bridge-unit">
-      <div style={{ fontWeight: 'bold' }}>{props.village.name}</div>
+      <div className="bridge-name" style={{ fontWeight: 'bold' }}>
+        {props.village.name}
+      </div>
       <div>{props.village.sector}</div>
     </div>
   );
