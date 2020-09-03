@@ -38,21 +38,27 @@ const LandingPage = () => {
         {/* TODO Access the state and map through it */}
         {Object.keys(dataMap).map((country, index) => {
           return (
-            <CountryCompoment
-              dataMap={dataMap}
-              country={country}
-              index={index}
-            />
+            <>
+              <CountryCompoment
+                dataMap={dataMap}
+                country={country}
+                index={index}
+              />
+              <div className="footer">
+                <img src={require('./assets/copyright.png')} alt="" />
+                <div>About</div>
+              </div>
+            </>
           );
         })}
       </div>
-      <div className="footer">
-        {/* WHy does this not show??? */}
-        <hr />
-        <h1>This will be the footer</h1>
+      {/* <div className="footer"> */}
+      {/* WHy does this not show??? */}
+      {/* <hr /> */}
+      {/* <h1>This will be the footer</h1> */}
 
-        <div>This will be the footer</div>
-      </div>
+      {/* <div>This will be the footer</div> */}
+      {/* </div> */}
     </div>
   );
 };
