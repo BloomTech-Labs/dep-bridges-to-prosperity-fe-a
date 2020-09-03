@@ -10,7 +10,7 @@
     height: 100vh;
 
     // background-image: url('./assets/Rwanda_Suspended_Children Crossing.png');
-    background-color:white;
+    background-color: white;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -37,7 +37,7 @@
     color: black;
     width: 100vw;
     height: 50vh;
-    display:grid;
+    display: grid;
     // display: flex;
     // justify-content: center;
     // align-items: center;
@@ -61,23 +61,67 @@ img {
   }
 }
 
-.region-class{
-  color:black;
-  display:grid;
+.region-class {
+  color: black;
+  display: grid;
   grid-template-columns: auto auto auto;
 }
 
-.footer{
-  z-index:99999999;
-  color:black;
+.footer {
+  z-index: 99999999;
+  color: black;
 }
 
-.region-wrapper{
+.region-header{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.region-wrapper {
   width:90%;
-  display:grid;
-  grid-template-columns: auto auto auto;
+  margin:auto;
+}
+.region-content-wrapper {
+  // width: 90%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
   margin-top: 1rem;
 }
+.pointer {
+  cursor: pointer;
+}
+.bridge-name {
+  // position: absolute;
+  // width: 102px;
+  // height: 22px;
+  // left: 809px;
+  // top: 1022px;
+  font-family: Akkurat Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+  /* Deactivated text */
+
+  color: #010015;
+}
+.bridge-info {
+  // position: absolute;
+  // width: 142px;
+  // height: 22px;
+  // left: 809px;
+  // top: 1052px;
+  font-family: Akkurat Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+  /* clickable grey */
+  color: #686b6f;
+}
+
 // *{
 //   border: 1px solid red;
 // }

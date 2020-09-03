@@ -16,15 +16,17 @@ export default function CountryComponent(props) {
         <br />
         {Object.keys(provinces).map((province, index) => {
           return (
-            <>
-              <h3>{province}</h3>
-              <hr />
+            <div className="region-wrapper">
+              <div className="region-header">
+                <h3>{province}</h3>
+                <hr />
+              </div>
               <RegionComponent
                 index={index}
                 provinces={provinces}
                 province={province}
               />
-            </>
+            </div>
           );
         })}
       </div>
@@ -35,27 +37,20 @@ export default function CountryComponent(props) {
 export function RegionComponent(props) {
   console.log('province, 32', props.provinces[props.province]);
   const [len, setLen] = React.useState(11);
-  // React.useEffect(() => {
 
-  // }, [len]);
   const showMore = () => {
     console.log('len', len);
-    setLen(len + 16);
+    setLen(props.provinces[props.province].length);
     console.log('len', len);
   };
   return (
-    <div className="region-wrapper">
+    <div className="region-content-wrapper">
       {props.provinces[props.province].slice(0, len).map((village, index) => {
-        return (
-          <div className="region-class">
-            <BridgeUnitComponent village={village}></BridgeUnitComponent>
-            <br />
-            <br />
-            <br />
-          </div>
-        );
+        return <BridgeUnitComponent village={village}></BridgeUnitComponent>;
       })}
-      <div onClick={showMore}>+ more</div>
+      <div className="pointer" onClick={showMore}>
+        + {props.provinces[props.province].length - len} more
+      </div>
       <div />
     </div>
   );
@@ -67,7 +62,11 @@ export function BridgeUnitComponent(props) {
       <div className="bridge-name" style={{ fontWeight: 'bold' }}>
         {props.village.name}
       </div>
-      <div>{props.village.sector}</div>
+      <div className="bridge-info">
+        {props.village.sector}, {props.village.district}
+      </div>
+      <br />
+      <br />
     </div>
   );
 }
