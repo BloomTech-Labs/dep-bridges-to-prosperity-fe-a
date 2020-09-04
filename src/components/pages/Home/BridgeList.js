@@ -17,7 +17,7 @@ export function BridgeList({
   };
 
   const getThoseCommunities = bridge.communities_served.map(community => {
-    return <li>{community.name}</li>;
+    return <li key={community.id}>{community.name}</li>;
   });
 
   return (
