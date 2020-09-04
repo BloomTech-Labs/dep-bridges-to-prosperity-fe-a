@@ -10,6 +10,8 @@ import {
   EDIT_BRIDGE_DATA_FAILURE,
   GET_SINGLE_BRIDGE,
   SEARCH_BRIDGE,
+  PAGINATE_BRIDGES,
+  PAGINATE_BRIDGES_FAILURE,
 } from '../actions';
 
 const initialState = {
@@ -111,6 +113,17 @@ export const bridgeSitesReducer = (state = initialState, action) => {
               .includes(action.payload.toLowerCase().trim())
         ),
         searching: true,
+      };
+    case PAGINATE_BRIDGES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: [action.payload],
+      };
+    case PAGINATE_BRIDGES:
+      return {
+        ...state,
+        bridgeData: action.payload,
       };
 
     default:

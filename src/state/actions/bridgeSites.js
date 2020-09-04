@@ -21,6 +21,9 @@ export const GET_SINGLE_BRIDGE = 'GET_SINGLE_BRIDGE';
 
 export const SEARCH_BRIDGE = 'SEARCH_BRIDGE';
 
+export const PAGINATE_BRIDGES = 'PAGINATE_BRIDGES';
+export const PAGINATE_BRIDGES_FAILURE = 'PAGINATE_BRIDGES_FAILURE';
+
 export const getSingleBridge = bridge => dispatch => {
   dispatch({ type: GET_SINGLE_BRIDGE, payload: bridge });
 };
@@ -109,4 +112,20 @@ export const searchBridge = search => dispatch => {
   //need to be able to hit that location for the search
 
   dispatch({ type: SEARCH_BRIDGE, payload: search });
+};
+
+export const paginateBridges = (page, limit) => dispatch => {
+  axios
+    .get(
+      process.env.REACT_APP_API_URI + `/paginate?page=${page}&limit=${limit}`
+    )
+    .then(res => {
+      dispatch({ type: PAGINATE_BRIDGES, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({
+        type: PAGINATE_BRIDGES_FAILURE,
+        payload: err.message,
+      });
+    });
 };
