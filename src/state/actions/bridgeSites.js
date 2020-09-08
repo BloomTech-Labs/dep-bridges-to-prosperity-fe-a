@@ -39,9 +39,7 @@ export const getAllBridges = () => dispatch => {
       });
     })
     .catch(err => {
-      console.log('Error resopnse', err);
-
-      console.log('DISPATCH GET ALL', err.response.data.message);
+      console.log('DISPATCH GET ALL', err.message);
       dispatch({
         type: GET_BRIDGE_DATA_FAILURE,
         payload: err.message,
