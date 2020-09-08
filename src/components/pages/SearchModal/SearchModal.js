@@ -28,12 +28,16 @@ const SearchModal = React.forwardRef((props, ref) => {
         <div onClick={close} className={'modal-backdrop'}></div>
         <div className={'modal-box'}>
           <div className="modal-bridge-area">
-            <img
-              src={require('./assets/x.png')}
-              alt="close"
-              className="pointer close-x"
-              onClick={close}
-            ></img>
+            <div className="image-box">
+              <img src={require('./assets/Search.png')} alt="logo" />
+
+              <img
+                src={require('./assets/x.png')}
+                alt="close"
+                className="pointer close-x"
+                onClick={close}
+              ></img>
+            </div>
             <br />
             <br />
             <input
