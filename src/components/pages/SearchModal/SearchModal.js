@@ -27,12 +27,13 @@ const SearchModal = React.forwardRef((props, ref) => {
       <div className={'modal-wrapper'}>
         <div onClick={close} className={'modal-backdrop'}></div>
         <div className={'modal-box'}>
-          <div className="modal-navbar">
-            <h3>Search for a bridge</h3>
-            <div className="pointer" onClick={close}>
-              Close X
-            </div>
-          </div>
+          <img
+            src={require('./assets/x.png')}
+            alt="close"
+            className="pointer close-x"
+            onClick={close}
+          ></img>
+
           <div className="modal-bridge-area">
             {bridgeData.map((bridge, index) => {
               // Todo why didn't props.bridgeData work? It threw error but doesn't through when using redux
