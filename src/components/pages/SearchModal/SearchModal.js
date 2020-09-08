@@ -1,0 +1,46 @@
+import React from 'react';
+import './styles.less';
+import { useSelector } from 'react-redux';
+import ReactDOM from 'react-dom';
+
+export default function SearchModal(props) {
+  const [searchString, setSearchString] = React.useState('');
+  const [display, setDisplay] = React.useState(true);
+  const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
+
+  const open = () => {
+    setDisplay(true);
+  };
+  const close = () => {
+    setDisplay(false);
+  };
+
+  if (display) {
+    return ReactDOM.createPortal(
+      <div className={'modal-wrapper'}>
+        <div onClick={close} className={'modal-backdrop'}></div>
+        <div className={'modal-box'}>
+          <h3>Search for a bridge</h3>
+          <div className="modal-bridge-area">
+            {bridgeData.map((bridge, index) => {
+              // Todo why didn't props.bridgeData work? It threw error but doesn't through when using redux
+              return (
+                <>
+                  <div className="modal-bridge-unit">
+                    <div className="modal-district-country">
+                      {bridge.district} District, {bridge.country}
+                    </div>
+                    <div className="modal-name">{bridge.name}</div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+      </div>,
+      document.getElementById('modal-root')
+    );
+  }
+
+  return null;
+}

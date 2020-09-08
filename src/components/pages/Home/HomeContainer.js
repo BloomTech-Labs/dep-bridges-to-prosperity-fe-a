@@ -8,6 +8,7 @@ import Mapbox from './Mapbox';
 import BridgeForms from '../BridgeForms.js';
 import { LandingPage } from '../../pages/LandingPage';
 import Layout from '../../common/Layout';
+import { SearchModal } from '../SearchModal';
 
 function HomeContainer() {
   const [visible, setVisible] = useState(false);
@@ -140,6 +141,7 @@ function HomeContainer() {
   return (
     <Layout>
       <div className="home-wrapper">
+        <SearchModal />
         <LandingPage />
         {/* HAMBURGER MENU START */}
         <div className="menu-cont">

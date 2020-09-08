@@ -3,6 +3,7 @@ import './styles.less';
 import { ShowExplorerContext } from '../../../state/context/showExplorer';
 import { useSelector } from 'react-redux';
 import CountryCompoment from './CountryComponent';
+import { SearchModal } from '../SearchModal';
 
 // Here is an example of using our reusable List component to display some list data to the UI.
 const LandingPage = () => {
@@ -10,7 +11,7 @@ const LandingPage = () => {
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   const dataMap = {};
   bridgeData.map((bridge, index) => {
-    console.log(`Bridge ${index}: ${bridge}`); //TODO Delete
+    // console.log(`Bridge ${index}: ${bridge}`); //TODO Delete
     if (!(bridge.country in dataMap)) {
       dataMap[bridge.country] = [];
     }
@@ -20,12 +21,17 @@ const LandingPage = () => {
   console.log('Bridge Data line 10', bridgeData); //TODO Delete
   let visibility = contextState.show;
 
+  const openModal = () => {
+    console.log('Opening modal');
+  };
+
   return (
     <div className={`landing-page-wrapper ${visibility}`}>
+      <SearchModal bridgeData={bridgeData} />
       <div className="landing-page-wrapper-top">
         <div className="linear-overlay">
           <br />
-          <div className="central-search-content">
+          <div onClick={openModal} className="central-search-content">
             <img
               src={require('./assets/callToActionBlack.png')}
               alt="Search Bridges"
