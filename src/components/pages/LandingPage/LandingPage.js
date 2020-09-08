@@ -9,6 +9,8 @@ import { SearchModal } from '../SearchModal';
 const LandingPage = () => {
   const [contextState] = React.useContext(ShowExplorerContext);
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
+  const modalRef = React.useRef();
+
   const dataMap = {};
   bridgeData.map((bridge, index) => {
     // console.log(`Bridge ${index}: ${bridge}`); //TODO Delete
@@ -22,16 +24,17 @@ const LandingPage = () => {
   let visibility = contextState.show;
 
   const openModal = () => {
-    console.log('Opening modal');
+    // modalRef.current.testMethod();
+    modalRef.current.openModal();
   };
 
   return (
     <div className={`landing-page-wrapper ${visibility}`}>
-      <SearchModal bridgeData={bridgeData} />
+      <SearchModal ref={modalRef} bridgeData={bridgeData} />
       <div className="landing-page-wrapper-top">
         <div className="linear-overlay">
           <br />
-          <div onClick={openModal} className="central-search-content">
+          <div onClick={openModal} className="central-search-content pointer">
             <img
               src={require('./assets/callToActionBlack.png')}
               alt="Search Bridges"

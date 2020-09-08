@@ -3,9 +3,16 @@ import './styles.less';
 import { useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
 
-export default function SearchModal(props) {
+const SearchModal = React.forwardRef((props, ref) => {
   const [searchString, setSearchString] = React.useState('');
-  const [display, setDisplay] = React.useState(true);
+  const [display, setDisplay] = React.useState(false);
+  React.useImperativeHandle(ref, () => {
+    return {
+      openModal: () => open(),
+      close: () => close(),
+      // testMethod: () => console.log('testing modal ref'),
+    };
+  });
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
 
   const open = () => {
@@ -20,7 +27,12 @@ export default function SearchModal(props) {
       <div className={'modal-wrapper'}>
         <div onClick={close} className={'modal-backdrop'}></div>
         <div className={'modal-box'}>
-          <h3>Search for a bridge</h3>
+          <div className="modal-navbar">
+            <h3>Search for a bridge</h3>
+            <div className="pointer" onClick={close}>
+              Close X
+            </div>
+          </div>
           <div className="modal-bridge-area">
             {bridgeData.map((bridge, index) => {
               // Todo why didn't props.bridgeData work? It threw error but doesn't through when using redux
@@ -43,4 +55,5 @@ export default function SearchModal(props) {
   }
 
   return null;
-}
+});
+export default SearchModal;
