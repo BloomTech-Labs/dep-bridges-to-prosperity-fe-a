@@ -14,14 +14,43 @@ const SearchModal = React.forwardRef((props, ref) => {
     };
   });
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
-
+  const handleChange = e => {
+    e.preventDefault();
+    setSearchString(e.target.value);
+    // console.log('SearchString', searchString); // Works
+  };
   const open = () => {
     setDisplay(true);
   };
   const close = () => {
     setDisplay(false);
   };
+  const [bridgeDataFiltered, setBridgeDataFiltered] = React.useState(
+    bridgeData
+  );
+  React.useEffect(() => {
+    setBridgeDataFiltered(filterByValue(bridgeData));
+  }, [searchString, bridgeData]);
 
+  // SO boilerplate reducer
+  // var reduced = options.reduce(function(filtered, option) {
+  //   if (option.assigned) {
+  //      var someNewValue = { name: option.name, newProperty: 'Foo' }
+  //      filtered.push(someNewValue);
+  //   }
+  //   return filtered;
+  // }, []);
+
+  function filterByValue(array) {
+    // From Stack Overflow searches all keys and values at once
+    return array.filter(
+      data =>
+        JSON.stringify(data.name)
+          .toLowerCase()
+          .indexOf(searchString.toLowerCase()) !== -1
+    );
+  }
+  // React.useEffect(() => {}, [searchString]);
   if (display) {
     return ReactDOM.createPortal(
       <div className={'modal-wrapper'}>
@@ -43,10 +72,11 @@ const SearchModal = React.forwardRef((props, ref) => {
             <input
               type="search"
               placeholder="What bridge are you looking for?"
+              onChange={handleChange}
             />
             <hr />
             <br />
-            {bridgeData.map((bridge, index) => {
+            {bridgeDataFiltered.map((bridge, index) => {
               // Todo why didn't props.bridgeData work? It threw error but doesn't through when using redux
               return (
                 <>
