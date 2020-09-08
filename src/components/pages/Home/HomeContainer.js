@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlyToInterpolator } from 'react-map-gl';
-import { getAllBridges, getSingleBridge } from '../../../state/actions';
+import {
+  getAllBridges,
+  getSingleBridge,
+  paginateBridges,
+} from '../../../state/actions';
 import { Modal } from 'antd';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
@@ -100,6 +104,8 @@ function HomeContainer() {
   };
 
   const toggleBridges = () => {
+    dispatch(paginateBridges(1, 20));
+    //keeping for now V
     setBridgesToggle(!bridgesToggle);
   };
 

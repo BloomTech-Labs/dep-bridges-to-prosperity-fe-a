@@ -16,10 +16,6 @@ export function BridgeList({
     setVisible(false);
   };
 
-  const getThoseCommunities = bridge.communities_served.map(community => {
-    return <li key={community.id}>{community.name}</li>;
-  });
-
   return (
     <div className="bridge-card">
       <div className="bridge-card-info">
@@ -43,9 +39,6 @@ export function BridgeList({
           <p>
             Stage: <b>{bridge.stage}</b>
           </p>
-          <p>
-            Serving: <b>{getThoseCommunities.length}</b>
-          </p>
         </div>
         <div className="info-button-wrapper">
           <button onClick={showDrawer} className="info-button">
@@ -60,16 +53,7 @@ export function BridgeList({
           >
             <div className="bridge-card-info-secondary">
               <h2>{bridge.name}</h2>
-              <p>
-                Serving:{' '}
-                <b>
-                  {
-                    bridge.communities_served.map(community => {
-                      return <>{community}</>;
-                    }).length
-                  }
-                </b>
-              </p>
+
               <p>Stage: {bridge.stage}</p>
             </div>
             <h3>Regional Information</h3>
@@ -87,7 +71,7 @@ export function BridgeList({
             <h4>Longitude</h4>
             <p>{bridge.longitude}</p>
             <h4>Communities Served:</h4>
-            <ol>{getThoseCommunities}</ol>
+
             <h3>Identification Codes</h3>
             <h4>Project Code</h4>
             <p>{bridge.project_code}</p>

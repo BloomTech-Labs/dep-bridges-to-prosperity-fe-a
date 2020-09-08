@@ -103,27 +103,30 @@ export const bridgeSitesReducer = (state = initialState, action) => {
               .toLowerCase()
               .trim()
               .includes(action.payload.toLowerCase().trim()) ||
-            info.type
-              .toLowerCase()
-              .trim()
-              .includes(action.payload.toLowerCase().trim()) ||
+            // info.type
+            //   .toLowerCase()
+            //   .trim()
+            //   .includes(action.payload.toLowerCase().trim())
+            // ||
             info.stage
               .toLowerCase()
               .trim()
               .includes(action.payload.toLowerCase().trim())
         ),
+
         searching: true,
       };
     case PAGINATE_BRIDGES_FAILURE:
       return {
         ...state,
         loading: false,
-        error: [action.payload],
+        error: action.payload,
       };
     case PAGINATE_BRIDGES:
       return {
         ...state,
         bridgeData: action.payload,
+        loading: false,
       };
 
     default:

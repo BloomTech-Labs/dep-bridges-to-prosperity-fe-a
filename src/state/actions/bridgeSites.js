@@ -117,10 +117,13 @@ export const searchBridge = search => dispatch => {
 export const paginateBridges = (page, limit) => dispatch => {
   axios
     .get(
-      process.env.REACT_APP_API_URI + `/paginate?page=${page}&limit=${limit}`
+      process.env.REACT_APP_API_URI +
+        `/bridge/paginate?page=${page}&limit=${limit}`,
+      page,
+      limit
     )
     .then(res => {
-      dispatch({ type: PAGINATE_BRIDGES, payload: res.data });
+      dispatch({ type: PAGINATE_BRIDGES, payload: res.data.paginatedBridges });
     })
     .catch(err => {
       dispatch({
