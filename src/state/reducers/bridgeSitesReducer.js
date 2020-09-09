@@ -126,7 +126,8 @@ export const bridgeSitesReducer = (state = initialState, action) => {
     case PAGINATE_BRIDGES:
       return {
         ...state,
-        paginatedData: action.payload.paginatedBrdiges,
+
+        paginatedData: action.payload.paginatedBridges,
         loading: false,
       };
 
