@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { BridgeList } from './BridgeList';
-import usePagination from './custom-hooks/usePagination';
+
 import { useOktaAuth } from '@okta/okta-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Tooltip, Pagination } from 'antd';
+import { Tooltip } from 'antd';
 import Themes from './Themes';
-import { paginateBridges } from '../../../state/actions';
+// import { paginateBridges } from '../../../state/actions';
+import Pagination from './Pagination';
 
 const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
 const redirectUri = `${window.location.origin}/`;
@@ -26,16 +27,15 @@ function MapMenu({
   onClear,
 }) {
   // Pulling in bridge data from reducer
-  const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
-
-  //Grabbing functions from paginationHook
-  const { next, prev, jump, currentPage, currentData, maxPage } = usePagination(
-    useDispatch(paginateBridges())
+  const { bridgeData, paginatedData } = useSelector(
+    state => state.bridgeSitesReducer
   );
 
-  const onNext = () => {
-    next();
-  };
+  //Grabbing functions from paginationHook
+  // const { next, prev, jump, currentPage, currentData, maxPage } = usePagination(
+  //   useDispatch(paginateBridges())
+  // );
+
   /******* TO SIGN OUT *******/
   const { authState, authService } = useOktaAuth();
 
@@ -126,9 +126,9 @@ function MapMenu({
         ) : (
           // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
-            {bridgeData.length > 0 ? (
+            {paginatedData?.length > 0 ? (
               <div className="bridges-wrapper">
-                {bridgeData?.map(bridge => (
+                {paginatedData?.map(bridge => (
                   <div key={bridge.id}>
                     <BridgeList
                       bridge={bridge}
@@ -164,7 +164,7 @@ function MapMenu({
           </button>
         ) : (
           <>
-            <Pagination simple total={5} onChange={onNext} />
+            <Pagination />
             <button onClick={onClear} className="view-bridges-btn">
               {/* Special clear command onClick here */}
               Clear

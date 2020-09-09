@@ -25,11 +25,11 @@ export function BridgeList({
               ZoomIn(bridge);
             }}
           >
-            {bridge.name}
+            {bridge?.name}
           </h2>
         </div>
         <p className="bridge-type">
-          Type: <b>{bridge.type}</b>
+          Type: <b>{bridge?.type}</b>
         </p>
         <div className="bridge-card-info-secondary">
           <div className="image-placeholder">
@@ -37,7 +37,7 @@ export function BridgeList({
             <h6 className="placeholder-name">IMG PLACEHOLDER</h6>
           </div>
           <p>
-            Stage: <b>{bridge.stage}</b>
+            Stage: <b>{bridge?.stage}</b>
           </p>
         </div>
         <div className="info-button-wrapper">
@@ -52,29 +52,29 @@ export function BridgeList({
             width={'45%'}
           >
             <div className="bridge-card-info-secondary">
-              <h2>{bridge.name}</h2>
+              <h2>{bridge?.name}</h2>
 
-              <p>Stage: {bridge.stage}</p>
+              <p>Stage: {bridge?.stage}</p>
             </div>
             <h3>Regional Information</h3>
 
             <h4>Country</h4>
-            <p>{bridge.country}</p>
+            <p>{bridge?.country}</p>
             <h4>Province</h4>
-            <p>{bridge.province}</p>
+            <p>{bridge?.province}</p>
             <h4>Cell</h4>
-            <p>{bridge.cell}</p>
+            <p>{bridge?.cell}</p>
             <h4>District</h4>
-            <p>{bridge.district}</p>
+            <p>{bridge?.district}</p>
             <h4>Latitude</h4>
-            <p>{bridge.latitude}</p>
+            <p>{bridge?.latitude}</p>
             <h4>Longitude</h4>
-            <p>{bridge.longitude}</p>
+            <p>{bridge?.longitude}</p>
             <h4>Communities Served:</h4>
 
             <h3>Identification Codes</h3>
             <h4>Project Code</h4>
-            <p>{bridge.project_code}</p>
+            <p>{bridge?.project_code}</p>
           </Drawer>
         </div>
       </div>

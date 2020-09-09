@@ -17,6 +17,7 @@ import {
 const initialState = {
   bridgeData: [],
   searchData: [],
+  paginatedData: [],
   loading: false,
   error: '',
   searching: false,
@@ -125,7 +126,7 @@ export const bridgeSitesReducer = (state = initialState, action) => {
     case PAGINATE_BRIDGES:
       return {
         ...state,
-        bridgeData: action.payload,
+        paginatedData: action.payload,
         loading: false,
       };
 

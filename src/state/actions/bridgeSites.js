@@ -123,7 +123,7 @@ export const paginateBridges = (page, limit) => dispatch => {
       limit
     )
     .then(res => {
-      dispatch({ type: PAGINATE_BRIDGES, payload: res.data.paginatedBridges });
+      dispatch({ type: PAGINATE_BRIDGES, payload: res.data });
     })
     .catch(err => {
       dispatch({

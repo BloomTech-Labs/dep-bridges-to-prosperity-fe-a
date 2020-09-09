@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMapGl, { Marker } from 'react-map-gl';
-import { EnvironmentFilled } from '@ant-design/icons';
+
 import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 import pinMarker from './assets/pinMarker.png';
@@ -38,7 +38,7 @@ function Mapbox({ viewport, setViewport, theme, ZoomIn, changeChecked }) {
         mapStyle={theme}
       >
         {/* maps the points of the data to the map: bridges, villiages, etc. */}
-        {bridgeData.map(bridge => {
+        {bridgeData?.map(bridge => {
           return (
             <div
               key={bridge.id}
