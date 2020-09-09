@@ -62,6 +62,7 @@ const SearchModal = React.forwardRef((props, ref) => {
     }));
     window.scrollTo(0, 0);
     // Close Search Modal
+    close();
 
     // Zoom in to marker and pull up data
   }
