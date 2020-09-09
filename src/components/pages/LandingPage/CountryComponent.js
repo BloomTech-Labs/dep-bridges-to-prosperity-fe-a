@@ -16,7 +16,7 @@ export default function CountryComponent(props) {
         <br />
         {Object.keys(provinces).map((province, index) => {
           return (
-            <div className="region-wrapper">
+            <div className="region-wrapper" id={index}>
               <div className="region-header">
                 <h3>{province}</h3>
                 <hr />
@@ -35,7 +35,7 @@ export default function CountryComponent(props) {
 }
 
 export function RegionComponent(props) {
-  console.log('province, 32', props.provinces[props.province]);
+  // console.log('province, 32', props.provinces[props.province]); // TO DELETE
   const [len, setLen] = React.useState(11);
 
   const showMore = () => {
@@ -46,7 +46,12 @@ export function RegionComponent(props) {
   return (
     <div className="region-content-wrapper">
       {props.provinces[props.province].slice(0, len).map((village, index) => {
-        return <BridgeUnitComponent village={village}></BridgeUnitComponent>;
+        return (
+          <BridgeUnitComponent
+            id={index}
+            village={village}
+          ></BridgeUnitComponent>
+        );
       })}
       <div className="pointer" onClick={showMore}>
         + {props.provinces[props.province].length - len} more
@@ -56,13 +61,33 @@ export function RegionComponent(props) {
   );
 }
 
+function handleClick(info) {
+  alert(info.name); // Works
+  // TODO toggle landing page visibility and zoom in to and call up mapbox
+}
+
 export function BridgeUnitComponent(props) {
   return (
-    <div className="bridge-unit">
-      <div className="bridge-name" style={{ fontWeight: 'bold' }}>
+    <div
+      className="bridge-unit"
+      // onClick={() => {
+      //   handleClick(props.village);
+      // }}
+    >
+      <div
+        className="bridge-name pointer"
+        onClick={() => {
+          handleClick(props.village);
+        }}
+      >
         {props.village.name}
       </div>
-      <div className="bridge-info">
+      <div
+        className="bridge-info pointer"
+        onClick={() => {
+          handleClick(props.village);
+        }}
+      >
         {props.village.sector}, {props.village.district}
       </div>
       <br />
