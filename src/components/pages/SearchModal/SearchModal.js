@@ -60,7 +60,9 @@ const SearchModal = React.forwardRef((props, ref) => {
       ...contextState,
       show: 'landing-page-wrapper-hidden',
     }));
+    window.scrollTo(0, 0);
     // Close Search Modal
+
     // Zoom in to marker and pull up data
   }
   // React.useEffect(() => {}, [searchString]);
