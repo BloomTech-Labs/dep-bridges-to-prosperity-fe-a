@@ -46,13 +46,15 @@ export default function Layout({ children }) {
         {/* <button onClick={() => setLandingFalse()}>Bridge Explorer</button>
         <button onClick={() => setLandingTrue()}>Map</button> */}
         <div className="right-nav">
-          <button onClick={showBE}>Bridge Explorer</button>
-          <button className="b-e" onClick={showMap}>
+          <button className="nav-buttons" onClick={showBE}>
+            Bridge Explorer
+          </button>
+          <button className="nav-buttons b-e" onClick={showMap}>
             {/* {state.buttonName} */}
             Map
           </button>
           <button
-            className="about"
+            className="about nav-buttons"
             onClick={() =>
               // TODO Need to refactor this to do what is wanted per UX
               setContextState(contextState => ({

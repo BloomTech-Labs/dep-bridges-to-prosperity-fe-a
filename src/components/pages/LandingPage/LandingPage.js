@@ -53,6 +53,7 @@ const LandingPage = props => {
                 country={country}
                 index={index}
                 ZoomIn={props.ZoomIn}
+                // onClear={props.onClear}
               />
               <div className="footer">
                 <img src={require('./assets/copyright.png')} alt="" />

@@ -141,8 +141,14 @@ function HomeContainer() {
   return (
     <Layout>
       <div className="home-wrapper">
-        <SearchModal ZoomIn={ZoomIn} />
-        <LandingPage ZoomIn={ZoomIn} />
+        <SearchModal
+          ZoomIn={ZoomIn}
+          // onClear={onClear}
+        />
+        <LandingPage
+          ZoomIn={ZoomIn}
+          // onClear={onClear}
+        />
         {/* HAMBURGER MENU START */}
         <div className="menu-cont">
           <input

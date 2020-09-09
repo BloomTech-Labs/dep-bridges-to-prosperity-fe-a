@@ -78,6 +78,7 @@ export function BridgeUnitComponent(props) {
     window.scrollTo(0, 0);
     // Zoom in to marker and pull up data
     props.ZoomIn(info);
+    // props.onClear();
   }
   return (
     <div
