@@ -19,8 +19,8 @@ const LandingPage = props => {
     }
     dataMap[bridge.country].push(bridge);
   });
-  console.log('Datamap line 18', dataMap); //TODO Delete
-  console.log('Bridge Data line 10', bridgeData); //TODO Delete
+  // console.log('Datamap line 18', dataMap); //TODO Delete
+  // console.log('Bridge Data line 10', bridgeData); //TODO Delete
   let visibility = contextState.show;
 
   const openModal = () => {
