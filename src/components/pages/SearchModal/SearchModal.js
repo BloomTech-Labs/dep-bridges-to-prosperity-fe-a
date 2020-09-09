@@ -50,6 +50,9 @@ const SearchModal = React.forwardRef((props, ref) => {
           .indexOf(searchString.toLowerCase()) !== -1
     );
   }
+  function handleClick(info) {
+    alert(info.name + ' ' + info.district);
+  }
   // React.useEffect(() => {}, [searchString]);
   if (display) {
     return ReactDOM.createPortal(
@@ -80,7 +83,12 @@ const SearchModal = React.forwardRef((props, ref) => {
               // Todo why didn't props.bridgeData work? It threw error but doesn't through when using redux
               return (
                 <>
-                  <div className="modal-bridge-unit">
+                  <div
+                    className="modal-bridge-unit pointer"
+                    onClick={() => {
+                      handleClick(bridge);
+                    }}
+                  >
                     <div className="modal-district-country">
                       {bridge.district} District, {bridge.country}
                     </div>

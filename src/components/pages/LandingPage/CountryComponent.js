@@ -62,7 +62,7 @@ export function RegionComponent(props) {
 }
 
 function handleClick(info) {
-  alert(info.name); // Works
+  // alert(info.name); // Works
   // TODO toggle landing page visibility and zoom in to and call up mapbox
 }
 
