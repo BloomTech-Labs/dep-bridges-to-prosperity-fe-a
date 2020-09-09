@@ -2,6 +2,7 @@ import React from 'react';
 import './styles.less';
 import { useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
+import { ShowExplorerContext } from '../../../state/context/showExplorer';
 
 const SearchModal = React.forwardRef((props, ref) => {
   const [searchString, setSearchString] = React.useState('');
@@ -50,11 +51,16 @@ const SearchModal = React.forwardRef((props, ref) => {
           .indexOf(searchString.toLowerCase()) !== -1
     );
   }
+  const [contextState, setContextState] = React.useContext(ShowExplorerContext);
   function handleClick(info) {
-    alert(info.name + ' ' + info.district);
+    // alert(info.name + ' ' + info.district);
     //TODO
-    // Close Search Modal
     // Toggle Landing Page visibility class to hidden
+    setContextState(contextState => ({
+      ...contextState,
+      show: 'landing-page-wrapper-hidden',
+    }));
+    // Close Search Modal
     // Zoom in to marker and pull up data
   }
   // React.useEffect(() => {}, [searchString]);
