@@ -63,6 +63,7 @@ const SearchModal = React.forwardRef((props, ref) => {
     window.scrollTo(0, 0);
     // Close Search Modal
     close();
+    props.ZoomIn(info);
 
     // Zoom in to marker and pull up data
   }

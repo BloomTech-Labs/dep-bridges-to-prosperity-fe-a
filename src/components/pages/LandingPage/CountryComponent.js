@@ -9,7 +9,7 @@ export default function CountryComponent(props) {
     }
     provinces[item.province].push(item);
   });
-  console.log('provinces', provinces);
+  // console.log('provinces', provinces);
   return (
     <>
       <div key={props.index}>
@@ -17,7 +17,7 @@ export default function CountryComponent(props) {
         <br />
         {Object.keys(provinces).map((province, index) => {
           return (
-            <div className="region-wrapper" id={index}>
+            <div className="region-wrapper" key={index}>
               <div className="region-header">
                 <h3>{province}</h3>
                 <hr />
@@ -26,6 +26,7 @@ export default function CountryComponent(props) {
                 index={index}
                 provinces={provinces}
                 province={province}
+                ZoomIn={props.ZoomIn}
               />
             </div>
           );
@@ -40,17 +41,18 @@ export function RegionComponent(props) {
   const [len, setLen] = React.useState(11);
 
   const showMore = () => {
-    console.log('len', len);
+    // console.log('len', len);
     setLen(props.provinces[props.province].length);
-    console.log('len', len);
+    // console.log('len', len);
   };
   return (
     <div className="region-content-wrapper">
       {props.provinces[props.province].slice(0, len).map((village, index) => {
         return (
           <BridgeUnitComponent
-            id={index}
+            key={index}
             village={village}
+            ZoomIn={props.ZoomIn}
           ></BridgeUnitComponent>
         );
       })}
@@ -75,6 +77,7 @@ export function BridgeUnitComponent(props) {
     }));
     window.scrollTo(0, 0);
     // Zoom in to marker and pull up data
+    props.ZoomIn(info);
   }
   return (
     <div

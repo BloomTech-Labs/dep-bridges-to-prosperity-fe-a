@@ -32,13 +32,13 @@ export function BridgeList({
           </p>
           <p>
             Serving:{' '}
-            <b>
+            {/* <b>
               {
                 bridge.communities_served.map(community => {
                   return <>{community}</>;
                 }).length
               }
-            </b>
+            </b> */}
           </p>
         </div>
       </div>

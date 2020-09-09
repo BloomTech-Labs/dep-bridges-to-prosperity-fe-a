@@ -6,7 +6,7 @@ import CountryCompoment from './CountryComponent';
 import { SearchModal } from '../SearchModal';
 
 // Here is an example of using our reusable List component to display some list data to the UI.
-const LandingPage = () => {
+const LandingPage = props => {
   const [contextState] = React.useContext(ShowExplorerContext);
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   const modalRef = React.useRef();
@@ -47,17 +47,18 @@ const LandingPage = () => {
         {/* TODO Access the state and map through it */}
         {Object.keys(dataMap).map((country, index) => {
           return (
-            <>
+            <div key={index}>
               <CountryCompoment
                 dataMap={dataMap}
                 country={country}
                 index={index}
+                ZoomIn={props.ZoomIn}
               />
               <div className="footer">
                 <img src={require('./assets/copyright.png')} alt="" />
                 <div>About</div>
               </div>
-            </>
+            </div>
           );
         })}
       </div>
