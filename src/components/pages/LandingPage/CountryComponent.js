@@ -1,4 +1,5 @@
 import React from 'react';
+import { ShowExplorerContext } from '../../../state/context/showExplorer';
 
 export default function CountryComponent(props) {
   const provinces = {};
@@ -61,12 +62,20 @@ export function RegionComponent(props) {
   );
 }
 
-function handleClick(info) {
-  // alert(info.name); // Works
-  // TODO toggle landing page visibility and zoom in to and call up mapbox
-}
-
 export function BridgeUnitComponent(props) {
+  const [contextState, setContextState] = React.useContext(ShowExplorerContext);
+  function handleClick(info) {
+    // alert(info.name); // Works
+    // TODO toggle landing page visibility and zoom in to and call up mapbox
+
+    // Toggle Landing Page visibility class to hidden
+    setContextState(contextState => ({
+      ...contextState,
+      show: 'landing-page-wrapper-hidden',
+    }));
+    window.scrollTo(0, 0);
+    // Zoom in to marker and pull up data
+  }
   return (
     <div
       className="bridge-unit"

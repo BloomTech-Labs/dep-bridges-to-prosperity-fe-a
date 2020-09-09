@@ -52,6 +52,10 @@ const SearchModal = React.forwardRef((props, ref) => {
   }
   function handleClick(info) {
     alert(info.name + ' ' + info.district);
+    //TODO
+    // Close Search Modal
+    // Toggle Landing Page visibility class to hidden
+    // Zoom in to marker and pull up data
   }
   // React.useEffect(() => {}, [searchString]);
   if (display) {
