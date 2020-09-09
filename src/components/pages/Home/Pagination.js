@@ -20,8 +20,8 @@ export default function Pagination() {
 
   return (
     <div>
-      <button onClick={nextPage}>Previous Page</button>
-      <button onClick={prevPage}> Next Page</button>
+      <button onClick={prevPage}>Previous Page</button>
+      <button onClick={nextPage}> Next Page</button>
     </div>
   );
 }
