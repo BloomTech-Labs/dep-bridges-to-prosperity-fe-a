@@ -1,3 +1,8 @@
+// VARS
+@btn-text: #f4f1f1;
+@clickables: #05004f;
+@clickables-hover: #08007a;
+
 * {
   max-width: 100%;
   box-sizing: border-box;
@@ -102,6 +107,17 @@
   }
   .submit {
     grid-area: submit;
+    background-color: @clickables;
+    border-style: none;
+    border-radius: 3px;
+    color: @btn-text;
+    padding: 2px 0;
+    transition: 0.25s;
+
+    &:hover {
+      background-color: @clickables-hover;
+      transition: 0.25s;
+    }
   }
   .delete-button {
     grid-area: delete;

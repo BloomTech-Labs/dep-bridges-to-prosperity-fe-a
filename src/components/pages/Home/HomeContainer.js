@@ -132,7 +132,7 @@ function HomeContainer() {
   };
 
   // Passing down to MapBox, when Marker is pressed menu toggle will be set to checked
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const changeChecked = () => {
     setChecked(true);
