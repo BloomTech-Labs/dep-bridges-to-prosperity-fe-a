@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { paginateBridges } from '../../../state/actions';
 export default function Pagination() {
-  const [limit, setLimit] = useState(20);
+  const [limit] = useState(20);
   const [page, setPage] = useState(1);
   const [disabled, setDisabled] = useState(false);
   let dispatch = useDispatch();
@@ -48,9 +48,9 @@ export default function Pagination() {
         {' '}
         Next Page
       </button>
+      {/* <div>
+        <Pagination simple />
+      </div> */}
     </div>
-    // <div>
-    //   <Pagination simple />
-    // </div>
   );
 }

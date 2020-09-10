@@ -104,7 +104,6 @@ export const bridgeSitesReducer = (state = initialState, action) => {
               .toLowerCase()
               .trim()
               .includes(action.payload.toLowerCase().trim())
-          //||
           // info.type
           //   .toLowerCase()
           //   .trim()

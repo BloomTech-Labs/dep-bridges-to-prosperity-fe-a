@@ -145,14 +145,17 @@ function MapMenu({
             ) : (
               //the clickedBridge
               <div className="bridges-wrapper">
-                <BridgeList
-                  ZoomIn={ZoomIn}
-                  bridge={bridgeData[0]}
-                  loggedIn={authState.idToken}
-                  changeShow={changeShow}
-                  changeIsEditing={changeIsEditing}
-                  onClear={onClear}
-                />
+                {/* {singleBridge.length > 0 ? (
+                  <BridgeList
+                    ZoomIn={ZoomIn}
+                    bridge={paginatedData[0]} // return singleBridge state from reducer
+                    loggedIn={authState.idToken}
+                    changeShow={changeShow}
+                    changeIsEditing={changeIsEditing}
+                    onClear={onClear}
+                  />
+
+                ) : <Welcome Component /> } */}
               </div>
             )}
           </>
