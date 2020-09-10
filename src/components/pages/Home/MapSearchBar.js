@@ -2,7 +2,11 @@ import { Input } from 'antd';
 import filterIcon from './assets/filter-icon.svg';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { searchBridge, getAllBridges } from '../../../state/actions';
+import {
+  searchBridge,
+  getAllBridges,
+  paginateBridges,
+} from '../../../state/actions';
 
 const MapSearchBar = ({ setBridgesToggle }) => {
   const dispatch = useDispatch();
@@ -14,7 +18,7 @@ const MapSearchBar = ({ setBridgesToggle }) => {
       //logic to show data in menu
       bridge.target.value ? setBridgesToggle(true) : setBridgesToggle(false);
     } else {
-      dispatch(getAllBridges());
+      dispatch(paginateBridges());
       setBridgesToggle(false);
     }
   }

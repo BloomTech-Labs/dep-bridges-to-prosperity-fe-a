@@ -12,7 +12,7 @@ export default function Pagination() {
     console.log('page:', page);
   };
   const prevPage = () => {
-    if (page >= 1) {
+    if (page > 1) {
       setPage(page - 1);
       setDisabled(disabled);
     } else {
@@ -34,23 +34,23 @@ export default function Pagination() {
   }, [dispatch, page, limit]);
 
   return (
-    // <div className="pagination-wrapper">
-    //   <button className="paginate-btn" onClick={prevPage}>
-    //     Previous Page
-    //   </button>
-    //   <input
-    //     type="number"
-    //     className="pagination-counter"
-    //     placeholder={`Current page: ${page}`}
-    //     onChange={jumpPage}
-    //   ></input>
-    //   <button className="paginate-btn" onClick={nextPage}>
-    //     {' '}
-    //     Next Page
-    //   </button>
-    // </div>
-    <div>
-      <Pagination simple />
+    <div className="pagination-wrapper">
+      <button className="paginate-btn" onClick={prevPage}>
+        Previous Page
+      </button>
+      <input
+        type="number"
+        className="pagination-counter"
+        placeholder={`Current page: ${page}`}
+        onChange={jumpPage}
+      ></input>
+      <button className="paginate-btn" onClick={nextPage}>
+        {' '}
+        Next Page
+      </button>
     </div>
+    // <div>
+    //   <Pagination simple />
+    // </div>
   );
 }
