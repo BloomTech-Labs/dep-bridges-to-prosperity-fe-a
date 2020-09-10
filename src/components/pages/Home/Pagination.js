@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { paginateBridges } from '../../../state/actions';
 export default function Pagination() {
-  const [limit, setLimit] = useState(20);
+  const [limit] = useState(20);
   const [page, setPage] = useState(1);
   const [disabled, setDisabled] = useState(false);
   let dispatch = useDispatch();
@@ -34,23 +34,23 @@ export default function Pagination() {
   }, [dispatch, page, limit]);
 
   return (
-    // <div className="pagination-wrapper">
-    //   <button className="paginate-btn" onClick={prevPage}>
-    //     Previous Page
-    //   </button>
-    //   <input
-    //     type="number"
-    //     className="pagination-counter"
-    //     placeholder={`Current page: ${page}`}
-    //     onChange={jumpPage}
-    //   ></input>
-    //   <button className="paginate-btn" onClick={nextPage}>
-    //     {' '}
-    //     Next Page
-    //   </button>
-    // </div>
-    <div>
-      <Pagination simple />
+    <div className="pagination-wrapper">
+      <button className="paginate-btn" onClick={prevPage}>
+        Previous Page
+      </button>
+      <input
+        type="number"
+        className="pagination-counter"
+        placeholder={`Current page: ${page}`}
+        onChange={jumpPage}
+      ></input>
+      <button className="paginate-btn" onClick={nextPage}>
+        {' '}
+        Next Page
+      </button>
+      {/* <div>
+        <Pagination simple />
+      </div> */}
     </div>
   );
 }

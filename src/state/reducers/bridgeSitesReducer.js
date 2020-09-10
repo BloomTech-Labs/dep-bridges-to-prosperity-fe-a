@@ -98,21 +98,21 @@ export const bridgeSitesReducer = (state = initialState, action) => {
       return {
         ...state,
 
-        bridgeData: state.bridgeData.filter(
+        paginatedData: state.bridgeData.filter(
           info =>
             info.name
               .toLowerCase()
               .trim()
-              .includes(action.payload.toLowerCase().trim()) ||
-            // info.type
-            //   .toLowerCase()
-            //   .trim()
-            //   .includes(action.payload.toLowerCase().trim())
-            // ||
-            info.stage
-              .toLowerCase()
-              .trim()
               .includes(action.payload.toLowerCase().trim())
+          // info.type
+          //   .toLowerCase()
+          //   .trim()
+          //   .includes(action.payload.toLowerCase().trim())
+          // ||
+          // info.stage
+          //   .toLowerCase()
+          //   .trim()
+          //   .includes(action.payload.toLowerCase().trim())
         ),
 
         searching: true,
