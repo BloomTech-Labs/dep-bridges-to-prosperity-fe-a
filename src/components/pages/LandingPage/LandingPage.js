@@ -10,6 +10,10 @@ const LandingPage = props => {
   const [contextState] = React.useContext(ShowExplorerContext);
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   const modalRef = React.useRef();
+  const openModal = () => {
+    // modalRef.current.testMethod();
+    modalRef.current.openModal();
+  };
 
   const dataMap = {};
   bridgeData.map((bridge, index) => {
@@ -22,11 +26,6 @@ const LandingPage = props => {
   // console.log('Datamap line 18', dataMap); //TODO Delete
   // console.log('Bridge Data line 10', bridgeData); //TODO Delete
   let visibility = contextState.show;
-
-  const openModal = () => {
-    // modalRef.current.testMethod();
-    modalRef.current.openModal();
-  };
 
   return (
     <div className={`landing-page-wrapper ${visibility}`}>
