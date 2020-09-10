@@ -4,14 +4,29 @@ import { paginateBridges } from '../../../state/actions';
 export default function Pagination() {
   const [limit, setLimit] = useState(20);
   const [page, setPage] = useState(1);
+  const [disabled, setDisabled] = useState(false);
   let dispatch = useDispatch();
   const nextPage = () => {
     setPage(page + 1);
+
     console.log('page:', page);
   };
   const prevPage = () => {
-    setPage(page - 1);
+    if (page >= 1) {
+      setPage(page - 1);
+      setDisabled(disabled);
+    } else {
+      setDisabled(true);
+    }
+
     console.log('page:', page);
+  };
+
+  const jumpPage = e => {
+    setPage({
+      page: e.target.value,
+    });
+    console.log('Jpage:', page);
   };
 
   useEffect(() => {
@@ -19,9 +34,23 @@ export default function Pagination() {
   }, [dispatch, page, limit]);
 
   return (
+    // <div className="pagination-wrapper">
+    //   <button className="paginate-btn" onClick={prevPage}>
+    //     Previous Page
+    //   </button>
+    //   <input
+    //     type="number"
+    //     className="pagination-counter"
+    //     placeholder={`Current page: ${page}`}
+    //     onChange={jumpPage}
+    //   ></input>
+    //   <button className="paginate-btn" onClick={nextPage}>
+    //     {' '}
+    //     Next Page
+    //   </button>
+    // </div>
     <div>
-      <button onClick={prevPage}>Previous Page</button>
-      <button onClick={nextPage}> Next Page</button>
+      <Pagination simple />
     </div>
   );
 }
