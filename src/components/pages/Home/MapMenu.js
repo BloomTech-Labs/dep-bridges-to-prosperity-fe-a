@@ -159,7 +159,14 @@ function MapMenu({
             View All Bridges
           </button>
         ) : (
-          <button onClick={onClear} className="view-bridges-btn">
+          <button
+            onClick={onClear}
+            className={
+              !authState.idToken
+                ? 'view-bridges-btn'
+                : 'view-bridges-btn two-view-bridges-btn'
+            }
+          >
             {/* Special clear command onClick here */}
             Clear
           </button>
