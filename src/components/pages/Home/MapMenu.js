@@ -146,21 +146,33 @@ function MapMenu({
         )}
       </section>
 
-      {!bridgesToggle ? (
-        <button onClick={toggleBridges} className="view-bridges-btn">
-          View All Bridges
-        </button>
-      ) : (
-        <button onClick={onClear} className="view-bridges-btn">
-          {/* Special clear command onClick here */}
-          Clear
-        </button>
-      )}
-      {authState.idToken ? (
-        <button className="view-bridges-btn" onClick={changeShow}>
-          Add New Bridge
-        </button>
-      ) : null}
+      <div className="vb-btn-cont">
+        {!bridgesToggle ? (
+          <button
+            onClick={toggleBridges}
+            className={
+              !authState.idToken
+                ? 'view-bridges-btn'
+                : 'view-bridges-btn two-view-bridges-btn'
+            }
+          >
+            View All Bridges
+          </button>
+        ) : (
+          <button onClick={onClear} className="view-bridges-btn">
+            {/* Special clear command onClick here */}
+            Clear
+          </button>
+        )}
+        {authState.idToken ? (
+          <button
+            className="view-bridges-btn two-view-bridges-btn"
+            onClick={changeShow}
+          >
+            Add New Bridge
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }
