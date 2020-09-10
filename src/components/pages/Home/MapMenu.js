@@ -144,23 +144,23 @@ function MapMenu({
             )}
           </>
         )}
-
-        {!bridgesToggle ? (
-          <button onClick={toggleBridges} className="view-bridges-btn">
-            View All Bridges
-          </button>
-        ) : (
-          <button onClick={onClear} className="view-bridges-btn">
-            {/* Special clear command onClick here */}
-            Clear
-          </button>
-        )}
-        {authState.idToken ? (
-          <button className="view-bridges-btn" onClick={changeShow}>
-            Add New Bridge
-          </button>
-        ) : null}
       </section>
+
+      {!bridgesToggle ? (
+        <button onClick={toggleBridges} className="view-bridges-btn">
+          View All Bridges
+        </button>
+      ) : (
+        <button onClick={onClear} className="view-bridges-btn">
+          {/* Special clear command onClick here */}
+          Clear
+        </button>
+      )}
+      {authState.idToken ? (
+        <button className="view-bridges-btn" onClick={changeShow}>
+          Add New Bridge
+        </button>
+      ) : null}
     </div>
   );
 }
