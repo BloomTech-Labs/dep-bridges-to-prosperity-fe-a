@@ -29,7 +29,11 @@ const LandingPage = props => {
 
   return (
     <div className={`landing-page-wrapper ${visibility}`}>
-      <SearchModal ref={modalRef} bridgeData={bridgeData} />
+      <SearchModal
+        ref={modalRef}
+        bridgeData={bridgeData}
+        ZoomIn={props.ZoomIn}
+      />
       <div className="landing-page-wrapper-top">
         <div className="linear-overlay">
           <br />

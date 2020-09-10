@@ -141,10 +141,10 @@ function HomeContainer() {
   return (
     <Layout>
       <div className="home-wrapper">
-        <SearchModal
+        {/* <SearchModal
           ZoomIn={ZoomIn}
           // onClear={onClear}
-        />
+        /> */}
         <LandingPage
           ZoomIn={ZoomIn}
           // onClear={onClear}

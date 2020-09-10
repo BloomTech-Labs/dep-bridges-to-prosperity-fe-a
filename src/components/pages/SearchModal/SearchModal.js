@@ -96,7 +96,7 @@ const SearchModal = React.forwardRef((props, ref) => {
             {bridgeDataFiltered.map((bridge, index) => {
               // Todo why didn't props.bridgeData work? It threw error but doesn't through when using redux
               return (
-                <>
+                <div key={index}>
                   <div
                     className="modal-bridge-unit pointer"
                     onClick={() => {
@@ -108,7 +108,7 @@ const SearchModal = React.forwardRef((props, ref) => {
                     </div>
                     <div className="modal-name">{bridge.name}</div>
                   </div>
-                </>
+                </div>
               );
             })}
           </div>
