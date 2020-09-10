@@ -99,7 +99,7 @@
           border-style: none;
           border-radius: 3px;
           color: #f4f1f1;
-          display: none;
+          // display: none;
 
           &:hover {
             background-color: @clickables-hover;
@@ -332,21 +332,30 @@
         }
 
         // MENU ADD & VIEW BRIDGES BUTTON
-        .view-bridges-btn {
-          margin-top: 10px;
-          color: #ffffff;
-          background: #05004f;
-          border-radius: 1px;
-          margin-bottom: 24px;
-          border: none;
-          height: 40px;
-          width: 100%;
-          font-size: 15px;
-          transition: 0.25s;
+        .vb-btn-cont {
+          display: flex;
+          justify-content: space-between;
 
-          &:hover {
-            background: @clickables-hover;
+          .view-bridges-btn {
+            margin-top: 10px;
+            color: #ffffff;
+            background: #05004f;
+            border-radius: 1px;
+            margin-bottom: 24px;
+            border: none;
+            height: 40px;
+            width: 100%;
+            font-size: 15px;
             transition: 0.25s;
+
+            &:hover {
+              background: @clickables-hover;
+              transition: 0.25s;
+            }
+          }
+
+          .two-view-bridges-btn {
+            width: 45%;
           }
         }
       }
