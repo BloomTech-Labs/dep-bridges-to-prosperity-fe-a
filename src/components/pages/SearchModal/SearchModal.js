@@ -21,6 +21,8 @@ const SearchModal = React.forwardRef((props, ref) => {
     // console.log('SearchString', searchString); // Works
   };
   const open = () => {
+    props.toggleBridges();
+    props.onClear();
     setDisplay(true);
   };
   const close = () => {

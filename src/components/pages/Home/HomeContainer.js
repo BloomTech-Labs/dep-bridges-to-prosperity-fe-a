@@ -147,7 +147,8 @@ function HomeContainer() {
         /> */}
         <LandingPage
           ZoomIn={ZoomIn}
-          // onClear={onClear}
+          toggleBridges={toggleBridges}
+          onClear={onClear}
         />
         {/* HAMBURGER MENU START */}
         <div className="menu-cont">

@@ -33,6 +33,8 @@ const LandingPage = props => {
         ref={modalRef}
         bridgeData={bridgeData}
         ZoomIn={props.ZoomIn}
+        toggleBridges={props.toggleBridges}
+        onClear={props.onClear}
       />
       <div className="landing-page-wrapper-top">
         <div className="linear-overlay">
