@@ -3,11 +3,12 @@ import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
 import { useSelector } from 'react-redux';
 import { BridgeList } from './BridgeList';
-
+import WelcomeComponent from './WelcomeComponent';
 import { useOktaAuth } from '@okta/okta-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import Themes from './Themes';
 // import { paginateBridges } from '../../../state/actions';
 import Pagination from './Pagination';
@@ -27,7 +28,7 @@ function MapMenu({
   onClear,
 }) {
   // Pulling in bridge data from reducer
-  const { bridgeData, paginatedData } = useSelector(
+  const { bridgeData, paginatedData, singleBridgeData } = useSelector(
     state => state.bridgeSitesReducer
   );
 
@@ -119,10 +120,7 @@ function MapMenu({
         {/* Begin toggle for information */}
         {/* first if : when bridges toggle is set off it displays the welcome */}
         {!bridgesToggle ? (
-          <div className="card">
-            <strong>Welcome to the Bridge Explorer!</strong>Here you can can
-            learn more about the 1.5k existing and prospective bridges.
-          </div>
+          <WelcomeComponent />
         ) : (
           // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
@@ -145,7 +143,7 @@ function MapMenu({
             ) : (
               //the clickedBridge
               <div className="bridges-wrapper">
-                {/* {singleBridge.length > 0 ? (
+                {singleBridgeData.length > 0 ? (
                   <BridgeList
                     ZoomIn={ZoomIn}
                     bridge={paginatedData[0]} // return singleBridge state from reducer
@@ -154,8 +152,10 @@ function MapMenu({
                     changeIsEditing={changeIsEditing}
                     onClear={onClear}
                   />
-
-                ) : <Welcome Component /> } */}
+                ) : (
+                  //loading needed here
+                  <LoadingOutlined style={{ fontSize: '85px' }} />
+                )}
               </div>
             )}
           </>
