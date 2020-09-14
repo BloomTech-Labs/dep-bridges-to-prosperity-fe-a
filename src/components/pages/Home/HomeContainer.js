@@ -103,8 +103,36 @@ function HomeContainer() {
     }
   };
 
+  //Pagination commands to be passed down to pagination page
+  const [limit] = useState(20);
+  const [page, setPage] = useState(1);
+  const [disabled, setDisabled] = useState(false);
+
+  const nextPage = () => {
+    setPage(page + 1);
+    console.log('page:', page);
+  };
+
+  const prevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      setDisabled(disabled);
+    } else {
+      setDisabled(true);
+    }
+
+    console.log('page:', page);
+  };
+
+  //work in progress
+  // const jumpPage = e => {
+  //   setPage({
+  //     page: e.target.value,
+  //   });
+  // };
+
   const toggleBridges = () => {
-    dispatch(paginateBridges(1, 20));
+    dispatch(paginateBridges(page, limit));
     //keeping for now V
     setBridgesToggle(!bridgesToggle);
   };
@@ -171,6 +199,11 @@ function HomeContainer() {
             changeShow={changeShow}
             changeIsEditing={changeIsEditing}
             onClear={onClear}
+            page={page}
+            setPage={setPage}
+            limit={limit}
+            nextPage={nextPage}
+            prevPage={prevPage}
           />
         </div>
       </div>

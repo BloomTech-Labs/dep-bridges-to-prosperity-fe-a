@@ -26,16 +26,16 @@ function MapMenu({
   changeShow,
   changeIsEditing,
   onClear,
+  page,
+  setPage,
+  limit,
+  prevPage,
+  nextPage,
 }) {
   // Pulling in bridge data from reducer
   const { bridgeData, paginatedData, singleBridgeData } = useSelector(
     state => state.bridgeSitesReducer
   );
-
-  //Grabbing functions from paginationHook
-  // const { next, prev, jump, currentPage, currentData, maxPage } = usePagination(
-  //   useDispatch(paginateBridges())
-  // );
 
   /******* TO SIGN OUT *******/
   const { authState, authService } = useOktaAuth();
@@ -143,10 +143,10 @@ function MapMenu({
             ) : (
               //the clickedBridge
               <div className="bridges-wrapper">
-                {singleBridgeData.length > 0 ? (
+                {singleBridgeData.length === 1 ? (
                   <BridgeList
                     ZoomIn={ZoomIn}
-                    bridge={paginatedData[0]} // return singleBridge state from reducer
+                    bridge={singleBridgeData[0]} // return singleBridge state from reducer
                     loggedIn={authState.idToken}
                     changeShow={changeShow}
                     changeIsEditing={changeIsEditing}
@@ -167,7 +167,13 @@ function MapMenu({
           </button>
         ) : (
           <>
-            <Pagination />
+            <Pagination
+              page={page}
+              setPage={setPage}
+              limit={limit}
+              prevPage={prevPage}
+              nextPage={nextPage}
+            />
             <button onClick={onClear} className="view-bridges-btn">
               {/* Special clear command onClick here */}
               Clear
