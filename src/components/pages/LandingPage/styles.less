@@ -31,7 +31,7 @@
   }
   .landing-page-wrapper-bottom {
     z-index: 2000;
-    position:absolute;
+    position: absolute;
     background-color: rgb(255, 255, 255);
     margin-top: 50vh;
     // position: absolute;
@@ -70,7 +70,7 @@ img {
 .region-class {
   color: black;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
 }
 
 .region-header {
@@ -80,48 +80,56 @@ img {
 .region-wrapper {
   width: 90%;
   margin: auto;
+  // border: 1px solid blue;
 }
 .region-content-wrapper {
   // width: 90%;
   margin: auto;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 25% 25% 25% 25%;
+  // grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 1rem;
+  // border: 1px solid red;
 }
 .pointer {
   cursor: pointer;
 }
-.bridge-name {
-  // position: absolute;
-  // width: 102px;
-  // height: 22px;
-  // left: 809px;
-  // top: 1022px;
-  font-family: Akkurat Pro;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 22px;
-  width: max-content;
-  /* identical to box height */
-  /* Deactivated text */
-  color: #010015;
-}
-.bridge-info {
-  // position: absolute;
-  // width: 142px;
-  // height: 22px;
-  // left: 809px;
-  // top: 1052px;
-  font-family: Akkurat Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 22px;
-  width: max-content;
-  /* identical to box height */
-  /* clickable grey */
-  color: #686b6f;
+
+.bridge-unit {
+  // border: 1px solid green;
+  
+  .bridge-name {
+    // position: absolute;
+    // width: 102px;
+    // height: 22px;
+    // left: 809px;
+    // top: 1022px;
+    font-family: Akkurat Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    width: max-content;
+    /* identical to box height */
+    /* Deactivated text */
+    color: #010015;
+  }
+  .bridge-info {
+    // position: absolute;
+    // width: 142px;
+    // height: 22px;
+    // left: 809px;
+    // top: 1052px;
+    font-family: Akkurat Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    width: max-content;
+    /* identical to box height */
+    /* clickable grey */
+    color: #686b6f;
+  }
 }
 
 .footer {
