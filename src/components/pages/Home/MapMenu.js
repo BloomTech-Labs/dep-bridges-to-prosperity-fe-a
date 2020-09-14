@@ -31,6 +31,7 @@ function MapMenu({
   limit,
   prevPage,
   nextPage,
+  pageCount,
 }) {
   // Pulling in bridge data from reducer
   const { bridgeData, paginatedData, singleBridgeData } = useSelector(

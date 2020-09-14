@@ -114,17 +114,20 @@ function HomeContainer() {
     let next = page + 1;
     dispatch(paginateBridges(next, limit));
     console.log('page:', next);
+    setPage(next);
   };
 
-  const prevPage = () => {
+  const prevPage = e => {
+    // setPage(page - 1);
     if (page > 1) {
-      setPage(page - 1);
+      let prev = page - 1;
+      dispatch(paginateBridges(prev, limit));
       setDisabled(disabled);
+      setPage(prev);
+      console.log('page:', prev);
     } else {
       setDisabled(true);
     }
-
-    console.log('page:', page);
   };
 
   //work in progress
