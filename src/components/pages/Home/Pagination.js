@@ -46,12 +46,7 @@ export default function Pagination(props) {
         placeholder={`Current page: ${page}`}
         // onChange={jumpPage}
       ></input>
-      <button
-        className="paginate-btn"
-        onClick={() => {
-          nextPage();
-        }}
-      >
+      <button className="paginate-btn" onClick={nextPage}>
         {' '}
         Next Page
       </button>

@@ -18,6 +18,7 @@ const initialState = {
   bridgeData: [],
   searchData: [],
   paginatedData: [],
+  singleBridgeData: [],
   loading: false,
   error: '',
   searching: false,
@@ -91,7 +92,7 @@ export const bridgeSitesReducer = (state = initialState, action) => {
     case GET_SINGLE_BRIDGE:
       return {
         ...state,
-        bridgeData: [action.payload],
+        singleBridgeData: [action.payload],
       };
 
     case SEARCH_BRIDGE:

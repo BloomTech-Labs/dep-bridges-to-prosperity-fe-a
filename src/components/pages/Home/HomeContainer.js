@@ -105,12 +105,15 @@ function HomeContainer() {
 
   //Pagination commands to be passed down to pagination page
   const [limit] = useState(20);
-  const [page, setPage] = useState(1);
+  let [page, setPage] = useState(1);
   const [disabled, setDisabled] = useState(false);
 
-  const nextPage = () => {
-    setPage(page + 1);
-    console.log('page:', page);
+  const nextPage = e => {
+    // e.preventDefault();
+    // setPage(page + 1);
+    let next = page + 1;
+    dispatch(paginateBridges(next, limit));
+    console.log('page:', next);
   };
 
   const prevPage = () => {

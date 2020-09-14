@@ -124,6 +124,7 @@ export const paginateBridges = (page, limit) => dispatch => {
     )
     .then(res => {
       dispatch({ type: PAGINATE_BRIDGES, payload: res.data });
+      console.log(res.data);
     })
     .catch(err => {
       dispatch({
