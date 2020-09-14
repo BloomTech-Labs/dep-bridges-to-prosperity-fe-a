@@ -155,7 +155,7 @@
             'title title title title icons'
             'title title title title .'
             'search search search search search'
-            'filters filters filters filters filters';
+            '. . . filter filter';
 
           // NAMING GRID AREAS
           .menu-title {
@@ -174,11 +174,21 @@
               justify-content: space-between;
             }
           }
+          .filter-btn-2 {
+            grid-area: filter;
+            border: 1px solid #959595;
+            border-radius: 2px;
+            font-size: 14px;
+            color: #959595;
+            padding: 3px 9px;
+
+            &:hover {
+              color: #666;
+              border: 1px solid #666;
+            }
+          }
+
           .filters {
-            grid-area: filters;
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
             display: none;
           }
 
@@ -215,25 +225,6 @@
             input {
               height: 26px;
             }
-            .filter-btn-mobile {
-              display: none;
-              align-items: center;
-              border: 1px solid #959595;
-              border-radius: 8px;
-              font-size: 14px;
-              line-height: 16px;
-              color: #959595;
-              padding: 3px 9px;
-
-              &:hover {
-                color: #666;
-                border: 1px solid #666;
-              }
-
-              @media (max-width: 500px) {
-                display: inherit;
-              }
-            }
           }
         }
 
@@ -247,7 +238,7 @@
           box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
 
           .bridges-wrapper {
-            max-height: 60vh;
+            max-height: 55vh;
             overflow: scroll;
             width: 100%;
             display: flex;
