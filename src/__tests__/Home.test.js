@@ -45,12 +45,10 @@ describe('<HomeContainer /> testing suite', () => {
         </Router>
       </Provider>
     );
-    let welcome = getByText(/Welcome to the Bridge Explorer!/i);
+    let welcome = getByText(/Search through over 250 footbridges/i);
     expect(welcome).toBeInTheDocument();
 
-    let into = getByText(
-      /Here you can can learn more about the 1.5k existing and prospective bridges./i
-    );
+    let into = getByText(/serving over 1 million community members./i);
     expect(into).toBeInTheDocument();
 
     let bridges = getByText(/View All Bridges/i);
