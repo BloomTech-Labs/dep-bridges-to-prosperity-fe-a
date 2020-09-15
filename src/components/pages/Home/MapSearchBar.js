@@ -2,11 +2,7 @@ import { Input } from 'antd';
 import filterIcon from './assets/filter-icon.svg';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  searchBridge,
-  getAllBridges,
-  paginateBridges,
-} from '../../../state/actions';
+import { searchBridge, paginateBridges } from '../../../state/actions';
 
 const MapSearchBar = ({ setBridgesToggle }) => {
   const dispatch = useDispatch();
