@@ -21,6 +21,7 @@ export function BridgeList({
       <div className="bridge-card-info">
         <div className="bridge-card-title-wrapper">
           <h2
+            style={{ cursor: 'pointer' }}
             onClick={() => {
               ZoomIn(bridge);
             }}
