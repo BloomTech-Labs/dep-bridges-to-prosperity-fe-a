@@ -9,7 +9,6 @@ export default function CountryComponent(props) {
     }
     provinces[item.province].push(item);
   });
-  // console.log('provinces', provinces);
   return (
     <>
       <div key={props.index}>
@@ -37,13 +36,10 @@ export default function CountryComponent(props) {
 }
 
 export function RegionComponent(props) {
-  // console.log('province, 32', props.provinces[props.province]); // TO DELETE
   const [len, setLen] = React.useState(11);
 
   const showMore = () => {
-    // console.log('len', len);
     setLen(props.provinces[props.province].length);
-    // console.log('len', len);
   };
   return (
     <div className="region-content-wrapper">
@@ -67,26 +63,15 @@ export function RegionComponent(props) {
 export function BridgeUnitComponent(props) {
   const [contextState, setContextState] = React.useContext(ShowExplorerContext);
   function handleClick(bridgeInfo) {
-    // alert(info.name); // Works
-    // TODO toggle landing page visibility and zoom in to and call up mapbox
-
-    // Toggle Landing Page visibility class to hidden
     setContextState(contextState => ({
       ...contextState,
       show: 'landing-page-wrapper-hidden',
     }));
     window.scrollTo(0, 0);
-    // Zoom in to marker and pull up data
     props.ZoomIn(bridgeInfo);
-    // props.onClear();
   }
   return (
-    <div
-      className="bridge-unit"
-      // onClick={() => {
-      //   handleClick(props.village);
-      // }}
-    >
+    <div className="bridge-unit">
       <div
         className="bridge-name pointer"
         onClick={() => {

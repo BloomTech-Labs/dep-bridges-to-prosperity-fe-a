@@ -11,14 +11,12 @@ const SearchModal = React.forwardRef((props, ref) => {
     return {
       openModal: () => open(),
       close: () => close(),
-      // testMethod: () => console.log('testing modal ref'),
     };
   });
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
   const handleChange = e => {
     e.preventDefault();
     setSearchString(e.target.value);
-    // console.log('SearchString', searchString); // Works
   };
   const open = () => {
     setSearchString('');
@@ -37,17 +35,8 @@ const SearchModal = React.forwardRef((props, ref) => {
     setBridgeDataFiltered(filterByValue(bridgeData));
   }, [searchString, bridgeData]);
 
-  // SO boilerplate reducer
-  // var reduced = options.reduce(function(filtered, option) {
-  //   if (option.assigned) {
-  //      var someNewValue = { name: option.name, newProperty: 'Foo' }
-  //      filtered.push(someNewValue);
-  //   }
-  //   return filtered;
-  // }, []);
-
   function filterByValue(array) {
-    // From Stack Overflow searches all keys and values at once
+    // From S/O searches all keys and values at once
     return array.filter(
       data =>
         JSON.stringify(data.name)
@@ -57,21 +46,14 @@ const SearchModal = React.forwardRef((props, ref) => {
   }
   const [contextState, setContextState] = React.useContext(ShowExplorerContext);
   function handleClick(info) {
-    // alert(info.name + ' ' + info.district);
-    //TODO
-    // Toggle Landing Page visibility class to hidden
     setContextState(contextState => ({
       ...contextState,
       show: 'landing-page-wrapper-hidden',
     }));
     window.scrollTo(0, 0);
-    // Close Search Modal
     close();
     props.ZoomIn(info);
-
-    // Zoom in to marker and pull up data
   }
-  // React.useEffect(() => {}, [searchString]);
   if (display) {
     return ReactDOM.createPortal(
       <div className={'modal-wrapper'}>
@@ -98,7 +80,6 @@ const SearchModal = React.forwardRef((props, ref) => {
             <hr />
             <br />
             {bridgeDataFiltered.map((bridge, index) => {
-              // Todo why didn't props.bridgeData work? It threw error but doesn't through when using redux
               return (
                 <div key={index}>
                   <div
