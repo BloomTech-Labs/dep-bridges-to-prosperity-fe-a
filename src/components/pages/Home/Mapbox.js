@@ -5,8 +5,18 @@ import { Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 import pinMarker from './assets/pinMarker.png';
 
-function Mapbox({ viewport, setViewport, theme, ZoomIn, changeChecked }) {
-  const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
+function Mapbox({
+  viewport,
+  setViewport,
+  theme,
+  ZoomIn,
+  changeChecked,
+  limitDisplay,
+  setLimitDisplay,
+}) {
+  const { bridgeData, paginatedData } = useSelector(
+    state => state.bridgeSitesReducer
+  );
 
   const themeChanger = () => {
     //checks local storage for mapStyle, sets proper pin color per mapstyle, waiting on brians updated pins.
@@ -37,22 +47,51 @@ function Mapbox({ viewport, setViewport, theme, ZoomIn, changeChecked }) {
         }}
         mapStyle={theme}
       >
-        {/* maps the points of the data to the map: bridges, villiages, etc. */}
-        {bridgeData?.map(bridge => {
-          return (
-            <div
-              key={bridge.id}
-              onClick={() => {
-                ZoomIn(bridge);
-                changeChecked();
-              }}
-            >
-              <Marker latitude={bridge.latitude} longitude={bridge.longitude}>
-                <Tooltip title={bridge.name}>{themeChanger()}</Tooltip>
-              </Marker>
-            </div>
-          );
-        })}
+        {!limitDisplay ? (
+          <>
+            {/* maps the points of the data to the map: bridges, villiages, etc. */}
+            {bridgeData?.map(bridge => {
+              return (
+                <div
+                  key={bridge.id}
+                  onClick={() => {
+                    ZoomIn(bridge);
+                    changeChecked();
+                  }}
+                >
+                  <Marker
+                    latitude={bridge.latitude}
+                    longitude={bridge.longitude}
+                  >
+                    <Tooltip title={bridge.name}>{themeChanger()}</Tooltip>
+                  </Marker>
+                </div>
+              );
+            })}
+          </>
+        ) : (
+          <>
+            {/* maps the points of the data to the map: bridges, villiages, etc. */}
+            {paginatedData?.map(bridge => {
+              return (
+                <div
+                  key={bridge.id}
+                  onClick={() => {
+                    ZoomIn(bridge);
+                    changeChecked();
+                  }}
+                >
+                  <Marker
+                    latitude={bridge.latitude}
+                    longitude={bridge.longitude}
+                  >
+                    <Tooltip title={bridge.name}>{themeChanger()}</Tooltip>
+                  </Marker>
+                </div>
+              );
+            })}
+          </>
+        )}
       </ReactMapGl>
     </div>
   );

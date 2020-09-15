@@ -107,8 +107,8 @@ function HomeContainer() {
   const [limit, setLimit] = useState(20);
   const [page, setPage] = useState(1);
   const [disabled, setDisabled] = useState(false);
+  const [limitDisplay, setLimitDisplay] = useState(false);
 
-  //work in progress should handle a new limit at the target values
   //passes down to the pagination page for an input
   //it works: bug: doesnt persist on the next - cant set the limit how I want
   const giveLimit = e => {
@@ -124,11 +124,8 @@ function HomeContainer() {
       let newLimit = e.target.value;
       setPage(page);
       dispatch(paginateBridges(page, newLimit));
+      setLimitDisplay(!limitDisplay);
     }
-
-    //if I set the limit (not newLimit) to anything the limit returns 20 on first
-
-    //blarhg
   };
 
   const nextPage = e => {
@@ -243,6 +240,8 @@ function HomeContainer() {
         toggleMarkerColor={toggleMarkerColor}
         changeChecked={changeChecked}
         changeMarkerClicked={changeMarkerClicked}
+        limitDisplay={limitDisplay}
+        setLimitDisplay={setLimitDisplay}
       />
       <Modal visible={show} footer={null} onCancel={cancelModal}>
         <BridgeForms
