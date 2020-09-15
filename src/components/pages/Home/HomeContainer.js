@@ -135,12 +135,17 @@ function HomeContainer() {
   //passes down to the pagination page for an input
   //it dispatches but doesn't accept the page or new limit.
   const giveLimit = e => {
-    let newLimit = setLimit({
+    //seems like state isn't updating
+    //thought this new variable would work similar to the prev/next - it...does not
+    // let newLimit =
+    setLimit({
       limit: e.target.value,
     });
     setPage(page);
-    dispatch(paginateBridges(page, newLimit));
-    console.log('new limit:', page, newLimit);
+    //if I set the limit (not newLimit) to anything the limit returns 20 on first
+    dispatch(paginateBridges(page, limit));
+    //blarhg
+    console.log('new limit:', page, limit);
   };
 
   const toggleBridges = () => {
