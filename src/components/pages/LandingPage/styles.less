@@ -1,0 +1,174 @@
+body{
+  overflow-x:hidden;
+}
+
+.landing-page-wrapper-visible {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #999;
+  // border: 10px solid red;
+  // overflow-x: hidden;
+  .landing-page-wrapper-top {
+    z-index: 2000;
+    position: absolute;
+    width: 100vw;
+    height: 50vh;
+    // border: 1px solid red;
+
+    // background-image: url('./assets/Rwanda_Suspended_Children Crossing.png');
+    background-color: rgb(255, 255, 255);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .linear-overlay {
+      // background-image: url('./assets/Rectangle.png');
+      z-index: 2001;
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .landing-page-wrapper-bottom {
+    z-index: 2000;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    margin-top: 50vh;
+    // position: absolute;
+    color: black;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // border: 1px solid blue;
+    h1 {
+      width: 90%;
+      margin: auto;
+    }
+  }
+  button {
+    background-color: rgb(207, 80, 80);
+  }
+}
+img {
+  z-index: 2001;
+}
+.landing-page-wrapper-hidden {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #999;
+  // z-index: -1;
+  visibility: hidden;
+  button {
+    background-color: rgb(207, 80, 80);
+    z-index: 2000;
+  }
+}
+
+.region-class {
+  color: black;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.region-header {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+.region-wrapper {
+  width: 90%;
+  margin: auto;
+  // border: 1px solid blue;
+}
+.region-content-wrapper {
+  // width: 90%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  // grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 1rem;
+  // border: 1px solid red;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.bridge-unit {
+  // border: 1px solid green;
+  
+  .bridge-name {
+    // position: absolute;
+    // width: 102px;
+    // height: 22px;
+    // left: 809px;
+    // top: 1022px;
+    font-family: Akkurat Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    width: max-content;
+    /* identical to box height */
+    /* Deactivated text */
+    color: #010015;
+  }
+  .bridge-info {
+    // position: absolute;
+    // width: 142px;
+    // height: 22px;
+    // left: 809px;
+    // top: 1052px;
+    font-family: Akkurat Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    width: max-content;
+    /* identical to box height */
+    /* clickable grey */
+    color: #686b6f;
+  }
+}
+
+.footer {
+  width: 90%;
+  // margin:auto;
+  margin: 3rem auto 3rem auto;
+  z-index: 2004;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  div {
+    margin-right: 3rem;
+    font-family: Akkurat Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+
+    /* Text color */
+
+    color: #1f1f1f;
+  }
+}
+
+.central-search-content {
+  img {
+    margin: 0 1rem;
+  }
+  margin-top: -50rem;
+}
+
+// *{
+//   border: 1px solid red;
+// }

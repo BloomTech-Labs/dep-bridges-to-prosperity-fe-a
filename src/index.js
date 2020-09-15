@@ -15,6 +15,8 @@ import { ExampleDataViz } from './components/pages/ExampleDataViz';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import { RegistrationPage } from './components/pages/Registration';
+import { LandingPage } from './components/pages/LandingPage';
+import { ShowExplorerProvider } from './state/context/showExplorer';
 
 // Set up Redux
 import { applyMiddleware, createStore } from 'redux';
@@ -36,11 +38,13 @@ const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </Router>
+    <ShowExplorerProvider>
+      <Router>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </Router>
+    </ShowExplorerProvider>
   </Provider>,
   document.getElementById('root')
 );
@@ -60,6 +64,7 @@ function App() {
   return (
     <Security {...config} onAuthRequired={authHandler}>
       <Switch>
+        <Route path="/landing" component={LandingPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/registration/:token" component={RegistrationPage} />
         <Route path="/implicit/callback" component={LoginCallback} />
