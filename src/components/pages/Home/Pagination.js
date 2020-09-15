@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Pagination(props) {
-  let { page, limit, giveLimit, nextPage, prevPage } = props;
+  let { limit, giveLimit, nextPage, prevPage } = props;
 
   return (
     <div className="pagination-wrapper">
@@ -11,8 +11,8 @@ export default function Pagination(props) {
       <input
         type="number"
         className="pagination-counter"
-        placeholder={`Displaying: ${limit} items`}
         onChange={giveLimit}
+        placeholder={`Displaying: ${limit} items`}
       ></input>
       <button className="paginate-btn" onClick={nextPage}>
         {' '}
