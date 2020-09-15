@@ -12,7 +12,6 @@ function Mapbox({
   ZoomIn,
   changeChecked,
   limitDisplay,
-  setLimitDisplay,
 }) {
   const { bridgeData, paginatedData } = useSelector(
     state => state.bridgeSitesReducer
@@ -50,7 +49,7 @@ function Mapbox({
         {!limitDisplay ? (
           <>
             {/* maps the points of the data to the map: bridges, villiages, etc. */}
-            {bridgeData?.map(bridge => {
+            {bridgeData.map(bridge => {
               return (
                 <div
                   key={bridge.id}
@@ -72,7 +71,7 @@ function Mapbox({
         ) : (
           <>
             {/* maps the points of the data to the map: bridges, villiages, etc. */}
-            {paginatedData?.map(bridge => {
+            {paginatedData.map(bridge => {
               return (
                 <div
                   key={bridge.id}

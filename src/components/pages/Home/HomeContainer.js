@@ -14,6 +14,7 @@ import BridgeForms from '../BridgeForms.js';
 function HomeContainer() {
   const [visible, setVisible] = useState(false);
   const [bridgesToggle, setBridgesToggle] = useState(false);
+  const [limitDisplay, setLimitDisplay] = useState(false);
 
   // One spot for default view values, so this object can be shared across components
   const originalView = {
@@ -74,6 +75,7 @@ function HomeContainer() {
       transitionDuration: 'auto',
     });
     toggleBridges();
+    setLimitDisplay(false);
   }
 
   const [markerClicked, setMarkerClicked] = useState(false);
@@ -107,7 +109,6 @@ function HomeContainer() {
   const [limit, setLimit] = useState(20);
   const [page, setPage] = useState(1);
   const [disabled, setDisabled] = useState(false);
-  const [limitDisplay, setLimitDisplay] = useState(false);
 
   //passes down to the pagination page for an input
   //it works: bug: doesnt persist on the next - cant set the limit how I want
