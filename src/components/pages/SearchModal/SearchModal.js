@@ -21,6 +21,7 @@ const SearchModal = React.forwardRef((props, ref) => {
     // console.log('SearchString', searchString); // Works
   };
   const open = () => {
+    setSearchString('');
     props.toggleBridges();
     props.onClear();
     setDisplay(true);
@@ -31,6 +32,7 @@ const SearchModal = React.forwardRef((props, ref) => {
   const [bridgeDataFiltered, setBridgeDataFiltered] = React.useState(
     bridgeData
   );
+
   React.useEffect(() => {
     setBridgeDataFiltered(filterByValue(bridgeData));
   }, [searchString, bridgeData]);

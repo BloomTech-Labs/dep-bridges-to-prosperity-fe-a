@@ -139,7 +139,7 @@ function HomeContainer() {
   };
 
   return (
-    <Layout>
+    <Layout onClear={onClear} toggleBridges={toggleBridges}>
       <div className="home-wrapper">
         {/* <SearchModal
           ZoomIn={ZoomIn}

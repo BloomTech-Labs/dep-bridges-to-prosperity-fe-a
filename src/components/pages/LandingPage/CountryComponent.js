@@ -66,7 +66,7 @@ export function RegionComponent(props) {
 
 export function BridgeUnitComponent(props) {
   const [contextState, setContextState] = React.useContext(ShowExplorerContext);
-  function handleClick(info) {
+  function handleClick(bridgeInfo) {
     // alert(info.name); // Works
     // TODO toggle landing page visibility and zoom in to and call up mapbox
 
@@ -77,7 +77,7 @@ export function BridgeUnitComponent(props) {
     }));
     window.scrollTo(0, 0);
     // Zoom in to marker and pull up data
-    props.ZoomIn(info);
+    props.ZoomIn(bridgeInfo);
     // props.onClear();
   }
   return (

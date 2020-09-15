@@ -8,12 +8,20 @@ import { SearchModal } from '../SearchModal';
 // Here is an example of using our reusable List component to display some list data to the UI.
 const LandingPage = props => {
   const [contextState] = React.useContext(ShowExplorerContext);
+  // const [bridgeData, setBridgeData] = React.useState([]);
+  // setBridgeData(useSelector(state => state.bridgeSitesReducer));
   const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
+
   const modalRef = React.useRef();
+  let visibility = contextState.show;
+
   const openModal = () => {
     // modalRef.current.testMethod();
     modalRef.current.openModal();
   };
+  // React.useEffect(() => {
+  //   // setBridgeData(bridgeData);
+  // }, []);
 
   const dataMap = {};
   bridgeData.map((bridge, index) => {
@@ -25,7 +33,6 @@ const LandingPage = props => {
   });
   // console.log('Datamap line 18', dataMap); //TODO Delete
   // console.log('Bridge Data line 10', bridgeData); //TODO Delete
-  let visibility = contextState.show;
 
   return (
     <div className={`landing-page-wrapper ${visibility}`}>
@@ -68,13 +75,6 @@ const LandingPage = props => {
           );
         })}
       </div>
-      {/* <div className="footer"> */}
-      {/* WHy does this not show??? */}
-      {/* <hr /> */}
-      {/* <h1>This will be the footer</h1> */}
-
-      {/* <div>This will be the footer</div> */}
-      {/* </div> */}
     </div>
   );
 };

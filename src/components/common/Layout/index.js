@@ -3,7 +3,7 @@ import './styles.less';
 import logo from './logo.png';
 import { ShowExplorerContext } from '../../../state/context/showExplorer';
 
-export default function Layout({ children }) {
+export default function Layout({ children, onClear, toggleBridges }) {
   const [contextState, setContextState] = React.useContext(ShowExplorerContext);
 
   // const toggle = e => {   // SUPERCEDED BY SEPARATE BUTTONS
@@ -28,6 +28,10 @@ export default function Layout({ children }) {
         ...contextState,
         show: 'landing-page-wrapper-visible',
       }));
+      onClear();
+      // console.log('Calling onClear', onClear);
+      toggleBridges();
+      // console.log('Calling toggle bridges', toggleBridges);
     }
   };
 
