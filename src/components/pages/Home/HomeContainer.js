@@ -10,6 +10,7 @@ import { Modal } from 'antd';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
 import BridgeForms from '../BridgeForms.js';
+import { LeftSquareTwoTone } from '@ant-design/icons';
 
 function HomeContainer() {
   const [visible, setVisible] = useState(false);
@@ -104,8 +105,8 @@ function HomeContainer() {
   };
 
   //Pagination commands to be passed down to pagination page
-  const [limit] = useState(20);
-  let [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(20);
+  const [page, setPage] = useState(1);
   const [disabled, setDisabled] = useState(false);
 
   const nextPage = e => {
@@ -130,12 +131,17 @@ function HomeContainer() {
     }
   };
 
-  //work in progress
-  // const jumpPage = e => {
-  //   setPage({
-  //     page: e.target.value,
-  //   });
-  // };
+  //work in progress should handle a new limit at the target values
+  //passes down to the pagination page for an input
+  //it dispatches but doesn't accept the page or new limit.
+  const giveLimit = e => {
+    let newLimit = setLimit({
+      limit: e.target.value,
+    });
+    setPage(page);
+    dispatch(paginateBridges(page, newLimit));
+    console.log('new limit:', page, newLimit);
+  };
 
   const toggleBridges = () => {
     dispatch(paginateBridges(page, limit));
@@ -208,6 +214,7 @@ function HomeContainer() {
             page={page}
             setPage={setPage}
             limit={limit}
+            giveLimit={giveLimit}
             nextPage={nextPage}
             prevPage={prevPage}
           />

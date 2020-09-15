@@ -29,9 +29,9 @@ function MapMenu({
   page,
   setPage,
   limit,
+  giveLimit,
   prevPage,
   nextPage,
-  pageCount,
 }) {
   // Pulling in bridge data from reducer
   const { bridgeData, paginatedData, singleBridgeData } = useSelector(
@@ -172,6 +172,7 @@ function MapMenu({
               page={page}
               setPage={setPage}
               limit={limit}
+              giveLimit={giveLimit}
               prevPage={prevPage}
               nextPage={nextPage}
             />
