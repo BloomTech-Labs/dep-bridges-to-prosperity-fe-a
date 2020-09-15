@@ -10,7 +10,6 @@ import { Modal } from 'antd';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
 import BridgeForms from '../BridgeForms.js';
-import { LeftSquareTwoTone } from '@ant-design/icons';
 
 function HomeContainer() {
   const [visible, setVisible] = useState(false);
@@ -109,6 +108,30 @@ function HomeContainer() {
   const [page, setPage] = useState(1);
   const [disabled, setDisabled] = useState(false);
 
+  //work in progress should handle a new limit at the target values
+  //passes down to the pagination page for an input
+  //it works: bug: doesnt persist on the next - cant set the limit how I want
+  const giveLimit = e => {
+    e.preventDefault();
+    if (
+      e.target.value <= 0 ||
+      e.target.value === '' ||
+      e.target.value === null
+    ) {
+      //if 0 or less just repaginate to default
+      dispatch(paginateBridges(page, limit));
+    } else {
+      //set the limit and display the new limit on dispatch
+      let newLimit = e.target.value;
+      setPage(page);
+      dispatch(paginateBridges(page, newLimit));
+    }
+
+    //if I set the limit (not newLimit) to anything the limit returns 20 on first
+
+    //blarhg
+  };
+
   const nextPage = e => {
     // e.preventDefault();
     // setPage(page + 1);
@@ -129,23 +152,6 @@ function HomeContainer() {
     } else {
       setDisabled(true);
     }
-  };
-
-  //work in progress should handle a new limit at the target values
-  //passes down to the pagination page for an input
-  //it dispatches but doesn't accept the page or new limit.
-  const giveLimit = e => {
-    //seems like state isn't updating
-    //thought this new variable would work similar to the prev/next - it...does not
-    // let newLimit =
-    setLimit({
-      limit: e.target.value,
-    });
-    setPage(page);
-    //if I set the limit (not newLimit) to anything the limit returns 20 on first
-    dispatch(paginateBridges(page, limit));
-    //blarhg
-    console.log('new limit:', page, limit);
   };
 
   const toggleBridges = () => {
@@ -222,6 +228,7 @@ function HomeContainer() {
             giveLimit={giveLimit}
             nextPage={nextPage}
             prevPage={prevPage}
+            setLimit={setLimit}
           />
         </div>
       </div>

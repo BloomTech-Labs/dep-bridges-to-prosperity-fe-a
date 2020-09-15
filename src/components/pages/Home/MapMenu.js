@@ -32,6 +32,7 @@ function MapMenu({
   giveLimit,
   prevPage,
   nextPage,
+  setLimit,
 }) {
   // Pulling in bridge data from reducer
   const { bridgeData, paginatedData, singleBridgeData } = useSelector(
@@ -175,6 +176,7 @@ function MapMenu({
               giveLimit={giveLimit}
               prevPage={prevPage}
               nextPage={nextPage}
+              setLimit={setLimit}
             />
             <button onClick={onClear} className="view-bridges-btn">
               {/* Special clear command onClick here */}
