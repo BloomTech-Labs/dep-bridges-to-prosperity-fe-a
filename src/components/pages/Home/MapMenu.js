@@ -126,6 +126,15 @@ function MapMenu({
         ) : (
           // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
+            <Pagination
+              page={page}
+              setPage={setPage}
+              limit={limit}
+              giveLimit={giveLimit}
+              prevPage={prevPage}
+              nextPage={nextPage}
+              setLimit={setLimit}
+            />
             {paginatedData?.length > 0 ? (
               <div className="bridges-wrapper">
                 {paginatedData?.map(bridge => (
@@ -169,15 +178,6 @@ function MapMenu({
           </button>
         ) : (
           <>
-            <Pagination
-              page={page}
-              setPage={setPage}
-              limit={limit}
-              giveLimit={giveLimit}
-              prevPage={prevPage}
-              nextPage={nextPage}
-              setLimit={setLimit}
-            />
             <button onClick={onClear} className="view-bridges-btn">
               {/* Special clear command onClick here */}
               Clear

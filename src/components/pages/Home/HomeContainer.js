@@ -112,7 +112,6 @@ function HomeContainer() {
   //passes down to the pagination page for an input
   //it works: bug: doesnt persist on the next - cant set the limit how I want
   const giveLimit = e => {
-    e.preventDefault();
     if (
       e.target.value <= 0 ||
       e.target.value === '' ||
