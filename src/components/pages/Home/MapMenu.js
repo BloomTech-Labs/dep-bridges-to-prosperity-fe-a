@@ -61,11 +61,10 @@ function MapMenu({
   return (
     <div className="menu-wrapper">
       <section className="search-menu">
-        <div className="menu-header">
+        <div className="theme-search-icons">
           {!toggleThemes ? (
             <Tooltip title="Change theme">
               <FontAwesomeIcon
-                className="theme-search-icons"
                 icon={faPalette}
                 onClick={() => {
                   themeClick();
@@ -75,7 +74,6 @@ function MapMenu({
           ) : (
             <Tooltip title="Search Location">
               <FontAwesomeIcon
-                className="theme-search-icons"
                 icon={faSearch}
                 onClick={() => {
                   themeClick(false);
@@ -83,30 +81,34 @@ function MapMenu({
               />
             </Tooltip>
           )}
-          <h2>Bridge Explorer</h2>
-          <div className="sign-in">
-            {authState.idToken ? (
-              <button className="sign-in-btn" onClick={logout}>
-                sign out
-              </button>
-            ) : (
-              <button className="sign-in-btn">
-                <a href="/login">sign in</a>
-              </button>
-            )}
-          </div>
         </div>
-
-        {!toggleThemes ? (
-          <MapSearchBar
-            bridgeData={bridgeData}
-            setBridgesToggle={setBridgesToggle}
-            onClear={onClear}
-            setViewport={setViewport}
-          />
-        ) : (
-          <Themes changeTheme={changeTheme} />
-        )}
+        <h3 className="menu-title">
+          Search through over 250 footbridges serving over 1 million community
+          members.
+        </h3>
+        <div className="sign-in">
+          {authState.idToken ? (
+            <button className="sign-in-btn" onClick={logout}>
+              sign out
+            </button>
+          ) : (
+            <button className="sign-in-btn">
+              <a href="/login">sign in</a>
+            </button>
+          )}
+        </div>
+        <div className="search-bar">
+          {!toggleThemes ? (
+            <MapSearchBar
+              bridgeData={bridgeData}
+              setBridgesToggle={setBridgesToggle}
+              onClear={onClear}
+              setViewport={setViewport}
+            />
+          ) : (
+            <Themes changeTheme={changeTheme} />
+          )}
+        </div>
 
         <div className="filters">
           <button className="filter-btn">Province</button>
@@ -171,25 +173,42 @@ function MapMenu({
             )}
           </>
         )}
+      </section>
 
+      <div className="vb-btn-cont">
         {!bridgesToggle ? (
-          <button onClick={toggleBridges} className="view-bridges-btn">
+          <button
+            onClick={toggleBridges}
+            className={
+              !authState.idToken
+                ? 'view-bridges-btn'
+                : 'view-bridges-btn two-view-bridges-btn'
+            }
+          >
             View All Bridges
           </button>
         ) : (
-          <>
-            <button onClick={onClear} className="view-bridges-btn">
-              {/* Special clear command onClick here */}
-              Clear
-            </button>
-          </>
+          <button
+            onClick={onClear}
+            className={
+              !authState.idToken
+                ? 'view-bridges-btn'
+                : 'view-bridges-btn two-view-bridges-btn'
+            }
+          >
+            {/* Special clear command onClick here */}
+            Clear
+          </button>
         )}
         {authState.idToken ? (
-          <button className="view-bridges-btn" onClick={changeShow}>
+          <button
+            className="view-bridges-btn two-view-bridges-btn"
+            onClick={changeShow}
+          >
             Add New Bridge
           </button>
         ) : null}
-      </section>
+      </div>
     </div>
   );
 }

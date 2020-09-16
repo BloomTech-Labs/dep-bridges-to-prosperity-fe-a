@@ -33,7 +33,7 @@ function BridgeFormEdit({ bridge, authState, changeIsEditing, changeShow }) {
     );
 
     // deleting communities served array from sent data
-    delete newBridge['communitiesServed'];
+    delete newBridge['communities_served'];
 
     dispatch(editBridge(newBridge, authState.idToken));
     window.localStorage.removeItem('bridge');

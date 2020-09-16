@@ -1,0 +1,98 @@
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3500;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3500;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: red;
+}
+.modal-box {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 70%;
+  width: 60%;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 3505;
+  overflow-y: auto;
+  .close-x {
+    float: right;
+  }
+}
+
+.modal-bridge-area {
+  margin: 10rem;
+  textarea:focus,
+  input:focus {
+    outline: none;
+  }
+  input {
+    width: 100%;
+    border: 0px solid;
+    font-family: Akkurat Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 31px;
+    /* identical to box height */
+
+    /* #959595 - Mid Grey 2 */
+
+    color: #959595;
+  }
+}
+
+.modal-district-country {
+
+  font-family: Akkurat Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height */
+
+  /* Text color */
+
+  color: #1f1f1f;
+}
+
+.modal-bridge-unit {
+  // display:flex;
+  margin: 1rem 0;
+  width: max-content;
+
+}
+
+.modal-name {
+
+
+  font-family: Akkurat Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+
+  /* Text color */
+
+  color: #1f1f1f;
+}
+.modal-navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.MODAL .pointer {
+  cursor: pointer;
+}

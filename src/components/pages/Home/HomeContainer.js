@@ -10,6 +10,9 @@ import { Modal } from 'antd';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
 import BridgeForms from '../BridgeForms.js';
+import { LandingPage } from '../../pages/LandingPage';
+import Layout from '../../common/Layout';
+import { SearchModal } from '../SearchModal';
 
 function HomeContainer() {
   const [visible, setVisible] = useState(false);
@@ -183,39 +186,66 @@ function HomeContainer() {
   };
 
   // Passing down to MapBox, when Marker is pressed menu toggle will be set to checked
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const changeChecked = () => {
     setChecked(true);
   };
 
   return (
-    <div className="home-wrapper">
-      {/* HAMBURGER MENU START */}
-      <div className="menu-cont">
-        <input
-          type="checkbox"
-          className="toggle"
-          checked={checked}
-          onChange={() => setChecked(!checked)}
+    <Layout onClear={onClear} toggleBridges={toggleBridges}>
+      <div className="home-wrapper">
+        <LandingPage
+          ZoomIn={ZoomIn}
+          toggleBridges={toggleBridges}
+          onClear={onClear}
         />
-        <div className="hamburger">
-          <div></div>
-        </div>
-        <div className="menu">
-          {/* Passing down functions and bridge data to 
+        {/* HAMBURGER MENU START */}
+        <div className="menu-cont">
+          <input
+            type="checkbox"
+            className="toggle"
+            checked={checked}
+            onChange={() => setChecked(!checked)}
+          />
+          <div className="hamburger">
+            <div></div>
+          </div>
+          <div className="menu">
+            {/* Passing down functions and bridge data to 
       assist sorting through the bridge data */}
-          <MapMenu
-            toggleBridges={toggleBridges}
-            bridgeData={bridgeData}
-            bridgesToggle={bridgesToggle}
-            visible={visible}
-            setViewport={setViewport}
-            originalView={originalView}
-            setBridgesToggle={setBridgesToggle}
-            setTheme={setTheme}
-            ZoomIn={ZoomIn}
-            changeTheme={changeTheme}
+            <MapMenu
+              toggleBridges={toggleBridges}
+              bridgeData={bridgeData}
+              bridgesToggle={bridgesToggle}
+              visible={visible}
+              setViewport={setViewport}
+              originalView={originalView}
+              setBridgesToggle={setBridgesToggle}
+              setTheme={setTheme}
+              ZoomIn={ZoomIn}
+              changeTheme={changeTheme}
+              changeShow={changeShow}
+              changeIsEditing={changeIsEditing}
+              onClear={onClear}
+            />
+          </div>
+        </div>
+        <Mapbox
+          clickMarker={clickMarker}
+          visible={visible}
+          setVisible={setVisible}
+          viewport={viewport}
+          setViewport={setViewport}
+          theme={theme}
+          setTheme={setTheme}
+          ZoomIn={ZoomIn}
+          toggleMarkerColor={toggleMarkerColor}
+          changeChecked={changeChecked}
+          changeMarkerClicked={changeMarkerClicked}
+        />
+        <Modal visible={show} footer={null} onCancel={cancelModal}>
+          <BridgeForms
             changeShow={changeShow}
             changeIsEditing={changeIsEditing}
             onClear={onClear}
@@ -226,8 +256,9 @@ function HomeContainer() {
             nextPage={nextPage}
             prevPage={prevPage}
             setLimit={setLimit}
+            isEditing={isEditing}
           />
-        </div>
+        </Modal>
       </div>
       <Mapbox
         clickMarker={clickMarker}
@@ -251,7 +282,7 @@ function HomeContainer() {
           isEditing={isEditing}
         />
       </Modal>
-    </div>
+    </Layout>
   );
 }
 

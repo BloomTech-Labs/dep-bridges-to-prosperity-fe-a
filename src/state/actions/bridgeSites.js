@@ -29,6 +29,7 @@ export const getSingleBridge = bridge => dispatch => {
 };
 
 export const getAllBridges = () => dispatch => {
+  let apiURL = 'https://bridges-a-api.herokuapp.com/bridges';
   dispatch({
     type: GET_BRIDGE_DATA_START,
   });
@@ -93,10 +94,16 @@ export const editBridge = (bridge, idToken) => dispatch => {
   });
   axiosWithAuth(idToken)
     .patch(`/bridges/${bridge.id}`, bridge)
-    .then(res => {
-      dispatch({
-        type: EDIT_BRIDGE_DATA_SUCCESS,
-        payload: res.data,
+    .then(() => {
+      axios.get(process.env.REACT_APP_API_URI + '/bridges/all').then(res => {
+        dispatch({
+          type: GET_BRIDGE_DATA_SUCCESS,
+          payload: res.data.filter(site => site.latitude && site.longitude),
+        });
+        dispatch({
+          type: EDIT_BRIDGE_DATA_SUCCESS,
+          payload: res.data,
+        });
       });
     })
     .catch(err => {
