@@ -162,7 +162,7 @@ function MapMenu({
             ) : (
               //the clickedBridge
               <div className="bridges-wrapper">
-                {singleBridgeData.length === 1 ? (
+                {singleBridgeData ? (
                   <BridgeList
                     ZoomIn={ZoomIn}
                     bridge={singleBridgeData[0]} // return singleBridge state from reducer
