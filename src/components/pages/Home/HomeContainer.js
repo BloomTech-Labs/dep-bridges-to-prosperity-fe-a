@@ -36,7 +36,7 @@ function HomeContainer() {
   const [theme, setTheme] = useState(
     localStorage.getItem('mapStyle')
       ? localStorage.getItem('mapStyle')
-      : 'mapbox://styles/jameslcarpino/ckej1e5b546o019mmuazc08ko'
+      : 'mapbox://styles/bridgestoprosperity/ckf5rc0ty07fy1aphplybpubm'
   );
   const [toggleMarkerColor, setToggleMarkerColor] = useState(false);
 
@@ -47,9 +47,9 @@ function HomeContainer() {
     //sets the theme
     localStorage.setItem(
       'mapStyle',
-      `mapbox://styles/jameslcarpino/${changeStyle}`
+      `mapbox://styles/bridgestoprosperity/${changeStyle}`
     );
-    setTheme(`mapbox://styles/jameslcarpino/${changeStyle}`);
+    setTheme(`mapbox://styles/bridgestoprosperity/${changeStyle}`);
     setToggleMarkerColor(!toggleMarkerColor);
   };
 

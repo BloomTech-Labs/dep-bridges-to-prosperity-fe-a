@@ -21,7 +21,7 @@ function Mapbox({
     //checks local storage for mapStyle, sets proper pin color per mapstyle, waiting on brians updated pins.
     if (
       localStorage.getItem('mapStyle') ===
-      'mapbox://styles/jameslcarpino/ckebr24rw1fs91an1h6e52vij'
+      'mapbox://styles/bridgestoprosperity/ckf5rc0ty07fy1aphplybpubm'
     ) {
       return (
         //brians marker - test
