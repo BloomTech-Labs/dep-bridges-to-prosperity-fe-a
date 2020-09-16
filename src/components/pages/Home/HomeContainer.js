@@ -127,6 +127,7 @@ function HomeContainer() {
       //set the limit and display the new limit on dispatch
       let newLimit = e.target.value;
       setPage(page);
+      setLimit(newLimit);
       dispatch(paginateBridges(page, newLimit));
       setLimitDisplay(!limitDisplay);
     }
@@ -228,6 +229,15 @@ function HomeContainer() {
               changeShow={changeShow}
               changeIsEditing={changeIsEditing}
               onClear={onClear}
+              page={page}
+              setPage={setPage}
+              limit={limit}
+              giveLimit={giveLimit}
+              nextPage={nextPage}
+              prevPage={prevPage}
+              setLimit={setLimit}
+              isEditing={isEditing}
+              loading={loading}
             />
           </div>
         </div>

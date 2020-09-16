@@ -33,6 +33,7 @@ function MapMenu({
   prevPage,
   nextPage,
   setLimit,
+  loading,
 }) {
   // Pulling in bridge data from reducer
   const { bridgeData, paginatedData, singleBridgeData } = useSelector(
@@ -128,31 +129,36 @@ function MapMenu({
         ) : (
           // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
-            <Pagination
-              page={page}
-              setPage={setPage}
-              limit={limit}
-              giveLimit={giveLimit}
-              prevPage={prevPage}
-              nextPage={nextPage}
-              setLimit={setLimit}
-            />
-            {paginatedData?.length > 0 ? (
-              <div className="bridges-wrapper">
-                {paginatedData?.map(bridge => (
-                  <div key={bridge.id}>
-                    <BridgeList
-                      bridge={bridge}
-                      loggedIn={authState.idToken}
-                      ZoomIn={ZoomIn}
-                      changeShow={changeShow}
-                      changeIsEditing={changeIsEditing}
-                      toggleBridges={toggleBridges}
-                      onClear={onClear}
-                    />
-                  </div>
-                ))}
-              </div>
+            {!loading ? (
+              <>
+                <Pagination
+                  page={page}
+                  setPage={setPage}
+                  limit={limit}
+                  giveLimit={giveLimit}
+                  prevPage={prevPage}
+                  nextPage={nextPage}
+                  setLimit={setLimit}
+                  loading={loading}
+                />
+                {/* // {paginatedData?.length > 0 ? ( */}
+
+                <div className="bridges-wrapper">
+                  {paginatedData?.map(bridge => (
+                    <div key={bridge.id}>
+                      <BridgeList
+                        bridge={bridge}
+                        loggedIn={authState.idToken}
+                        ZoomIn={ZoomIn}
+                        changeShow={changeShow}
+                        changeIsEditing={changeIsEditing}
+                        toggleBridges={toggleBridges}
+                        onClear={onClear}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
             ) : (
               //the clickedBridge
               <div className="bridges-wrapper">

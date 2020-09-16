@@ -16,11 +16,11 @@ export default function Pagination(props) {
           Previous Page
         </LeftOutlined>
       </Tooltip>
-      <Tooltip title="set display number">
+      <Tooltip title="change amount shown by hitting enter">
         <Input
           size="medium"
           className="pagination-counter"
-          onChange={giveLimit}
+          onPressEnter={giveLimit}
           placeholder={`Page ${page} showing ${limit} sites`}
           style={{
             width: '200px',

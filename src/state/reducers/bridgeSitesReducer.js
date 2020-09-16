@@ -12,6 +12,7 @@ import {
   SEARCH_BRIDGE,
   PAGINATE_BRIDGES,
   PAGINATE_BRIDGES_FAILURE,
+  PAGINATE_BRIDGES_LOADING,
 } from '../actions';
 
 const initialState = {
@@ -99,25 +100,20 @@ export const bridgeSitesReducer = (state = initialState, action) => {
       return {
         ...state,
 
-        paginatedData: state.bridgeData.filter(
-          info =>
-            info.name
-              .toLowerCase()
-              .trim()
-              .includes(action.payload.toLowerCase().trim())
-          // info.type
-          //   .toLowerCase()
-          //   .trim()
-          //   .includes(action.payload.toLowerCase().trim())
-          // ||
-          // info.stage
-          //   .toLowerCase()
-          //   .trim()
-          //   .includes(action.payload.toLowerCase().trim())
+        paginatedData: state.bridgeData.filter(info =>
+          info.name
+            .toLowerCase()
+            .trim()
+            .includes(action.payload.toLowerCase().trim())
         ),
-
-        searching: true,
       };
+
+    case PAGINATE_BRIDGES_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+
     case PAGINATE_BRIDGES_FAILURE:
       return {
         ...state,
