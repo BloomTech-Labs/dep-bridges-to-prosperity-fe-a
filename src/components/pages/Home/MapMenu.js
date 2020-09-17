@@ -57,6 +57,7 @@ function MapMenu({
 
   const cancelModal = () => {
     setShow(false);
+    // toggleBridges();
   };
 
   return (

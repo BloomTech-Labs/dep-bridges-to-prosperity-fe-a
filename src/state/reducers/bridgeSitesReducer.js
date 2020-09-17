@@ -118,7 +118,45 @@ export const bridgeSitesReducer = (state = initialState, action) => {
       return {
         ...state,
         bridgeData: state.bridgeData.filter(bridge => {
-          if (bridge.stage.toLowerCase().trim() in action.payload === true) {
+          const bridgeEntries = Object.entries(bridge);
+          let cache = action.payload;
+
+          let stage = bridge.stage
+            .toString()
+            .toLowerCase()
+            .trim();
+          let type = bridge.type
+            .toString()
+            .toLowerCase()
+            .trim();
+          let province = bridge.province
+            .toString()
+            .toLowerCase()
+            .trim();
+          let sub_stage = bridge.sub_stage
+            .toString()
+            .toLowerCase()
+            .trim();
+          let communities_served = bridge.communities_served.length;
+
+          if (cache['any range']) {
+            communities_served = 'any range';
+          } else if (communities_served >= 5) {
+            communities_served = 5;
+            if (communities_served >= 10) {
+              communities_served = 10;
+            }
+          } else if (communities_served < 5) {
+            communities_served = 0;
+          }
+
+          if (
+            stage in cache ||
+            type in cache ||
+            province in cache ||
+            sub_stage in cache ||
+            communities_served in cache
+          ) {
             return bridge;
           }
         }),
