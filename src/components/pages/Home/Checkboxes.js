@@ -127,7 +127,11 @@ const Checkboxes = ({ toggleBridges, cancelModal }) => {
           </li>
         </ul>
       </section>
-      <button onClick={filter}>Filter</button>
+      <div className="filter-cont">
+        <button className="submit" onClick={filter}>
+          Filter
+        </button>
+      </div>
     </>
   );
 };

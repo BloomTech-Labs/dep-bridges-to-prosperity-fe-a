@@ -1,4 +1,5 @@
 // VARS
+@btn-text: #f4f1f1;
 @renewal-green: #009149;
 @clickables: #05004f;
 @clickables-hover: #08007a;
@@ -101,7 +102,7 @@
           padding: 2px 8px 5px;
           border-style: none;
           border-radius: 3px;
-          color: #f4f1f1;
+          color: @btn-text;
           display: none;
 
           &:hover {
@@ -110,7 +111,7 @@
         }
 
         a {
-          color: #f4f1f1;
+          color: @btn-text;
         }
       }
 
@@ -333,7 +334,7 @@
           .view-bridges-btn {
             margin-top: 10px;
             color: #ffffff;
-            background: #05004f;
+            background: @clickables;
             border-radius: 1px;
             border: none;
             height: 40px;
@@ -365,6 +366,26 @@
         width: 20px;
         height: 20px;
       }
+    }
+  }
+}
+
+.filter-cont {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  .submit {
+    background-color: @clickables;
+    border-style: none;
+    border-radius: 3px;
+    color: @btn-text;
+    padding: 0.5rem 1.5rem;
+    transition: 0.25s;
+
+    &:hover {
+      background-color: @clickables-hover;
+      transition: 0.25s;
     }
   }
 }
