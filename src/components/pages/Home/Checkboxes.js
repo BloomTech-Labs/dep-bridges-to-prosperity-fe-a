@@ -1,33 +1,58 @@
-import { Checkbox } from 'antd';
 import React from 'react';
+import { Checkbox } from 'antd';
+import { useDispatch } from 'react-redux';
+import { filterData, unfilter } from '../../../state/actions';
 
-const Checkboxes = () => {
+const Checkboxes = ({ toggleBridges }) => {
+  const dispatch = useDispatch();
+  const onChange = e => {
+    if (e.target.checked === false) {
+      dispatch(unfilter(e.target.name));
+      toggleBridges();
+    }
+    dispatch(filterData(e.target.name));
+    toggleBridges();
+    console.log(`checked = ${e.target.name}`);
+  };
+
   return (
-    <section style={{ display: 'flex' }}>
-      {/* BUILD STATUS */}
+    <section>
       <ul style={{ listStyle: 'none' }}>
+        {/* BUILD STATUS */}
         <h3>Build Status</h3>
         <li>
-          <Checkbox>Accepted</Checkbox>
+          <Checkbox name="accepted" onChange={onChange}>
+            Accepted
+          </Checkbox>
         </li>
         <li>
-          <Checkbox>I'm a checkbox</Checkbox>
+          <Checkbox name="rejected" onChange={onChange}>
+            Rejected
+          </Checkbox>
         </li>
       </ul>
       {/* COMMUNITIES SERVED */}
       <ul style={{ listStyle: 'none' }}>
         <h3>Communities Served</h3>
         <li>
-          <Checkbox>Any Range</Checkbox>
+          <Checkbox name="any range" onChange={onChange}>
+            Any Range
+          </Checkbox>
         </li>
         <li>
-          <Checkbox>0-5</Checkbox>
+          <Checkbox name="0-5" onChange={onChange}>
+            0-5
+          </Checkbox>
         </li>
         <li>
-          <Checkbox>5+</Checkbox>
+          <Checkbox name="5+" onChange={onChange}>
+            5+
+          </Checkbox>
         </li>
         <li>
-          <Checkbox>10+</Checkbox>
+          <Checkbox name="10+" onChange={onChange}>
+            10+
+          </Checkbox>
         </li>
       </ul>
     </section>

@@ -121,7 +121,7 @@ function MapMenu({
             <button>Filter</button>,
           ]}
         >
-          <Checkboxes />
+          <Checkboxes bridgeData={bridgeData} toggleBridges={toggleBridges} />
         </Modal>
 
         <div className="filters">

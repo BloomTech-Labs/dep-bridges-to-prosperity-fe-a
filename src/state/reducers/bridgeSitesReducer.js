@@ -10,6 +10,8 @@ import {
   EDIT_BRIDGE_DATA_FAILURE,
   GET_SINGLE_BRIDGE,
   SEARCH_BRIDGE,
+  FILTER_DATA,
+  UNFILTER,
 } from '../actions';
 
 const initialState = {
@@ -111,6 +113,27 @@ export const bridgeSitesReducer = (state = initialState, action) => {
               .includes(action.payload.toLowerCase().trim())
         ),
         searching: true,
+      };
+
+    case FILTER_DATA:
+      return {
+        ...state,
+        bridgeData: state.bridgeData.filter(bridge =>
+          bridge.stage
+            .toLowerCase()
+            .trim()
+            .includes(action.payload.toLowerCase().trim())
+        ),
+      };
+
+    case UNFILTER:
+      return {
+        ...state,
+        bridgeData: state.bridgeData.filter(bridge => {
+          if (action.payload.toLowerCase().trim() != bridge.stage) {
+            return bridge;
+          }
+        }),
       };
 
     default:
