@@ -118,9 +118,9 @@ export const bridgeSitesReducer = (state = initialState, action) => {
       return {
         ...state,
         bridgeData: state.bridgeData.filter(bridge => {
-          const bridgeEntries = Object.entries(bridge);
           let cache = action.payload;
 
+          // DEFINING VARS FOR ALL POSSIBLE FILTERS
           let stage = bridge.stage
             .toString()
             .toLowerCase()
@@ -139,6 +139,7 @@ export const bridgeSitesReducer = (state = initialState, action) => {
             .trim();
           let communities_served = bridge.communities_served.length;
 
+          // DEFINING COMMUNITIES SERVED FILTER RANGE
           if (cache['any range']) {
             communities_served = 'any range';
           } else if (communities_served >= 5) {
@@ -150,6 +151,8 @@ export const bridgeSitesReducer = (state = initialState, action) => {
             communities_served = 0;
           }
 
+          // IF ANY OF THESE FILTERABLE VALUES ARE FOUND IN THE CACHE,
+          // THEN FILTER BY THEM . . .
           if (
             stage in cache ||
             type in cache ||
