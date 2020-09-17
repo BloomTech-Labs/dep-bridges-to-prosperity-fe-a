@@ -3,7 +3,7 @@ import { Checkbox } from 'antd';
 import { useDispatch } from 'react-redux';
 import { filterData } from '../../../state/actions';
 
-const Checkboxes = ({ cancelModal }) => {
+const Checkboxes = ({ toggleBridges, cancelModal }) => {
   const dispatch = useDispatch();
   const [cache, setCache] = useState({});
 
@@ -18,6 +18,7 @@ const Checkboxes = ({ cancelModal }) => {
 
   const filter = e => {
     dispatch(filterData(cache));
+    toggleBridges();
     cancelModal();
   };
 

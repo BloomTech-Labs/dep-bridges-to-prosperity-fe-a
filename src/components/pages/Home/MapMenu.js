@@ -18,6 +18,7 @@ function MapMenu({
   setBridgesToggle,
   bridgesToggle,
   toggleBridges,
+  toggleBridgesFalse,
   setViewport,
   ZoomIn,
   changeTheme,
@@ -52,12 +53,11 @@ function MapMenu({
   const [show, setShow] = useState(false);
   const changeShowFilter = () => {
     setShow(!show);
-    toggleBridges();
+    toggleBridgesFalse();
   };
 
   const cancelModal = () => {
     setShow(false);
-    // toggleBridges();
   };
 
   return (
@@ -116,7 +116,7 @@ function MapMenu({
           All Filters <img src={filterIcon} alt="filter icon" />
         </button>
         <Modal visible={show} onCancel={cancelModal} footer={null}>
-          <Checkboxes cancelModal={cancelModal} />
+          <Checkboxes cancelModal={cancelModal} toggleBridges={toggleBridges} />
         </Modal>
 
         <div className="filters">
