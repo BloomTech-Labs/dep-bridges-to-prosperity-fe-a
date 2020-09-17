@@ -28,6 +28,7 @@ export const getSingleBridge = bridge => dispatch => {
 };
 
 export const getAllBridges = () => dispatch => {
+  let apiURL = 'https://bridges-a-api.herokuapp.com/bridges';
   dispatch({
     type: GET_BRIDGE_DATA_START,
   });
