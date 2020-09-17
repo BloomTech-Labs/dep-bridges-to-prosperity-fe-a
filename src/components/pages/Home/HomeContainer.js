@@ -63,6 +63,7 @@ function HomeContainer() {
   //handles the click feature of the info
   const clickMarker = bridge => {
     setBridgesToggle(true);
+    // setLimitDisplay(false);
     dispatch(getSingleBridge(bridge));
   };
 
@@ -253,6 +254,8 @@ function HomeContainer() {
           toggleMarkerColor={toggleMarkerColor}
           changeChecked={changeChecked}
           changeMarkerClicked={changeMarkerClicked}
+          limitDisplay={limitDisplay}
+          setLimitDisplay={setLimitDisplay}
         />
         <Modal visible={show} footer={null} onCancel={cancelModal}>
           <BridgeForms
@@ -270,28 +273,6 @@ function HomeContainer() {
           />
         </Modal>
       </div>
-      <Mapbox
-        clickMarker={clickMarker}
-        visible={visible}
-        setVisible={setVisible}
-        viewport={viewport}
-        setViewport={setViewport}
-        theme={theme}
-        setTheme={setTheme}
-        ZoomIn={ZoomIn}
-        toggleMarkerColor={toggleMarkerColor}
-        changeChecked={changeChecked}
-        changeMarkerClicked={changeMarkerClicked}
-        limitDisplay={limitDisplay}
-        setLimitDisplay={setLimitDisplay}
-      />
-      <Modal visible={show} footer={null} onCancel={cancelModal}>
-        <BridgeForms
-          changeShow={changeShow}
-          changeIsEditing={changeIsEditing}
-          isEditing={isEditing}
-        />
-      </Modal>
     </Layout>
   );
 }
