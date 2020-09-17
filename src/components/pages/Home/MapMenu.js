@@ -52,6 +52,7 @@ function MapMenu({
   const [show, setShow] = useState(false);
   const changeShowFilter = () => {
     setShow(!show);
+    toggleBridges();
   };
 
   const cancelModal = () => {
@@ -113,15 +114,8 @@ function MapMenu({
         <button className="filter-btn-2" onClick={changeShowFilter}>
           All Filters <img src={filterIcon} alt="filter icon" />
         </button>
-        <Modal
-          visible={show}
-          onCancel={cancelModal}
-          footer={[
-            <button onClick={cancelModal}>Cancel</button>,
-            <button>Filter</button>,
-          ]}
-        >
-          <Checkboxes bridgeData={bridgeData} toggleBridges={toggleBridges} />
+        <Modal visible={show} onCancel={cancelModal} footer={null}>
+          <Checkboxes cancelModal={cancelModal} />
         </Modal>
 
         <div className="filters">

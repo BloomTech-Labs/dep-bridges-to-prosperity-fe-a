@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Checkbox } from 'antd';
 import { useDispatch } from 'react-redux';
-import { filterData, unfilter } from '../../../state/actions';
+import { filterData } from '../../../state/actions';
 
-const Checkboxes = ({ toggleBridges }) => {
+const Checkboxes = ({ cancelModal }) => {
   const dispatch = useDispatch();
+  const [cache, setCache] = useState({});
+
   const onChange = e => {
-    if (e.target.checked === false) {
-      dispatch(unfilter(e.target.name));
-      toggleBridges();
+    if (e.target.checked && e.target.value in cache === false) {
+      cache[e.target.value] = e.target.checked;
+    } else if (!e.target.checked && e.target.value in cache === true) {
+      delete cache[e.target.value];
     }
-    dispatch(filterData(e.target.name));
-    toggleBridges();
-    console.log(`checked = ${e.target.name}`);
+    console.log(cache);
+  };
+
+  const filter = e => {
+    dispatch(filterData(cache));
+    cancelModal();
   };
 
   return (
@@ -21,12 +27,12 @@ const Checkboxes = ({ toggleBridges }) => {
         {/* BUILD STATUS */}
         <h3>Build Status</h3>
         <li>
-          <Checkbox name="accepted" onChange={onChange}>
+          <Checkbox value="accepted" onChange={onChange}>
             Accepted
           </Checkbox>
         </li>
         <li>
-          <Checkbox name="rejected" onChange={onChange}>
+          <Checkbox value="rejected" onChange={onChange}>
             Rejected
           </Checkbox>
         </li>
@@ -35,12 +41,12 @@ const Checkboxes = ({ toggleBridges }) => {
       <ul style={{ listStyle: 'none' }}>
         <h3>Communities Served</h3>
         <li>
-          <Checkbox name="any range" onChange={onChange}>
+          <Checkbox value="any range" onChange={onChange}>
             Any Range
           </Checkbox>
         </li>
         <li>
-          <Checkbox name="0-5" onChange={onChange}>
+          <Checkbox value="0-5" onChange={onChange}>
             0-5
           </Checkbox>
         </li>
@@ -50,11 +56,12 @@ const Checkboxes = ({ toggleBridges }) => {
           </Checkbox>
         </li>
         <li>
-          <Checkbox name="10+" onChange={onChange}>
+          <Checkbox value="10+" onChange={onChange}>
             10+
           </Checkbox>
         </li>
       </ul>
+      <button onClick={filter}>Filter</button>
     </section>
   );
 };

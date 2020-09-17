@@ -21,7 +21,6 @@ export const GET_SINGLE_BRIDGE = 'GET_SINGLE_BRIDGE';
 
 export const SEARCH_BRIDGE = 'SEARCH_BRIDGE';
 export const FILTER_DATA = 'FILTER_DATA';
-export const UNFILTER = 'UNFILTER';
 
 export const getSingleBridge = bridge => dispatch => {
   dispatch({ type: GET_SINGLE_BRIDGE, payload: bridge });
@@ -120,10 +119,24 @@ export const searchBridge = search => dispatch => {
   dispatch({ type: SEARCH_BRIDGE, payload: search });
 };
 
-export const filterData = checked => dispatch => {
-  dispatch({ type: FILTER_DATA, payload: checked });
-};
-
-export const unfilter = checked => dispatch => {
-  dispatch({ type: UNFILTER, payload: checked });
+export const filterData = cache => dispatch => {
+  dispatch({
+    type: GET_BRIDGE_DATA_START,
+  });
+  axios
+    .get(process.env.REACT_APP_API_URI + '/bridges/all')
+    .then(async res => {
+      await dispatch({
+        type: GET_BRIDGE_DATA_SUCCESS,
+        payload: res.data.filter(site => site.latitude && site.longitude),
+      });
+      dispatch({ type: FILTER_DATA, payload: cache });
+    })
+    .catch(err => {
+      console.log('DISPATCH GET ALL', err.message);
+      dispatch({
+        type: GET_BRIDGE_DATA_FAILURE,
+        payload: err.message,
+      });
+    });
 };
