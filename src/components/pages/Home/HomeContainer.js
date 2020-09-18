@@ -106,6 +106,10 @@ function HomeContainer() {
     setBridgesToggle(!bridgesToggle);
   };
 
+  const toggleBridgesFalse = () => {
+    setBridgesToggle(false);
+  };
+
   useEffect(() => {
     // When home page is refreshed all bridges
     // are retrieved
@@ -162,6 +166,7 @@ function HomeContainer() {
       assist sorting through the bridge data */}
             <MapMenu
               toggleBridges={toggleBridges}
+              toggleBridgesFalse={toggleBridgesFalse}
               bridgeData={bridgeData}
               bridgesToggle={bridgesToggle}
               visible={visible}

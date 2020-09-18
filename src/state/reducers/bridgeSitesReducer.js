@@ -10,6 +10,7 @@ import {
   EDIT_BRIDGE_DATA_FAILURE,
   GET_SINGLE_BRIDGE,
   SEARCH_BRIDGE,
+  FILTER_DATA,
 } from '../actions';
 
 const initialState = {
@@ -111,6 +112,69 @@ export const bridgeSitesReducer = (state = initialState, action) => {
               .includes(action.payload.toLowerCase().trim())
         ),
         searching: true,
+      };
+
+    case FILTER_DATA:
+      return {
+        ...state,
+        bridgeData: state.bridgeData.filter(bridge => {
+          let cache = action.payload;
+
+          // DEFINING VARS FOR ALL POSSIBLE FILTERS
+          let stage =
+            bridge.stage != null
+              ? bridge.stage
+                  .toString()
+                  .toLowerCase()
+                  .trim()
+              : bridge.stage;
+          let type =
+            bridge.type != null
+              ? bridge.type
+                  .toString()
+                  .toLowerCase()
+                  .trim()
+              : bridge.type;
+          let province =
+            bridge.province != null
+              ? bridge.province
+                  .toString()
+                  .toLowerCase()
+                  .trim()
+              : bridge.province;
+          let sub_stage =
+            bridge.sub_stage != null
+              ? bridge.sub_stage
+                  .toString()
+                  .toLowerCase()
+                  .trim()
+              : bridge.sub_stage;
+          let communities_served = bridge.communities_served.length;
+
+          // DEFINING COMMUNITIES SERVED FILTER RANGE
+          if (cache['any range']) {
+            communities_served = 'any range';
+          } else if (communities_served >= 5) {
+            communities_served = 5;
+            if (communities_served >= 10) {
+              communities_served = 10;
+            }
+          } else if (communities_served < 5) {
+            communities_served = 0;
+          }
+
+          // IF ANY OF THESE FILTERABLE VALUES ARE FOUND IN THE CACHE,
+          // THEN FILTER BY THEM . . .
+          if (
+            stage in cache ||
+            type in cache ||
+            province in cache ||
+            sub_stage in cache ||
+            communities_served in cache
+          ) {
+            return bridge;
+          }
+        }),
       };
 
     default:

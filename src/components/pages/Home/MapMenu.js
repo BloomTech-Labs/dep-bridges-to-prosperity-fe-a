@@ -3,11 +3,12 @@ import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
 import { useSelector } from 'react-redux';
 import { BridgeList } from './BridgeList';
+import Checkboxes from './Checkboxes';
 
 import { useOktaAuth } from '@okta/okta-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Tooltip } from 'antd';
+import { Tooltip, Modal } from 'antd';
 import Themes from './Themes';
 
 const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
@@ -17,6 +18,7 @@ function MapMenu({
   setBridgesToggle,
   bridgesToggle,
   toggleBridges,
+  toggleBridgesFalse,
   setViewport,
   ZoomIn,
   changeTheme,
@@ -40,10 +42,22 @@ function MapMenu({
     window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
   };
 
+  // TOGGLING THEMES
   const [toggleThemes, setToggleThemes] = useState(false);
 
   const themeClick = () => {
     setToggleThemes(!toggleThemes);
+  };
+
+  // TO SHOW OR HIDE MODAL
+  const [show, setShow] = useState(false);
+  const changeShowFilter = () => {
+    setShow(!show);
+    toggleBridgesFalse();
+  };
+
+  const cancelModal = () => {
+    setShow(false);
   };
 
   return (
@@ -97,6 +111,13 @@ function MapMenu({
             <Themes changeTheme={changeTheme} />
           )}
         </div>
+
+        <button className="filter-btn-2" onClick={changeShowFilter}>
+          All Filters <img src={filterIcon} alt="filter icon" />
+        </button>
+        <Modal visible={show} onCancel={cancelModal} footer={null}>
+          <Checkboxes cancelModal={cancelModal} toggleBridges={toggleBridges} />
+        </Modal>
 
         <div className="filters">
           <button className="filter-btn">Province</button>
