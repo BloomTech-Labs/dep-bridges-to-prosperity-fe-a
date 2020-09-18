@@ -121,22 +121,34 @@ export const bridgeSitesReducer = (state = initialState, action) => {
           let cache = action.payload;
 
           // DEFINING VARS FOR ALL POSSIBLE FILTERS
-          let stage = bridge.stage
-            .toString()
-            .toLowerCase()
-            .trim();
-          let type = bridge.type
-            .toString()
-            .toLowerCase()
-            .trim();
-          let province = bridge.province
-            .toString()
-            .toLowerCase()
-            .trim();
-          let sub_stage = bridge.sub_stage
-            .toString()
-            .toLowerCase()
-            .trim();
+          let stage =
+            bridge.stage != null
+              ? bridge.stage
+                  .toString()
+                  .toLowerCase()
+                  .trim()
+              : bridge.stage;
+          let type =
+            bridge.type != null
+              ? bridge.type
+                  .toString()
+                  .toLowerCase()
+                  .trim()
+              : bridge.type;
+          let province =
+            bridge.province != null
+              ? bridge.province
+                  .toString()
+                  .toLowerCase()
+                  .trim()
+              : bridge.province;
+          let sub_stage =
+            bridge.sub_stage != null
+              ? bridge.sub_stage
+                  .toString()
+                  .toLowerCase()
+                  .trim()
+              : bridge.sub_stage;
           let communities_served = bridge.communities_served.length;
 
           // DEFINING COMMUNITIES SERVED FILTER RANGE
