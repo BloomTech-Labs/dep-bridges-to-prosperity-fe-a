@@ -44,6 +44,11 @@ const Checkboxes = ({ toggleBridges, cancelModal }) => {
               Rejected
             </Checkbox>
           </li>
+          <li>
+            <Checkbox value="identified" onChange={onChange}>
+              Identified
+            </Checkbox>
+          </li>
         </ul>
         {/* SUB STAGE */}
         <ul style={{ listStyle: 'none' }}>
