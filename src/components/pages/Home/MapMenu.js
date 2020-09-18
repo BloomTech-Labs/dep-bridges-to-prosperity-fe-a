@@ -34,6 +34,7 @@ function MapMenu({
   nextPage,
   setLimit,
   loading,
+  dataDisplayed,
 }) {
   // Pulling in bridge data from reducer
   const { bridgeData, paginatedData, singleBridgeData } = useSelector(
@@ -127,7 +128,6 @@ function MapMenu({
         {!bridgesToggle ? (
           <WelcomeComponent />
         ) : (
-          // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
             {!loading ? (
               <>
@@ -141,41 +141,43 @@ function MapMenu({
                   setLimit={setLimit}
                   loading={loading}
                 />
-                {/* // {paginatedData?.length > 0 ? ( */}
-
-                <div className="bridges-wrapper">
-                  {paginatedData?.map(bridge => (
-                    <div key={bridge.id}>
+                {dataDisplayed ? (
+                  <div className="bridges-wrapper">
+                    {paginatedData.map(bridge => (
+                      <div key={bridge.id}>
+                        <BridgeList
+                          bridge={bridge}
+                          loggedIn={authState.idToken}
+                          ZoomIn={ZoomIn}
+                          changeShow={changeShow}
+                          changeIsEditing={changeIsEditing}
+                          toggleBridges={toggleBridges}
+                          onClear={onClear}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="bridges-wrapper">
+                    {!dataDisplayed ? (
                       <BridgeList
-                        bridge={bridge}
-                        loggedIn={authState.idToken}
                         ZoomIn={ZoomIn}
+                        bridge={singleBridgeData} // return singleBridge state from reducer
+                        loggedIn={authState.idToken}
                         changeShow={changeShow}
                         changeIsEditing={changeIsEditing}
-                        toggleBridges={toggleBridges}
                         onClear={onClear}
                       />
-                    </div>
-                  ))}
-                </div>
+                    ) : (
+                      <div>
+                        <h3>No bridge to display</h3>
+                      </div>
+                    )}
+                  </div>
+                )}
               </>
             ) : (
-              //the clickedBridge
-              <div className="bridges-wrapper">
-                {singleBridgeData.length === 1 ? (
-                  <BridgeList
-                    ZoomIn={ZoomIn}
-                    bridge={singleBridgeData[1]} // return singleBridge state from reducer
-                    loggedIn={authState.idToken}
-                    changeShow={changeShow}
-                    changeIsEditing={changeIsEditing}
-                    onClear={onClear}
-                  />
-                ) : (
-                  //loading needed here
-                  <LoadingOutlined style={{ fontSize: '85px' }} />
-                )}
-              </div>
+              <LoadingOutlined style={{ fontSize: '85px' }} />
             )}
           </>
         )}

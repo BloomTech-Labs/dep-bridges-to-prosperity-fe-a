@@ -9,6 +9,7 @@ import {
   EDIT_BRIDGE_DATA_SUCCESS,
   EDIT_BRIDGE_DATA_FAILURE,
   GET_SINGLE_BRIDGE,
+  GET_SINGLE_BRIDGE_LOADING,
   SEARCH_BRIDGE,
   PAGINATE_BRIDGES,
   PAGINATE_BRIDGES_FAILURE,
@@ -19,7 +20,7 @@ const initialState = {
   bridgeData: [],
   searchData: [],
   paginatedData: [],
-  singleBridgeData: [],
+  singleBridgeData: {},
   loading: false,
   error: '',
   searching: false,
@@ -93,7 +94,12 @@ export const bridgeSitesReducer = (state = initialState, action) => {
     case GET_SINGLE_BRIDGE:
       return {
         ...state,
-        singleBridgeData: [action.payload],
+        singleBridgeData: action.payload,
+      };
+    case GET_SINGLE_BRIDGE_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
 
     case SEARCH_BRIDGE:
