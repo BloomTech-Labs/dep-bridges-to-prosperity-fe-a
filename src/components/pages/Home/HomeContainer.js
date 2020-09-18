@@ -73,7 +73,6 @@ function HomeContainer() {
     dispatch(getSingleBridge(bridge));
     setDataDisplayed(false);
     setBridgesToggle(true);
-    console.log('CLICKED::', bridge);
   };
 
   /* Refetches bridge data, toggles all bridges
