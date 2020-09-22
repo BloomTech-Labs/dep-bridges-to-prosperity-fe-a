@@ -6,20 +6,20 @@ export default function Themes({ changeTheme }) {
       <h3>Map Theme Options</h3>
       <button
         className="theme-btn"
-        id="ckej1e5b546o019mmuazc08ko"
+        id="ckf5rc0ty07fy1aphplybpubm"
         onClick={changeTheme}
       >
         Standard Map
       </button>
       <button
-        id="ckebqwnel1ifg19lg8lkmn29s"
+        id="ckf5rh55n004o19ojswfmx3i9"
         className="theme-btn"
         onClick={changeTheme}
       >
         Terrain Map
       </button>
       <button
-        id="ckebpt7fe1hfn19p7roqubcev"
+        id="ckf5rf05204ln19o7o0sdv860"
         className="theme-btn"
         onClick={changeTheme}
       >
