@@ -57,13 +57,22 @@ function HomeContainer() {
 
   // Components should be set up to handle errors and loadings status
   // eslint-disable-next-line
-  const { bridgeData, loading, error } = useSelector(
-    state => state.bridgeSitesReducer
-  );
+  const {
+    bridgeData,
+
+    loading,
+    error,
+  } = useSelector(state => state.bridgeSitesReducer);
+
+  //handles what data is displayed
+  const [dataDisplayed, setDataDisplayed] = useState(true);
+
   //handles the click feature of the info
   const clickMarker = bridge => {
-    setBridgesToggle(true);
+    // setLimitDisplay(false);
     dispatch(getSingleBridge(bridge));
+    setDataDisplayed(false);
+    setBridgesToggle(true);
   };
 
   /* Refetches bridge data, toggles all bridges
@@ -156,6 +165,7 @@ function HomeContainer() {
   };
 
   const toggleBridges = () => {
+    setDataDisplayed(true);
     dispatch(paginateBridges(page, limit));
     //keeping for now V
     setBridgesToggle(!bridgesToggle);
@@ -243,6 +253,7 @@ function HomeContainer() {
               setLimit={setLimit}
               isEditing={isEditing}
               loading={loading}
+              dataDisplayed={dataDisplayed}
             />
           </div>
         </div>
@@ -258,6 +269,8 @@ function HomeContainer() {
           toggleMarkerColor={toggleMarkerColor}
           changeChecked={changeChecked}
           changeMarkerClicked={changeMarkerClicked}
+          limitDisplay={limitDisplay}
+          setLimitDisplay={setLimitDisplay}
         />
         <Modal visible={show} footer={null} onCancel={cancelModal}>
           <BridgeForms
@@ -275,28 +288,6 @@ function HomeContainer() {
           />
         </Modal>
       </div>
-      <Mapbox
-        clickMarker={clickMarker}
-        visible={visible}
-        setVisible={setVisible}
-        viewport={viewport}
-        setViewport={setViewport}
-        theme={theme}
-        setTheme={setTheme}
-        ZoomIn={ZoomIn}
-        toggleMarkerColor={toggleMarkerColor}
-        changeChecked={changeChecked}
-        changeMarkerClicked={changeMarkerClicked}
-        limitDisplay={limitDisplay}
-        setLimitDisplay={setLimitDisplay}
-      />
-      <Modal visible={show} footer={null} onCancel={cancelModal}>
-        <BridgeForms
-          changeShow={changeShow}
-          changeIsEditing={changeIsEditing}
-          isEditing={isEditing}
-        />
-      </Modal>
     </Layout>
   );
 }

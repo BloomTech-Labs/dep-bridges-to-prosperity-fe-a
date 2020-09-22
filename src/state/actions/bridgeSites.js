@@ -18,6 +18,7 @@ export const EDIT_BRIDGE_DATA_SUCCESS = 'EDIT_BRIDGE_SUCCESS';
 export const EDIT_BRIDGE_DATA_FAILURE = 'EDIT_BRIDGE_FAILURE';
 
 export const GET_SINGLE_BRIDGE = 'GET_SINGLE_BRIDGE';
+export const GET_SINGLE_BRIDGE_LOADING = 'GET_SINGLE_BRIDGE_LOADING';
 
 export const SEARCH_BRIDGE = 'SEARCH_BRIDGE';
 export const FILTER_DATA = 'FILTER_DATA';
@@ -27,6 +28,7 @@ export const PAGINATE_BRIDGES_FAILURE = 'PAGINATE_BRIDGES_FAILURE';
 export const PAGINATE_BRIDGES_LOADING = 'PAGINATE_BRIDGES_LOADING';
 
 export const getSingleBridge = bridge => dispatch => {
+  // dispatch({ type: GET_SINGLE_BRIDGE_LOADING });
   dispatch({ type: GET_SINGLE_BRIDGE, payload: bridge });
 };
 
