@@ -27,9 +27,6 @@ const MapSearchBar = ({ setBridgesToggle }) => {
         onChange={onSearch}
         allowClear
       />
-      <button className="filter-btn-mobile">
-        All Filters <img src={filterIcon} alt="filter icon" />
-      </button>
     </div>
   );
 };

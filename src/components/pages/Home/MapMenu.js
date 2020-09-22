@@ -7,8 +7,9 @@ import WelcomeComponent from './WelcomeComponent';
 import { useOktaAuth } from '@okta/okta-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Tooltip } from 'antd';
+import { Tooltip, Modal } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import Checkboxes from './Checkboxes';
 import Themes from './Themes';
 // import { paginateBridges } from '../../../state/actions';
 import Pagination from './Pagination';
@@ -20,6 +21,7 @@ function MapMenu({
   setBridgesToggle,
   bridgesToggle,
   toggleBridges,
+  toggleBridgesFalse,
   setViewport,
   ZoomIn,
   changeTheme,
@@ -53,10 +55,22 @@ function MapMenu({
     window.location.href = `${issuer}/v1/logout?id_token_hint=${idToken}&post_logout_redirect_uri=${redirectUri}`;
   };
 
+  // TOGGLING THEMES
   const [toggleThemes, setToggleThemes] = useState(false);
 
   const themeClick = () => {
     setToggleThemes(!toggleThemes);
+  };
+
+  // TO SHOW OR HIDE MODAL
+  const [show, setShow] = useState(false);
+  const changeShowFilter = () => {
+    setShow(!show);
+    toggleBridgesFalse();
+  };
+
+  const cancelModal = () => {
+    setShow(false);
   };
 
   return (
@@ -110,6 +124,13 @@ function MapMenu({
             <Themes changeTheme={changeTheme} />
           )}
         </div>
+
+        <button className="filter-btn-2" onClick={changeShowFilter}>
+          All Filters <img src={filterIcon} alt="filter icon" />
+        </button>
+        <Modal visible={show} onCancel={cancelModal} footer={null}>
+          <Checkboxes cancelModal={cancelModal} toggleBridges={toggleBridges} />
+        </Modal>
 
         <div className="filters">
           <button className="filter-btn">Province</button>

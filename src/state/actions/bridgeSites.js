@@ -20,6 +20,7 @@ export const EDIT_BRIDGE_DATA_FAILURE = 'EDIT_BRIDGE_FAILURE';
 export const GET_SINGLE_BRIDGE = 'GET_SINGLE_BRIDGE';
 
 export const SEARCH_BRIDGE = 'SEARCH_BRIDGE';
+export const FILTER_DATA = 'FILTER_DATA';
 
 export const PAGINATE_BRIDGES = 'PAGINATE_BRIDGES';
 export const PAGINATE_BRIDGES_FAILURE = 'PAGINATE_BRIDGES_FAILURE';
@@ -140,6 +141,28 @@ export const paginateBridges = (page, limit) => dispatch => {
     .catch(err => {
       dispatch({
         type: PAGINATE_BRIDGES_FAILURE,
+        payload: err.message,
+      });
+    });
+};
+
+export const filterData = cache => dispatch => {
+  dispatch({
+    type: GET_BRIDGE_DATA_START,
+  });
+  axios
+    .get(process.env.REACT_APP_API_URI + '/bridges/all')
+    .then(async res => {
+      await dispatch({
+        type: GET_BRIDGE_DATA_SUCCESS,
+        payload: res.data.filter(site => site.latitude && site.longitude),
+      });
+      dispatch({ type: FILTER_DATA, payload: cache });
+    })
+    .catch(err => {
+      console.log('DISPATCH GET ALL', err.message);
+      dispatch({
+        type: GET_BRIDGE_DATA_FAILURE,
         payload: err.message,
       });
     });
