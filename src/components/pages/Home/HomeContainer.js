@@ -12,7 +12,7 @@ import Mapbox from './Mapbox';
 import BridgeForms from '../BridgeForms.js';
 import { LandingPage } from '../../pages/LandingPage';
 import Layout from '../../common/Layout';
-import { SearchModal } from '../SearchModal';
+// import { SearchModal } from '../SearchModal';
 
 function HomeContainer() {
   const [visible, setVisible] = useState(false);
