@@ -25,7 +25,7 @@ function HomeContainer() {
     latitude: -1.94995,
     longitude: 29.9,
     width: '100vw',
-    height: '100vh',
+    height: 'calc(100vh - 37.55px)',
     zoom: 8.4,
   };
 
