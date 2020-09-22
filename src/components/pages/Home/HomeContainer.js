@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlyToInterpolator } from 'react-map-gl';
-import { getAllBridges, getSingleBridge } from '../../../state/actions';
+import {
+  getAllBridges,
+  getSingleBridge,
+  paginateBridges,
+} from '../../../state/actions';
 import { Modal } from 'antd';
 import MapMenu from './MapMenu';
 import Mapbox from './Mapbox';
 import BridgeForms from '../BridgeForms.js';
 import { LandingPage } from '../../pages/LandingPage';
 import Layout from '../../common/Layout';
-import { SearchModal } from '../SearchModal';
+// import { SearchModal } from '../SearchModal';
 
 function HomeContainer() {
   const [visible, setVisible] = useState(false);
   const [bridgesToggle, setBridgesToggle] = useState(false);
+  const [limitDisplay, setLimitDisplay] = useState(false);
 
   // One spot for default view values, so this object can be shared across components
   const originalView = {
@@ -31,7 +36,7 @@ function HomeContainer() {
   const [theme, setTheme] = useState(
     localStorage.getItem('mapStyle')
       ? localStorage.getItem('mapStyle')
-      : 'mapbox://styles/jameslcarpino/ckej1e5b546o019mmuazc08ko'
+      : 'mapbox://styles/bridgestoprosperity/ckf5rc0ty07fy1aphplybpubm'
   );
   const [toggleMarkerColor, setToggleMarkerColor] = useState(false);
 
@@ -42,9 +47,9 @@ function HomeContainer() {
     //sets the theme
     localStorage.setItem(
       'mapStyle',
-      `mapbox://styles/jameslcarpino/${changeStyle}`
+      `mapbox://styles/bridgestoprosperity/${changeStyle}`
     );
-    setTheme(`mapbox://styles/jameslcarpino/${changeStyle}`);
+    setTheme(`mapbox://styles/bridgestoprosperity/${changeStyle}`);
     setToggleMarkerColor(!toggleMarkerColor);
   };
 
@@ -52,13 +57,22 @@ function HomeContainer() {
 
   // Components should be set up to handle errors and loadings status
   // eslint-disable-next-line
-  const { bridgeData, loading, error } = useSelector(
-    state => state.bridgeSitesReducer
-  );
+  const {
+    bridgeData,
+
+    loading,
+    error,
+  } = useSelector(state => state.bridgeSitesReducer);
+
+  //handles what data is displayed
+  const [dataDisplayed, setDataDisplayed] = useState(true);
+
   //handles the click feature of the info
   const clickMarker = bridge => {
-    setBridgesToggle(true);
+    // setLimitDisplay(false);
     dispatch(getSingleBridge(bridge));
+    setDataDisplayed(false);
+    setBridgesToggle(true);
   };
 
   /* Refetches bridge data, toggles all bridges
@@ -73,6 +87,7 @@ function HomeContainer() {
       transitionDuration: 'auto',
     });
     toggleBridges();
+    setLimitDisplay(false);
   }
 
   const [markerClicked, setMarkerClicked] = useState(false);
@@ -102,7 +117,57 @@ function HomeContainer() {
     }
   };
 
+  //Pagination commands to be passed down to pagination page
+  const [limit, setLimit] = useState(20);
+  const [page, setPage] = useState(1);
+  const [disabled, setDisabled] = useState(false);
+
+  //passes down to the pagination page for an input
+  //it works: bug: doesnt persist on the next - cant set the limit how I want
+  const giveLimit = e => {
+    if (
+      e.target.value <= 0 ||
+      e.target.value === '' ||
+      e.target.value === null
+    ) {
+      //if 0 or less just repaginate to default
+      dispatch(paginateBridges(page, limit));
+    } else {
+      //set the limit and display the new limit on dispatch
+      let newLimit = e.target.value;
+      setPage(page);
+      setLimit(newLimit);
+      dispatch(paginateBridges(page, newLimit));
+      setLimitDisplay(!limitDisplay);
+    }
+  };
+
+  const nextPage = e => {
+    // e.preventDefault();
+    // setPage(page + 1);
+    let next = page + 1;
+    dispatch(paginateBridges(next, limit));
+    console.log('page:', next);
+    setPage(next);
+  };
+
+  const prevPage = e => {
+    // setPage(page - 1);
+    if (page > 1) {
+      let prev = page - 1;
+      dispatch(paginateBridges(prev, limit));
+      setDisabled(disabled);
+      setPage(prev);
+      console.log('page:', prev);
+    } else {
+      setDisabled(true);
+    }
+  };
+
   const toggleBridges = () => {
+    setDataDisplayed(true);
+    dispatch(paginateBridges(page, limit));
+    //keeping for now V
     setBridgesToggle(!bridgesToggle);
   };
 
@@ -179,6 +244,16 @@ function HomeContainer() {
               changeShow={changeShow}
               changeIsEditing={changeIsEditing}
               onClear={onClear}
+              page={page}
+              setPage={setPage}
+              limit={limit}
+              giveLimit={giveLimit}
+              nextPage={nextPage}
+              prevPage={prevPage}
+              setLimit={setLimit}
+              isEditing={isEditing}
+              loading={loading}
+              dataDisplayed={dataDisplayed}
             />
           </div>
         </div>
@@ -194,11 +269,21 @@ function HomeContainer() {
           toggleMarkerColor={toggleMarkerColor}
           changeChecked={changeChecked}
           changeMarkerClicked={changeMarkerClicked}
+          limitDisplay={limitDisplay}
+          setLimitDisplay={setLimitDisplay}
         />
         <Modal visible={show} footer={null} onCancel={cancelModal}>
           <BridgeForms
             changeShow={changeShow}
             changeIsEditing={changeIsEditing}
+            onClear={onClear}
+            page={page}
+            setPage={setPage}
+            limit={limit}
+            giveLimit={giveLimit}
+            nextPage={nextPage}
+            prevPage={prevPage}
+            setLimit={setLimit}
             isEditing={isEditing}
           />
         </Modal>

@@ -9,13 +9,19 @@ import {
   EDIT_BRIDGE_DATA_SUCCESS,
   EDIT_BRIDGE_DATA_FAILURE,
   GET_SINGLE_BRIDGE,
+  GET_SINGLE_BRIDGE_LOADING,
   SEARCH_BRIDGE,
+  PAGINATE_BRIDGES,
+  PAGINATE_BRIDGES_FAILURE,
+  PAGINATE_BRIDGES_LOADING,
   FILTER_DATA,
 } from '../actions';
 
 const initialState = {
   bridgeData: [],
   searchData: [],
+  paginatedData: [],
+  singleBridgeData: {},
   loading: false,
   error: '',
   searching: false,
@@ -89,29 +95,44 @@ export const bridgeSitesReducer = (state = initialState, action) => {
     case GET_SINGLE_BRIDGE:
       return {
         ...state,
-        bridgeData: [action.payload],
+        singleBridgeData: action.payload,
+      };
+    case GET_SINGLE_BRIDGE_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
 
     case SEARCH_BRIDGE:
       return {
         ...state,
 
-        bridgeData: state.bridgeData.filter(
-          info =>
-            info.name
-              .toLowerCase()
-              .trim()
-              .includes(action.payload.toLowerCase().trim()) ||
-            info.type
-              .toLowerCase()
-              .trim()
-              .includes(action.payload.toLowerCase().trim()) ||
-            info.stage
-              .toLowerCase()
-              .trim()
-              .includes(action.payload.toLowerCase().trim())
+        paginatedData: state.bridgeData.filter(info =>
+          info.name
+            .toLowerCase()
+            .trim()
+            .includes(action.payload.toLowerCase().trim())
         ),
-        searching: true,
+      };
+
+    case PAGINATE_BRIDGES_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case PAGINATE_BRIDGES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case PAGINATE_BRIDGES:
+      return {
+        ...state,
+
+        paginatedData: action.payload.paginatedBridges,
+        loading: false,
       };
 
     case FILTER_DATA:

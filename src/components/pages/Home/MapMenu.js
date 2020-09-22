@@ -3,13 +3,16 @@ import filterIcon from './assets/filter-icon.svg';
 import MapSearchBar from './MapSearchBar';
 import { useSelector } from 'react-redux';
 import { BridgeList } from './BridgeList';
-import Checkboxes from './Checkboxes';
-
+import WelcomeComponent from './WelcomeComponent';
 import { useOktaAuth } from '@okta/okta-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip, Modal } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import Checkboxes from './Checkboxes';
 import Themes from './Themes';
+// import { paginateBridges } from '../../../state/actions';
+import Pagination from './Pagination';
 
 const issuer = 'https://auth.lambdalabs.dev/oauth2/default';
 const redirectUri = `${window.location.origin}/`;
@@ -25,9 +28,20 @@ function MapMenu({
   changeShow,
   changeIsEditing,
   onClear,
+  page,
+  setPage,
+  limit,
+  giveLimit,
+  prevPage,
+  nextPage,
+  setLimit,
+  loading,
+  dataDisplayed,
 }) {
   // Pulling in bridge data from reducer
-  const { bridgeData } = useSelector(state => state.bridgeSitesReducer);
+  const { bridgeData, paginatedData, singleBridgeData } = useSelector(
+    state => state.bridgeSitesReducer
+  );
 
   /******* TO SIGN OUT *******/
   const { authState, authService } = useOktaAuth();
@@ -133,35 +147,58 @@ function MapMenu({
         {/* Begin toggle for information */}
         {/* first if : when bridges toggle is set off it displays the welcome */}
         {!bridgesToggle ? (
-          ''
+          <WelcomeComponent />
         ) : (
-          // begin the ternary statement of if bridgesToggle true check searching. If searching display search results, if not searching display brdige
           <>
-            {bridgeData.length >= 0 ? (
-              <div className="bridges-wrapper">
-                {bridgeData.map(bridge => (
-                  <div key={bridge.id}>
-                    <BridgeList
-                      bridge={bridge}
-                      loggedIn={authState.idToken}
-                      ZoomIn={ZoomIn}
-                      changeShow={changeShow}
-                      changeIsEditing={changeIsEditing}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              //the clickedBridge
-              <div className="bridges-wrapper">
-                <BridgeList
-                  ZoomIn={ZoomIn}
-                  bridge={bridgeData[0]}
-                  loggedIn={authState.idToken}
-                  changeShow={changeShow}
-                  changeIsEditing={changeIsEditing}
+            {!loading ? (
+              <>
+                <Pagination
+                  page={page}
+                  setPage={setPage}
+                  limit={limit}
+                  giveLimit={giveLimit}
+                  prevPage={prevPage}
+                  nextPage={nextPage}
+                  setLimit={setLimit}
+                  loading={loading}
                 />
-              </div>
+                {dataDisplayed ? (
+                  <div className="bridges-wrapper">
+                    {paginatedData.map(bridge => (
+                      <div key={bridge.id}>
+                        <BridgeList
+                          bridge={bridge}
+                          loggedIn={authState.idToken}
+                          ZoomIn={ZoomIn}
+                          changeShow={changeShow}
+                          changeIsEditing={changeIsEditing}
+                          toggleBridges={toggleBridges}
+                          onClear={onClear}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="bridges-wrapper">
+                    {!dataDisplayed ? (
+                      <BridgeList
+                        ZoomIn={ZoomIn}
+                        bridge={singleBridgeData} // return singleBridge state from reducer
+                        loggedIn={authState.idToken}
+                        changeShow={changeShow}
+                        changeIsEditing={changeIsEditing}
+                        onClear={onClear}
+                      />
+                    ) : (
+                      <div>
+                        <h3>No bridge to display</h3>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </>
+            ) : (
+              <LoadingOutlined style={{ fontSize: '85px' }} />
             )}
           </>
         )}
